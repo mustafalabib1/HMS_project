@@ -277,7 +277,18 @@ add FOREIGN KEY (SSN) REFERENCES HMS_User(SSN)
 alter table MedicalRecord 
 add DoctorID int Not null  REFERENCES Doctor(DoctorID);
 
-
+--add constraint to Ensure that the Dosage in the Prescription table is always greater than 0.
+ALTER TABLE Prescription
+ADD CONSTRAINT CK_Prescription_Dosage CHECK (Dosage > 0);
+--add constraint to Ensure that the totalmount in the Invoice table is always greater than 0.
+ALTER TABLE Invoice 
+ADD CONSTRAINT CK_Invoice_TotalAmount CHECK (TotalAmount > 0);
+-- add constraint toEnsure that the Email column in the HMS_User table is unique.
+ALTER TABLE HMS_User
+ADD CONSTRAINT UQ_HMS_User_Email UNIQUE (Email);
+-- add constraint to Set a default value for the PaymentStatus column in the Invoice table to 'N' (Not Paid).
+ALTER TABLE Invoice
+ADD CONSTRAINT DF_Invoice_PaymentStatus DEFAULT ('N') FOR PaymentStatus;
 
 create or alter proc AddAvailableAppoitmentInTableAvailableAppointment @EndDate date
 as 
