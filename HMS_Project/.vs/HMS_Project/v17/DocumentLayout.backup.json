@@ -54,8 +54,7 @@
               "RelativeToolTip": "common\\Patient_Medications.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAYwCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:45:11.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:45:11.273Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "common\\Medications_ActiveSubstance.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAgwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:42:48.811Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:42:48.811Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "common\\Medication.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAYwBkAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:41:33.24Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:41:33.24Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "common\\ActiveSubstances_SideEffects.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:39:58.249Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:39:58.249Z"
             },
             {
               "$type": "Document",
@@ -106,8 +102,7 @@
               "RelativeToolTip": "common\\ActiveSubstance_Interaction.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:38:33.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:38:33.644Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "RelativeToolTip": "common\\ActiveSubstances.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:31:37.878Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:31:37.878Z"
             },
             {
               "$type": "Document",
@@ -145,8 +139,7 @@
               "RelativeToolTip": "common\\Patient_ActiveSubstances_Allergies.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAYwBYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T21:32:40.813Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T21:32:40.813Z"
             }
           ]
         }
