@@ -286,6 +286,10 @@ ADD CONSTRAINT CK_Invoice_TotalAmount CHECK (TotalAmount > 0);
 -- add constraint toEnsure that the Email column in the HMS_User table is unique.
 ALTER TABLE HMS_User
 ADD CONSTRAINT UQ_HMS_User_Email UNIQUE (Email);
+
+ALTER TABLE [dbo].[ActiveSubstances]
+ADD CONSTRAINT UQ_ActiveSubstances_ActiveSubstancesNam UNIQUE ([ActiveSubstancesName]);
+
 -- add constraint to Set a default value for the PaymentStatus column in the Invoice table to 'N' (Not Paid).
 ALTER TABLE Invoice
 ADD CONSTRAINT DF_Invoice_PaymentStatus DEFAULT ('N') FOR PaymentStatus;
@@ -321,6 +325,7 @@ end;
 
 
 use HMS
+
 -- Insert doctors into the HMS_User table with User_type set to 'D'
 INSERT INTO HMS_User (FirstName, LastName, DateOfBirth, Phone, Email, SSN, User_Password, User_type, gender)
 VALUES
@@ -361,16 +366,16 @@ VALUES
 
 --Insert patient into the HMS_User table with User_type set to 'P'
 
-('John', 'Doe', '1985-01-15', '123-456-7890', 'john.doe@example.com'                       , 999999951, 'password123', 'P', 'M'),
-('Jane', 'Smith', '1990-02-20', '234-567-8901', 'jane.smith@example.com'                   , 999999952, 'password123', 'P', 'F'),
+('John', 'Doe', '1985-01-15', '123-456-7890', 'john..doe@example.com'                       , 999999951, 'password123', 'P', 'M'),
+('Jane', 'Smith', '1990-02-20', '234-567-8901', 'jane..smith@example.com'                   , 999999952, 'password123', 'P', 'F'),
 ('Mark', 'Johnson', '1975-03-25', '345-678-9012', 'mark.johnson@example.com'               , 999999953, 'password123', 'P', 'M'),
 ('Lisa', 'Williams', '1980-04-30', '456-789-0123', 'lisa.williams@example.com'             , 999999954, 'password123', 'P', 'F'),
 ('Michael', 'Brown', '1995-05-10', '567-890-1234', 'michael.brown@example.com'             , 999999955, 'password123', 'P', 'M'),
-('Olivia', 'Moore', '1987-01-10', '111-222-3333', 'olivia.moore@example.com'               , 999999956, 'password123', 'P', 'F'),
+('Olivia', 'Moore', '1987-01-10', '111-222-3333', 'o.livia.moore@example.com'               , 999999956, 'password123', 'P', 'F'),
 ('William', 'Martinez', '1990-03-15', '222-333-4444', 'william.martinez@example.com'       , 999999957, 'password123', 'P', 'M'),
 ('Emma', 'Garcia', '1992-06-25', '333-444-5555', 'emma.garcia@example.com'                 , 999999958, 'password123', 'P', 'F'),
 ('Alexander', 'Rodriguez', '1985-12-02', '444-555-6666', 'alexander.rodriguez@example.com' , 999999959, 'password123', 'P', 'M'),
-('Isabella', 'Martinez', '1998-11-11', '555-666-7777', 'isabella.martinez@example.com'     , 999999960, 'password123', 'P', 'F'),
+('Isabella', 'Martinez', '1998-11-11', '555-666-7777', 'isabella..martinez@example.com'     , 999999960, 'password123', 'P', 'F'),
 ('Sophia', 'Hernandez', '1989-04-07', '666-777-8888', 'sophia.hernandez@example.com'       , 999999961, 'password123', 'P', 'F'),
 ('Benjamin', 'Lopez', '1986-02-15', '777-888-9999', 'benjamin.lopez@example.com'           , 999999962, 'password123', 'P', 'M'),
 ('Mia', 'Gonzalez', '1994-07-23', '888-999-0000', 'mia.gonzalez@example.com'               , 999999963, 'password123', 'P', 'F'),
@@ -537,9 +542,9 @@ VALUES
 ('John', 'Doe', '1980-01-15', '555-1230001', 'john.doe@example.com', 211111111, 'password1',           'H', 'M'),
 ('Jane', 'Smith', '1985-05-25', '555-1230002', 'jane.smith@example.com', 211111112, 'password2',       'H', 'F'),
 ('Emily', 'Davis', '1990-07-10', '555-1230003', 'emily.davis@example.com', 211111113, 'password3',     'H', 'F'),
-('Michael', 'Brown', '1983-03-30', '555-1230004', 'michael.brown@example.com', 211111114, 'password4', 'H', 'M'),
-('Sarah', 'Johnson', '1988-12-12', '555-1230005', 'sarah.johnson@example.com', 211111115, 'password5', 'H', 'F'),
-('David', 'Wilson', '1992-09-19', '555-1230006', 'david.wilson@example.com', 211111116, 'password6',   'H', 'M'),
+('Michael', 'Brown', '1983-03-30', '555-1230004', 'michael..brown@example.com', 211111114, 'password4', 'H', 'M'),
+('Sarah', 'Johnson', '1988-12-12', '555-1230005', 'sarah..johnson@example.com', 211111115, 'password5', 'H', 'F'),
+('David', 'Wilson', '1992-09-19', '555-1230006', 'david..wilson@example.com', 211111116, 'password6',   'H', 'M'),
 
 -- Inserting Receptionists into HMS_User
 ('Alice', 'Walker', '1982-02-22', '555-1240001', 'alice.walker@example.com', 311111111, 'password7', 'R', 'F'),
@@ -548,7 +553,6 @@ VALUES
 ('Robert', 'Lee', '1984-11-02', '555-1240004', 'robert.lee@example.com', 311111114, 'password10', 'R', 'M'),
 ('Olivia', 'White', '1986-03-15', '555-1240005', 'olivia.white@example.com', 311111115, 'password11', 'R', 'F'),
 ('James', 'Taylor', '1990-06-10', '555-1240006', 'james.taylor@example.com', 311111116, 'password12', 'R', 'M');
-
 
 SET IDENTITY_INSERT Clinic on; 
 go 

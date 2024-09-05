@@ -14,6 +14,7 @@ BEGIN
     INSERT INTO ActiveSubstances (ActiveSubstancesName)
     VALUES (@ActiveSubstanceName);
 END;
+go
 -----------------------------------------------------------------------------------------------------------------------------
 CREATE or alter PROC AddMedication 
 @MedicationCode VARCHAR(20),
@@ -54,7 +55,7 @@ BEGIN
 	values (@ActiveSubstanceID,@MedicationCode)
 END;
 
-
+go
 -------------------------------------------------------------------------------------------------------------------------
 -- Test the stored procedure AddMedication
 
@@ -98,7 +99,7 @@ RETURN
     WHERE 
         P.PatientID = @PatientID
 );
-
+go
 select * 
 from GetPatientMedicationsAndActiveSubstancesByPatientID(1000)
  
