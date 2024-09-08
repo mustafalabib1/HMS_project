@@ -84,6 +84,7 @@ EXEC dbo.AddMedication
     @PharmacyID = 1;
 
 EXEC [dbo].[InsertActiveSubstance]'Paracetamol';
+
 ------------------------------------------------------------------------------------------------------------------------
 CREATE OR ALTER FUNCTION GetPatientMedicationsAndActiveSubstancesByPatientID( @PatientID INT )
 RETURNS TABLE

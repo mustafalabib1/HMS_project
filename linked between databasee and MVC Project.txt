@@ -1,0 +1,3 @@
+Scaffold-DbContext "Server=DESKTOP-AM9IO3H\MSSQLSERVER01;Database=HMS;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context HMSContext -Force 
+
+put this command in package Manager console 

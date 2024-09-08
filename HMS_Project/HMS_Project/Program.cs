@@ -1,4 +1,4 @@
-﻿using common;
+﻿using HMS_Project.Contexts;
 
 namespace HMS_Project
 {
@@ -6,7 +6,7 @@ namespace HMS_Project
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            HMSdbcontext context = new HMSdbcontext();
         }
     }
 }
