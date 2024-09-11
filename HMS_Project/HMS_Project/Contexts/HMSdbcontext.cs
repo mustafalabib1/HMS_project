@@ -16,6 +16,11 @@ namespace HMS_Project.Contexts
         {
             optionsBuilder.UseSqlServer("Server=DESKTOP-AM9IO3H\\MSSQLSERVER01;Database=HMS01;Trusted_Connection=True;Encrypt=False");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<HmsUser>().HasKey(u => u.SSN);
+        }
         //public virtual DbSet<ActiveSubstances> ActiveSubstances { get; set; }
         //public virtual DbSet<ActiveSubstance_Interaction> ActiveSubstanceInteractions { get; set; }
         //public virtual DbSet<ActiveSubstances_SideEffects> ActiveSubstancesSideEffects { get; set; }

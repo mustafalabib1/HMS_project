@@ -6,7 +6,6 @@ namespace HMS_Project.model;
 
 public partial class HmsUser
 {
-    [Key]
     public long SSN { get; set; }
     public string FirstName { get; set; } = null!;
 

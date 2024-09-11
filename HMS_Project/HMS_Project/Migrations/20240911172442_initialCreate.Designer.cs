@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HMS_Project.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    [Migration("20240908233525_Intia1Create")]
-    partial class Intia1Create
+    [Migration("20240911172442_initialCreate")]
+    partial class initialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v5QywfueU+4=",
+  "dgSpecHash": "v7Sp9rxMRuo=",
   "success": true,
-  "projectFilePath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+  "projectFilePath": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pc\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

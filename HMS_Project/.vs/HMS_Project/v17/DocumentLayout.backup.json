@@ -1,25 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\",
+  "WorkspaceRootPath": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Migrations\\20240908233525_Intia1Create.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HMS_Project\\Migrations\\20240908233525_Intia1Create.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Migrations\\20240911172442_initialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HMS_Project\\Migrations\\20240911172442_initialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\new folder\\hms_project\\hms_project\\model\\hmsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\hmsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\new folder\\hms_project\\hms_project\\model\\activesubstance_interaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\activesubstance_interaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\new folder\\hms_project\\hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\hms_project\\hms_project\\hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\new folder\\hms_project\\hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\hms_project\\hms_project\\hms_project\\model\\activesubstance_interaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\activesubstance_interaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\hms_project\\hms_project\\hms_project\\model\\hmsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\hmsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\hms_project\\hms_project\\hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -34,13 +34,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "HMSdbcontext.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
+              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
+              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
               "RelativeToolTip": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAiwBAAAABdAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwBUAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-08T23:00:54.352Z",
               "IsPinned": true,
@@ -49,23 +49,23 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20240908233525_Intia1Create.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Migrations\\20240908233525_Intia1Create.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Migrations\\20240908233525_Intia1Create.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Migrations\\20240908233525_Intia1Create.cs",
-              "RelativeToolTip": "HMS_Project\\Migrations\\20240908233525_Intia1Create.cs",
+              "Title": "20240911172442_initialCreate.cs",
+              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Migrations\\20240911172442_initialCreate.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\Migrations\\20240911172442_initialCreate.cs",
+              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Migrations\\20240911172442_initialCreate.cs",
+              "RelativeToolTip": "HMS_Project\\Migrations\\20240911172442_initialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T23:35:25.495Z",
+              "WhenOpened": "2024-09-11T17:24:43.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ActiveSubstance_Interaction.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\model\\ActiveSubstance_Interaction.cs",
+              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\model\\ActiveSubstance_Interaction.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\ActiveSubstance_Interaction.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\model\\ActiveSubstance_Interaction.cs",
+              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\model\\ActiveSubstance_Interaction.cs",
               "RelativeToolTip": "HMS_Project\\model\\ActiveSubstance_Interaction.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -74,13 +74,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "HmsUser.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\model\\HmsUser.cs",
+              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\model\\HmsUser.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\HmsUser.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\model\\HmsUser.cs",
+              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\model\\HmsUser.cs",
               "RelativeToolTip": "HMS_Project\\model\\HmsUser.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAkAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA3wAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-08T23:24:06.389Z",
               "EditorCaption": ""
@@ -89,14 +89,13 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Program.cs",
+              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Program.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Program.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\New folder\\HMS_Project\\HMS_Project\\Program.cs",
+              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\HMS_project\\HMS_Project\\HMS_Project\\Program.cs",
               "RelativeToolTip": "HMS_Project\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T22:51:13.91Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-08T22:51:13.91Z"
             }
           ]
         }
