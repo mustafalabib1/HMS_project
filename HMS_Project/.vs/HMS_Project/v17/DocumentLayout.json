@@ -84,8 +84,7 @@
               "RelativeToolTip": "HMS_Project\\model\\Reception.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:28:39.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-11T19:28:39.275Z"
             },
             {
               "$type": "Document",
@@ -97,8 +96,7 @@
               "RelativeToolTip": "HMS_Project\\model\\Appointment.cs",
               "ViewState": "AQIAABwAAAAAAAAAAAAAAC0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:17:54.28Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-11T19:17:54.28Z"
             },
             {
               "$type": "Document",
@@ -110,8 +108,7 @@
               "RelativeToolTip": "HMS_Project\\model\\MedicalRecord.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:13:01.116Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-11T19:13:01.116Z"
             },
             {
               "$type": "Document",
@@ -123,8 +120,7 @@
               "RelativeToolTip": "HMS_Project\\model\\Invoice.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAAAEAAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:07:34.328Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-11T19:07:34.328Z"
             },
             {
               "$type": "Document",
@@ -136,8 +132,7 @@
               "RelativeToolTip": "HMS_Project\\model\\Patient.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAAABkAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T18:52:59.981Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-11T18:52:59.981Z"
             },
             {
               "$type": "Document",
@@ -149,8 +144,7 @@
               "RelativeToolTip": "HMS_Project\\model\\HmsUser.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T23:24:06.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-08T23:24:06.389Z"
             },
             {
               "$type": "Document",
@@ -162,8 +156,7 @@
               "RelativeToolTip": "HMS_Project\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T22:51:13.91Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-08T22:51:13.91Z"
             }
           ]
         }
