@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\receptionist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\receptionist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\configurations\\patientconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\configurations\\patientconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,16 +15,32 @@
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\reception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\receptionist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\receptionist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\hmsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\hmsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,13 +54,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "HMSdbcontext.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Contexts\\HMSdbcontext.cs",
               "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
               "RelativeToolTip": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAiwBUAAAA+AAAAAAAAAA==",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAABQAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-08T23:00:54.352Z",
               "IsPinned": true
@@ -64,43 +68,57 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PatientConfigurations.cs",
+              "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Configurations\\PatientConfigurations.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\Configurations\\PatientConfigurations.cs",
+              "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Configurations\\PatientConfigurations.cs",
+              "RelativeToolTip": "HMS_Project\\Configurations\\PatientConfigurations.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T11:34:50.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Receptionist.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Receptionist.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\Receptionist.cs",
               "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Receptionist.cs",
               "RelativeToolTip": "HMS_Project\\model\\Receptionist.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:32:47.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-11T19:32:47.287Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "Reception.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Reception.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\Reception.cs",
               "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Reception.cs",
               "RelativeToolTip": "HMS_Project\\model\\Reception.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAHAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:28:39.275Z"
+              "WhenOpened": "2024-09-11T19:28:39.275Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Appointment.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Appointment.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\Appointment.cs",
               "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Appointment.cs",
               "RelativeToolTip": "HMS_Project\\model\\Appointment.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAAAC0AAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:17:54.28Z"
+              "WhenOpened": "2024-09-11T19:17:54.28Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "MedicalRecord.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\MedicalRecord.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\MedicalRecord.cs",
@@ -112,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Invoice.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Invoice.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\Invoice.cs",
@@ -124,19 +142,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Patient.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Patient.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\Patient.cs",
               "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\Patient.cs",
               "RelativeToolTip": "HMS_Project\\model\\Patient.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAABkAAAADAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-11T18:52:59.981Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "HmsUser.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\HmsUser.cs",
               "RelativeDocumentMoniker": "HMS_Project\\model\\HmsUser.cs",
@@ -148,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Program.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Program.cs",
