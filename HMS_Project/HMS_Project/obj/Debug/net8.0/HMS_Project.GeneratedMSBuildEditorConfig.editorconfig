@@ -8,6 +8,10 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HMS_Project
+<<<<<<< HEAD
 build_property.ProjectDir = D:\Hospital Management System\HMS_project\HMS_Project\HMS_Project\
+=======
+build_property.ProjectDir = C:\Users\LAB\Desktop\New folder (3)\HMS_Project\HMS_Project\
+>>>>>>> 73fe4018a6f5031d7e6fa731359dd9b01e14d287
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

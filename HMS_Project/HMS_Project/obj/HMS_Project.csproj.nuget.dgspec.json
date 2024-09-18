@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
   },
   "projects": {
@@ -12,9 +13,30 @@
         "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
         "packagesPath": "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\",
         "outputPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
+=======
+    "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "projectName": "HMS_Project",
+        "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "packagesPath": "C:\\Users\\LAB\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\obj\\",
+>>>>>>> 73fe4018a6f5031d7e6fa731359dd9b01e14d287
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\CRIZMA MEGA STORE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+>>>>>>> 73fe4018a6f5031d7e6fa731359dd9b01e14d287
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,7 +99,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 73fe4018a6f5031d7e6fa731359dd9b01e14d287
         }
       }
     }

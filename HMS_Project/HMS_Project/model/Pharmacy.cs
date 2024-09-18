@@ -10,7 +10,7 @@ namespace HMS_Project.model
     public class Pharmacy
     {
         private int pharmacyID;
-        private string pharmacyName;
+       private string pharmacyName;
         private string pharmacyPhone;
 
         public int PharmacyID
@@ -30,6 +30,10 @@ namespace HMS_Project.model
             get { return pharmacyPhone; }
             set { pharmacyPhone = value; }
         }
-        public virtual ICollection<Medication> Medications { get; set; } = new HashSet<Medication>();
+
+        public ICollection<Pharmacist> Pharmacists { get; set; } = new HashSet<Pharmacist>();
+        public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
+    
+        public ICollection<Medication> Medications { get; set; } = new HashSet<Medication>();
     }
 }
