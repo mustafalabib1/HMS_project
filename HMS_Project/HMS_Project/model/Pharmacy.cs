@@ -31,9 +31,9 @@ namespace HMS_Project.model
             set { pharmacyPhone = value; }
         }
 
-        public ICollection<Pharmacist> Pharmacists { get; set; }
-        public ICollection<Prescription> Prescriptions { get; set; }
+        public ICollection<Pharmacist> Pharmacists { get; set; } = new HashSet<Pharmacist>();
+        public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
     
-        public ICollection<Medication> Medications { get; set; }
+        public ICollection<Medication> Medications { get; set; } = new HashSet<Medication>();
     }
 }

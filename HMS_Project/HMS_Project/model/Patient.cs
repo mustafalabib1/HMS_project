@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
-    public class Patient : HmsUser
+    public class Patient /*: HmsUser*/
     {
 
         public int PatientId { get; set; }

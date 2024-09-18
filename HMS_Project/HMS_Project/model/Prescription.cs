@@ -37,22 +37,13 @@
             set { doctorID = value; }
         }
 
-        private int pharmacyId;
-        public int PharmacyId
-        {
-            get { return pharmacyId; }
-            set { pharmacyId = value; }
-        }
+      
 
-        private int patientID;
-        public int PatientID
-        {
-            get { return patientID; }
-            set { patientID = value; }
-        }
+      
 
-        public Pharmacy Pharmacy { get; set; }
-
+        public Pharmacy Pharmacy { get; set; } = null!;
+        public ICollection<ActiveSubstance> activeSubstances {  get; set; } = new HashSet<ActiveSubstance>();
+        public Patient Patient { get; set; } = null!;
 
     }
 }

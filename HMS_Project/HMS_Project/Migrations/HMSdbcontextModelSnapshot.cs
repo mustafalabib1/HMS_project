@@ -37,6 +37,21 @@ namespace HMS_Project.Migrations
                     b.ToTable("ActiveSubstanceMedication");
                 });
 
+            modelBuilder.Entity("ActiveSubstancePrescription", b =>
+                {
+                    b.Property<int>("ActiveSubstancesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrescriptionsPrescriptionID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActiveSubstancesId", "PrescriptionsPrescriptionID");
+
+                    b.HasIndex("PrescriptionsPrescriptionID");
+
+                    b.ToTable("ActiveSubstancePrescription");
+                });
+
             modelBuilder.Entity("HMS_Project.model.ActiveSubstance", b =>
                 {
                     b.Property<int>("ActiveSubstancesId")
@@ -102,11 +117,6 @@ namespace HMS_Project.Migrations
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -143,10 +153,6 @@ namespace HMS_Project.Migrations
                         .IsUnique();
 
                     b.ToTable("HmsUsers");
-
-                    b.HasDiscriminator().HasValue("HmsUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("HMS_Project.model.Medication", b =>
@@ -163,9 +169,6 @@ namespace HMS_Project.Migrations
                     b.Property<int>("PharmacyID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PharmacyID1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
@@ -173,9 +176,28 @@ namespace HMS_Project.Migrations
 
                     b.HasIndex("PharmacyID");
 
-                    b.HasIndex("PharmacyID1");
-
                     b.ToTable("Medication");
+                });
+
+            modelBuilder.Entity("HMS_Project.model.Patient", b =>
+                {
+                    b.Property<int>("PatientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientId"));
+
+                    b.Property<int?>("ActiveSubstancesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PatAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PatientId");
+
+                    b.HasIndex("ActiveSubstancesId");
+
+                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("HMS_Project.model.PatientMedication", b =>
@@ -194,6 +216,24 @@ namespace HMS_Project.Migrations
                     b.HasIndex("MedicationMedicationCode");
 
                     b.ToTable("PatientMedication");
+                });
+
+            modelBuilder.Entity("HMS_Project.model.Pharmacist", b =>
+                {
+                    b.Property<int>("PharmacistID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PharmacistID"));
+
+                    b.Property<int>("PharmacyID")
+                        .HasColumnType("int");
+
+                    b.HasKey("PharmacistID");
+
+                    b.HasIndex("PharmacyID");
+
+                    b.ToTable("Pharmacists");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Pharmacy", b =>
@@ -225,9 +265,6 @@ namespace HMS_Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PrescriptionID"));
 
-                    b.Property<int?>("ActiveSubstancesId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateIssued")
                         .HasColumnType("datetime2");
 
@@ -240,52 +277,19 @@ namespace HMS_Project.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientID")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PharmacyId")
+                    b.Property<int>("PharmacyID")
                         .HasColumnType("int");
 
                     b.HasKey("PrescriptionID");
 
-                    b.HasIndex("ActiveSubstancesId");
+                    b.HasIndex("PatientId");
 
-                    b.HasIndex("PharmacyId");
+                    b.HasIndex("PharmacyID");
 
                     b.ToTable("Prescriptions");
-                });
-
-            modelBuilder.Entity("HMS_Project.model.Patient", b =>
-                {
-                    b.HasBaseType("HMS_Project.model.HmsUser");
-
-                    b.Property<int?>("ActiveSubstancesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PatAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("ActiveSubstancesId");
-
-                    b.HasDiscriminator().HasValue("Patient");
-                });
-
-            modelBuilder.Entity("HMS_Project.model.Pharmacist", b =>
-                {
-                    b.HasBaseType("HMS_Project.model.HmsUser");
-
-                    b.Property<int>("PharmacistID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PharmacyId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PharmacyId");
-
-                    b.HasDiscriminator().HasValue("Pharmacist");
                 });
 
             modelBuilder.Entity("ActiveSubstanceMedication", b =>
@@ -299,6 +303,21 @@ namespace HMS_Project.Migrations
                     b.HasOne("HMS_Project.model.Medication", null)
                         .WithMany()
                         .HasForeignKey("MedicationCodesMedicationCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ActiveSubstancePrescription", b =>
+                {
+                    b.HasOne("HMS_Project.model.ActiveSubstance", null)
+                        .WithMany()
+                        .HasForeignKey("ActiveSubstancesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HMS_Project.model.Prescription", null)
+                        .WithMany()
+                        .HasForeignKey("PrescriptionsPrescriptionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -333,36 +352,8 @@ namespace HMS_Project.Migrations
             modelBuilder.Entity("HMS_Project.model.Medication", b =>
                 {
                     b.HasOne("HMS_Project.model.Pharmacy", "Pharmacy")
-                        .WithMany()
+                        .WithMany("Medications")
                         .HasForeignKey("PharmacyID")
-                        .IsRequired();
-
-                    b.HasOne("HMS_Project.model.Pharmacy", null)
-                        .WithMany("Medication")
-                        .HasForeignKey("PharmacyID1");
-
-                    b.Navigation("Pharmacy");
-                });
-
-            modelBuilder.Entity("HMS_Project.model.PatientMedication", b =>
-                {
-                    b.HasOne("HMS_Project.model.Medication", null)
-                        .WithMany("PatientMedications")
-                        .HasForeignKey("MedicationMedicationCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HMS_Project.model.Prescription", b =>
-                {
-                    b.HasOne("HMS_Project.model.ActiveSubstance", null)
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("ActiveSubstancesId");
-
-                    b.HasOne("HMS_Project.model.Pharmacy", "Pharmacy")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("PharmacyId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Pharmacy");
@@ -375,13 +366,41 @@ namespace HMS_Project.Migrations
                         .HasForeignKey("ActiveSubstancesId");
                 });
 
+            modelBuilder.Entity("HMS_Project.model.PatientMedication", b =>
+                {
+                    b.HasOne("HMS_Project.model.Medication", null)
+                        .WithMany("PatientMedications")
+                        .HasForeignKey("MedicationMedicationCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HMS_Project.model.Pharmacist", b =>
                 {
                     b.HasOne("HMS_Project.model.Pharmacy", "Pharmacy")
                         .WithMany("Pharmacists")
-                        .HasForeignKey("PharmacyId")
+                        .HasForeignKey("PharmacyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Pharmacy");
+                });
+
+            modelBuilder.Entity("HMS_Project.model.Prescription", b =>
+                {
+                    b.HasOne("HMS_Project.model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HMS_Project.model.Pharmacy", "Pharmacy")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("PharmacyID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
 
                     b.Navigation("Pharmacy");
                 });
@@ -395,8 +414,6 @@ namespace HMS_Project.Migrations
                     b.Navigation("ActiveSubstancesSideEffects");
 
                     b.Navigation("Patients");
-
-                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Medication", b =>
@@ -406,7 +423,7 @@ namespace HMS_Project.Migrations
 
             modelBuilder.Entity("HMS_Project.model.Pharmacy", b =>
                 {
-                    b.Navigation("Medication");
+                    b.Navigation("Medications");
 
                     b.Navigation("Pharmacists");
 

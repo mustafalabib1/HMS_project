@@ -16,20 +16,19 @@ namespace HMS_Project.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-AM9IO3H\\MSSQLSERVER01;Database=HMS02;Trusted_Connection=True;Encrypt=False");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-9OPA1VT\\MSS;Database=HMS02;Trusted_Connection=True;Encrypt=False");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Prescription>()
-                        .HasOne(p => p.Pharmacy)
-                        .WithMany(p => p.Prescriptions)
-                        .HasForeignKey(p => p.PharmacyId);
-            modelBuilder.Entity<Pharmacist>()
-                        .HasOne(p => p.Pharmacy)
-                        .WithMany(p => p.Pharmacists)
-                        .HasForeignKey(p => p.PharmacyId);
+                .HasOne(p => p.Pharmacy)
+                .WithMany(p => p.Prescriptions)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+                     
         }
 
         public virtual DbSet<HmsUser> HmsUsers { get; set; }

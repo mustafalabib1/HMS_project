@@ -17,7 +17,7 @@ namespace HMS_Project.Configurations
             builder.Property(e => e.MedicationCode).HasMaxLength(20);
             builder.Property(e => e.MedName).HasMaxLength(50);
 
-            builder.HasOne(d => d.Pharmacy).WithMany().OnDelete(DeleteBehavior.ClientSetNull);
+            builder.HasOne(d => d.Pharmacy).WithMany(d => d.Medications).OnDelete(DeleteBehavior.ClientSetNull);
             builder.HasMany(m => m.PatientMedications).WithOne();
         }
     }
