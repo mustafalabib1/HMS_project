@@ -184,15 +184,13 @@ namespace HMS_Project.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-<<<<<<< HEAD:HMS_Project/HMS_Project/Data/Migrations/HMSdbcontextModelSnapshot.cs
                     b.ToTable("HmsUser");
 
                     b.HasDiscriminator().HasValue("HmsUser");
 
                     b.UseTphMappingStrategy();
-=======
+
                     b.ToTable("HmsUsers");
->>>>>>> 73fe4018a6f5031d7e6fa731359dd9b01e14d287:HMS_Project/HMS_Project/Migrations/HMSdbcontextModelSnapshot.cs
                 });
 
             modelBuilder.Entity("HMS_Project.model.Invoice", b =>
@@ -386,7 +384,7 @@ namespace HMS_Project.Migrations
 
                     b.HasIndex("PharmacyID");
 
-<<<<<<< HEAD:HMS_Project/HMS_Project/Data/Migrations/HMSdbcontextModelSnapshot.cs
+
             modelBuilder.Entity("HMS_Project.model.Reception", b =>
                 {
                     b.Property<int>("ReceptionID")
