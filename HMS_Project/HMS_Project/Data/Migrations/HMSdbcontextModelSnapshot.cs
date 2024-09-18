@@ -94,6 +94,30 @@ namespace HMS_Project.Migrations
                     b.ToTable("ActiveSubstancesSideEffect");
                 });
 
+            modelBuilder.Entity("HMS_Project.model.Apointment", b =>
+                {
+                    b.Property<int>("ApointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApointmentId"));
+
+                    b.Property<DateOnly>("ApointmentDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ApointmentStatus")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("char");
+
+                    b.Property<TimeOnly>("ApointmentTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("ApointmentId");
+
+                    b.ToTable("Apointments");
+                });
+
             modelBuilder.Entity("HMS_Project.model.HmsUser", b =>
                 {
                     b.Property<long>("SSN")
@@ -104,8 +128,8 @@ namespace HMS_Project.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -142,11 +166,68 @@ namespace HMS_Project.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("HmsUsers");
+                    b.ToTable("HmsUser");
 
                     b.HasDiscriminator().HasValue("HmsUser");
 
                     b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("HMS_Project.model.Invoice", b =>
+                {
+                    b.Property<int>("InvoiceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceID"));
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasComputedColumnSql("GETDATE()");
+
+                    b.Property<bool>("PaymentStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("char");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.HasKey("InvoiceID");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("HMS_Project.model.MedicalRecord", b =>
+                {
+                    b.Property<int>("RecordID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecordID"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasComputedColumnSql("GETDATE()");
+
+                    b.Property<string>("Diagnosis")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<string>("LabResults")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar");
+
+                    b.HasKey("RecordID");
+
+                    b.ToTable("MedicalRecords");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Medication", b =>
@@ -253,6 +334,24 @@ namespace HMS_Project.Migrations
                     b.ToTable("Prescription");
                 });
 
+            modelBuilder.Entity("HMS_Project.model.Reception", b =>
+                {
+                    b.Property<int>("ReceptionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReceptionID"));
+
+                    b.Property<string>("phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar");
+
+                    b.HasKey("ReceptionID");
+
+                    b.ToTable("Reception");
+                });
+
             modelBuilder.Entity("HMS_Project.model.Patient", b =>
                 {
                     b.HasBaseType("HMS_Project.model.HmsUser");
@@ -261,7 +360,8 @@ namespace HMS_Project.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PatAddress")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -269,6 +369,16 @@ namespace HMS_Project.Migrations
                     b.HasIndex("ActiveSubstancesId");
 
                     b.HasDiscriminator().HasValue("Patient");
+                });
+
+            modelBuilder.Entity("HMS_Project.model.Receptionist", b =>
+                {
+                    b.HasBaseType("HMS_Project.model.HmsUser");
+
+                    b.Property<int>("ReceptionistID")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Receptionist");
                 });
 
             modelBuilder.Entity("ActiveSubstanceMedication", b =>

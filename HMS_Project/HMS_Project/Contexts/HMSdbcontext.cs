@@ -24,7 +24,15 @@ namespace HMS_Project.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-        public virtual DbSet<HmsUser> HmsUsers { get; set; }
-        
+        //public virtual DbSet<HmsUser> HmsUsers { get; set; }
+        public virtual DbSet<Patient>Patients  { get; set; } // patient table inherit from User (TPC)
+        public virtual DbSet<MedicalRecord> MedicalRecords { get; set; } 
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Apointment> Apointments { get; set; }
+        public virtual DbSet<Reception> Reception { get; set; }
+        public virtual DbSet<Receptionist> Receptionists { get; set; }
+
+
+
     }
 }

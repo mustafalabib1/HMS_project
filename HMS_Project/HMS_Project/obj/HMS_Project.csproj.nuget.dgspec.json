@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
+    "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
   },
   "projects": {
-    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+    "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "projectUniqueName": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
         "projectName": "HMS_Project",
-        "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
-        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\obj\\",
+        "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "packagesPath": "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\",
+        "outputPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\CRIZMA MEGA STORE\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

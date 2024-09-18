@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HMS_Project.Configurations
+namespace HMS_Project.Data.Configurations
 {
     internal class HmsUserConfiguration : IEntityTypeConfiguration<HmsUser>
     {
