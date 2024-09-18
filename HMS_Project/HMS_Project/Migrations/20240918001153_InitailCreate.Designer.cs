@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HMS_Project.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    [Migration("20240911172442_initialCreate")]
-    partial class initialCreate
+    [Migration("20240918001153_InitailCreate")]
+    partial class InitailCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,42 +28,45 @@ namespace HMS_Project.Migrations
             modelBuilder.Entity("HMS_Project.model.HmsUser", b =>
                 {
                     b.Property<long>("SSN")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SSN"));
 
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nchar(1)")
+                        .IsFixedLength();
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("UserPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("SSN");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("HmsUsers");
                 });

@@ -1,41 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HMS_Project.model
+namespace HMS_Project.model;
+
+public partial class Medication
 {
-    public class Medication
-    {
-        private string medicationCode;
-        public string MedicationCode
-        {
-            get { return medicationCode; }
-            set { medicationCode = value; }
-        }
+    public string MedicationCode { get; set; } = null!;
 
-        private string medName;
-        public string MedName
-        {
-            get { return medName; }
-            set { medName = value; }
-        }
+    public string MedName { get; set; } = null!;
 
-        private int strength;
-        public int Strength
-        {
-            get { return strength; }
-            set { strength = value; }
-        }
+    public int Strength { get; set; }
+    public virtual ICollection<ActiveSubstance> ActiveSubstances { get; set; } = new List<ActiveSubstance>();
+    public virtual ICollection<PatientMedication> PatientMedications { get; set; } = new List<PatientMedication>();
+    public virtual Pharmacy Pharmacy { get; set; } = null!;
 
-        private int pharmacyId;
-        public int PharmacyId
-        {
-            get { return pharmacyId; }
-            set { pharmacyId = value; }
-        }
-
-        // Additional properties or methods as needed
-    }
 }

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LAB\\Source\\Repos\\mustafalabib1\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LAB\\Source\\Repos\\mustafalabib1\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB\\Source\\Repos\\mustafalabib1\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
         "projectName": "HMS_Project",
-        "projectPath": "C:\\Users\\LAB\\Source\\Repos\\mustafalabib1\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
-        "packagesPath": "C:\\Users\\LAB\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB\\Source\\Repos\\mustafalabib1\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
+        "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -50,6 +46,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -77,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

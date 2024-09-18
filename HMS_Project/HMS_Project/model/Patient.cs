@@ -8,38 +8,9 @@ namespace HMS_Project.model
 {
     public class Patient : HmsUser
     {
-       
-        private int _patientID;
-        public int PatientID
-        {
-            get { return _patientID; }
-            set { _patientID = value; }
-        }
 
-        private string _patAddress;
-        public string PatAddress
-        {
-            get { return _patAddress; }
-            set { _patAddress = value; }
-        }
+        public int PatientId { get; set; }
 
-        private long _ssn;
-        public long SSN
-        {
-            get { return _ssn; }
-            set { _ssn = value; }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
+        public string? PatAddress { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMS_Project.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,5 +30,6 @@ namespace HMS_Project.model
             get { return pharmacyPhone; }
             set { pharmacyPhone = value; }
         }
+        public virtual ICollection<Medication> Medications { get; set; } = new HashSet<Medication>();
     }
 }
