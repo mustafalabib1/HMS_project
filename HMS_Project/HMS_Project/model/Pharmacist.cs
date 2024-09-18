@@ -8,21 +8,21 @@ namespace HMS_Project.model
 {
     public class Pharmacist : HmsUser
     {
-        public int pharmacistID;
+        private int pharmacistID;
         public int PharmacistID
         {
             get { return pharmacistID; }
             set { pharmacistID = value; }
         }
 
-        public int pharmacyId;
+        private int pharmacyId;
         public int PharmacyId
         {
             get { return pharmacyId; }
             set { pharmacyId = value; }
         }
 
-        public long ssn;
+      private long ssn;
         public long SSN
         {
             get { return ssn; }

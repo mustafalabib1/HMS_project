@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HMS_Project.model
+﻿namespace HMS_Project.model
 {
     public class Prescription
     {
-        public int prescriptionID;
+        private int prescriptionID;
         public int PrescriptionID
         {
             get { return prescriptionID; }
             set { prescriptionID = value; }
         }
 
-        public int dosage;
+        private int dosage;
         public int Dosage
         {
             get { return dosage; }
             set { dosage = value; }
         }
 
-        public DateTime dateIssued;
+        private DateTime dateIssued;
         public DateTime DateIssued
         {
             get { return dateIssued; }
@@ -44,14 +37,14 @@ namespace HMS_Project.model
             set { doctorID = value; }
         }
 
-        public int pharmacyId;
+        private int pharmacyId;
         public int PharmacyId
         {
             get { return pharmacyId; }
             set { pharmacyId = value; }
         }
 
-        public int patientID;
+        private int patientID;
         public int PatientID
         {
             get { return patientID; }
@@ -60,6 +53,6 @@ namespace HMS_Project.model
 
         public Pharmacy Pharmacy { get; set; }
 
-        public Patient Patient { get; set; }
+
     }
 }

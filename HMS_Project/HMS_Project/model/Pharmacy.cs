@@ -9,9 +9,9 @@ namespace HMS_Project.model
 {
     public class Pharmacy
     {
-        public int pharmacyID;
-        public string pharmacyName;
-        public string pharmacyPhone;
+        private int pharmacyID;
+       private string pharmacyName;
+        private string pharmacyPhone;
 
         public int PharmacyID
         {
@@ -34,6 +34,6 @@ namespace HMS_Project.model
         public ICollection<Pharmacist> Pharmacists { get; set; }
         public ICollection<Prescription> Prescriptions { get; set; }
     
-        public ICollection<Medication> Medication { get; set; }
+        public ICollection<Medication> Medications { get; set; }
     }
 }

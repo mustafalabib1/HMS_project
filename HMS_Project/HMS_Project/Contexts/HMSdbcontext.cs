@@ -22,9 +22,21 @@ namespace HMS_Project.Contexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Prescription>()
+                        .HasOne(p => p.Pharmacy)
+                        .WithMany(p => p.Prescriptions)
+                        .HasForeignKey(p => p.PharmacyId);
+            modelBuilder.Entity<Pharmacist>()
+                        .HasOne(p => p.Pharmacy)
+                        .WithMany(p => p.Pharmacists)
+                        .HasForeignKey(p => p.PharmacyId);
         }
 
         public virtual DbSet<HmsUser> HmsUsers { get; set; }
-        
+        public DbSet<Pharmacy> Pharmacies { get; set; }
+        public DbSet<Pharmacist> Pharmacists { get; set; }
+
+        public DbSet<Prescription> Prescriptions { get; set; }
+
     }
 }
