@@ -6,62 +6,24 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
-    internal class Invoice
+    public class Invoice
     {
-        private int _invoiceID;
-        // Full Property for InvoiceID
-        public int InvoiceID
-        {
-            get { return _invoiceID; }
-            set { _invoiceID = value; }
-        }
+        public int InvoiceID { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public decimal TotalAmount { get; set; }
+        public bool PaymentStatus { get; set; }
+        public char PaymentType { get; set; }
 
-        private DateTime _invoiceDate;
-        // Full Property for InvoiceDate
-        public DateTime InvoiceDate
-        {
-            get { return _invoiceDate; }
-            set { _invoiceDate = value; }
-        }
+        #region One2Many With patient
+        public int PatientId { get; set; }
+        public virtual Patient Patient { get; set; } = null!; 
+        #endregion
 
-        private decimal _totalAmount;
-        // Full Property for TotalAmount
-        public decimal TotalAmount
-        {
-            get { return _totalAmount; }
-            set { _totalAmount = value; }
-        }
+        #region One2Many With Reception
+        public int ReceptionId { get; set; }
+        public virtual Reception Reception { get; set; } = null!; 
+        #endregion
 
-        private bool _paymentStatus;
-        // Full Property for PaymentStatus
-        public bool PaymentStatus
-        {
-            get { return _paymentStatus; }
-            set { _paymentStatus = value; }
-        }
 
-        private char _paymentType;
-        // Full Property for PaymentType
-        public char PaymentType
-        {
-            get { return _paymentType; }
-            set { _paymentType = value; }
-        }
-
-        private int _patientID;
-        // Full Property for PatientID
-        public int PatientID
-        {
-            get { return _patientID; }
-            set { _patientID = value; }
-        }
-
-        private int _receptionID;
-        // Full Property for ReceptionID
-        public int ReceptionID
-        {
-            get { return _receptionID; }
-            set { _receptionID = value; }
-        }
     }
 }

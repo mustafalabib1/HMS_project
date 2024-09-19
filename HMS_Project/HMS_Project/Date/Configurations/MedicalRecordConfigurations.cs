@@ -17,6 +17,12 @@ namespace HMS_Project.Data.Configurations
             builder.Property(m => m.Diagnosis).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(250);
             builder.Property(m => m.CreatedDate).HasComputedColumnSql("GETDATE()");
             builder.Property(m => m.LabResults).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(250);
+
+            builder
+                .HasOne(m => m.Patient)
+                .WithMany(m => m.MedicalRecords)
+                .HasForeignKey(m => m.PatientID);
+                
         }
     }
 }

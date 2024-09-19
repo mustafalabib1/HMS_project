@@ -28,6 +28,14 @@ namespace HMS_Project.Data.Configurations
                 .Property(i => i.PaymentType)
                 .HasColumnType($"{DB_DataTypes_Helper._char}")
                 .HasMaxLength(1);
+            builder
+                .HasOne(i => i.Reception)
+                .WithMany(i => i.invoices)
+                .HasForeignKey(i => i.ReceptionId);
+            builder
+                .HasOne(i => i.Patient)
+                .WithMany(i => i.Invoices)
+                .HasForeignKey(i => i.PatientId);
             
         }
     }

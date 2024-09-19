@@ -6,27 +6,15 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
-    internal class Receptionist
+    public class Receptionist : HmsUser
     {
-        private int _receptionistID;
-        public int ReceptionistID
-        {
-            get { return _receptionistID; }
-            set { _receptionistID = value; }
-        }
+        public int ReceptionistID { get; set; }
 
-        private int _receptionID;
-        public int ReceptionID
-        {
-            get { return _receptionID; }
-            set { _receptionID = value; }
-        }
+        #region One2Many With Reception
+        public int ReceptionID { get; set; }
+        public Reception Reception { get; set; } = null!; 
+        #endregion
 
-        private long _ssn;
-        public long SSN
-        {
-            get { return _ssn; }
-            set { _ssn = value; }
-        }
+        //public long SSN { get; set; }
     }
 }

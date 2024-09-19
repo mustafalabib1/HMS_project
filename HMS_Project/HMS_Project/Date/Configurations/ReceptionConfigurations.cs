@@ -13,8 +13,20 @@ namespace HMS_Project.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Reception> builder)
         {
-            builder.HasKey(r => r.ReceptionID);
-            builder.Property(r => r.phone).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(20);
+           
+            builder.Property(r => r.Phone).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(20);
+            builder
+                .HasMany(r => r.invoices)
+                .WithOne(r => r.Reception)
+                .HasForeignKey(r => r.ReceptionId);
+            builder
+                .HasMany(r => r.Receptionists)
+                .WithOne(r => r.Reception)
+                .HasForeignKey(r => r.ReceptionID);
+            builder
+                .HasMany(r => r.Apointments)
+                .WithOne(r => r.Reception)
+                .HasForeignKey(r => r.ReceptionId);
         }
     }
 }

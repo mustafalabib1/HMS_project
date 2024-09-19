@@ -6,32 +6,15 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
-    internal class Reception
+    public class Reception
     {
-        
-        private int _receptionID;
-        public int ReceptionID
-        {
-            get { return _receptionID; }
-            set { _receptionID = value; }
-        }
+        public int ReceptionId { get; set; }
 
-        private string _phone;
-        public string Phone
-        {
-            get { return _phone; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("Phone cannot be null or empty");
-                }
-                if (value.Length > 20)
-                {
-                    throw new ArgumentException("Phone number cannot exceed 20 characters");
-                }
-                _phone = value;
-            }
-        }
+        public string Phone { get; set; } = null!;
+
+        public ICollection<Invoice> invoices { get; set; } = new HashSet<Invoice>();
+        public ICollection<Receptionist> Receptionists { get; set; } = new HashSet<Receptionist>();
+        public ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
+
     }
 }

@@ -17,6 +17,9 @@ namespace HMS_Project.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=DESKTOP-AM9IO3H\\MSSQLSERVER01;Database=HMS02;Trusted_Connection=True;Encrypt=False");
+            //optionsBuilder.UseSqlServer("Server=DESKTOP-F0FJTS7\\SQLEXPRESS;Database=HMS02;Trusted_Connection=True;Encrypt=False"); connection for 7awy
+
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,12 +34,12 @@ namespace HMS_Project.Contexts
                      
         }
 
-        //public virtual DbSet<Patient> Patients { get; set; } // patient table inherit from User (TPC)
-        //public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
-        //public virtual DbSet<Invoice> Invoices { get; set; }
-        //public virtual DbSet<Apointment> Apointments { get; set; }
-        //public virtual DbSet<Reception> Reception { get; set; }
-        //public virtual DbSet<Receptionist> Receptionists { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
+        public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Apointment> Apointments { get; set; }
+        public virtual DbSet<Reception> Reception { get; set; }
+        public virtual DbSet<Receptionist> Receptionists { get; set; }//Receptionists  table inherit from User (TPC)
 
 
         public virtual DbSet<ActiveSubstance> ActiveSubstances { get; set; }

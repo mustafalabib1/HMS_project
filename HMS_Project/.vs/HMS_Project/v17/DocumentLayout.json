@@ -1,38 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\",
+  "WorkspaceRootPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\new folder\\hms_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\hms_project\\hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240919013743_InitailCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HMS_Project\\Date\\Migrations\\20240919013743_InitailCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\new folder\\hms_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\hms_project\\hms_project\\date\\configurations\\pharmacistconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\date\\configurations\\pharmacistconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\new folder\\hms_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\hms_project\\hms_project\\date\\configurations\\patientconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\date\\configurations\\patientconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240919013021_InitailCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HMS_Project\\Date\\Migrations\\20240919013021_InitailCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\new folder\\hms_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\hms_project\\hms_project\\model\\activesubstance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\activesubstance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\new folder\\hms_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\hms_project\\hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\.net project\\new folder\\new folder\\hms_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\hms_project\\hms_project\\model\\pharmacist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\pharmacist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\hospital management system\\hms_project\\hms_project\\hms_project\\model\\db_datatypes_helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\db_datatypes_helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -48,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "HMSdbcontext.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
+              "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
+              "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
               "RelativeToolTip": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCkAAAAdAAAAAAAAAA==",
+              "ViewState": "AQIAACsAAAAAAAAAAAAAACQAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T00:59:45.517Z",
               "IsPinned": true,
@@ -61,92 +37,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "20240919013743_InitailCreate.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240919013743_InitailCreate.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Migrations\\20240919013743_InitailCreate.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240919013743_InitailCreate.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Migrations\\20240919013743_InitailCreate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Title": "DB_DataTypes_Helper.cs",
+              "DocumentMoniker": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\DB_DataTypes_Helper.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\DB_DataTypes_Helper.cs",
+              "ToolTip": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\model\\DB_DataTypes_Helper.cs",
+              "RelativeToolTip": "HMS_Project\\model\\DB_DataTypes_Helper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:37:43.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PharmacistConfiguration.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Configurations\\PharmacistConfiguration.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Configurations\\PharmacistConfiguration.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Configurations\\PharmacistConfiguration.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Configurations\\PharmacistConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:36:25.13Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "20240919013021_InitailCreate.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240919013021_InitailCreate.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Migrations\\20240919013021_InitailCreate.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240919013021_InitailCreate.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Migrations\\20240919013021_InitailCreate.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAQwAwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:30:21.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ActiveSubstance.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\model\\ActiveSubstance.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\ActiveSubstance.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\model\\ActiveSubstance.cs",
-              "RelativeToolTip": "HMS_Project\\model\\ActiveSubstance.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:26:48.274Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PatientConfigurations.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:20:49.047Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Pharmacist.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\model\\Pharmacist.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\Pharmacist.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\model\\Pharmacist.cs",
-              "RelativeToolTip": "HMS_Project\\model\\Pharmacist.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:13:47.583Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Patient.cs",
-              "DocumentMoniker": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\model\\Patient.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\Patient.cs",
-              "ToolTip": "E:\\Mustafa\\.net project\\New folder\\New folder\\HMS_project-73fe4018a6f5031d7e6fa731359dd9b01e14d287\\HMS_Project\\HMS_Project\\model\\Patient.cs",
-              "RelativeToolTip": "HMS_Project\\model\\Patient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T01:11:37.783Z",
+              "WhenOpened": "2024-09-19T10:14:59.92Z",
+              "IsPinned": true,
               "EditorCaption": ""
             }
           ]

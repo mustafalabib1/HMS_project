@@ -17,6 +17,15 @@ namespace HMS_Project.Data.Configurations
             builder.Property(a => a.ApointmentDate).HasColumnType($"{DB_DataTypes_Helper.date}");
             builder.Property(a => a.ApointmentTime).HasColumnType($"{DB_DataTypes_Helper.time}");
             builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper._char}").HasMaxLength(1);
+
+            builder
+                .HasOne(a => a.Reception)
+                .WithMany(a => a.Apointments)
+                .HasForeignKey(a => a.ReceptionId);
+            builder
+                .HasOne(a => a.Patient)
+                .WithMany(a => a.Apointments)
+                .HasForeignKey(a => a.PatientId);
         }
     }
 }

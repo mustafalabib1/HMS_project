@@ -29,6 +29,19 @@ namespace HMS_Project.Data.Configurations
             builder.Property(e => e.Phone).HasMaxLength(20);
             builder.Property(e => e.UserPassword)
                 .HasMaxLength(50);
+
+            builder
+                .HasMany(p => p.Apointments)
+                .WithOne(p => p.Patient)
+                .HasForeignKey(p => p.PatientId);
+            builder
+                .HasMany(p => p.Invoices)
+                .WithOne(p => p.Patient)
+                .HasForeignKey(p => p.PatientId);
+            builder
+                .HasMany(p => p.MedicalRecords)
+                .WithOne(p => p.Patient)
+                .HasForeignKey(p => p.PatientID);
         }
     }
 }
