@@ -13,6 +13,6 @@ public partial class ActiveSubstance
     public virtual ICollection<ActiveSubstancesSideEffect> ActiveSubstancesSideEffects { get; set; } = new HashSet<ActiveSubstancesSideEffect>();
     public virtual ICollection<ActiveSubstanceInteraction> ActSub1 { get; set; } = new HashSet<ActiveSubstanceInteraction>();
     public virtual ICollection<ActiveSubstanceInteraction> ActSub2 { get; set; } = new HashSet<ActiveSubstanceInteraction>();
-    public virtual ICollection<Patient> Patients { get; set; } = new HashSet<Patient>();
+    public virtual ICollection<Patient> PatientshaveAllergy { get; set; } = new HashSet<Patient>();
     public virtual ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
 }

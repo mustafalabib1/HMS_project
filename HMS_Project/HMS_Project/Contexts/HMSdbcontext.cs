@@ -16,7 +16,7 @@ namespace HMS_Project.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-9OPA1VT\\MSS;Database=HMS02;Trusted_Connection=True;Encrypt=False");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-AM9IO3H\\MSSQLSERVER01;Database=HMS02;Trusted_Connection=True;Encrypt=False");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,23 +31,19 @@ namespace HMS_Project.Contexts
                      
         }
 
-<<<<<<< HEAD
-        //public virtual DbSet<HmsUser> HmsUsers { get; set; }
-        public virtual DbSet<Patient>Patients  { get; set; } // patient table inherit from User (TPC)
-        public virtual DbSet<MedicalRecord> MedicalRecords { get; set; } 
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<Apointment> Apointments { get; set; }
-        public virtual DbSet<Reception> Reception { get; set; }
-        public virtual DbSet<Receptionist> Receptionists { get; set; }
+        //public virtual DbSet<Patient> Patients { get; set; } // patient table inherit from User (TPC)
+        //public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
+        //public virtual DbSet<Invoice> Invoices { get; set; }
+        //public virtual DbSet<Apointment> Apointments { get; set; }
+        //public virtual DbSet<Reception> Reception { get; set; }
+        //public virtual DbSet<Receptionist> Receptionists { get; set; }
 
 
-=======
-        public virtual DbSet<HmsUser> HmsUsers { get; set; }
-        public DbSet<Pharmacy> Pharmacies { get; set; }
-        public DbSet<Pharmacist> Pharmacists { get; set; }
-
-        public DbSet<Prescription> Prescriptions { get; set; }
->>>>>>> 73fe4018a6f5031d7e6fa731359dd9b01e14d287
+        public virtual DbSet<ActiveSubstance> ActiveSubstances { get; set; }
+        public virtual DbSet<Medication> Medication { get; set; }
+        public virtual DbSet<Pharmacy> Pharmacies { get; set; }
+        public virtual DbSet<Pharmacist> Pharmacists { get; set; }
+        public virtual DbSet<Prescription> Prescriptions { get; set; }
 
     }
 }

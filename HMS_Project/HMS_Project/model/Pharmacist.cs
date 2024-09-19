@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
-    public class Pharmacist /*: HmsUser*/
+    public class Pharmacist : HmsUser
     {
         private int pharmacistID;
         public int PharmacistID
@@ -14,18 +14,7 @@ namespace HMS_Project.model
             get { return pharmacistID; }
             set { pharmacistID = value; }
         }
-
-        
-        
-
-      //private long ssn;
-      //  public long SSN
-      //  {
-      //      get { return ssn; }
-      //      set { ssn = value; }
-      //  }
-
-        public Pharmacy Pharmacy { get; set; }
+        public Pharmacy Pharmacy { get; set; } = null!;
 
         
     }

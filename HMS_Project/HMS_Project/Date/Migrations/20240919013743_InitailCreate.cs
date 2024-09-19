@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HMS_Project.Migrations
+namespace HMS_Project.Date.Migrations
 {
     /// <inheritdoc />
-    public partial class Pharmacy : Migration
+    public partial class InitailCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ActiveSubstance",
+                name: "ActiveSubstances",
                 columns: table => new
                 {
                     ActiveSubstancesId = table.Column<int>(type: "int", nullable: false)
@@ -21,7 +21,28 @@ namespace HMS_Project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActiveSubstance", x => x.ActiveSubstancesId);
+                    table.PrimaryKey("PK_ActiveSubstances", x => x.ActiveSubstancesId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patient",
+                columns: table => new
+                {
+                    PatientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PatAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    SSN = table.Column<long>(type: "bigint", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserPassword = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Gender = table.Column<string>(type: "nchar(1)", fixedLength: true, maxLength: 1, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patient", x => x.PatientId);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,14 +71,14 @@ namespace HMS_Project.Migrations
                 {
                     table.PrimaryKey("PK_ActiveSubstanceInteraction", x => new { x.ActiveSubstanceId1, x.ActiveSubstanceId2 });
                     table.ForeignKey(
-                        name: "FK_ActiveSubstanceInteraction_ActiveSubstance_ActiveSubstanceId1",
+                        name: "FK_ActiveSubstanceInteraction_ActiveSubstances_ActiveSubstanceId1",
                         column: x => x.ActiveSubstanceId1,
-                        principalTable: "ActiveSubstance",
+                        principalTable: "ActiveSubstances",
                         principalColumn: "ActiveSubstancesId");
                     table.ForeignKey(
-                        name: "FK_ActiveSubstanceInteraction_ActiveSubstance_ActiveSubstanceId2",
+                        name: "FK_ActiveSubstanceInteraction_ActiveSubstances_ActiveSubstanceId2",
                         column: x => x.ActiveSubstanceId2,
-                        principalTable: "ActiveSubstance",
+                        principalTable: "ActiveSubstances",
                         principalColumn: "ActiveSubstancesId");
                 });
 
@@ -72,29 +93,34 @@ namespace HMS_Project.Migrations
                 {
                     table.PrimaryKey("PK_ActiveSubstancesSideEffect", x => new { x.SideEffects, x.ActiveSubstancesID });
                     table.ForeignKey(
-                        name: "FK_ActiveSubstancesSideEffect_ActiveSubstance_ActiveSubstancesID",
+                        name: "FK_ActiveSubstancesSideEffect_ActiveSubstances_ActiveSubstancesID",
                         column: x => x.ActiveSubstancesID,
-                        principalTable: "ActiveSubstance",
+                        principalTable: "ActiveSubstances",
                         principalColumn: "ActiveSubstancesId");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patient",
+                name: "ActiveSubstancePatient",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PatAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ActiveSubstancesId = table.Column<int>(type: "int", nullable: true)
+                    ActSbuAllergiesActiveSubstancesId = table.Column<int>(type: "int", nullable: false),
+                    PatientshaveAllergyPatientId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patient", x => x.PatientId);
+                    table.PrimaryKey("PK_ActiveSubstancePatient", x => new { x.ActSbuAllergiesActiveSubstancesId, x.PatientshaveAllergyPatientId });
                     table.ForeignKey(
-                        name: "FK_Patient_ActiveSubstance_ActiveSubstancesId",
-                        column: x => x.ActiveSubstancesId,
-                        principalTable: "ActiveSubstance",
-                        principalColumn: "ActiveSubstancesId");
+                        name: "FK_ActiveSubstancePatient_ActiveSubstances_ActSbuAllergiesActiveSubstancesId",
+                        column: x => x.ActSbuAllergiesActiveSubstancesId,
+                        principalTable: "ActiveSubstances",
+                        principalColumn: "ActiveSubstancesId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActiveSubstancePatient_Patient_PatientshaveAllergyPatientId",
+                        column: x => x.PatientshaveAllergyPatientId,
+                        principalTable: "Patient",
+                        principalColumn: "PatientId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,11 +130,17 @@ namespace HMS_Project.Migrations
                     MedicationCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     MedName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Strength = table.Column<int>(type: "int", nullable: false),
-                    PharmacyID = table.Column<int>(type: "int", nullable: false)
+                    PharmacyID = table.Column<int>(type: "int", nullable: false),
+                    PatientId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medication", x => x.MedicationCode);
+                    table.ForeignKey(
+                        name: "FK_Medication_Patient_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patient",
+                        principalColumn: "PatientId");
                     table.ForeignKey(
                         name: "FK_Medication_Pharmacies_PharmacyID",
                         column: x => x.PharmacyID,
@@ -122,7 +154,15 @@ namespace HMS_Project.Migrations
                 {
                     PharmacistID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PharmacyID = table.Column<int>(type: "int", nullable: false)
+                    PharmacyID = table.Column<int>(type: "int", nullable: false),
+                    SSN = table.Column<long>(type: "bigint", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserPassword = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Gender = table.Column<string>(type: "nchar(1)", fixedLength: true, maxLength: 1, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -175,9 +215,9 @@ namespace HMS_Project.Migrations
                 {
                     table.PrimaryKey("PK_ActiveSubstanceMedication", x => new { x.ActiveSubstancesId, x.MedicationCodesMedicationCode });
                     table.ForeignKey(
-                        name: "FK_ActiveSubstanceMedication_ActiveSubstance_ActiveSubstancesId",
+                        name: "FK_ActiveSubstanceMedication_ActiveSubstances_ActiveSubstancesId",
                         column: x => x.ActiveSubstancesId,
-                        principalTable: "ActiveSubstance",
+                        principalTable: "ActiveSubstances",
                         principalColumn: "ActiveSubstancesId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -218,9 +258,9 @@ namespace HMS_Project.Migrations
                 {
                     table.PrimaryKey("PK_ActiveSubstancePrescription", x => new { x.ActiveSubstancesId, x.PrescriptionsPrescriptionID });
                     table.ForeignKey(
-                        name: "FK_ActiveSubstancePrescription_ActiveSubstance_ActiveSubstancesId",
+                        name: "FK_ActiveSubstancePrescription_ActiveSubstances_ActiveSubstancesId",
                         column: x => x.ActiveSubstancesId,
-                        principalTable: "ActiveSubstance",
+                        principalTable: "ActiveSubstances",
                         principalColumn: "ActiveSubstancesId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -230,12 +270,6 @@ namespace HMS_Project.Migrations
                         principalColumn: "PrescriptionID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActiveSubstance_ActiveSubstancesName",
-                table: "ActiveSubstance",
-                column: "ActiveSubstancesName",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActiveSubstanceInteraction_ActiveSubstanceId2",
@@ -248,9 +282,20 @@ namespace HMS_Project.Migrations
                 column: "MedicationCodesMedicationCode");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActiveSubstancePatient_PatientshaveAllergyPatientId",
+                table: "ActiveSubstancePatient",
+                column: "PatientshaveAllergyPatientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ActiveSubstancePrescription_PrescriptionsPrescriptionID",
                 table: "ActiveSubstancePrescription",
                 column: "PrescriptionsPrescriptionID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActiveSubstances_ActiveSubstancesName",
+                table: "ActiveSubstances",
+                column: "ActiveSubstancesName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActiveSubstancesSideEffect_ActiveSubstancesID",
@@ -258,19 +303,31 @@ namespace HMS_Project.Migrations
                 column: "ActiveSubstancesID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Medication_PatientId",
+                table: "Medication",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Medication_PharmacyID",
                 table: "Medication",
                 column: "PharmacyID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_ActiveSubstancesId",
+                name: "IX_Patient_Email",
                 table: "Patient",
-                column: "ActiveSubstancesId");
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PatientMedication_MedicationMedicationCode",
                 table: "PatientMedication",
                 column: "MedicationMedicationCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pharmacists_Email",
+                table: "Pharmacists",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pharmacists_PharmacyID",
@@ -298,6 +355,9 @@ namespace HMS_Project.Migrations
                 name: "ActiveSubstanceMedication");
 
             migrationBuilder.DropTable(
+                name: "ActiveSubstancePatient");
+
+            migrationBuilder.DropTable(
                 name: "ActiveSubstancePrescription");
 
             migrationBuilder.DropTable(
@@ -313,6 +373,9 @@ namespace HMS_Project.Migrations
                 name: "Prescriptions");
 
             migrationBuilder.DropTable(
+                name: "ActiveSubstances");
+
+            migrationBuilder.DropTable(
                 name: "Medication");
 
             migrationBuilder.DropTable(
@@ -320,9 +383,6 @@ namespace HMS_Project.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pharmacies");
-
-            migrationBuilder.DropTable(
-                name: "ActiveSubstance");
         }
     }
 }

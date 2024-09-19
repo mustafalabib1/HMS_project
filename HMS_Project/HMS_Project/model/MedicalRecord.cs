@@ -8,14 +8,46 @@ namespace HMS_Project.model
 {
     internal class MedicalRecord
     {
-        public int RecordID { get; set; }
+        private int _recordID;
+        // Full property for RecordID
+        public int RecordID
+        {
+            get { return _recordID; }
+            set { _recordID = value; }
+        }
 
-        public string Diagnosis { get; set; } = null!;
 
-        public DateTime CreatedDate { get; set; }
+        private string _diagnosis;
+        // Full property for Diagnosis
+        public string Diagnosis
+        {
+            get { return _diagnosis; }
+            set { _diagnosis = value; }
+        }
 
-        public string LabResults { get; set; }=null!;
+        private DateTime _createdDate;
+        // Full property for CreatedDate
+        public DateTime CreatedDate
+        {
+            get { return _createdDate; }
+            set { _createdDate = value; }
+        }
 
-        //public int PatientID { get; set; }
+        private string _labResults;
+        // Full property for LabResults
+        public string LabResults
+        {
+            get { return _labResults; }
+            set { _labResults = value; }
+        }
+
+        private int _patientID;
+        // Full property for PatientID
+        public int PatientID
+        {
+            get { return _patientID; }
+            set { _patientID = value; }
+
+        }
     }
 }

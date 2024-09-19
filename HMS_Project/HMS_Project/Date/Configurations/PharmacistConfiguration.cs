@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HMS_Project.Data.Configurations
+namespace HMS_Project.Configurations
 {
-    internal class HmsUserConfiguration : IEntityTypeConfiguration<HmsUser>
+    internal class PharmacistConfiguration : IEntityTypeConfiguration<Pharmacist>
     {
-        public void Configure(EntityTypeBuilder<HmsUser> builder)
+        public void Configure(EntityTypeBuilder<Pharmacist> builder)
         {
-            builder.HasKey(e => e.SSN);
+            builder.HasKey(e => e.PharmacistID);
             builder.HasIndex(e => e.Email).IsUnique();
 
             builder.Property(e => e.SSN)
