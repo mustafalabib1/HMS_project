@@ -26,6 +26,10 @@ namespace HMS_Project.Data.Configurations
                 .HasOne(a => a.Patient)
                 .WithMany(a => a.Apointments)
                 .HasForeignKey(a => a.PatientId);
+            builder
+                .HasOne(a => a.Clinic)
+                .WithMany(c => c.Apointments)
+                .HasForeignKey(c => c.ClinicId);
         }
     }
 }

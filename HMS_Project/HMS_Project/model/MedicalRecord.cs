@@ -15,7 +15,11 @@ namespace HMS_Project.model
 
         #region One2Many With Patient
         public int PatientID { get; set; }
-        public Patient Patient { get; set; } = null!; 
+        public Patient Patient { get; set; } = null!;
+        #endregion
+
+        #region Many2Many With Doctor
+        public ICollection<Doctor> Doctors = new HashSet<Doctor>();
         #endregion
     }
 }

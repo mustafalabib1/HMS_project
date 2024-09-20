@@ -14,19 +14,19 @@ namespace HMS_Project.Data.Configurations
         public void Configure(EntityTypeBuilder<Reception> builder)
         {
            
-            builder.Property(r => r.Phone).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(20);
+            builder.Property(c => c.Phone).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(20);
             builder
-                .HasMany(r => r.invoices)
-                .WithOne(r => r.Reception)
-                .HasForeignKey(r => r.ReceptionId);
+                .HasMany(c => c.invoices)
+                .WithOne(c => c.Reception)
+                .HasForeignKey(c => c.ReceptionId);
             builder
-                .HasMany(r => r.Receptionists)
-                .WithOne(r => r.Reception)
-                .HasForeignKey(r => r.ReceptionID);
+                .HasMany(c => c.Receptionists)
+                .WithOne(c => c.Reception)
+                .HasForeignKey(c => c.ReceptionID);
             builder
-                .HasMany(r => r.Apointments)
-                .WithOne(r => r.Reception)
-                .HasForeignKey(r => r.ReceptionId);
+                .HasMany(c => c.Apointments)
+                .WithOne(c => c.Reception)
+                .HasForeignKey(c => c.ReceptionId);
         }
     }
 }

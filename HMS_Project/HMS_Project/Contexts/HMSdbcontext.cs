@@ -48,5 +48,11 @@ namespace HMS_Project.Contexts
         public virtual DbSet<Pharmacist> Pharmacists { get; set; } //Pharmacists  table inherit from User (TPC)
         public virtual DbSet<Prescription> Prescriptions { get; set; }
 
+        public virtual DbSet<Doctor> Doctors { get; set; }
+        public virtual DbSet<Nurse> Nurses { get; set; }
+        public virtual DbSet<Clinic> Clinics { get; set; }
+        public virtual DbSet<AvailableAppointment> AvailableAppointments { get; set; }
+        
+
     }
 }

@@ -13,12 +13,10 @@ namespace HMS_Project.model
         public string? PatAddress { get; set; }
 
         public virtual ICollection<PatientMedication> PatientMedication { get; set; } = new HashSet<PatientMedication>();
-        public virtual ICollection<Prescription> Prescription { get; set; } = new HashSet<Prescription>();
+        public virtual ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
         public virtual ICollection<ActiveSubstance> ActSbuAllergies { get; set; } = new HashSet<ActiveSubstance>();
         public virtual ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
         public virtual ICollection<Invoice> Invoices { get; set; } = new HashSet<Invoice>();
         public virtual ICollection<MedicalRecord> MedicalRecords { get; set; } = new HashSet<MedicalRecord>();
-
-
     }
 }
