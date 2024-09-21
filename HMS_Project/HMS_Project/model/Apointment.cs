@@ -18,6 +18,11 @@ namespace HMS_Project.model
         public Reception Reception { get; set; } = null!;
         #endregion
 
+        #region One2Many With Clinic
+        public int ClinicId { get; set; }
+        public Clinic Clinic { get; set; } = null!;
+        #endregion
+
         #region One2Many With Patient
         public int PatientId { get; set; }
         public Patient Patient { get; set; } = null!; 

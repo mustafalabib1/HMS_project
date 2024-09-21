@@ -10,7 +10,12 @@
 
         public Pharmacy Pharmacy { get; set; } = null!;
         public ICollection<ActiveSubstance> activeSubstances {  get; set; } = new HashSet<ActiveSubstance>();
+
+        public int PatientId { get; set; }
         public Patient Patient { get; set; } = null!;
+
+        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; } = null!;
 
     }
 }

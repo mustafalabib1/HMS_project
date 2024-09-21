@@ -1,34 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\",
+  "WorkspaceRootPath": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\model\\medication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\medication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\apointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\apointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\model\\patientmedication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\patientmedication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\availableappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\availableappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\date\\migrations\\20240920180948_team2tables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\date\\migrations\\20240920180948_team2tables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\clinicavailableappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\clinicavailableappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\date\\configurations\\patientconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\date\\configurations\\patientconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\date\\configurations\\medicationconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\date\\configurations\\medicationconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\model\\db_datatypes_helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\model\\db_datatypes_helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|d:\\code\\myfork\\hms_project\\hms_project\\hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F851862-2C4D-44C7-9DC4-88DB52B4B891}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,99 +46,130 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HMSdbcontext.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "RelativeToolTip": "HMS_Project\\Contexts\\HMSdbcontext.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAwwAoAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T00:59:45.517Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DB_DataTypes_Helper.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\DB_DataTypes_Helper.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\DB_DataTypes_Helper.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\DB_DataTypes_Helper.cs",
-              "RelativeToolTip": "HMS_Project\\model\\DB_DataTypes_Helper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T10:14:59.92Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PatientMedication.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\PatientMedication.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\PatientMedication.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\PatientMedication.cs",
-              "RelativeToolTip": "HMS_Project\\model\\PatientMedication.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:41:43.461Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Medication.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\Medication.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\Medication.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\Medication.cs",
-              "RelativeToolTip": "HMS_Project\\model\\Medication.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA3AAAAAAAAAA==",
+              "Title": "Apointment.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Apointment.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\Apointment.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Apointment.cs",
+              "RelativeToolTip": "HMS_Project\\model\\Apointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:41:36.678Z",
+              "WhenOpened": "2024-09-20T18:30:05.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Nurse.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Nurse.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\Nurse.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Nurse.cs",
+              "RelativeToolTip": "HMS_Project\\model\\Nurse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:22:45.215Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PatientConfigurations.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Configurations\\PatientConfigurations.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAxwB8AAAAqAAAAAAAAAA==",
+              "Title": "Prescription.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Prescription.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\Prescription.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Prescription.cs",
+              "RelativeToolTip": "HMS_Project\\model\\Prescription.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:39:50.997Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-20T18:22:43.53Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "MedicationConfiguration.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Configurations\\MedicationConfiguration.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Configurations\\MedicationConfiguration.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Configurations\\MedicationConfiguration.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Configurations\\MedicationConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABsAAAAAAAAAA==",
+              "Title": "20240920180948_Team2Tables.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240920180948_Team2Tables.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\Date\\Migrations\\20240920180948_Team2Tables.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240920180948_Team2Tables.cs",
+              "RelativeToolTip": "HMS_Project\\Date\\Migrations\\20240920180948_Team2Tables.cs",
+              "ViewState": "AgIAACMBAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:38:04.803Z",
+              "WhenOpened": "2024-09-20T18:22:36.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClinicAvailableAppointment.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\ClinicAvailableAppointment.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\ClinicAvailableAppointment.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\ClinicAvailableAppointment.cs",
+              "RelativeToolTip": "HMS_Project\\model\\ClinicAvailableAppointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:21:52.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AvailableAppointment.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\AvailableAppointment.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\AvailableAppointment.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\AvailableAppointment.cs",
+              "RelativeToolTip": "HMS_Project\\model\\AvailableAppointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:21:47.457Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Patient.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\Patient.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\model\\Patient.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\model\\Patient.cs",
-              "RelativeToolTip": "HMS_Project\\model\\Patient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABlAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Doctor.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\Doctor.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Doctor.cs",
+              "RelativeToolTip": "HMS_Project\\model\\Doctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T15:30:46.055Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-20T18:21:44.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Patient.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Patient.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\model\\Patient.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\model\\Patient.cs",
+              "RelativeToolTip": "HMS_Project\\model\\Patient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:20:17.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\Program.cs",
+              "RelativeDocumentMoniker": "HMS_Project\\Program.cs",
+              "ToolTip": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\Program.cs",
+              "RelativeToolTip": "HMS_Project\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:13:17.164Z"
             }
           ]
         }
