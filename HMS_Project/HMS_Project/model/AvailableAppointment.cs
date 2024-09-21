@@ -15,7 +15,9 @@ namespace HMS_Project.model
         #region Many2Many With Doctor
         public ICollection<Doctor> Doctors = new HashSet<Doctor>();
         #endregion
-        public ICollection<ClinicAvailableAppointment> ClinicAvailableAppointments { get; set; } = new HashSet<ClinicAvailableAppointment>();
 
+        #region Many2Many With Clinic
+        public ICollection<ClinicAvailableAppointment> ClinicAvailableAppointments { get; set; } = new HashSet<ClinicAvailableAppointment>();
+        #endregion
     }
 }

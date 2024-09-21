@@ -11,8 +11,9 @@ namespace HMS_Project.model
         public int NurseId { get; set; }
 
 
-        // One2Many With Clinic
+        #region One2Many With Clinic
         public int ClinicId { get; set; }
         public Clinic Clinic { get; set; } = null!;
+        #endregion 
     }
 }

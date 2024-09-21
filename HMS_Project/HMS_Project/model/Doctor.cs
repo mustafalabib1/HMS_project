@@ -11,17 +11,21 @@ namespace HMS_Project.model
         public int DoctorId { get; set; }
         public string Specialization { get; set; } = null!;
 
-        // One2Many With Clinic
+        #region One2Many With Clinic
         public int ClinicId { get; set; }
         public Clinic Clinic { get; set; } = null!;
+        #endregion
 
-        // One2Many with Prescription
+        #region One2Many with Prescription
         public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
+        #endregion
 
-        // Many2Many with MedicalRecord
+        #region Many2Many with MedicalRecord
         public ICollection<MedicalRecord> MedicalRecords { get; set; } = new HashSet<MedicalRecord>();
+        #endregion
 
-        // Many2Many with AvailableAppointment
+        #region Many2Many with AvailableAppointment
         public ICollection<AvailableAppointment> AvailableAppointments { get; set; } = new HashSet<AvailableAppointment>();
+        #endregion
     }
 }
