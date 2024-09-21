@@ -4,6 +4,7 @@ using HMS_Project.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HMS_Project.Date.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    partial class HMSdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240921135135_one2manyForDoctorMidrecord")]
+    partial class one2manyForDoctorMidrecord
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("MedicationCodesMedicationCode");
 
-                    b.ToTable("ActiveSubstanceMedication", (string)null);
+                    b.ToTable("ActiveSubstanceMedication");
                 });
 
             modelBuilder.Entity("ActiveSubstancePatient", b =>
@@ -49,7 +52,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("PatientshaveAllergyPatientId");
 
-                    b.ToTable("ActiveSubstancePatient", (string)null);
+                    b.ToTable("ActiveSubstancePatient");
                 });
 
             modelBuilder.Entity("ActiveSubstancePrescription", b =>
@@ -64,7 +67,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("PrescriptionsPrescriptionID");
 
-                    b.ToTable("ActiveSubstancePrescription", (string)null);
+                    b.ToTable("ActiveSubstancePrescription");
                 });
 
             modelBuilder.Entity("AvailableAppointmentDoctor", b =>
@@ -79,7 +82,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("DoctorsDoctorId");
 
-                    b.ToTable("AvailableAppointmentDoctor", (string)null);
+                    b.ToTable("AvailableAppointmentDoctor");
                 });
 
             modelBuilder.Entity("HMS_Project.model.ActiveSubstance", b =>
@@ -100,7 +103,7 @@ namespace HMS_Project.Date.Migrations
                     b.HasIndex("ActiveSubstancesName")
                         .IsUnique();
 
-                    b.ToTable("ActiveSubstances", (string)null);
+                    b.ToTable("ActiveSubstances");
                 });
 
             modelBuilder.Entity("HMS_Project.model.ActiveSubstanceInteraction", b =>
@@ -119,7 +122,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("ActiveSubstanceId2");
 
-                    b.ToTable("ActiveSubstanceInteraction", (string)null);
+                    b.ToTable("ActiveSubstanceInteraction");
                 });
 
             modelBuilder.Entity("HMS_Project.model.ActiveSubstancesSideEffect", b =>
@@ -136,7 +139,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("ActiveSubstancesId");
 
-                    b.ToTable("ActiveSubstancesSideEffect", (string)null);
+                    b.ToTable("ActiveSubstancesSideEffect");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Apointment", b =>
@@ -175,7 +178,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("ReceptionId");
 
-                    b.ToTable("Apointments", (string)null);
+                    b.ToTable("Apointments");
                 });
 
             modelBuilder.Entity("HMS_Project.model.AvailableAppointment", b =>
@@ -194,7 +197,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasKey("AvailableAppointmentId");
 
-                    b.ToTable("AvailableAppointments", (string)null);
+                    b.ToTable("AvailableAppointments");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Clinic", b =>
@@ -223,7 +226,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasKey("ClinicId");
 
-                    b.ToTable("Clinics", (string)null);
+                    b.ToTable("Clinics");
                 });
 
             modelBuilder.Entity("HMS_Project.model.ClinicAvailableAppointment", b =>
@@ -241,7 +244,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("AvailableAppointmentId");
 
-                    b.ToTable("ClinicAvailableAppointment", (string)null);
+                    b.ToTable("ClinicAvailableAppointment");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Doctor", b =>
@@ -302,7 +305,7 @@ namespace HMS_Project.Date.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Invoice", b =>
@@ -341,7 +344,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("ReceptionId");
 
-                    b.ToTable("Invoices", (string)null);
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("HMS_Project.model.MedicalRecord", b =>
@@ -379,7 +382,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("PatientID");
 
-                    b.ToTable("MedicalRecords", (string)null);
+                    b.ToTable("MedicalRecords");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Medication", b =>
@@ -403,7 +406,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("PharmacyID");
 
-                    b.ToTable("Medication", (string)null);
+                    b.ToTable("Medication");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Nurse", b =>
@@ -460,7 +463,7 @@ namespace HMS_Project.Date.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Nurses", (string)null);
+                    b.ToTable("Nurses");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Patient", b =>
@@ -516,7 +519,7 @@ namespace HMS_Project.Date.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("HMS_Project.model.PatientMedication", b =>
@@ -534,7 +537,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("MedicationMedicationCode");
 
-                    b.ToTable("PatientMedication", (string)null);
+                    b.ToTable("PatientMedication");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Pharmacist", b =>
@@ -591,7 +594,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("PharmacyID");
 
-                    b.ToTable("Pharmacists", (string)null);
+                    b.ToTable("Pharmacists");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Pharmacy", b =>
@@ -612,7 +615,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasKey("PharmacyID");
 
-                    b.ToTable("Pharmacies", (string)null);
+                    b.ToTable("Pharmacies");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Prescription", b =>
@@ -649,7 +652,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("PharmacyID");
 
-                    b.ToTable("Prescriptions", (string)null);
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Reception", b =>
@@ -667,7 +670,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasKey("ReceptionId");
 
-                    b.ToTable("Reception", (string)null);
+                    b.ToTable("Reception");
                 });
 
             modelBuilder.Entity("HMS_Project.model.Receptionist", b =>
@@ -724,7 +727,7 @@ namespace HMS_Project.Date.Migrations
 
                     b.HasIndex("ReceptionID");
 
-                    b.ToTable("Receptionists", (string)null);
+                    b.ToTable("Receptionists");
                 });
 
             modelBuilder.Entity("ActiveSubstanceMedication", b =>

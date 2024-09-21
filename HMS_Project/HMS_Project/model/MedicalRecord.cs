@@ -18,8 +18,8 @@ namespace HMS_Project.model
         public Patient Patient { get; set; } = null!;
         #endregion
 
-        #region Many2Many With Doctor
-        public ICollection<Doctor> Doctors = new HashSet<Doctor>();
+        #region One2Many With Doctor
+        public virtual Doctor Doctor { get; set; } = null!;
         #endregion
     }
 }

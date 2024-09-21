@@ -1,30 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
   },
   "projects": {
-    "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
         "projectName": "HMS_Project",
-        "projectPath": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
-        "packagesPath": "C:\\Users\\Fares\\.nuget\\packages\\",
-        "outputPath": "D:\\code\\MyFork\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
+        "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Fares\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -49,7 +46,7 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
               "version": "[8.0.8, )"
             },

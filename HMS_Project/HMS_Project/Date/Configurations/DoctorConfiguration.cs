@@ -23,7 +23,7 @@ namespace HMS_Project.Date.Configurations
                 .HasForeignKey(n => n.DoctorId);
             builder
                 .HasMany(n => n.MedicalRecords)
-                .WithMany(n => n.Doctors);
+                .WithOne(n => n.Doctor);
             builder
                 .HasMany(n => n.AvailableAppointments)
                 .WithMany(n => n.Doctors);
