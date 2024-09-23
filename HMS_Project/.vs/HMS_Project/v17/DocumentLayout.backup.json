@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240921142049_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HMS_Project\\Date\\Migrations\\20240921142049_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E5E6C204-FE51-40D1-B47F-FA6071248D42}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\date\\migrations\\20240921135135_one2manyfordoctormidrecord.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E5E6C204-FE51-40D1-B47F-FA6071248D42}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\date\\migrations\\20240921135135_one2manyfordoctormidrecord.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,32 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20240921142049_test.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240921142049_test.cs",
-              "RelativeDocumentMoniker": "HMS_Project\\Date\\Migrations\\20240921142049_test.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240921142049_test.cs",
-              "RelativeToolTip": "HMS_Project\\Date\\Migrations\\20240921142049_test.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T14:20:50.003Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "20240921135135_one2manyForDoctorMidrecord.Designer.cs",
               "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240921135135_one2manyForDoctorMidrecord.Designer.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Date\\Migrations\\20240921135135_one2manyForDoctorMidrecord.Designer.cs",
               "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Date\\Migrations\\20240921135135_one2manyForDoctorMidrecord.Designer.cs",
               "RelativeToolTip": "HMS_Project\\Date\\Migrations\\20240921135135_one2manyForDoctorMidrecord.Designer.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwA4AAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-21T14:20:07.864Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Program.cs",
               "RelativeDocumentMoniker": "HMS_Project\\Program.cs",
@@ -60,8 +43,7 @@
               "RelativeToolTip": "HMS_Project\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T14:16:07.341Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T14:16:07.341Z"
             }
           ]
         }
