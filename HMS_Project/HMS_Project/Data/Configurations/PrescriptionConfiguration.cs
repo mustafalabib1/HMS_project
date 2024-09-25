@@ -14,27 +14,11 @@ namespace HMS_Project.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Prescription> builder)
         {
-            #region Presciption Configuration 
-            builder.Property(p => p.Dosage).HasMaxLength(50);
-            #endregion
-
-            #region Many2Many With Active Substance 
+            #region One2Many With Pharmacist 
             builder
-                .HasMany(p => p.activeSubstances)
-                .WithMany(a => a.Prescriptions);
-            #endregion
-
-            #region Many2Many With Medicaion 
-            builder
-                .HasMany(p => p.Medications)
-                .WithMany(m=>m.Prescriptions);
-            #endregion
-
-            #region One2Many With Pharmacy 
-            builder
-                    .HasOne(p => p.Pharmacy)
+                    .HasOne(p => p.Pharmacist)
                     .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(p=>p.PharmacyId)
+                    .HasForeignKey(p=>p.PharmacistId)
                     .OnDelete(DeleteBehavior.SetNull);
             #endregion
 
@@ -44,7 +28,6 @@ namespace HMS_Project.Data.Configurations
                     .WithMany(d=> d.Prescriptions)
                     .HasForeignKey(n => n.DoctorId);
             #endregion
-
         }
     }
 }

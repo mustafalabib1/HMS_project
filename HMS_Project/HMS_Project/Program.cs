@@ -6,7 +6,10 @@ namespace HMS_Project
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            #region how can get day in week 
+            DayOfWeek day = DateTime.Now.DayOfWeek;
+            Console.WriteLine($"Today is day number {day} of the week."); 
+            #endregion
         }
     }
 }

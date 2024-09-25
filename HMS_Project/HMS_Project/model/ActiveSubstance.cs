@@ -6,7 +6,6 @@ namespace HMS_Project.model;
 public partial class ActiveSubstance
 {
     public int ActiveSubstancesId { get; set; }
-
     public string ActiveSubstancesName { get; set; } = null!;
 
     #region Many2Many With Medication
@@ -22,7 +21,7 @@ public partial class ActiveSubstance
     public virtual ICollection<Patient> PatientshaveAllergy { get; set; } = new HashSet<Patient>();
     #endregion
 
-    #region Many2Many With Presciption
-    public virtual ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>(); 
+    #region One2One With PrescriptionItem
+    public virtual PrescriptionItem PatrescriptionItem { get; set; } = null!;
     #endregion
 }

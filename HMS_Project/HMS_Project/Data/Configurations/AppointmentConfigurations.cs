@@ -21,11 +21,11 @@ namespace HMS_Project.Data.Configurations
             builder.Property(a => a.Examination).HasMaxLength(100); 
             #endregion
 
-            #region One2Many With Reception
+            #region One2Many With Receptionist
             builder
-                    .HasOne(a => a.Reception)
+                    .HasOne(a => a.Receptionist)
                     .WithMany(a => a.Apointments)
-                    .HasForeignKey(a => a.ReceptionId)
+                    .HasForeignKey(a => a.ReceptionistId)
                     .OnDelete(DeleteBehavior.SetNull);
             #endregion
 
@@ -51,7 +51,7 @@ namespace HMS_Project.Data.Configurations
                 .HasForeignKey(a=>a.DoctorId);
             #endregion
 
-            #region One2One With Presciption
+            #region One2One With Prescription
             builder 
                 .HasOne(a=>a.Prescription)
                 .WithOne(p=>p.Apointment)

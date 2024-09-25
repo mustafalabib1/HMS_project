@@ -14,9 +14,9 @@ namespace HMS_Project.model
         public bool PaymentStatus { get; set; }
         public char PaymentType { get; set; }
 
-        #region One2Many With Reception
-        public int? ReceptionId { get; set; }
-        public virtual Reception Reception { get; set; } = null!;
+        #region One2Many With Receptionist
+        public long? ReceptionistId { get; set; }
+        public virtual Receptionist Receptionist { get; set; } = null!;
         #endregion
 
         #region One2One With Apointment

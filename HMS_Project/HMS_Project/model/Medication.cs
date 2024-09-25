@@ -11,8 +11,8 @@ public class Medication
 
     public int Strength { get; set; }
 
-    #region Many2Many With Presciption
-    public virtual ICollection<Prescription> Prescriptions { get; set; }= new HashSet<Prescription>();
+    #region One2Many With PrescriptionItemMedication
+    public virtual ICollection<PrescriptionItemMedication> PrescriptionItemMedications { get; set; }= new HashSet<PrescriptionItemMedication>();
     #endregion
 
     #region Many2Many With ActiveSubstance

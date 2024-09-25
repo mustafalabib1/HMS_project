@@ -34,11 +34,11 @@ namespace HMS_Project.Data.Configurations
                 .HasMaxLength(1);
             #endregion
 
-            #region One2Many With Reception
+            #region One2Many With Receptionist
             builder
-                   .HasOne(i => i.Reception)
+                   .HasOne(i => i.Receptionist)
                    .WithMany(i => i.invoices)
-                   .HasForeignKey(i => i.ReceptionId); 
+                   .HasForeignKey(i => i.ReceptionistId); 
             #endregion
         }
     }

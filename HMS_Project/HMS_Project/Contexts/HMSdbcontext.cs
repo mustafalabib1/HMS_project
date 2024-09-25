@@ -27,7 +27,7 @@ namespace HMS_Project.Contexts
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Prescription>()
-                .HasOne(p => p.Pharmacy)
+                .HasOne(p => p.Pharmacist)
                 .WithMany(p => p.Prescriptions)
                 .OnDelete(DeleteBehavior.NoAction);
             
@@ -37,19 +37,17 @@ namespace HMS_Project.Contexts
         public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Apointment> Apointments { get; set; }
-        public virtual DbSet<Reception> Reception { get; set; }
         public virtual DbSet<Receptionist> Receptionists { get; set; }//Receptionists  table inherit from User (TPC)
 
 
         public virtual DbSet<ActiveSubstance> ActiveSubstances { get; set; }
         public virtual DbSet<Medication> Medication { get; set; }
-        public virtual DbSet<Pharmacy> Pharmacies { get; set; }
         public virtual DbSet<Pharmacist> Pharmacists { get; set; } //Pharmacists  table inherit from User (TPC)
         public virtual DbSet<Prescription> Prescriptions { get; set; }
 
-        public virtual DbSet<Doctor> Doctors { get; set; } //Pharmacists  table inherit from User (TPC)
+        public virtual DbSet<Doctor> Doctors { get; set; } //Doctors  table inherit from User (TPC)
         public virtual DbSet<DoctorScheduleLookup> DoctorScheduleLookups { get; set; }
-        public virtual DbSet<Nurse> Nurses { get; set; } //Pharmacists  table inherit from User (TPC)
+        public virtual DbSet<Nurse> Nurses { get; set; } //Nurses  table inherit from User (TPC)
         public virtual DbSet<Clinic> Clinics { get; set; }
         
 

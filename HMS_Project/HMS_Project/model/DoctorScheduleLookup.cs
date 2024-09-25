@@ -8,7 +8,7 @@ namespace HMS_Project.model
 {
     public class DoctorScheduleLookup
     {
-        public virtual WeekDays Day { get; set; }
+        public virtual DayOfWeek Day { get; set; }
         public virtual TimeOnly StartTime {  get; set; }
         public virtual TimeOnly EndTime { get; set; }
 
