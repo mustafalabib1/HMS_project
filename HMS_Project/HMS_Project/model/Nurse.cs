@@ -8,12 +8,9 @@ namespace HMS_Project.model
 {
     public class Nurse : HmsUser
     {
-        public int NurseId { get; set; }
-
-
         #region One2Many With Clinic
-        public int ClinicId { get; set; }
-        public Clinic Clinic { get; set; } = null!;
+        public int? ClinicId { get; set; }
+        public virtual Clinic Clinic { get; set; } = null!;
         #endregion 
     }
 }

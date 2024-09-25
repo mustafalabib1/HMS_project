@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
+    public enum WeekDays
+    {
+        Saturday,
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+    }
     internal class DB_DataTypes_Helper
     {
         public const string nvarchar = "nvarchar";

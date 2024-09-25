@@ -5,13 +5,12 @@ namespace HMS_Project.model;
 
 public partial class ActiveSubstanceInteraction
 {
-    public int ActiveSubstanceId1 { get; set; }
+    public string Interaction { get; set; } = null!;
 
-    public int ActiveSubstanceId2 { get; set; }
-
-    public string? Interaction { get; set; }
-
+    #region Many2Many With ActiveSbustance
+    public int? ActiveSubstanceId1 { get; set; }
     public virtual ActiveSubstance ActSub1 { get; set; } = null!;
-
-    public virtual ActiveSubstance ActSub2 { get; set; } = null!;
+    public int? ActiveSubstanceId2 { get; set; }
+    public virtual ActiveSubstance ActSub2 { get; set; } = null!; 
+    #endregion
 }

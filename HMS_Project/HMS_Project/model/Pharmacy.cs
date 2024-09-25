@@ -9,31 +9,16 @@ namespace HMS_Project.model
 {
     public class Pharmacy
     {
-        private int pharmacyID;
-       private string pharmacyName;
-        private string pharmacyPhone;
+        public int PharmacyID {  get; set; }
+        public string PharmacyName { get; set; } = null!;
+        public string Phone { get; set; } = null!;
 
-        public int PharmacyID
-        {
-            get { return pharmacyID; }
-            set { pharmacyID = value; }
-        }
+        #region One2Many With Pharmaist
+        public virtual ICollection<Pharmacist> Pharmacists { get; set; } = new HashSet<Pharmacist>();
+        #endregion
 
-        public string PharmacyName
-        {
-            get { return pharmacyName; }
-            set { pharmacyName = value; }
-        }
-
-        public string PharmacyPhone
-        {
-            get { return pharmacyPhone; }
-            set { pharmacyPhone = value; }
-        }
-
-        public ICollection<Pharmacist> Pharmacists { get; set; } = new HashSet<Pharmacist>();
-        public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
-    
-        public ICollection<Medication> Medications { get; set; } = new HashSet<Medication>();
+        #region One2Many With Presciption
+        public virtual ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>(); 
+        #endregion
     }
 }

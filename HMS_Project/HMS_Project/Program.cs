@@ -1,4 +1,6 @@
-﻿namespace HMS_Project
+﻿using HMS_Project.model;
+
+namespace HMS_Project
 {
     internal class Program
     {

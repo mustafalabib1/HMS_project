@@ -35,7 +35,6 @@ namespace HMS_Project.Contexts
         }
 
         public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
-        public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Apointment> Apointments { get; set; }
         public virtual DbSet<Reception> Reception { get; set; }
@@ -48,10 +47,10 @@ namespace HMS_Project.Contexts
         public virtual DbSet<Pharmacist> Pharmacists { get; set; } //Pharmacists  table inherit from User (TPC)
         public virtual DbSet<Prescription> Prescriptions { get; set; }
 
-        public virtual DbSet<Doctor> Doctors { get; set; }
-        public virtual DbSet<Nurse> Nurses { get; set; }
+        public virtual DbSet<Doctor> Doctors { get; set; } //Pharmacists  table inherit from User (TPC)
+        public virtual DbSet<DoctorScheduleLookup> DoctorScheduleLookups { get; set; }
+        public virtual DbSet<Nurse> Nurses { get; set; } //Pharmacists  table inherit from User (TPC)
         public virtual DbSet<Clinic> Clinics { get; set; }
-        public virtual DbSet<AvailableAppointment> AvailableAppointments { get; set; }
         
 
     }

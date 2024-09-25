@@ -12,20 +12,35 @@ namespace HMS_Project.model
         public DateOnly ApointmentDate { get; set; }
         public TimeOnly ApointmentTime { get; set; }
         public char ApointmentStatus { get; set; }
+        public virtual string Examination { get; set; } = null!;
+
 
         #region One2Many With Reception
-        public int ReceptionId { get; set; }
-        public Reception Reception { get; set; } = null!;
+        public int? ReceptionId { get; set; }
+        public virtual Reception Reception { get; set; } = null!;
         #endregion
 
         #region One2Many With Clinic
-        public int ClinicId { get; set; }
-        public Clinic Clinic { get; set; } = null!;
+        public int? ClinicId { get; set; }
+        public  virtual Clinic Clinic { get; set; } = null!;
         #endregion
 
         #region One2Many With Patient
-        public int PatientId { get; set; }
-        public Patient Patient { get; set; } = null!; 
+        public long PatientId { get; set; }
+        public virtual Patient Patient { get; set; } = null!; 
+        #endregion
+
+        #region One2Many With Doctor
+        public virtual long DoctorId { get; set; }
+        public virtual Doctor Doctor { get; set; } = null!;
+        #endregion
+
+        #region One2One With Invoice
+        public virtual Invoice Invoice { get; set; }= null!;
+        #endregion
+
+        #region One2One With Prescription
+        public virtual Prescription Prescription { get; set; } = null!;
         #endregion
     }
 }

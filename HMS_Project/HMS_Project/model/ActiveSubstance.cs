@@ -9,10 +9,20 @@ public partial class ActiveSubstance
 
     public string ActiveSubstancesName { get; set; } = null!;
 
-    public virtual ICollection<Medication> MedicationCodes { get; set; } = new HashSet<Medication>();
-    public virtual ICollection<ActiveSubstancesSideEffect> ActiveSubstancesSideEffects { get; set; } = new HashSet<ActiveSubstancesSideEffect>();
+    #region Many2Many With Medication
+    public virtual ICollection<Medication> Medications { get; set; } = new HashSet<Medication>();
+    #endregion
+    
+    #region One2Many With ActiveSubstanceInteraction
     public virtual ICollection<ActiveSubstanceInteraction> ActSub1 { get; set; } = new HashSet<ActiveSubstanceInteraction>();
     public virtual ICollection<ActiveSubstanceInteraction> ActSub2 { get; set; } = new HashSet<ActiveSubstanceInteraction>();
+    #endregion
+    
+    #region Many2Many With Patient
     public virtual ICollection<Patient> PatientshaveAllergy { get; set; } = new HashSet<Patient>();
-    public virtual ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
+    #endregion
+
+    #region Many2Many With Presciption
+    public virtual ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>(); 
+    #endregion
 }

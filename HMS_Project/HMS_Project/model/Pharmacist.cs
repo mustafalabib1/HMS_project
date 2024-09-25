@@ -8,14 +8,9 @@ namespace HMS_Project.model
 {
     public class Pharmacist : HmsUser
     {
-        private int pharmacistID;
-        public int PharmacistID
-        {
-            get { return pharmacistID; }
-            set { pharmacistID = value; }
-        }
-        public Pharmacy Pharmacy { get; set; } = null!;
-
-        
+        #region One2Many with Pharmacy
+        public virtual int? PharmacyId { get; set; }
+        public virtual Pharmacy Pharmacy { get; set; } = null!; 
+        #endregion
     }
 }

@@ -14,16 +14,14 @@ namespace HMS_Project.model
         public bool PaymentStatus { get; set; }
         public char PaymentType { get; set; }
 
-        #region One2Many With patient
-        public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; } = null!; 
-        #endregion
-
         #region One2Many With Reception
-        public int ReceptionId { get; set; }
-        public virtual Reception Reception { get; set; } = null!; 
+        public int? ReceptionId { get; set; }
+        public virtual Reception Reception { get; set; } = null!;
         #endregion
 
-
+        #region One2One With Apointment
+        public int? ApointmentId { get; set; }
+        public virtual Apointment Apointment { get; set; }=null!;
+        #endregion
     }
 }

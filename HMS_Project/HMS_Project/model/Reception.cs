@@ -12,9 +12,17 @@ namespace HMS_Project.model
 
         public string Phone { get; set; } = null!;
 
+        #region One2Many With Invoice
         public ICollection<Invoice> invoices { get; set; } = new HashSet<Invoice>();
+        #endregion
+
+        #region One2Many With Recptionist
         public ICollection<Receptionist> Receptionists { get; set; } = new HashSet<Receptionist>();
-        public ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
+        #endregion
+
+        #region One2Many With Apintment 
+        public ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>(); 
+        #endregion
 
     }
 }

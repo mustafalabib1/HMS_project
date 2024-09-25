@@ -13,5 +13,6 @@ public partial class HmsUser
     public string Phone { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string UserPassword { get; set; } = null!;
-    public string? Gender { get; set; }
+    public string? Address { get; set; }
+    public char? Gender { get; set; }
 }
