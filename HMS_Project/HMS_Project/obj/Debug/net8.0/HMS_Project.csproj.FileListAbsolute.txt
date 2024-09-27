@@ -134,3 +134,5 @@ E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\
 E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\HMS_Project\obj\Debug\net8.0\HMS_Project.pdb
 E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\HMS_Project\obj\Debug\net8.0\HMS_Project.genruntimeconfig.cache
 E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\HMS_Project\obj\Debug\net8.0\ref\HMS_Project.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\HMS_Project\bin\Debug\net8.0\DALProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\HMS_Project\bin\Debug\net8.0\DALProject.pdb

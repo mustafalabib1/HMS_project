@@ -1561,6 +1561,19 @@
             "rid": "win"
           }
         }
+      },
+      "DALProject/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
+        },
+        "compile": {
+          "bin/placeholder/DALProject.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DALProject.dll": {}
+        }
       }
     }
   },
@@ -4225,12 +4238,17 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "DALProject/1.0.0": {
+      "type": "project",
+      "path": "../DALProject/DALProject.csproj",
+      "msbuildProject": "../DALProject/DALProject.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "DALProject >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Proxies >= 8.0.8",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.8"
     ]
   },
@@ -4261,7 +4279,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -4280,10 +4302,6 @@
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Proxies": {
-            "target": "Package",
-            "version": "[8.0.8, )"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[8.0.8, )"
           },

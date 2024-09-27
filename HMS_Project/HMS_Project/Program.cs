@@ -1,5 +1,6 @@
-﻿using HMS_Project.Contexts;
-using HMS_Project.model;
+﻿using DALProject.Data.Contexts;
+using DALProject.model;
+using HMS_Project.ViewModels;
 
 namespace HMS_Project
 {
@@ -13,7 +14,22 @@ namespace HMS_Project
             #endregion
 
             using HMSdbcontext context = new HMSdbcontext();
-
+            RegisterationViewModel PatViewModle = new RegisterationViewModel()
+            {
+                SSN = 345678990,
+                Address = "Mansoura",
+                FirstName = "Musrtafa",
+                MidleName = "Labib",
+                LastName = "Issa",
+                Gender = Gender.Male,
+                DateOfBirth = new DateOnly(2004, 2, 18),
+                Email = "Mustafa@gmail.com"
+                ,UserPassword="1234567890",
+                Phone="1234567890"
+            };
+            Patient patient = (Patient)PatViewModle;
+            context.Patients.Add(patient);
+            context.SaveChanges();
         }
     }
 }

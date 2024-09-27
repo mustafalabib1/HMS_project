@@ -1,0 +1,13 @@
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.deps.json
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.pdb
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.AssemblyReference.cache
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.GeneratedMSBuildEditorConfig.editorconfig
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfoInputs.cache
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfo.cs
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.CoreCompileInputs.cache
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.sourcelink.json
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll
