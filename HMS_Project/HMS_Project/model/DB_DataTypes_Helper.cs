@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.model
 {
+    public enum Gender 
+    {
+        Male ,
+        Female ,
+    }
+
     internal class DB_DataTypes_Helper
     {
         public const string nvarchar = "nvarchar";
