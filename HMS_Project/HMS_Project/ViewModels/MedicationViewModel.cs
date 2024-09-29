@@ -17,8 +17,9 @@ namespace HMS_Project.ViewModels
             MedicationCode = medication.MedicationCode;
             MedName = medication.MedName;
             Strength = medication.Strength;
+            ActSubInMed =medication.ActiveSubstances.ToHashSet();
         }
-
+        public HashSet<ActiveSubstance> ActSubInDB { get; set; } = new HashSet<ActiveSubstance>();
         [Required]
         public string MedicationCode { get; set; } = null!;
 
@@ -27,15 +28,18 @@ namespace HMS_Project.ViewModels
 
         [Required]
         public int Strength { get; set; }
+        public HashSet<ActiveSubstance> ActSubInMed { get; set; } = new HashSet<ActiveSubstance>();
 
-        
+
+
         public static explicit operator Medication(MedicationViewModel medViewModel)
         {
             return new Medication()
             {
                 MedicationCode = medViewModel.MedicationCode,
                 MedName = medViewModel.MedName,
-                Strength = medViewModel.Strength
+                Strength = medViewModel.Strength,
+                ActiveSubstances = medViewModel.ActSubInMed
             };
         }
 

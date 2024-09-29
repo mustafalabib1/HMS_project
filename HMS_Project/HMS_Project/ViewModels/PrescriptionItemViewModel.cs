@@ -14,12 +14,12 @@ namespace HMS_Project.ViewModels
 
         public PrescriptionItemViewModel(PrescriptionItem prescriptionItem)
         {
-            Id = prescriptionItem.Id;
+            //Id = prescriptionItem.Id;
             FullDosage = prescriptionItem.FullDosage;
         }
 
-        [Required]
-        public int Id { get; set; }
+        //[Required]
+        //public int Id { get; set; }
 
         [Required]
         public string FullDosage { get; set; } = null!;
@@ -29,7 +29,7 @@ namespace HMS_Project.ViewModels
         {
             return new PrescriptionItem()
             {
-                Id = viewModel.Id,
+                //Id = viewModel.Id,
                 FullDosage = viewModel.FullDosage
             };
         }
