@@ -32,6 +32,8 @@ namespace DALProject.Data.Configurations
                 .Property(i => i.PaymentType)
                 .HasColumnType($"{DB_DataTypes_Helper._char}")
                 .HasMaxLength(1);
+
+            builder.Property(i => i.PaymentType).HasMaxLength(15);
             #endregion
 
             #region One2Many With Receptionist

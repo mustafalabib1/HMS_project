@@ -17,7 +17,7 @@ namespace DALProject.Data.Configurations
             builder.HasKey(a => a.ApointmentId);
             builder.Property(a => a.ApointmentDate).HasColumnType($"{DB_DataTypes_Helper.date}");
             builder.Property(a => a.ApointmentTime).HasColumnType($"{DB_DataTypes_Helper.time}");
-            builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper._char}").HasMaxLength(1);
+            builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(15);
             builder.Property(a => a.Examination).HasMaxLength(100); 
             #endregion
 

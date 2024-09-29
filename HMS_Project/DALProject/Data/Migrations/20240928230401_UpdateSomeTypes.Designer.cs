@@ -4,6 +4,7 @@ using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Data.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    partial class HMSdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240928230401_UpdateSomeTypes")]
+    partial class UpdateSomeTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,24 +164,11 @@ namespace DALProject.Data.Migrations
 
                     b.Property<string>("Specilization")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ClinicId");
 
-                    b.HasIndex("Specilization");
-
                     b.ToTable("Clinics");
-                });
-
-            modelBuilder.Entity("DALProject.model.ClinicSpecializationLookup", b =>
-                {
-                    b.Property<string>("Specialization")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Specialization");
-
-                    b.ToTable("ClinicSpecializationLookup");
                 });
 
             modelBuilder.Entity("DALProject.model.Doctor", b =>
@@ -231,8 +221,6 @@ namespace DALProject.Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("Specialization");
-
                     b.ToTable("Doctors");
                 });
 
@@ -256,17 +244,6 @@ namespace DALProject.Data.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("DoctorScheduleLookups");
-                });
-
-            modelBuilder.Entity("DALProject.model.DoctorSpecializationLookup", b =>
-                {
-                    b.Property<string>("Specialization")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Specialization");
-
-                    b.ToTable("DoctorSpecializationLookup");
                 });
 
             modelBuilder.Entity("DALProject.model.Invoice", b =>
@@ -675,17 +652,6 @@ namespace DALProject.Data.Migrations
                     b.Navigation("Receptionist");
                 });
 
-            modelBuilder.Entity("DALProject.model.Clinic", b =>
-                {
-                    b.HasOne("DALProject.model.ClinicSpecializationLookup", "ClinicSpecilization")
-                        .WithMany("Clinic")
-                        .HasForeignKey("Specilization")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ClinicSpecilization");
-                });
-
             modelBuilder.Entity("DALProject.model.Doctor", b =>
                 {
                     b.HasOne("DALProject.model.Clinic", "Clinic")
@@ -693,15 +659,7 @@ namespace DALProject.Data.Migrations
                         .HasForeignKey("ClinicId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("DALProject.model.DoctorSpecializationLookup", "DoctorSpecialization")
-                        .WithMany("Doctors")
-                        .HasForeignKey("Specialization")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Clinic");
-
-                    b.Navigation("DoctorSpecialization");
                 });
 
             modelBuilder.Entity("DALProject.model.DoctorScheduleLookup", b =>
@@ -820,11 +778,6 @@ namespace DALProject.Data.Migrations
                     b.Navigation("Nurses");
                 });
 
-            modelBuilder.Entity("DALProject.model.ClinicSpecializationLookup", b =>
-                {
-                    b.Navigation("Clinic");
-                });
-
             modelBuilder.Entity("DALProject.model.Doctor", b =>
                 {
                     b.Navigation("Apointments");
@@ -832,11 +785,6 @@ namespace DALProject.Data.Migrations
                     b.Navigation("DoctorScheduleLookups");
 
                     b.Navigation("Prescriptions");
-                });
-
-            modelBuilder.Entity("DALProject.model.DoctorSpecializationLookup", b =>
-                {
-                    b.Navigation("Doctors");
                 });
 
             modelBuilder.Entity("DALProject.model.Medication", b =>

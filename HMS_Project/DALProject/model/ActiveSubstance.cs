@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DALProject.model;
 
-public partial class ActiveSubstance
+public class ActiveSubstance
 {
     public int ActiveSubstancesId { get; set; }
     public string ActiveSubstancesName { get; set; } = null!;

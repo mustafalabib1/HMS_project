@@ -18,8 +18,4 @@ public class Medication
     #region Many2Many With ActiveSubstance
     public virtual ICollection<ActiveSubstance> ActiveSubstances { get; set; } = new HashSet<ActiveSubstance>();
     #endregion
-
-    #region One2Many With MedicatoinSideEffects mult value attribut 
-    public virtual ICollection<MedicatoinSideEffect> MedicatoinSideEffects { get; set; } = new HashSet<MedicatoinSideEffect>(); 
-    #endregion
 }

@@ -12,7 +12,10 @@ namespace DALProject.model
         public DateTime InvoiceDate { get; set; }
         public decimal TotalAmount { get; set; }
         public bool PaymentStatus { get; set; }
-        public char PaymentType { get; set; }
+        /// <summary>
+        /// PaymentType take his value from enum PaymentType
+        /// </summary>
+        public string PaymentType { get; set; } = null!;
 
         #region One2Many With Receptionist
         public long? ReceptionistId { get; set; }

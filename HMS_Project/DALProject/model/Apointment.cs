@@ -11,7 +11,10 @@ namespace DALProject.model
         public  int ApointmentId { get; set; }
         public DateOnly ApointmentDate { get; set; }
         public TimeOnly ApointmentTime { get; set; }
-        public char ApointmentStatus { get; set; }
+        /// <summary>
+        ///  AppointmentStatus take his value from enum AppointmentStatus
+        /// </summary>
+        public string ApointmentStatus { get; set; }= AppointmentStatus.Scheduled.ToString();
         public virtual string Examination { get; set; } = null!;
 
 

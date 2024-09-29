@@ -12,7 +12,7 @@ namespace DALProject.model
         public ICollection<Invoice> invoices { get; set; } = new HashSet<Invoice>();
         #endregion
 
-        #region One2Many With Apintment 
+        #region One2Many With Apiontment 
         public ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
         #endregion
     }

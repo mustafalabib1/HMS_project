@@ -11,8 +11,12 @@ namespace DALProject.model
         public int ClinicId { get; set; }
         public double Price { get; set; }
         public string Name { get; set; } = null!;
-        public string Specilization { get; set; } = null!;
         public string Phone { get; set; } = null!;
+
+        #region One2Many With ClinicSpecializationLookup
+        public string Specilization { get; set; } = null!;
+        public virtual ClinicSpecializationLookup ClinicSpecilization { get; set; } = null!; 
+        #endregion
 
         #region One2Many With Nurses
         public virtual ICollection<Nurse> Nurses { get; set; } = new HashSet<Nurse>();

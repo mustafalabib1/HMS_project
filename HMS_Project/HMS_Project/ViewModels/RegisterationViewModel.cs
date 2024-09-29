@@ -20,9 +20,18 @@ namespace HMS_Project.ViewModels
         public RegisterationViewModel(Patient patient)
         {
             SSN = patient.SSN;
-            //FirstName = firstName;
-            //MidleName = midleName;
-            //LastName = patient.FullName;
+            string[] name = patient.FullName.Split();
+            if (name.Length == 3)
+            {
+                FirstName = name[0];
+                MiddleName = name[1];
+                LastName = name[2];
+            }
+            else if (name.Length == 2)
+            {
+                FirstName = name[0];
+                LastName = name[1];
+            }
             DateOfBirth = patient.DateOfBirth;
             Phone = patient.Phone;
             Email = patient.Email;
@@ -30,18 +39,16 @@ namespace HMS_Project.ViewModels
             Address = patient.Address;
             Gender = Enum.TryParse(patient.Gender, out Gender Gendervalue) ? Gendervalue : null;
         }
-
+        //public HashSet<DoctorSpecializationLookup> Specializations { get; set; }
+        //public string Specializations { get; set; };
         [Required]
         public long SSN { get; set; }
-        //public FullName FullName { get; set; } = null!;
-
         [Required]
         public string FirstName { get; set; } = null!;
         [Required]
-        public string MidleName { get; set; } = null!;
+        public string MiddleName { get; set; } = null!;
         [Required]
         public string LastName { get; set; } = null!;
-
         [Required]
         public DateOnly DateOfBirth { get; set; }
         public string? Phone { get; set; } = null!;
@@ -62,7 +69,7 @@ namespace HMS_Project.ViewModels
                 Address = PatViewModel.Address,
                 Gender = PatViewModel.Gender.ToString(),
                 Phone = PatViewModel.Phone,
-                FullName = $"{PatViewModel.FirstName} {PatViewModel.MidleName} {PatViewModel.LastName}",
+                FullName = $"{PatViewModel.FirstName} {PatViewModel.MiddleName} {PatViewModel.LastName}",
                 DateOfBirth = PatViewModel.DateOfBirth
             };
         }

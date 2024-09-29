@@ -12,9 +12,7 @@
         public long? PharmacistId { get; set; }
         public virtual Pharmacist Pharmacist { get; set; } = null!;
         #endregion
-
         
-
         #region One2One With Apointment
         public int ApointmentId { get; set; }
         public virtual Apointment Apointment { get; set; }=null!;

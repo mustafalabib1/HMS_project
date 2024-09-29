@@ -7,20 +7,8 @@
       "RelativeMoniker": "D:0:0:{E5E6C204-FE51-40D1-B47F-FA6071248D42}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B496886F-2842-44AD-9091-F5615219086C}|DALProject\\DALProject.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\dalproject\\data\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B496886F-2842-44AD-9091-F5615219086C}|DALProject\\DALProject.csproj|solutionrelative:dalproject\\data\\contexts\\hmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B496886F-2842-44AD-9091-F5615219086C}|DALProject\\DALProject.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\dalproject\\model\\db_datatypes_helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B496886F-2842-44AD-9091-F5615219086C}|DALProject\\DALProject.csproj|solutionrelative:dalproject\\model\\db_datatypes_helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E5E6C204-FE51-40D1-B47F-FA6071248D42}|HMS_Project\\HMS_Project.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\hms_project\\viewmodels\\registerationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E5E6C204-FE51-40D1-B47F-FA6071248D42}|HMS_Project\\HMS_Project.csproj|solutionrelative:hms_project\\viewmodels\\registerationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B496886F-2842-44AD-9091-F5615219086C}|DALProject\\DALProject.csproj|e:\\mustafa\\digital egypt pioneers initiative depi\\techncial\\project\\hms_project\\dalproject\\data\\configurations\\receptionistconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B496886F-2842-44AD-9091-F5615219086C}|DALProject\\DALProject.csproj|solutionrelative:dalproject\\data\\configurations\\receptionistconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,21 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HMSdbcontext.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\Data\\Contexts\\HMSdbcontext.cs",
-              "RelativeDocumentMoniker": "DALProject\\Data\\Contexts\\HMSdbcontext.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\Data\\Contexts\\HMSdbcontext.cs",
-              "RelativeToolTip": "DALProject\\Data\\Contexts\\HMSdbcontext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T20:17:46.297Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -53,48 +28,23 @@
               "RelativeDocumentMoniker": "HMS_Project\\Program.cs",
               "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\Program.cs*",
               "RelativeToolTip": "HMS_Project\\Program.cs*",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwCEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-27T20:17:41.044Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DB_DataTypes_Helper.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\model\\DB_DataTypes_Helper.cs",
-              "RelativeDocumentMoniker": "DALProject\\model\\DB_DataTypes_Helper.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\model\\DB_DataTypes_Helper.cs",
-              "RelativeToolTip": "DALProject\\model\\DB_DataTypes_Helper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T20:15:42.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "RegisterationViewModel.cs",
               "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\ViewModels\\RegisterationViewModel.cs",
               "RelativeDocumentMoniker": "HMS_Project\\ViewModels\\RegisterationViewModel.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\ViewModels\\RegisterationViewModel.cs",
-              "RelativeToolTip": "HMS_Project\\ViewModels\\RegisterationViewModel.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAYwDQAAAAPAAAAAAAAAA==",
+              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\ViewModels\\RegisterationViewModel.cs*",
+              "RelativeToolTip": "HMS_Project\\ViewModels\\RegisterationViewModel.cs*",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAtwBMAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T20:15:20.842Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ReceptionistConfigurations.cs",
-              "DocumentMoniker": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\Data\\Configurations\\ReceptionistConfigurations.cs",
-              "RelativeDocumentMoniker": "DALProject\\Data\\Configurations\\ReceptionistConfigurations.cs",
-              "ToolTip": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\Data\\Configurations\\ReceptionistConfigurations.cs",
-              "RelativeToolTip": "DALProject\\Data\\Configurations\\ReceptionistConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T20:14:29.902Z",
+              "WhenOpened": "2024-09-29T19:34:09.35Z",
               "EditorCaption": ""
             },
             {
