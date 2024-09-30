@@ -26,8 +26,8 @@ namespace DALProject.model
         public virtual ICollection<DoctorScheduleLookup> DoctorScheduleLookups { get; set; } = new HashSet<DoctorScheduleLookup>();
         #endregion
 
-        #region One2Many With Apointment
-        public virtual ICollection <Apointment> Apointments { get; set; }= new HashSet<Apointment>();
+        #region One2Many With Appointment
+        public virtual ICollection <Appointment> Appointments { get; set; }= new HashSet<Appointment>();
         #endregion
     }
 }

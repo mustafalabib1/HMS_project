@@ -74,8 +74,8 @@ namespace DALProject.Data.Migrations
                 oldMaxLength: 20);
 
             migrationBuilder.AlterColumn<string>(
-                name: "ApointmentStatus",
-                table: "Apointments",
+                name: "AppointmentStatus",
+                table: "Appointments",
                 type: "nvarchar(15)",
                 maxLength: 15,
                 nullable: false,
@@ -158,8 +158,8 @@ namespace DALProject.Data.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "ApointmentStatus",
-                table: "Apointments",
+                name: "AppointmentStatus",
+                table: "Appointments",
                 type: "char(1)",
                 maxLength: 1,
                 nullable: false,

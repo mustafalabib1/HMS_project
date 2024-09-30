@@ -20,7 +20,7 @@ namespace DALProject.Data.Configurations
             #region One2Many With Prescription
             builder
                 .HasOne(p => p.Prescription)
-                .WithMany(p => p.PrescriptionItem)
+                .WithMany(p => p.PrescriptionItems)
                 .OnDelete(DeleteBehavior.Cascade);
             #endregion
 

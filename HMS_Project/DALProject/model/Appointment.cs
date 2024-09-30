@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Apointment
+    public class Appointment
     {
-        public  int ApointmentId { get; set; }
-        public DateOnly ApointmentDate { get; set; }
-        public TimeOnly ApointmentTime { get; set; }
+        public  int AppointmentId { get; set; }
+        public DateOnly AppointmentDate { get; set; }
+        public TimeOnly AppointmentTime { get; set; }
         /// <summary>
         ///  AppointmentStatus take his value from enum AppointmentStatus
         /// </summary>
-        public string ApointmentStatus { get; set; }= AppointmentStatus.Scheduled.ToString();
+        public string AppointmentStatus { get; set; } = null!;
         public virtual string Examination { get; set; } = null!;
 
 

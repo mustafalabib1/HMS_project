@@ -273,7 +273,7 @@ namespace DALProject.Data.Migrations
                     PrescriptionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PharmacistId = table.Column<long>(type: "bigint", nullable: true),
-                    ApointmentId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentId = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -293,13 +293,13 @@ namespace DALProject.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Apointments",
+                name: "Appointments",
                 columns: table => new
                 {
-                    ApointmentId = table.Column<int>(type: "int", nullable: false),
-                    ApointmentDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    ApointmentTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    ApointmentStatus = table.Column<string>(type: "char(1)", maxLength: 1, nullable: false),
+                    AppointmentId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    AppointmentTime = table.Column<TimeOnly>(type: "time", nullable: false),
+                    AppointmentStatus = table.Column<string>(type: "char(1)", maxLength: 1, nullable: false),
                     Examination = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ReceptionistId = table.Column<long>(type: "bigint", nullable: true),
                     ClinicId = table.Column<int>(type: "int", nullable: true),
@@ -308,32 +308,32 @@ namespace DALProject.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Apointments", x => x.ApointmentId);
+                    table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
                     table.ForeignKey(
-                        name: "FK_Apointments_Clinics_ClinicId",
+                        name: "FK_Appointments_Clinics_ClinicId",
                         column: x => x.ClinicId,
                         principalTable: "Clinics",
                         principalColumn: "ClinicId",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_Apointments_Doctors_DoctorId",
+                        name: "FK_Appointments_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "SSN",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Apointments_Patients_PatientId",
+                        name: "FK_Appointments_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "SSN",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Apointments_Prescriptions_ApointmentId",
-                        column: x => x.ApointmentId,
+                        name: "FK_Appointments_Prescriptions_AppointmentId",
+                        column: x => x.AppointmentId,
                         principalTable: "Prescriptions",
                         principalColumn: "PrescriptionID");
                     table.ForeignKey(
-                        name: "FK_Apointments_Receptionists_ReceptionistId",
+                        name: "FK_Appointments_Receptionists_ReceptionistId",
                         column: x => x.ReceptionistId,
                         principalTable: "Receptionists",
                         principalColumn: "SSN",
@@ -378,16 +378,16 @@ namespace DALProject.Data.Migrations
                     PaymentStatus = table.Column<bool>(type: "bit", nullable: false),
                     PaymentType = table.Column<string>(type: "char(1)", maxLength: 1, nullable: false),
                     ReceptionistId = table.Column<long>(type: "bigint", nullable: true),
-                    ApointmentId = table.Column<int>(type: "int", nullable: true)
+                    AppointmentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Invoices", x => x.InvoiceID);
                     table.ForeignKey(
-                        name: "FK_Invoices_Apointments_ApointmentId",
-                        column: x => x.ApointmentId,
-                        principalTable: "Apointments",
-                        principalColumn: "ApointmentId",
+                        name: "FK_Invoices_Appointments_AppointmentId",
+                        column: x => x.AppointmentId,
+                        principalTable: "Appointments",
+                        principalColumn: "AppointmentId",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Invoices_Receptionists_ReceptionistId",
@@ -444,23 +444,23 @@ namespace DALProject.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Apointments_ClinicId",
-                table: "Apointments",
+                name: "IX_Appointments_ClinicId",
+                table: "Appointments",
                 column: "ClinicId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Apointments_DoctorId",
-                table: "Apointments",
+                name: "IX_Appointments_DoctorId",
+                table: "Appointments",
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Apointments_PatientId",
-                table: "Apointments",
+                name: "IX_Appointments_PatientId",
+                table: "Appointments",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Apointments_ReceptionistId",
-                table: "Apointments",
+                name: "IX_Appointments_ReceptionistId",
+                table: "Appointments",
                 column: "ReceptionistId");
 
             migrationBuilder.CreateIndex(
@@ -480,11 +480,11 @@ namespace DALProject.Data.Migrations
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_ApointmentId",
+                name: "IX_Invoices_AppointmentId",
                 table: "Invoices",
-                column: "ApointmentId",
+                column: "AppointmentId",
                 unique: true,
-                filter: "[ApointmentId] IS NOT NULL");
+                filter: "[AppointmentId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Invoices_ReceptionistId",
@@ -581,7 +581,7 @@ namespace DALProject.Data.Migrations
                 name: "PrescriptionItemMedication");
 
             migrationBuilder.DropTable(
-                name: "Apointments");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "Medication");
