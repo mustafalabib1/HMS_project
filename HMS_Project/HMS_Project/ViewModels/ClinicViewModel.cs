@@ -19,11 +19,11 @@ namespace HMS_Project.ViewModels
             Price = clinic.Price;
             Specilization = clinic.Specilization;
             Doctors = (HashSet<Doctor>)clinic.Doctors;
-            UpcomingApointments = (HashSet<Apointment>)clinic.Apointments;
+            UpcomingAppointments = (HashSet<Appointment>)clinic.Appointments;
 
             TotalDoctors = clinic.Doctors.Count;
             TotalNurses = clinic.Nurses.Count;
-            TotalAppointments = clinic.Apointments.Count;
+            TotalAppointments = clinic.Appointments.Count;
         }
 
         [Required]
@@ -38,7 +38,7 @@ namespace HMS_Project.ViewModels
         public double Price { get; set; }
         HashSet<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
 
-        HashSet<Apointment> UpcomingApointments { get; set; } = new HashSet<Apointment>();
+        HashSet<Appointment> UpcomingAppointments { get; set; } = new HashSet<Appointment>();
 
         // Maybe if we want to display the number of Doctors, Nurses and Appointments in the clinic
         public int TotalDoctors { get; set; }
@@ -56,7 +56,7 @@ namespace HMS_Project.ViewModels
                 Price = _clinicViewModel.Price,
                 Specilization = _clinicViewModel.Specilization,
                 Doctors = _clinicViewModel.Doctors,
-                Apointments = _clinicViewModel.UpcomingApointments
+                Appointments = _clinicViewModel.UpcomingAppointments
             };
         }
 
