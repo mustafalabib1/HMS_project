@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "DALProject/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Proxies": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
         },
         "runtime": {
@@ -45,6 +46,17 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.10.3.0",
             "fileVersion": "1.1000.323.51804"
+          }
+        }
+      },
+      "Castle.Core/5.1.1": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Castle.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.1.0"
           }
         }
       },
@@ -141,6 +153,18 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/8.0.8": {},
+      "Microsoft.EntityFrameworkCore.Proxies/8.0.8": {
+        "dependencies": {
+          "Castle.Core": "5.1.1",
+          "Microsoft.EntityFrameworkCore": "8.0.8"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.Proxies.dll": {
+            "assemblyVersion": "8.0.8.0",
+            "fileVersion": "8.0.824.36704"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/8.0.8": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.8",
@@ -402,6 +426,28 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
+      "System.Diagnostics.EventLog/6.0.0": {
+        "runtime": {
+          "lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
       "System.Drawing.Common/6.0.0": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "6.0.0"
@@ -581,6 +627,13 @@
       "path": "azure.identity/1.10.3",
       "hashPath": "azure.identity.1.10.3.nupkg.sha512"
     },
+    "Castle.Core/5.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+      "path": "castle.core/5.1.1",
+      "hashPath": "castle.core.5.1.1.nupkg.sha512"
+    },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",
       "serviceable": true,
@@ -629,6 +682,13 @@
       "sha512": "sha512-OlAXMU+VQgLz5y5/SBkLvAa9VeiR3dlJqgIebEEH2M2NGA3evm68/Tv7SLWmSxwnEAtA3nmDEZF2pacK6eXh4Q==",
       "path": "microsoft.entityframeworkcore.analyzers/8.0.8",
       "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.8.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Proxies/8.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q4UneU7rhDgRdDwkta/VyKBNnAoKanKnuHQiVZ8xK1lD0VWg03q886XffrWu7qhzoViohPucGbqtRDOMrBD93Q==",
+      "path": "microsoft.entityframeworkcore.proxies/8.0.8",
+      "hashPath": "microsoft.entityframeworkcore.proxies.8.0.8.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.8": {
       "type": "package",
@@ -804,6 +864,13 @@
       "sha512": "sha512-KiLYDu2k2J82Q9BJpWiuQqCkFjRBWVq4jDzKKWawVi9KWzyD0XG3cmfX0vqTQlL14Wi9EufJrbL0+KCLTbqWiQ==",
       "path": "system.diagnostics.diagnosticsource/6.0.1",
       "hashPath": "system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw==",
+      "path": "system.diagnostics.eventlog/6.0.0",
+      "hashPath": "system.diagnostics.eventlog.6.0.0.nupkg.sha512"
     },
     "System.Drawing.Common/6.0.0": {
       "type": "package",

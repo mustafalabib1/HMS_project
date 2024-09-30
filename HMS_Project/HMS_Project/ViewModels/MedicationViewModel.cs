@@ -19,7 +19,7 @@ namespace HMS_Project.ViewModels
             Strength = medication.Strength;
             ActSubInMed =medication.ActiveSubstances.ToHashSet();
         }
-        public HashSet<ActiveSubstance> ActSubInDB { get; set; } = new HashSet<ActiveSubstance>();
+        public ICollection<ActiveSubstance> ActSubDateReader { get; set; } = new HashSet<ActiveSubstance>();
         [Required]
         public string MedicationCode { get; set; } = null!;
 
@@ -28,7 +28,7 @@ namespace HMS_Project.ViewModels
 
         [Required]
         public int Strength { get; set; }
-        public HashSet<ActiveSubstance> ActSubInMed { get; set; } = new HashSet<ActiveSubstance>();
+        public ICollection<ActiveSubstance> ActSubInMed { get; set; } = new HashSet<ActiveSubstance>();
 
 
 

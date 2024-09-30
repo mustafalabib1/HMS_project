@@ -14,7 +14,7 @@ namespace HMS_Project.ViewModels
 
         [Required]
         public string ActiveSubstancesName { get; set; } = null!;
-        public ICollection<ActiveSubstance> ActiveSubstancesInDB { get; set; }= new List<ActiveSubstance>();
+        public ICollection<ActiveSubstance> ActiveSubstancesInDB { get; set; } = new List<ActiveSubstance>();
         public ICollection<MedicationViewModel> Medications { get; set; } = new HashSet<MedicationViewModel>();
         public ICollection<ActiveSubstanceInteractionViewModel> Interactions { get; set; } = new HashSet<ActiveSubstanceInteractionViewModel>();
 
@@ -30,7 +30,7 @@ namespace HMS_Project.ViewModels
                 activeSubstance.ActSub1.Add(new ActiveSubstanceInteraction
                 {
                     Interaction = interactionViewModel.Interaction,
-                    ActiveSubstanceId2= interactionViewModel.ActSubId
+                    ActiveSubstanceId2 = interactionViewModel.ActSubId
                 });
             }
 

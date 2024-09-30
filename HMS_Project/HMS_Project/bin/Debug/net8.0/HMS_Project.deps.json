@@ -967,6 +967,7 @@
       },
       "DALProject/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Proxies": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
         },
         "runtime": {

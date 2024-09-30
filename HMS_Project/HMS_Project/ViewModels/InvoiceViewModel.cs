@@ -42,7 +42,5 @@ namespace HMS_Project.ViewModels
             return new InvoiceViewModel(invoice);
         }
 
-
-
     }
 }

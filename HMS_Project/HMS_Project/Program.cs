@@ -59,25 +59,25 @@ namespace HMS_Project
             #endregion
 
             #region view model of Activesubstance that show substance and list of interaction and medication 
-            //var ActSubs = (context.ActiveSubstances.Include(a => a.Medications)).Select(a => (ActiveSubstanceViewModel)a).ToList();
-            //foreach (var item in ActSubs)
-            //{
-            //    Console.WriteLine("=============================================================================");
-            //    Console.WriteLine($"{item.ActiveSubstancesName}");
-            //    foreach (var item1 in item.Interactions)
-            //    {
-            //        Console.WriteLine($"\t{item1.OtherSubstanceName}");
-            //    }
-            //    Console.WriteLine("-------------------------------------------------------");
-            //    foreach (var item1 in item.Medications)
-            //    {                    
-            //        Console.WriteLine($"\t{item1.MedName}");
-            //    }
-            //} 
+            var ActSubs = (context.ActiveSubstances.Include(a => a.Medications).ToList()).Select(a => (ActiveSubstanceViewModel)a);
+            foreach (var item in ActSubs)
+            {
+                Console.WriteLine("=============================================================================");
+                Console.WriteLine($"{item.ActiveSubstancesName}");
+                foreach (var item1 in item.Interactions)
+                {
+                    Console.WriteLine($"\t{item1.OtherSubstanceName}");
+                }
+                Console.WriteLine("-------------------------------------------------------");
+                foreach (var item1 in item.Medications)
+                {
+                    Console.WriteLine($"\t{item1.MedName}");
+                }
+            }
             #endregion
 
             #region try add active substance by use view model
-            // Creating new ViewModel
+            //Creating new ViewModel
             //var viewModel = new ActiveSubstanceViewModel
             //{
             //    ActiveSubstancesName = "NewSubstance",
@@ -92,7 +92,7 @@ namespace HMS_Project
             //    }
             //};
             //context.ActiveSubstances.Add((ActiveSubstance)viewModel);
-            //context.SaveChanges(); 
+            //context.SaveChanges();
             #endregion
         }
     }

@@ -37,6 +37,7 @@ namespace HMS_Project.ViewModels
             UserPassword = nurse.UserPassword;
             Address = nurse.Address;
             Gender = Enum.TryParse(nurse.Gender, out Gender Gendervalue) ? Gendervalue : null;
+            ClinicId = nurse.ClinicId;
         }
         
         [Required]
@@ -56,6 +57,8 @@ namespace HMS_Project.ViewModels
         public string UserPassword { get; set; } = null!;
         public string? Address { get; set; }
         public Gender? Gender { get; set; }
+        public ICollection<Clinic> ClinicDateReader { get; set; } = new HashSet<Clinic>();
+        public int? ClinicId { get; set; }
 
         public static explicit operator Nurse(NurseViewModel nurseViewModel)
         {
@@ -68,7 +71,8 @@ namespace HMS_Project.ViewModels
                 Gender = nurseViewModel.Gender.ToString(),
                 Phone = nurseViewModel.Phone,
                 FullName = $"{nurseViewModel.FirstName} {nurseViewModel.MiddleName} {nurseViewModel.LastName}",
-                DateOfBirth = nurseViewModel.DateOfBirth
+                DateOfBirth = nurseViewModel.DateOfBirth,
+                ClinicId = nurseViewModel.ClinicId,
             };
         }
         //we shoud make explicit casting Nurse to NurseViewModel but this is not important in this case 
