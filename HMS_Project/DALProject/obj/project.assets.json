@@ -2748,19 +2748,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\": {}
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
+      "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj",
       "projectName": "DALProject",
-      "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
-      "packagesPath": "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\",
-      "outputPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\obj\\",
+      "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\CRIZMA MEGA STORE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2813,7 +2813,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
