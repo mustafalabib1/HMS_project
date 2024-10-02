@@ -4254,19 +4254,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pc\\.nuget\\packages\\": {}
+    "C:\\Users\\Dr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+      "projectUniqueName": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
       "projectName": "HMS_Project",
-      "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
-      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\obj\\",
+      "projectPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+      "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4281,8 +4281,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
-              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj"
+            "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {
+              "projectPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj"
             }
           }
         }
