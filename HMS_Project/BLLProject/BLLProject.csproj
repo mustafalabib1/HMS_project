@@ -10,8 +10,4 @@
     <ProjectReference Include="..\DALProject\DALProject.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

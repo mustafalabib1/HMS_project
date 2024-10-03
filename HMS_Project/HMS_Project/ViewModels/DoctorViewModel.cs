@@ -40,7 +40,7 @@ namespace HMS_Project.ViewModels
             //Schedule = doctor.DoctorScheduleLookups;
         }
         
-        public HashSet<DoctorSpecializationLookup>? SpecializationsDateReader { get; set; }
+        public IEnumerable<DoctorSpecializationLookup>? SpecializationsDateReader { get; set; }
         public string? specialization { get; set; }
         [Required]
         public long SSN { get; set; }

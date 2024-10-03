@@ -1,4 +1,6 @@
-﻿using DALProject.Data.Contexts;
+﻿using BLLProject.Interfaces;
+using DALProject.Data.Contexts;
+using DALProject.model;
 using HMS_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,12 +8,15 @@ namespace PLProject.Controllers
 {
 	public class DoctorController : Controller
 	{
-		private readonly HMSdbcontext Context;
+        private readonly IRepository<Doctor> doctorRepo;
 
-		public DoctorController(HMSdbcontext context)
+        public IRepository<DoctorSpecializationLookup> SpecializationRepo { get; }
+
+        public DoctorController(IRepository<DoctorSpecializationLookup> SpecializationRepo,IRepository<Doctor> DoctorRepo)
 		{
-			Context = context;
-		}
+            this.SpecializationRepo = SpecializationRepo;
+            doctorRepo = DoctorRepo;
+        }
 		public IActionResult Index()
 		{
 			return RedirectToAction(nameof(Create));
@@ -19,7 +24,7 @@ namespace PLProject.Controllers
 		#region create
 		public IActionResult Create()
 		{
-			var ViewModel = new DoctorViewModel() { SpecializationsDateReader = Context.DoctorSpecializationLookup.ToHashSet() };
+			var ViewModel = new DoctorViewModel() { SpecializationsDateReader = SpecializationRepo.GetALL() };
 
 			return View(ViewModel);
 		}
@@ -28,11 +33,10 @@ namespace PLProject.Controllers
 		{
 			if (ModelState.IsValid) // server side validation
 			{
-				//Context.Doctors.Add((Doctor)doctorViewModel);
-				Context.SaveChanges();
+				doctorRepo.Add((Doctor)doctorViewModel);
 				return RedirectToAction(nameof(Index));
 			}
-			doctorViewModel.SpecializationsDateReader = Context.DoctorSpecializationLookup.ToHashSet();
+			doctorViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
 			return View(doctorViewModel);
 		}
 		#endregion

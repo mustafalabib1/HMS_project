@@ -525,3 +525,4 @@ E:\Mustafa\.net project\project\HMS_Project\PLProject\obj\Debug\net8.0\PLProject
 E:\Mustafa\.net project\project\HMS_Project\PLProject\obj\Debug\net8.0\PLProject.genruntimeconfig.cache
 E:\Mustafa\.net project\project\HMS_Project\PLProject\obj\Debug\net8.0\ref\PLProject.dll
 E:\Mustafa\.net project\project\HMS_Project\PLProject\bin\Debug\net8.0\libman.json
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\bin\Debug\net8.0\libman.json

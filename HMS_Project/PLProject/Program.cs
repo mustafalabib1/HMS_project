@@ -1,5 +1,8 @@
+using BLLProject.Interfaces;
+using BLLProject.Repositories;
 using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 
 namespace PLProject
 {
@@ -18,6 +21,7 @@ namespace PLProject
                 .UseLazyLoadingProxies()
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             var app = builder.Build();
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Mustafa\\.net project\\project\\HMS_Project\\BLLProject\\BLLProject.csproj": {}
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj": {}
   },
   "projects": {
-    "E:\\Mustafa\\.net project\\project\\HMS_Project\\BLLProject\\BLLProject.csproj": {
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Mustafa\\.net project\\project\\HMS_Project\\BLLProject\\BLLProject.csproj",
+        "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj",
         "projectName": "BLLProject",
-        "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\BLLProject\\BLLProject.csproj",
+        "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\BLLProject\\obj\\",
+        "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
-                "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj"
+              "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
+                "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
+    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj",
+        "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj",
         "projectName": "DALProject",
-        "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj",
+        "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\obj\\",
+        "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
