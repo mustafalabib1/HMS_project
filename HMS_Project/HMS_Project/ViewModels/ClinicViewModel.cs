@@ -1,4 +1,5 @@
-﻿using DALProject.model;
+﻿using DALProject.Data.Migrations;
+using DALProject.model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,31 +14,39 @@ namespace HMS_Project.ViewModels
         public ClinicViewModel() { }
         public ClinicViewModel(Clinic clinic)
         {
-            //ClinicId = clinic.ClinicId;
+            Id = clinic.ClinicId;
             Name = clinic.Name;
             Phone = clinic.Phone;
             Price = clinic.Price;
-            SpecilizationID = clinic.ClinicSpecializationId;
-            DoctorsInClinic = (HashSet<Doctor>)clinic.Doctors;
-            //UpcomingApointments = (HashSet<Apointment>)clinic.Apointments;
-
-            //TotalDoctors = clinic.Doctors.Count;
-            //TotalNurses = clinic.Nurses.Count;
-            //TotalApointments = clinic.Apointments.Count;
+            Specialization = clinic.Specialization;
         }
-        [Required]
+
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Name is Required")]
+        [Display(Name = "Clinic Name")]
         public string Name { get; set; } = null!;
-        [Required]
+
+        [Required(ErrorMessage = "Phone Number Is Required")]
+        [Display(Name = "Phone Number")]
+        [Phone(ErrorMessage = "The phone number you entered is invalid.")]
+        [MaxLength(11, ErrorMessage = "Phone Number Can be a maximum of 11 numbers")]
+        [MinLength(10, ErrorMessage = "Phone Number Can be a minimum of 10 numbers")]
         public string Phone { get; set; } = null!;
+        
         public IEnumerable<ClinicSpecializationLookup> SpecializationsDateReader { get; set; } = new HashSet<ClinicSpecializationLookup>();
-        [Required]
-        public int? SpecilizationID { get; set; } 
-        [Required]
-        public double Price { get; set; }
-        public IEnumerable<Nurse> NursesDateReader { get; set; } = new HashSet<Nurse>();
-        public ICollection<Nurse> NursesInClinic { get; set; } = new HashSet<Nurse>();
-        public IEnumerable<Doctor> DoctorsDateReader { get; set; } = new HashSet<Doctor>();
-        public ICollection<Doctor> DoctorsInClinic { get; set; } = new HashSet<Doctor>();
+        
+        [Required(ErrorMessage = " Please Choose a Specilization for this Clinic.")]
+        public string Specialization { get; set; } = null!;
+        
+        [Required(ErrorMessage ="Please specify the price.")]
+        [Display(Name = "Price per Visit")]
+        public double? Price { get; set; }
+
+        //public IEnumerable<Nurse> NursesDateReader { get; set; } = new HashSet<Nurse>();
+        //public ICollection<Nurse> NursesInClinic { get; set; } = new HashSet<Nurse>();
+        //public IEnumerable<Doctor> DoctorsDateReader { get; set; } = new HashSet<Doctor>();
+        //public ICollection<Doctor> DoctorsInClinic { get; set; } = new HashSet<Doctor>();
 
         //HashSet<Apointment> UpcomingApointments { get; set; } = new HashSet<Apointment>();
 
@@ -51,12 +60,11 @@ namespace HMS_Project.ViewModels
         {
             return new Clinic()
             {
-                //ClinicId = _clinicViewModel.ClinicId,
                 Name = _clinicViewModel.Name,
                 Phone = _clinicViewModel.Phone,
-                Price = _clinicViewModel.Price,
-                ClinicSpecializationId = _clinicViewModel.SpecilizationID,
-                Doctors = _clinicViewModel.DoctorsInClinic,
+                Price = _clinicViewModel.Price ?? default,
+                Specialization = _clinicViewModel.Specialization,
+                //Doctors = _clinicViewModel.DoctorsInClinic,
                 //Apointments = _clinicViewModel.UpcomingApointments
             };
         }

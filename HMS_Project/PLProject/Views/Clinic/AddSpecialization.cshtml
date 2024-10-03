@@ -1,0 +1,20 @@
+﻿@model ClinicSpecializationLookup
+@{
+    ViewData["Title"] = "Add Specialization";
+}
+
+<h1>Add a new Clinic Specialization</h1>
+<br />
+<br />
+
+<form asp-action="AddSpecialization" method="post">
+    <div class="form-group mt-2">
+        <label asp-for="Specialization"></label>
+        <input asp-for="Specialization" class="form-control" placeholder="" value="" />
+        <span asp-validation-for="Specialization" class="text-danger"></span>
+    </div>
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary mt-2">Add</button>
+    <a asp-controller="Clinic" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
+</form>
+

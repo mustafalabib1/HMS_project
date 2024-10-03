@@ -12,10 +12,11 @@ namespace DALProject.model
         public double Price { get; set; }
         public string Name { get; set; } = null!;
         public string Phone { get; set; } = null!;
+        public string Specialization { get; set; } = null!;
 
         #region One2Many With ClinicSpecializationLookup
-        public int? ClinicSpecializationId {  get; set; } 
-        public virtual ClinicSpecializationLookup ClinicSpecilization { get; set; } = null!; 
+        public int? ClinicSpecializationId { get; set; }
+        public virtual ClinicSpecializationLookup ClinicSpecilization { get; set; } = null!;
         #endregion
 
         #region One2Many With Nurses

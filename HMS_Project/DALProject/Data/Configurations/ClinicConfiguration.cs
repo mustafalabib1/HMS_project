@@ -13,7 +13,12 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Clinic> builder)
         {
-            builder.Property(c => c.Phone).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(20);
+            builder.Property(c => c.ClinicId)
+                .UseIdentityColumn(10, 10);
+
+            builder.Property(c => c.Phone)
+                .HasColumnType($"{DB_DataTypes_Helper.nvarchar}")
+                .HasMaxLength(20);
             
             #region One2Many with Nurses
             builder

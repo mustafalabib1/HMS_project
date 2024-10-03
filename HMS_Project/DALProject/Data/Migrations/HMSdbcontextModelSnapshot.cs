@@ -148,7 +148,7 @@ namespace DALProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClinicId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClinicId"), 10L, 10);
 
                     b.Property<int?>("ClinicSpecializationId")
                         .HasColumnType("int");
@@ -165,6 +165,10 @@ namespace DALProject.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("Specialization")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ClinicId");
 
                     b.HasIndex("ClinicSpecializationId");
@@ -174,11 +178,11 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.ClinicSpecializationLookup", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 10L, 10);
 
                     b.Property<string>("Specialization")
                         .IsRequired()

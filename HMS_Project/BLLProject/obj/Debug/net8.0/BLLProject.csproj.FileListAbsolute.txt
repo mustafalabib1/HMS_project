@@ -30,3 +30,19 @@ E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProje
 E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\refint\BLLProject.dll
 E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.pdb
 E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\ref\BLLProject.dll
+D:\code\HMS_project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.deps.json
+D:\code\HMS_project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.dll
+D:\code\HMS_project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.pdb
+D:\code\HMS_project\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.dll
+D:\code\HMS_project\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.pdb
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.AssemblyReference.cache
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfoInputs.cache
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfo.cs
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.CoreCompileInputs.cache
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.sourcelink.json
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.Up2Date
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.dll
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\refint\BLLProject.dll
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.pdb
+D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\ref\BLLProject.dll
