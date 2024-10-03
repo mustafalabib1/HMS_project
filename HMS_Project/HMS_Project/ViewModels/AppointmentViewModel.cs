@@ -8,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class AppointmentViewModel
+    public class ApointmentViewModel
     {
-        public AppointmentViewModel() { }
+        public ApointmentViewModel() { }
 
-        public AppointmentViewModel(Appointment appointment)
+        public ApointmentViewModel(Apointment Apointment)
         {
-            AppointmentId = appointment.AppointmentId;
-            AppointmentDate = appointment.AppointmentDate;
-            AppointmentTime = appointment.AppointmentTime;
-            AppointmentStatus = AppointmentStatusEnum.Scheduled.ToString();
-            Examination = appointment.Examination;
-            ReceptionistId = appointment.ReceptionistId;
-            ReceptionistName = appointment.Receptionist.FullName;
-            ClinicId = appointment.ClinicId;
-            ClinicName = appointment.Clinic.Name;
-            PatientId = appointment.PatientId;
-            PatientName = appointment.Patient.FullName;
-            DoctorId = appointment.DoctorId;
-            DoctorName = appointment.Doctor.FullName;
-            InvoiceId = appointment.Invoice.InvoiceID;
-            PrescriptionId = appointment.Prescription.PrescriptionID;
+            ApointmentId = Apointment.ApointmentId;
+            ApointmentDate = Apointment.ApointmentDate;
+            ApointmentTime = Apointment.ApointmentTime;
+            ApointmentStatus = ApointmentStatusEnum.Scheduled.ToString();
+            Examination = Apointment.Examination;
+            ReceptionistId = Apointment.ReceptionistId;
+            ReceptionistName = Apointment.Receptionist.FullName;
+            ClinicId = Apointment.ClinicId;
+            ClinicName = Apointment.Clinic.Name;
+            PatientId = Apointment.PatientId;
+            PatientName = Apointment.Patient.FullName;
+            DoctorId = Apointment.DoctorId;
+            DoctorName = Apointment.Doctor.FullName;
+            InvoiceId = Apointment.Invoice.InvoiceID;
+            PrescriptionId = Apointment.Prescription.PrescriptionID;
         }
 
         [Required]
-        public int AppointmentId { get; set; }
+        public int ApointmentId { get; set; }
 
         [Required]
-        public DateOnly AppointmentDate { get; set; }
+        public DateOnly ApointmentDate { get; set; }
 
         [Required]
-        public TimeOnly AppointmentTime { get; set; }
-        public string AppointmentStatus { get; set; } = null!;
+        public TimeOnly ApointmentTime { get; set; }
+        public string ApointmentStatus { get; set; } = null!;
         public virtual string Examination { get; set; } = null!;
 
         [Required]
@@ -64,25 +64,25 @@ namespace HMS_Project.ViewModels
         [Required]
         public int PrescriptionId { get; set; }
 
-        public static explicit operator Appointment(AppointmentViewModel appointmentViewModel)
+        public static explicit operator Apointment(ApointmentViewModel ApointmentViewModel)
         {
-            return new Appointment()
+            return new Apointment()
             {
-                AppointmentId = appointmentViewModel.AppointmentId,
-                AppointmentDate = appointmentViewModel.AppointmentDate,
-                AppointmentTime = appointmentViewModel.AppointmentTime,
-                AppointmentStatus = appointmentViewModel.AppointmentStatus,
-                //Examination = appointmentViewModel.Examination,
-                //ReceptionistId = appointmentViewModel.ReceptionistId,
-                //ClinicId = appointmentViewModel.ClinicId,
-                //PatientId = appointmentViewModel.PatientId,
-                //DoctorId = appointmentViewModel.DoctorId,
+                ApointmentId = ApointmentViewModel.ApointmentId,
+                ApointmentDate = ApointmentViewModel.ApointmentDate,
+                ApointmentTime = ApointmentViewModel.ApointmentTime,
+                ApointmentStatus = ApointmentViewModel.ApointmentStatus,
+                //Examination = ApointmentViewModel.Examination,
+                //ReceptionistId = ApointmentViewModel.ReceptionistId,
+                //ClinicId = ApointmentViewModel.ClinicId,
+                //PatientId = ApointmentViewModel.PatientId,
+                //DoctorId = ApointmentViewModel.DoctorId,
             };
         }
 
-        public static explicit operator AppointmentViewModel(Appointment appointment)
+        public static explicit operator ApointmentViewModel(Apointment Apointment)
         {
-            return new AppointmentViewModel(appointment);
+            return new ApointmentViewModel(Apointment);
         }
     }
 }

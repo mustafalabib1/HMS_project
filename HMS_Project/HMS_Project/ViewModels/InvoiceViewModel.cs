@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class InvoiceViewModel
+    public class InvoiceViewModel
     {
         public InvoiceViewModel() { }
         public InvoiceViewModel(Invoice invoice) 

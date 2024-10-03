@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Appointment
+    public class Apointment
     {
-        public  int AppointmentId { get; set; }
-        public DateOnly AppointmentDate { get; set; }
-        public TimeOnly AppointmentTime { get; set; }
+        public  int ApointmentId { get; set; }
+        public DateOnly ApointmentDate { get; set; }
+        public TimeOnly ApointmentTime { get; set; }
         /// <summary>
-        ///  AppointmentStatus take his value from enum AppointmentStatus
+        ///  ApointmentStatus take his value from enum ApointmentStatus
         /// </summary>
-        public string AppointmentStatus { get; set; } = null!;
+        public string ApointmentStatus { get; set; } = null!;
         public virtual string Examination { get; set; } = null!;
 
 
@@ -24,7 +24,7 @@ namespace DALProject.model
         #endregion
 
         #region One2Many With Clinic
-        public int? ClinicId { get; set; }
+        public int ClinicId { get; set; }
         public  virtual Clinic Clinic { get; set; } = null!;
         #endregion
 

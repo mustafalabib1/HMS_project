@@ -96,20 +96,20 @@ namespace DALProject.Data.Migrations
                     b.ToTable("ActiveSubstanceInteraction");
                 });
 
-            modelBuilder.Entity("DALProject.model.Appointment", b =>
+            modelBuilder.Entity("DALProject.model.Apointment", b =>
                 {
-                    b.Property<int>("AppointmentId")
+                    b.Property<int>("ApointmentId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("AppointmentDate")
+                    b.Property<DateOnly>("ApointmentDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("AppointmentStatus")
+                    b.Property<string>("ApointmentStatus")
                         .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("char");
 
-                    b.Property<TimeOnly>("AppointmentTime")
+                    b.Property<TimeOnly>("ApointmentTime")
                         .HasColumnType("time");
 
                     b.Property<int?>("ClinicId")
@@ -129,7 +129,7 @@ namespace DALProject.Data.Migrations
                     b.Property<long?>("ReceptionistId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("AppointmentId");
+                    b.HasKey("ApointmentId");
 
                     b.HasIndex("ClinicId");
 
@@ -139,7 +139,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("ReceptionistId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Apointments");
                 });
 
             modelBuilder.Entity("DALProject.model.Clinic", b =>
@@ -255,7 +255,7 @@ namespace DALProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceID"));
 
-                    b.Property<int?>("AppointmentId")
+                    b.Property<int?>("ApointmentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InvoiceDate")
@@ -279,9 +279,9 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("InvoiceID");
 
-                    b.HasIndex("AppointmentId")
+                    b.HasIndex("ApointmentId")
                         .IsUnique()
-                        .HasFilter("[AppointmentId] IS NOT NULL");
+                        .HasFilter("[ApointmentId] IS NOT NULL");
 
                     b.HasIndex("ReceptionistId");
 
@@ -468,7 +468,7 @@ namespace DALProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PrescriptionID"));
 
-                    b.Property<int>("AppointmentId")
+                    b.Property<int>("ApointmentId")
                         .HasColumnType("int");
 
                     b.Property<long>("DoctorId")
@@ -632,33 +632,33 @@ namespace DALProject.Data.Migrations
                     b.Navigation("ActSub2");
                 });
 
-            modelBuilder.Entity("DALProject.model.Appointment", b =>
+            modelBuilder.Entity("DALProject.model.Apointment", b =>
                 {
                     b.HasOne("DALProject.model.Prescription", "Prescription")
-                        .WithOne("Appointment")
-                        .HasForeignKey("DALProject.model.Appointment", "AppointmentId")
+                        .WithOne("Apointment")
+                        .HasForeignKey("DALProject.model.Apointment", "ApointmentId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("DALProject.model.Clinic", "Clinic")
-                        .WithMany("Appointments")
+                        .WithMany("Apointments")
                         .HasForeignKey("ClinicId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DALProject.model.Doctor", "Doctor")
-                        .WithMany("Appointments")
+                        .WithMany("Apointments")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DALProject.model.Patient", "Patient")
-                        .WithMany("Appointments")
+                        .WithMany("Apointments")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DALProject.model.Receptionist", "Receptionist")
-                        .WithMany("Appointments")
+                        .WithMany("Apointments")
                         .HasForeignKey("ReceptionistId")
                         .OnDelete(DeleteBehavior.SetNull);
 
@@ -696,16 +696,16 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Invoice", b =>
                 {
-                    b.HasOne("DALProject.model.Appointment", "Appointment")
+                    b.HasOne("DALProject.model.Apointment", "Apointment")
                         .WithOne("Invoice")
-                        .HasForeignKey("DALProject.model.Invoice", "AppointmentId")
+                        .HasForeignKey("DALProject.model.Invoice", "ApointmentId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DALProject.model.Receptionist", "Receptionist")
                         .WithMany("invoices")
                         .HasForeignKey("ReceptionistId");
 
-                    b.Navigation("Appointment");
+                    b.Navigation("Apointment");
 
                     b.Navigation("Receptionist");
                 });
@@ -794,7 +794,7 @@ namespace DALProject.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DALProject.model.Appointment", b =>
+            modelBuilder.Entity("DALProject.model.Apointment", b =>
                 {
                     b.Navigation("Invoice")
                         .IsRequired();
@@ -802,7 +802,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Clinic", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Apointments");
 
                     b.Navigation("Doctors");
 
@@ -811,7 +811,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Doctor", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Apointments");
 
                     b.Navigation("DoctorScheduleLookups");
 
@@ -827,7 +827,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Patient", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Apointments");
                 });
 
             modelBuilder.Entity("DALProject.model.Pharmacist", b =>
@@ -837,7 +837,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Prescription", b =>
                 {
-                    b.Navigation("Appointment")
+                    b.Navigation("Apointment")
                         .IsRequired();
 
                     b.Navigation("PrescriptionItem");
@@ -850,7 +850,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Receptionist", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Apointments");
 
                     b.Navigation("invoices");
                 });

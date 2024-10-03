@@ -14,7 +14,8 @@ namespace DALProject.Data.Configurations
         public void Configure(EntityTypeBuilder<ClinicSpecializationLookup> builder)
         {
             #region configuration 
-            builder.HasKey(s => s.Specialization);
+            builder.HasKey(s => s.Id);
+            builder.HasIndex(s => s.Specialization).IsUnique();
             builder.Property(s => s.Specialization).HasMaxLength(50); 
             #endregion
 
@@ -22,7 +23,8 @@ namespace DALProject.Data.Configurations
             builder
                     .HasMany(s => s.Clinic)
                     .WithOne(c => c.ClinicSpecilization)
-                    .HasForeignKey(c => c.Specilization); 
+                    .HasForeignKey(c => c.ClinicSpecializationId)
+                    .OnDelete(DeleteBehavior.SetNull); 
             #endregion
 
         }

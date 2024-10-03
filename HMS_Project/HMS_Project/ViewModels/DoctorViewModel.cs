@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class DoctorViewModel
+    public class DoctorViewModel
     {
 
         public DoctorViewModel()
@@ -36,10 +36,11 @@ namespace HMS_Project.ViewModels
             Address = doctor.Address;
             Gender = Enum.TryParse(doctor.Gender, out Gender Gendervalue) ? Gendervalue : null;
             specialization = doctor.Specialization;
-            ClinicId=doctor.ClinicId;
+            //ClinicId=doctor.ClinicId;
             //Schedule = doctor.DoctorScheduleLookups;
         }
-        public HashSet<DoctorSpecializationLookup> SpecializationsDateReader { get; set; }
+        
+        public HashSet<DoctorSpecializationLookup>? SpecializationsDateReader { get; set; }
         public string? specialization { get; set; }
         [Required]
         public long SSN { get; set; }
@@ -59,8 +60,8 @@ namespace HMS_Project.ViewModels
         public string? Address { get; set; }
         public Gender? Gender { get; set; }
         //public ICollection<DoctorScheduleLookup> Schedule { get; set; } = new HashSet<DoctorScheduleLookup>();
-        public ICollection<Clinic> ClinicDateReader { get; set; } = new HashSet<Clinic>();
-        public int? ClinicId { get; set; }
+        //public ICollection<Clinic> ClinicDateReader { get; set; } = new HashSet<Clinic>();
+        //public int? ClinicId { get; set; }
 
 
         public static explicit operator Doctor(DoctorViewModel doctorViewModwl)
@@ -76,7 +77,7 @@ namespace HMS_Project.ViewModels
                 FullName = $"{doctorViewModwl.FirstName} {doctorViewModwl.MiddleName} {doctorViewModwl.LastName}",
                 DateOfBirth = doctorViewModwl.DateOfBirth,
                 Specialization= doctorViewModwl.specialization,
-                ClinicId = doctorViewModwl.ClinicId,
+                //ClinicId = doctorViewModwl.ClinicId,
             };
         }
         //we shoud make explicit casting Doctor to DoctorViewModle but this is not important in this case 

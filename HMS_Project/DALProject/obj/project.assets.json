@@ -2878,19 +2878,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dr\\.nuget\\packages\\": {}
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
+      "projectUniqueName": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj",
       "projectName": "DALProject",
-      "projectPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
-      "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\obj\\",
+      "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

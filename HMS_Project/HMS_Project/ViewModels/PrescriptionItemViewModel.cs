@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class PrescriptionItemViewModel
+    public class PrescriptionItemViewModel
     {
         public PrescriptionItemViewModel() { }
 

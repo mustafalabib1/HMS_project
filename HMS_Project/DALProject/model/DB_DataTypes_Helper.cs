@@ -18,7 +18,7 @@ namespace DALProject.model
         Cash = 1,
         CreditCard = 2
     }
-    public enum AppointmentStatusEnum
+    public enum ApointmentStatusEnum
     {
         Scheduled = 1,
         Completed = 2,

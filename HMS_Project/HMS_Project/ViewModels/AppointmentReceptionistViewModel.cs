@@ -8,43 +8,43 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class AppointmentReceptionistViewModel
+    internal class ApointmentReceptionistViewModel
     {
-        public AppointmentReceptionistViewModel() { }
+        public ApointmentReceptionistViewModel() { }
 
-        // Constructor that takes an Appointment object
-        public AppointmentReceptionistViewModel(Appointment appointment)
+        // Constructor that takes an Apointment object
+        public ApointmentReceptionistViewModel(Apointment Apointment)
         {
-            AppointmentId = appointment.AppointmentId;
-            AppointmentDate = appointment.AppointmentDate;
-            AppointmentTime = appointment.AppointmentTime;
+            ApointmentId = Apointment.ApointmentId;
+            ApointmentDate = Apointment.ApointmentDate;
+            ApointmentTime = Apointment.ApointmentTime;
 
             // Map enum to string to ensure correct status is displayed
-            AppointmentStatus = Enum.GetName(typeof(AppointmentStatusEnum), appointment.AppointmentStatus) ?? AppointmentStatusEnum.Scheduled.ToString();
+            ApointmentStatus = Enum.GetName(typeof(ApointmentStatusEnum), Apointment.ApointmentStatus) ?? ApointmentStatusEnum.Scheduled.ToString();
         }
         [Required]
-        public int AppointmentId { get; set; }
+        public int ApointmentId { get; set; }
 
         [Required]
-        public DateOnly AppointmentDate { get; set; }
+        public DateOnly ApointmentDate { get; set; }
 
         [Required]
-        public TimeOnly AppointmentTime { get; set; }
-        public string AppointmentStatus { get; set; } = null!;
+        public TimeOnly ApointmentTime { get; set; }
+        public string ApointmentStatus { get; set; } = null!;
 
-        public static explicit operator Appointment(AppointmentReceptionistViewModel appointmentViewModel)
+        public static explicit operator Apointment(ApointmentReceptionistViewModel ApointmentViewModel)
         {
-            return new Appointment()
+            return new Apointment()
             {
-                AppointmentId   = appointmentViewModel.AppointmentId,
-                AppointmentDate = appointmentViewModel.AppointmentDate,
-                AppointmentTime = appointmentViewModel.AppointmentTime,
-                AppointmentStatus = appointmentViewModel.AppointmentStatus,
+                ApointmentId   = ApointmentViewModel.ApointmentId,
+                ApointmentDate = ApointmentViewModel.ApointmentDate,
+                ApointmentTime = ApointmentViewModel.ApointmentTime,
+                ApointmentStatus = ApointmentViewModel.ApointmentStatus,
             };
         }
-        public static explicit operator AppointmentReceptionistViewModel(Appointment appointment)
+        public static explicit operator ApointmentReceptionistViewModel(Apointment Apointment)
         {
-            return new AppointmentReceptionistViewModel(appointment);
+            return new ApointmentReceptionistViewModel(Apointment);
         }
     }
 }

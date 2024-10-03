@@ -1,0 +1,32 @@
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.deps.json
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.pdb
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.pdb
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.AssemblyReference.cache
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.GeneratedMSBuildEditorConfig.editorconfig
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfoInputs.cache
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfo.cs
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.CoreCompileInputs.cache
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.sourcelink.json
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.Up2Date
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\refint\BLLProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.pdb
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\BLLProject\obj\Debug\net8.0\ref\BLLProject.dll
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.deps.json
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.dll
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.pdb
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.dll
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.pdb
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.AssemblyReference.cache
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.GeneratedMSBuildEditorConfig.editorconfig
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfoInputs.cache
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfo.cs
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.CoreCompileInputs.cache
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.sourcelink.json
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.Up2Date
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.dll
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\refint\BLLProject.dll
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.pdb
+E:\Mustafa\.net project\project\HMS_Project\BLLProject\obj\Debug\net8.0\ref\BLLProject.dll

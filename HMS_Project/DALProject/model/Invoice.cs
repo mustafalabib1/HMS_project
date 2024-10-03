@@ -22,9 +22,9 @@ namespace DALProject.model
         public virtual Receptionist Receptionist { get; set; } = null!;
         #endregion
 
-        #region One2One With Appointment
-        public int? AppointmentId { get; set; }
-        public virtual Appointment Appointment { get; set; }=null!;
+        #region One2One With Apointment
+        public int? ApointmentId { get; set; }
+        public virtual Apointment Apointment { get; set; }=null!;
         #endregion
     }
 }

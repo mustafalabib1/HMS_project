@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class PrescriptionViewModel
+    public class PrescriptionViewModel
     {
         public PrescriptionViewModel() { }
         public PrescriptionViewModel(Prescription prescription) 
@@ -16,7 +16,7 @@ namespace HMS_Project.ViewModels
             PrescriptionID = prescription.PrescriptionID;
             PrescriptionItems = (HashSet<PrescriptionItem>)prescription.PrescriptionItems;
             PharmacistId = prescription.PharmacistId;
-            AppointmentId = prescription.AppointmentId;
+            ApointmentId = prescription.ApointmentId;
             DoctorId = prescription.DoctorId;
         }
 
@@ -24,7 +24,7 @@ namespace HMS_Project.ViewModels
         public int PrescriptionID { get; set; }
         HashSet<PrescriptionItem> PrescriptionItems { get; set; } = new HashSet<PrescriptionItem>();
         public long? PharmacistId { get; set; }
-        public int AppointmentId { get; set; }
+        public int ApointmentId { get; set; }
         public long DoctorId { get; set; }
 
         public static explicit operator Prescription(PrescriptionViewModel prescriptionViewModel)
@@ -34,7 +34,7 @@ namespace HMS_Project.ViewModels
                 PrescriptionID = prescriptionViewModel.PrescriptionID,
                 PrescriptionItems = prescriptionViewModel.PrescriptionItems,
                 PharmacistId = prescriptionViewModel?.PharmacistId,
-                AppointmentId = prescriptionViewModel.AppointmentId,
+                ApointmentId = prescriptionViewModel.ApointmentId,
                 DoctorId = prescriptionViewModel.DoctorId,
             };
         }

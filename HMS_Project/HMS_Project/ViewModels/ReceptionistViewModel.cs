@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class ReceptionistViewModel
+    public class ReceptionistViewModel
     {
         public ReceptionistViewModel()
         {

@@ -25,3 +25,4 @@ public class ActiveSubstance
     public virtual PrescriptionItem PatrescriptionItem { get; set; } = null!;
     #endregion
 }
+

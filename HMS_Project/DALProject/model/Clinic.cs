@@ -14,7 +14,7 @@ namespace DALProject.model
         public string Phone { get; set; } = null!;
 
         #region One2Many With ClinicSpecializationLookup
-        public string Specilization { get; set; } = null!;
+        public int? ClinicSpecializationId {  get; set; } 
         public virtual ClinicSpecializationLookup ClinicSpecilization { get; set; } = null!; 
         #endregion
 
@@ -26,8 +26,8 @@ namespace DALProject.model
         public virtual ICollection<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
         #endregion
 
-        #region One2Many With Appointment
-        public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
+        #region One2Many With Apointment
+        public virtual ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
         #endregion
     }
 }

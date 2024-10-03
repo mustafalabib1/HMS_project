@@ -8,6 +8,7 @@ namespace DALProject.model
 {
     public class ClinicSpecializationLookup
     {
+        public int? Id { get; set; }
         public string Specialization { get; set; } = null!;
 
         #region One2Many With Clinic

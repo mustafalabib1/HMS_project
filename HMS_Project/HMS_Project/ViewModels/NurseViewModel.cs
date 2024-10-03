@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class NurseViewModel
+    public class NurseViewModel
     {
         public NurseViewModel()
         {

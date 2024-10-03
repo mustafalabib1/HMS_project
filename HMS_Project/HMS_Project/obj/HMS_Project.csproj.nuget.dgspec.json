@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
+    "E:\\Mustafa\\.net project\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {
+    "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
+        "projectUniqueName": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj",
         "projectName": "DALProject",
-        "projectPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
-        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\obj\\",
+        "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,17 +75,17 @@
         }
       }
     },
-    "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+    "E:\\Mustafa\\.net project\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "projectUniqueName": "E:\\Mustafa\\.net project\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
         "projectName": "HMS_Project",
-        "projectPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
-        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
+        "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\HMS_Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,8 +100,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {
-                "projectPath": "C:\\Users\\Dr\\Documents\\GitHub\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj"
+              "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
+                "projectPath": "E:\\Mustafa\\.net project\\project\\HMS_Project\\DALProject\\DALProject.csproj"
               }
             }
           }

@@ -13,7 +13,7 @@ namespace DALProject.model
         #endregion
 
         #region One2Many With Apiontment 
-        public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
+        public virtual ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
         #endregion
     }
 }

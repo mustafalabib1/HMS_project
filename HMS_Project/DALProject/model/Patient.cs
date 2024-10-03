@@ -12,8 +12,8 @@ namespace DALProject.model
         public virtual ICollection<ActiveSubstance> ActSbuAllergies { get; set; } = new HashSet<ActiveSubstance>(); 
         #endregion
 
-        #region One2Many With Appointment
-        public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
+        #region One2Many With Apointment
+        public virtual ICollection<Apointment> Apointments { get; set; } = new HashSet<Apointment>();
         #endregion
     }
 }

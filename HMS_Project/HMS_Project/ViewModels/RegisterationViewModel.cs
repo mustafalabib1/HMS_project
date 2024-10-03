@@ -12,7 +12,7 @@ namespace HMS_Project.ViewModels
     /// <summary>
     /// patient resgastion 
     /// </summary>
-    internal class RegisterationViewModel
+    public class RegisterationViewModel
     {
         public RegisterationViewModel()
         {

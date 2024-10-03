@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HMS_Project.ViewModels
 {
-    internal class ActiveSubstanceInteractionViewModel
+    public class ActiveSubstanceInteractionViewModel
     {
         [Required]
         public int ActSubId { get; set; }
