@@ -24,3 +24,16 @@ E:\Mustafa\.net project\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProje
 E:\Mustafa\.net project\project\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
 E:\Mustafa\.net project\project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
 E:\Mustafa\.net project\project\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll
+D:\code\HMS_project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.deps.json
+D:\code\HMS_project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.dll
+D:\code\HMS_project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.pdb
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.AssemblyReference.cache
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfoInputs.cache
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfo.cs
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.CoreCompileInputs.cache
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.sourcelink.json
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.dll
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
+D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll
