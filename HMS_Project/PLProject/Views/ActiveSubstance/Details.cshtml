@@ -1,0 +1,47 @@
+﻿@model ActiveSubstanceViewModel
+@{
+	ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+	<div class="form-group">
+		<label asp-for="ActiveSubstancesName"></label>
+		<input asp-for="ActiveSubstancesName" class="form-control read" readonly />
+		<span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
+	</div>
+	<div>
+		<label mt-2> interaction with other active substance </label>
+		@if (Model.Interactions.Count() > 0)
+		{
+			<div class="table-responsive mt-2">
+				<table class="table table-striped table-hover align-middle">
+					<thead class="table-dark">
+						<tr>
+							<th>@Html.DisplayNameFor(a => a.Interactions.First().OtherSubstanceName)</th>
+							<th>@Html.DisplayNameFor(a => a.Interactions.First().Interaction)</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var Substance in Model.Interactions)
+						{
+							<tr>
+								<td class="align-content-center">@Substance.OtherSubstanceName</td>
+								<td class="align-content-center">@Substance.Interaction</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+		else
+		{
+			<div class="mt-4 alert alert-info">
+				<h3>There is no interaction with other active substance !</h3>
+			</div>
+		}
+	</div>
+	<a asp-controller="ActiveSubstance" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+	<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">Back To List</a>
+</div>

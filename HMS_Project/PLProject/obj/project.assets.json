@@ -2778,6 +2778,30 @@
           }
         }
       },
+      "X.PagedList/10.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/X.PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/X.PagedList.dll": {}
+        }
+      },
+      "X.PagedList.Mvc.Core/10.2.1": {
+        "type": "package",
+        "dependencies": {
+          "X.PagedList": "10.2.1"
+        },
+        "compile": {
+          "lib/net8.0/X.PagedList.Mvc.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/X.PagedList.Mvc.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "BLLProject/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -7821,6 +7845,40 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "X.PagedList/10.2.1": {
+      "sha512": "SS2rDErBq4fj6WW7sRb5QHipDjjVjDY3TZEJyx8MjXTEJZ4jrJ1Iks/QVOegkQ2f3JxeXIrkGdsOIKbVEtQnXQ==",
+      "type": "package",
+      "path": "x.pagedlist/10.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net6.0/X.PagedList.dll",
+        "lib/net8.0/X.PagedList.dll",
+        "lib/netstandard2.0/X.PagedList.dll",
+        "lib/netstandard2.1/X.PagedList.dll",
+        "x-pagedlist.png",
+        "x.pagedlist.10.2.1.nupkg.sha512",
+        "x.pagedlist.nuspec"
+      ]
+    },
+    "X.PagedList.Mvc.Core/10.2.1": {
+      "sha512": "X8lUQH19qnFPEvNcrHK3GT120p3KhZfIA1y6cKWjzzMZ5/jm5KEoaf4cWDnwAw1QlTVf53JGeBn4Kgogk/zOdA==",
+      "type": "package",
+      "path": "x.pagedlist.mvc.core/10.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net6.0/X.PagedList.Mvc.Core.dll",
+        "lib/net8.0/X.PagedList.Mvc.Core.dll",
+        "x-pagedlist.png",
+        "x.pagedlist.mvc.core.10.2.1.nupkg.sha512",
+        "x.pagedlist.mvc.core.nuspec"
+      ]
+    },
     "BLLProject/1.0.0": {
       "type": "project",
       "path": "../BLLProject/BLLProject.csproj",
@@ -7842,15 +7900,21 @@
       "BLLProject >= 1.0.0",
       "HMS_Project >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.8",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.5"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.5",
+      "X.PagedList.Mvc.Core >= 10.2.1"
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\PLProject\\PLProject.csproj",
       "projectName": "PLProject",
       "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\PLProject\\PLProject.csproj",
@@ -7859,6 +7923,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\CRIZMA MEGA STORE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\PLProject\\PLProject.csproj",
+      "projectName": "PLProject",
+      "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\PLProject\\PLProject.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\PLProject\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7873,11 +7947,19 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
             "D:\\Hospital Management System\\HMS_project\\HMS_Project\\BLLProject\\BLLProject.csproj": {
               "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\BLLProject\\BLLProject.csproj"
             },
             "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
               "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj"
+=======
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj"
+            },
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj"
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
             }
           }
         }
@@ -7906,6 +7988,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[8.0.5, )"
+          },
+          "X.PagedList.Mvc.Core": {
+            "target": "Package",
+            "version": "[10.2.1, )"
           }
         },
         "imports": [
@@ -7927,7 +8013,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
       }
     }
   }

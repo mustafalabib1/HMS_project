@@ -4254,11 +4254,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
       "projectName": "HMS_Project",
       "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
@@ -4267,6 +4272,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\CRIZMA MEGA STORE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+      "projectName": "HMS_Project",
+      "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4281,8 +4296,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
             "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {
               "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj"
+=======
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj"
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
             }
           }
         }
@@ -4329,7 +4349,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
       }
     }
   }
