@@ -30,12 +30,12 @@ namespace DALProject.Data.Migrations
                     b.Property<int>("ActiveSubstancesId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MedicationsMedicationCode")
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("MedicationsMedicationId")
+                        .HasColumnType("int");
 
-                    b.HasKey("ActiveSubstancesId", "MedicationsMedicationCode");
+                    b.HasKey("ActiveSubstancesId", "MedicationsMedicationId");
 
-                    b.HasIndex("MedicationsMedicationCode");
+                    b.HasIndex("MedicationsMedicationId");
 
                     b.ToTable("ActiveSubstanceMedication");
                 });
@@ -328,9 +328,11 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Medication", b =>
                 {
-                    b.Property<string>("MedicationCode")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("MedicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedicationId"));
 
                     b.Property<string>("MedName")
                         .IsRequired()
@@ -340,7 +342,7 @@ namespace DALProject.Data.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
-                    b.HasKey("MedicationCode");
+                    b.HasKey("MedicationId");
 
                     b.ToTable("Medication");
                 });
@@ -538,7 +540,7 @@ namespace DALProject.Data.Migrations
             modelBuilder.Entity("DALProject.model.PrescriptionItemMedication", b =>
                 {
                     b.Property<string>("MedicationCode")
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("PrescriptionItemId")
                         .HasColumnType("int");
@@ -553,7 +555,12 @@ namespace DALProject.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("MedicationId")
+                        .HasColumnType("int");
+
                     b.HasKey("MedicationCode", "PrescriptionItemId");
+
+                    b.HasIndex("MedicationId");
 
                     b.HasIndex("PrescriptionItemId");
 
@@ -613,7 +620,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.model.Medication", null)
                         .WithMany()
-                        .HasForeignKey("MedicationsMedicationCode")
+                        .HasForeignKey("MedicationsMedicationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -796,7 +803,7 @@ namespace DALProject.Data.Migrations
                 {
                     b.HasOne("DALProject.model.Medication", "Medication")
                         .WithMany("PrescriptionItemMedications")
-                        .HasForeignKey("MedicationCode")
+                        .HasForeignKey("MedicationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

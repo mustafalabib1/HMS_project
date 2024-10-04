@@ -50,16 +50,15 @@ C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALP
 C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
 C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
 C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.deps.json
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.dll
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.pdb
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.AssemblyReference.cache
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.GeneratedMSBuildEditorConfig.editorconfig
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfoInputs.cache
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfo.cs
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.CoreCompileInputs.cache
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.sourcelink.json
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.dll
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
-D:\Hospital Management System\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.deps.json
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.dll
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.pdb
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.AssemblyReference.cache
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfoInputs.cache
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfo.cs
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.CoreCompileInputs.cache
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.dll
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
+C:\Users\pc\Downloads\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_project-2b7268ccefe69da1b0b26ae44214598d06288194\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll

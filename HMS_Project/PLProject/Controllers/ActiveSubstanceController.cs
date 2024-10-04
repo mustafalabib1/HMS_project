@@ -12,11 +12,13 @@ public class ActiveSubstanceController : Controller
     private readonly IRepository<ActiveSubstance> ActiveSubstanceRepo;
 
     private readonly IRepository<Medication> MedicationRepo;
+    private readonly IWebHostEnvironment env;
 
-    public ActiveSubstanceController(IRepository<ActiveSubstance> ActiveSubstanceRepo, IRepository<Medication> MedicationRepo)
+    public ActiveSubstanceController(IRepository<ActiveSubstance> ActiveSubstanceRepo, IRepository<Medication> MedicationRepo, IWebHostEnvironment _env)
     {
         this.ActiveSubstanceRepo = ActiveSubstanceRepo;
         this.MedicationRepo = MedicationRepo;
+        env = _env;
     }
 
     #endregion
@@ -98,6 +100,34 @@ public class ActiveSubstanceController : Controller
             return NotFound(); // 404
 
         return View(viewname, substance);
-    } 
+    }
+    #endregion
+
+    #region Delete
+    public IActionResult Delete(int? Id)
+    {
+        return Details(Id, "Delete");
+    }
+
+    [HttpPost]
+    public IActionResult Delete(ActiveSubstance substance)
+    {
+        try
+        {
+            ActiveSubstanceRepo.Delete(substance);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+            //1. log exception
+            //2. friendly message
+            if (env.IsDevelopment())
+                ModelState.AddModelError(string.Empty, ex.Message);
+            else
+                ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+
+            return View(substance);
+        }
+    }
     #endregion
 }

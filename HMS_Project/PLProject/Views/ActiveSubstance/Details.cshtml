@@ -3,45 +3,88 @@
 	ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="mb-4">Active Substance Details</h1>
 
-<div>
-	<div class="form-group">
-		<label asp-for="ActiveSubstancesName"></label>
-		<input asp-for="ActiveSubstancesName" class="form-control read" readonly />
-		<span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
+<div class="container">
+    <!-- Active Substance Name -->
+    <div class="form-group mb-3">
+        <label asp-for="ActiveSubstancesName" class="form-label fw-bold"></label>
+        <input asp-for="ActiveSubstancesName" class="form-control form-control-plaintext ps-1" readonly />
+        <span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
+    </div>
+
+    <!-- Interactions with Other Substances -->
+    <div class="mb-4">
+        <h4 class="mb-3">Interactions with Other Active Substances</h4>
+        @if (Model.Interactions.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(a => a.Interactions.First().OtherSubstanceName)</th>
+                            <th>@Html.DisplayNameFor(a => a.Interactions.First().Interaction)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Substance in Model.Interactions)
+                        {
+                            <tr class="align-middle">
+                                <td>@Substance.OtherSubstanceName</td>
+                                <td>@Substance.Interaction</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle"></i> No interactions with other active substances found.
+            </div>
+        }
+    </div>
+
+    <!-- Medications with Active Substance -->
+    <div class="mb-4">
+        <h4 class="mb-3">Medications Containing This Active Substance</h4>
+        @if (Model.Medications.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(a => a.Medications.First().MedName)</th>
+                            <th>@Html.DisplayNameFor(a => a.Medications.First().Strength)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Medication in Model.Medications)
+                        {
+                            <tr class="align-middle">
+                                <td>@Medication.MedName</td>
+                                <td>@Medication.Strength</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle"></i> No medications found containing this active substance.
+            </div>
+        }
+    </div>
+
+	<div class="mt-4">
+		<a asp-controller="ActiveSubstance" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+			<i class="fas fa-edit"></i> Edit
+		</a>
+		<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
+			<i class="fas fa-arrow-left"></i> Back To List
+		</a>
 	</div>
-	<div>
-		<label mt-2> interaction with other active substance </label>
-		@if (Model.Interactions.Count() > 0)
-		{
-			<div class="table-responsive mt-2">
-				<table class="table table-striped table-hover align-middle">
-					<thead class="table-dark">
-						<tr>
-							<th>@Html.DisplayNameFor(a => a.Interactions.First().OtherSubstanceName)</th>
-							<th>@Html.DisplayNameFor(a => a.Interactions.First().Interaction)</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var Substance in Model.Interactions)
-						{
-							<tr>
-								<td class="align-content-center">@Substance.OtherSubstanceName</td>
-								<td class="align-content-center">@Substance.Interaction</td>
-							</tr>
-						}
-					</tbody>
-				</table>
-			</div>
-		}
-		else
-		{
-			<div class="mt-4 alert alert-info">
-				<h3>There is no interaction with other active substance !</h3>
-			</div>
-		}
-	</div>
-	<a asp-controller="ActiveSubstance" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-	<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">Back To List</a>
 </div>

@@ -7905,24 +7905,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LAB\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\PLProject\\PLProject.csproj",
+      "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\PLProject\\PLProject.csproj",
       "projectName": "PLProject",
-      "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\PLProject\\PLProject.csproj",
-      "packagesPath": "C:\\Users\\LAB\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\PLProject\\obj\\",
+      "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\PLProject\\PLProject.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\PLProject\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7937,11 +7932,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\BLLProject\\BLLProject.csproj": {
-              "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\BLLProject\\BLLProject.csproj"
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj"
             },
-            "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
-              "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj"
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\HMS_Project\\HMS_Project.csproj"
             }
           }
         }
@@ -7995,16 +7990,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\PLProject\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
