@@ -110,11 +110,12 @@ public class ActiveSubstanceController : Controller
     }
 
     [HttpPost]
-    public IActionResult Delete(ActiveSubstance substance)
+    public IActionResult Delete(ActiveSubstanceViewModel substance)
     {
         try
         {
-            ActiveSubstanceRepo.Delete(substance);
+
+            ActiveSubstanceRepo.Delete(ActiveSubstanceRepo.Get(substance.Id));
             return RedirectToAction(nameof(Index));
         }
         catch (Exception ex)
@@ -125,6 +126,36 @@ public class ActiveSubstanceController : Controller
                 ModelState.AddModelError(string.Empty, ex.Message);
             else
                 ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+
+            return View(substance);
+        }
+    }
+    #endregion
+
+    #region Edit
+    public IActionResult Edit(int? Id)
+    {
+        return Details(Id, "Edit");
+    }
+
+    [HttpPost]
+    public IActionResult Edit(ActiveSubstance substance)
+    {
+        if (!ModelState.IsValid)
+            return View(substance);
+
+        try
+        {
+            ActiveSubstanceRepo.Update(substance);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+
+            if (env.IsDevelopment())
+                ModelState.AddModelError(string.Empty, ex.Message);
+            else
+                ModelState.AddModelError(string.Empty, "An Error Has Occurred during updating the ActiveSubstance ");
 
             return View(substance);
         }
