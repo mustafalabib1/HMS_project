@@ -25,6 +25,10 @@ namespace HMS_Project.ViewModels
         public bool PaymentStatus { get; set; }
         public PaymentType? PaymentType { get; set; }
 
+        public IEnumerable <Receptionist> ReceptionistsReader { get; set; } = new HashSet<Receptionist>();
+        public IEnumerable<Apointment>  ApointmentsReader { get; set; } = new HashSet<Apointment>();
+       
+
         public static explicit operator Invoice(InvoiceViewModel invoiceViewModel)
         {
             return new Invoice()
