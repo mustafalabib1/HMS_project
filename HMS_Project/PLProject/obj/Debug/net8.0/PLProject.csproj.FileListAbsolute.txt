@@ -1056,3 +1056,7 @@ C:\Users\LAB\Desktop\New folder (3)\HMS_Project\PLProject\obj\Debug\net8.0\scope
 C:\Users\LAB\Desktop\New folder (3)\HMS_Project\PLProject\obj\Debug\net8.0\PLProject.csproj.Up2Date
 C:\Users\LAB\Desktop\New folder (3)\HMS_Project\PLProject\obj\Debug\net8.0\PLProject.genruntimeconfig.cache
 C:\Users\LAB\Desktop\New folder (3)\HMS_Project\PLProject\obj\Debug\net8.0\ref\PLProject.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\obj\Debug\net8.0\PLProject.MvcApplicationPartsAssemblyInfo.cs
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\bin\Debug\net8.0\X.PagedList.dll
+E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll

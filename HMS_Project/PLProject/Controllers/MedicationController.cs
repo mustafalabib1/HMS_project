@@ -26,7 +26,7 @@ namespace PLProject.Controllers
         {
             var viewModel = new MedicationViewModel
             {
-                MedicationId = Guid.NewGuid().ToString()
+                MedicationCode = Guid.NewGuid().ToString()
 
             };
 
@@ -40,7 +40,7 @@ namespace PLProject.Controllers
             {
                 var medication = new Medication
                 {
-                    MedicationId = medicationViewModel.MedicationId,
+                    MedicationCode = medicationViewModel.MedicationCode,
                     MedName = medicationViewModel.MedName,
                     Strength = medicationViewModel.Strength
                 };

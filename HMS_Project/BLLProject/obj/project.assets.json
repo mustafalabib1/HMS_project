@@ -2896,24 +2896,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LAB\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\BLLProject\\BLLProject.csproj",
+      "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj",
       "projectName": "BLLProject",
-      "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\BLLProject\\BLLProject.csproj",
-      "packagesPath": "C:\\Users\\LAB\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\BLLProject\\obj\\",
+      "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\BLLProject.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\BLLProject\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2928,8 +2923,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj": {
-              "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj"
+            "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
+              "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj"
             }
           }
         }
@@ -2964,7 +2959,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -14,8 +14,8 @@ namespace DALProject.Data.Configurations
         public void Configure(EntityTypeBuilder<Medication> builder)
         {
             #region Mediction configuration 
-            builder.HasKey(e => e.MedicationId);
-            builder.Property(e => e.MedicationId).HasMaxLength(20);
+            builder.HasKey(e => e.MedicationCode);
+            builder.Property(e => e.MedicationCode).HasMaxLength(20);
             builder.Property(e => e.MedName).HasMaxLength(50); 
             #endregion
         }
