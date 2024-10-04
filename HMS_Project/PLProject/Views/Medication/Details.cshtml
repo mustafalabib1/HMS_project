@@ -1,0 +1,30 @@
+﻿@model Medication
+
+@{
+    ViewData["Title"] = "Medication Details";
+}
+
+<h1>Medication Details</h1>
+<br />
+<br />
+<div>
+    <div class="mb-3">
+        <label asp-for="MedicationId" class="form-label"></label>
+        <input asp-for="MedicationId" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MedName" class="form-label"></label>
+        <input asp-for="MedName" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Strength" class="form-label"></label>
+        <input asp-for="Strength" class="form-control" readonly />
+    </div>
+
+    <a asp-controller="Medication" asp-action="Edit" asp-route-id="@Model.MedicationId" class="btn btn-primary">Edit</a>
+    <a asp-controller="Medication" asp-action="Index" class="btn btn-light">Back To List</a>
+</div>
+
+

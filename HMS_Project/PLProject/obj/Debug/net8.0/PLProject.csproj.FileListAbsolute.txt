@@ -1329,3 +1329,4 @@ E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\
 E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\bin\Debug\net8.0\X.PagedList.dll
 E:\Mustafa\Digital Egypt Pioneers Initiative DEPI\techncial\project\HMS_Project\PLProject\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
 >>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\PLProject\obj\Debug\net8.0\PLProject.MvcApplicationPartsAssemblyInfo.cs

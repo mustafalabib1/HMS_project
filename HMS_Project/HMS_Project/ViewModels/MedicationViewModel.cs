@@ -14,7 +14,7 @@ namespace HMS_Project.ViewModels
 
         public MedicationViewModel(Medication medication)
         {
-            MedicationCode = medication.MedicationCode;
+            MedicationId = medication.MedicationId;
             MedName = medication.MedName;
             Strength = medication.Strength;
             ActSubInMed = medication.ActiveSubstances.ToHashSet();
@@ -22,7 +22,7 @@ namespace HMS_Project.ViewModels
         public ICollection<PrescriptionItem> PrescriptionItemsReader { get; set; } = new HashSet<PrescriptionItem>();
         public ICollection<ActiveSubstance> ActSubDateReader { get; set; } = new HashSet<ActiveSubstance>();
         [Required]
-        public string MedicationCode { get; set; } = null!;
+        public int MedicationId { get; set; }
 
         [Required]
         public string MedName { get; set; } = null!;
@@ -37,7 +37,7 @@ namespace HMS_Project.ViewModels
         {
             return new Medication()
             {
-                MedicationCode = medViewModel.MedicationCode,
+                MedicationId = medViewModel.MedicationId,
                 MedName = medViewModel.MedName,
                 Strength = medViewModel.Strength,
                 ActiveSubstances = medViewModel.ActSubInMed

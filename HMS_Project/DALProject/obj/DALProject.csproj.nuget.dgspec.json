@@ -1,37 +1,24 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {}
+    "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj": {}
   },
   "projects": {
-    "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {
+    "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
+        "projectUniqueName": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj",
         "projectName": "DALProject",
-        "projectPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj",
-        "packagesPath": "C:\\Users\\CRIZMA MEGA STORE\\.nuget\\packages\\",
-        "outputPath": "D:\\Hospital Management System\\HMS_project\\HMS_Project\\DALProject\\obj\\",
+        "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj",
+        "packagesPath": "C:\\Users\\LAB\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\CRIZMA MEGA STORE\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {}
-  },
-  "projects": {
-    "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj",
-        "projectName": "DALProject",
-        "projectPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\DALProject.csproj",
-        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "E:\\Mustafa\\Digital Egypt Pioneers Initiative DEPI\\techncial\\project\\HMS_Project\\DALProject\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
+          "C:\\Users\\LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,11 +75,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
->>>>>>> 0d2519ddd25e05a00a34665e844efe289a04ae5e
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
