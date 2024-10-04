@@ -20,49 +20,58 @@ namespace HMS_Project.ViewModels
             ApointmentStatus = ApointmentStatusEnum.Scheduled.ToString();
             Examination = Apointment.Examination;
             ReceptionistId = Apointment.ReceptionistId;
-            ReceptionistName = Apointment.Receptionist.FullName;
             ClinicId = Apointment.ClinicId;
-            ClinicName = Apointment.Clinic.Name;
             PatientId = Apointment.PatientId;
-            PatientName = Apointment.Patient.FullName;
             DoctorId = Apointment.DoctorId;
-            DoctorName = Apointment.Doctor.FullName;
-            InvoiceId = Apointment.Invoice.InvoiceID;
-            PrescriptionId = Apointment.Prescription.PrescriptionID;
+            //InvoiceId = Apointment.Invoice.InvoiceID;
+            //PrescriptionId = Apointment.Prescription.PrescriptionID;
         }
 
         [Required]
         public int ApointmentId { get; set; }
 
+        [Display(Name = "Apointment Date")]
         [Required]
         public DateOnly ApointmentDate { get; set; }
 
+        [Display(Name = "Apointment Time")]
         [Required]
         public TimeOnly ApointmentTime { get; set; }
+
+        [Display(Name = "Apointment Status")]
         public string ApointmentStatus { get; set; } = null!;
+
         public virtual string Examination { get; set; } = null!;
 
-        [Required]
+        public IEnumerable<Clinic> Clinics { get; set; } = new HashSet<Clinic>();
+
+        [Display(Name = "Clinic Name")]
+        [Required(ErrorMessage = " Please Choose a Clinic for this Appointment.")]
+        public int ClinicId { get; set; }
+
+        public IEnumerable<Receptionist> Receptionists { get; set; } = new HashSet<Receptionist>();
+
+        [Display(Name = "Receptionist Name")]
+        [Required(ErrorMessage = " Please Choose a Receptionist for this Appointment.")]
         public long? ReceptionistId { get; set; }
-        public string ReceptionistName { get; set; }
 
-        [Required]
-        public int? ClinicId { get; set; }
-        public string ClinicName { get; set; }
+        public IEnumerable<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
 
+        [Display(Name = "Doctor Name")]
+        [Required(ErrorMessage = " Please Choose a Doctor for this Appointment.")]
+        public long DoctorId { get; set; }
+
+        // needs to be reviewed
+        [Display(Name = "Patient Id")]
         [Required]
         public long PatientId { get; set; }
-        public string PatientName { get; set; }
+        // needs to be reviewed
 
-        [Required]
-        public long DoctorId { get; set; }
-        public string DoctorName { get; set; }
+        //[Required]
+        //public int InvoiceId { get; set; }
 
-        [Required]
-        public int InvoiceId { get; set; }
-
-        [Required]
-        public int PrescriptionId { get; set; }
+        //[Required]
+        //public int PrescriptionId { get; set; }
 
         public static explicit operator Apointment(ApointmentViewModel ApointmentViewModel)
         {
@@ -72,11 +81,11 @@ namespace HMS_Project.ViewModels
                 ApointmentDate = ApointmentViewModel.ApointmentDate,
                 ApointmentTime = ApointmentViewModel.ApointmentTime,
                 ApointmentStatus = ApointmentViewModel.ApointmentStatus,
-                //Examination = ApointmentViewModel.Examination,
-                //ReceptionistId = ApointmentViewModel.ReceptionistId,
-                //ClinicId = ApointmentViewModel.ClinicId,
-                //PatientId = ApointmentViewModel.PatientId,
-                //DoctorId = ApointmentViewModel.DoctorId,
+                Examination = ApointmentViewModel.Examination,
+                ReceptionistId = ApointmentViewModel.ReceptionistId,
+                ClinicId = ApointmentViewModel.ClinicId,
+                PatientId = ApointmentViewModel.PatientId,
+                DoctorId = ApointmentViewModel.DoctorId,
             };
         }
 
