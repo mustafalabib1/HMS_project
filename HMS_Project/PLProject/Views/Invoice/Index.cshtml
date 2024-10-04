@@ -13,35 +13,39 @@
     <table class="mt-4 table table-striped table-hover">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(C => C.)</th>
-                <th>@Html.DisplayNameFor(C => C.Phone)</th>
-                <th>@Html.DisplayNameFor(C => C.Specialization)</th>
-                <th>@Html.DisplayNameFor(C => C.Price)</th>
+                <th>@Html.DisplayNameFor(I => I.InvoiceDate)</th>
+                <th>@Html.DisplayNameFor(I => I.TotalAmount)</th>
+                <th>@Html.DisplayNameFor(I => I.PaymentStatus)</th>
+                <th>@Html.DisplayNameFor(I => I.PaymentType)</th>
+                <th>@Html.DisplayNameFor(I => I.Apointment.ApointmentDate)</th>
+                <th>@Html.DisplayNameFor(I => I.Receptionist.FullName)</th>
                 <th>Details</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var clinic in Model)
+            @foreach (var invoice in Model)
             {
                 <tr>
-                    <td class="align-content-center">@clinic.Name</td>
-                    <td class="align-content-center">@clinic.Phone</td>
-                    <td class="align-content-center">@clinic.Specialization</td>
-                    <td class="align-content-center">@clinic.Price</td>
+                    <td class="align-content-center">@invoice.InvoiceDate</td>
+                    <td class="align-content-center">@invoice.TotalAmount</td>
+                    <td class="align-content-center">@invoice.PaymentStatus</td>
+                    <td class="align-content-center">@invoice.PaymentType</td>
+                    <td class="align-content-center">@invoice.Apointment.ApointmentDate</td>
+                    <td class="align-content-center">@invoice.Receptionist.FullName</td>
                     <td>
-                        <a asp-controller="Clinic" asp-action="Details" asp-route-Id="@clinic.Id" class="btn btn-warning">
+                        <a asp-controller="Invoice" asp-action="Details" asp-route-Id="@invoice.InvoiceID" class="btn btn-warning">
                             <i class="fas fa-eye"></i> Details
                         </a>
                     </td>
                     <td>
-                        <a asp-controller="Clinic" asp-action="Edit" asp-route-Id="@clinic.Id" class="btn btn-success">
+                        <a asp-controller="Invoice" asp-action="Edit" asp-route-Id="@invoice.InvoiceID" class="btn btn-success">
                             <i class="fas fa-edit"></i> Update
                         </a>
                     </td>
                     <td>
-                        <a asp-controller="Clinic" asp-action="Delete" asp-route-Id="@clinic.Id" class="btn btn-danger">
+                        <a asp-controller="Invoice" asp-action="Delete" asp-route-Id="@invoice.InvoiceID" class="btn btn-danger">
                             <i class="fas fa-trash"></i> Delete
                         </a>
                     </td>
@@ -53,7 +57,7 @@
 else
 {
     <div class="mt-4 alert alert-warning">
-        <h3>There is no Clinics !</h3>
+        <h3>There is no Invoices !</h3>
     </div>
 }
 
