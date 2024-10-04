@@ -8,20 +8,38 @@ namespace PLProject.Controllers
     public class AppointmentController : Controller
     {
         private readonly IRepository<Apointment> appointmentRepo;
-        public AppointmentController(IRepository<Apointment> appointmentRepo) 
+        private readonly IRepository<Clinic> clinicRepo;
+        private readonly IRepository<Receptionist> receptionistRepo;
+        private readonly IRepository<Doctor> doctorRepo;
+
+        public AppointmentController(IRepository<Apointment> appointmentRepo,
+            IRepository<Clinic> clinicRepo,
+            IRepository<Receptionist> receptionistRepo,
+            IRepository<Doctor> doctorRepo) 
         { 
             this.appointmentRepo = appointmentRepo;
+            this.clinicRepo = clinicRepo;
+            this.receptionistRepo = receptionistRepo;
+            this.doctorRepo = doctorRepo;
         }
 
         public IActionResult Index()
         {
             var appointments = appointmentRepo.GetALL();
-            return View(appointments);
+            var appointmentViewModels = appointments.Select(a => (ApointmentViewModel)a).ToList();
+            return View(appointmentViewModels);
         }
 
         public IActionResult Create()
         {
-            return View();
+            var appointmentViewModel = new ApointmentViewModel() 
+            { 
+                ApointmentStatus = ApointmentStatusEnum.Scheduled.ToString(),
+                Clinics = clinicRepo.GetALL(),
+                Receptionists = receptionistRepo.GetALL(),
+                Doctors = doctorRepo.GetALL(),
+            };
+            return View(appointmentViewModel);
         }
 
         [HttpPost]
