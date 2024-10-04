@@ -1,0 +1,78 @@
+﻿@model ApointmentViewModel
+@{
+    ViewData["Title"] = "Create Appointment";
+}
+<h1>Create New Appointment</h1>
+<br />
+<br />
+
+<form asp-asp-controller="Appointment" asp-action="Create" method="post">
+    <div class="form-group mt-2">
+        <label asp-for="ClinicId" class="mb-3"></label>
+        <select asp-for="ClinicId" class="form-control" required>
+            <option value="">Select Clinic</option>
+            @foreach (var clinic in Model.Clinics)
+            {
+                <option value="@clinic.ClinicId">@clinic.Name</option>
+            }
+        </select>
+        <span asp-validation-for="ClinicId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="ReceptionistId" class="mb-3"></label>
+        <select asp-for="ReceptionistId" class="form-control" required>
+            <option value="">Select Receptionist</option>
+            @foreach (var receptionist in Model.Receptionists)
+            {
+                <option value="@receptionist.SSN">@receptionist.FullName</option>
+            }
+        </select>
+        <span asp-validation-for="ReceptionistId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="DoctorId" class="mb-3"></label>
+        <select asp-for="DoctorId" class="form-control" required>
+            <option value="">Select Doctor</option>
+            @foreach (var doctor in Model.Doctors)
+            {
+                <option value="@doctor.SSN">@doctor.FullName</option>
+            }
+        </select>
+        <span asp-validation-for="DoctorId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ApointmentDate" class="form-label"></label>
+        <input asp-for="ApointmentDate" class="form-control" type="date" value="" />
+        <span asp-validation-for="ApointmentDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ApointmentTime" class="form-label"></label>
+        <input asp-for="ApointmentTime" class="form-control" type="time" value="" />
+        <span asp-validation-for="ApointmentTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="ApointmentStatus" class="mb-3"></label>
+        <select asp-for="ApointmentStatus" class="form-control" required>
+            <option value="">Select Status</option>
+            @foreach (var status in Enum.GetValues(typeof(ApointmentStatusEnum)))
+            {
+                <option value="@status">@status</option>
+            }
+        </select>
+        <span asp-validation-for="ApointmentStatus" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Examination" class="form-label"></label>
+        <textarea asp-for="Examination" class="form-control" cols="10" rows="5"></textarea>
+        <span asp-validation-for="Examination" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-primary mt-2" />
+    <a asp-controller="Appointment" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
+</form>
