@@ -46,3 +46,19 @@ D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.dll
 D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\refint\BLLProject.dll
 D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.pdb
 D:\code\HMS_project\HMS_Project\BLLProject\obj\Debug\net8.0\ref\BLLProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.deps.json
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\bin\Debug\net8.0\BLLProject.pdb
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\bin\Debug\net8.0\DALProject.pdb
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.AssemblyReference.cache
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfoInputs.cache
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.AssemblyInfo.cs
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.CoreCompileInputs.cache
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.sourcelink.json
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.csproj.Up2Date
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\refint\BLLProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\BLLProject.pdb
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\BLLProject\obj\Debug\net8.0\ref\BLLProject.dll

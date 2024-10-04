@@ -14,14 +14,15 @@ namespace HMS_Project.ViewModels
 
         public MedicationViewModel(Medication medication)
         {
-            MedicationCode = medication.MedicationCode;
+            MedicationId = medication.MedicationId;
             MedName = medication.MedName;
             Strength = medication.Strength;
-            ActSubInMed =medication.ActiveSubstances.ToHashSet();
+            ActSubInMed = medication.ActiveSubstances.ToHashSet();
         }
+        public ICollection<PrescriptionItem> PrescriptionItemsReader { get; set; } = new HashSet<PrescriptionItem>();
         public ICollection<ActiveSubstance> ActSubDateReader { get; set; } = new HashSet<ActiveSubstance>();
         [Required]
-        public string MedicationCode { get; set; } = null!;
+        public string MedicationId { get; set; } = null!;
 
         [Required]
         public string MedName { get; set; } = null!;
@@ -29,21 +30,21 @@ namespace HMS_Project.ViewModels
         [Required]
         public int Strength { get; set; }
         public ICollection<ActiveSubstance> ActSubInMed { get; set; } = new HashSet<ActiveSubstance>();
-
+        public ICollection<PrescriptionItem> PrescriptionItemInMed { get; set; } = new HashSet<PrescriptionItem>();
 
 
         public static explicit operator Medication(MedicationViewModel medViewModel)
         {
             return new Medication()
             {
-                MedicationCode = medViewModel.MedicationCode,
+                MedicationId = medViewModel.MedicationId,
                 MedName = medViewModel.MedName,
                 Strength = medViewModel.Strength,
                 ActiveSubstances = medViewModel.ActSubInMed
             };
         }
 
-        
+
         public static explicit operator MedicationViewModel(Medication medication)
         {
             return new MedicationViewModel(medication);

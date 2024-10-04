@@ -5,7 +5,7 @@ namespace DALProject.model;
 
 public class Medication
 {
-    public string MedicationCode { get; set; } = null!;
+    public string MedicationId { get; set; } = null!;
 
     public string MedName { get; set; } = null!;
 

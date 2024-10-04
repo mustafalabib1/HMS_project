@@ -37,3 +37,16 @@ D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.dll
 D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
 D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
 D:\code\HMS_project\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.deps.json
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\bin\Debug\net8.0\DALProject.pdb
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.AssemblyReference.cache
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfoInputs.cache
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.AssemblyInfo.cs
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.csproj.CoreCompileInputs.cache
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.sourcelink.json
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\refint\DALProject.dll
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\DALProject.pdb
+C:\Users\LAB\Desktop\New folder (3)\HMS_Project\DALProject\obj\Debug\net8.0\ref\DALProject.dll

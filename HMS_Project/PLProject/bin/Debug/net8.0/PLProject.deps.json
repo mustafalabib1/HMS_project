@@ -1895,10 +1895,7 @@
           "DALProject": "1.0.0"
         },
         "runtime": {
-          "BLLProject.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "BLLProject.dll": {}
         }
       },
       "DALProject/1.0.0": {
@@ -1907,10 +1904,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
         },
         "runtime": {
-          "DALProject.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "DALProject.dll": {}
         }
       },
       "HMS_Project/1.0.0": {
@@ -1919,10 +1913,7 @@
           "Microsoft.EntityFrameworkCore.Proxies": "8.0.8"
         },
         "runtime": {
-          "HMS_Project.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "HMS_Project.dll": {}
         }
       }
     }

@@ -4254,23 +4254,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fares\\.nuget\\packages\\": {},
+    "C:\\Users\\LAB\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\code\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+      "projectUniqueName": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
       "projectName": "HMS_Project",
-      "projectPath": "D:\\code\\HMS_project\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
-      "packagesPath": "C:\\Users\\Fares\\.nuget\\packages\\",
-      "outputPath": "D:\\code\\HMS_project\\HMS_Project\\HMS_Project\\obj\\",
+      "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\HMS_Project.csproj",
+      "packagesPath": "C:\\Users\\LAB\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\HMS_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Fares\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4278,6 +4278,7 @@
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -4285,8 +4286,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\code\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj": {
-              "projectPath": "D:\\code\\HMS_project\\HMS_Project\\DALProject\\DALProject.csproj"
+            "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj": {
+              "projectPath": "C:\\Users\\LAB\\Desktop\\New folder (3)\\HMS_Project\\DALProject\\DALProject.csproj"
             }
           }
         }
@@ -4333,7 +4334,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
