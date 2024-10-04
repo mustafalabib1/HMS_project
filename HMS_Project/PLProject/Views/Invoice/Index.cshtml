@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Invoice>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Invoices</h1>
+<br />
+<br />
+<a asp-controller="Invoice" asp-action="Index" class="btn btn-primary">Create New Invoice</a>
+<br />
+@if (Model.Count() > 0)
+{
+    <table class="mt-4 table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(C => C.)</th>
+                <th>@Html.DisplayNameFor(C => C.Phone)</th>
+                <th>@Html.DisplayNameFor(C => C.Specialization)</th>
+                <th>@Html.DisplayNameFor(C => C.Price)</th>
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clinic in Model)
+            {
+                <tr>
+                    <td class="align-content-center">@clinic.Name</td>
+                    <td class="align-content-center">@clinic.Phone</td>
+                    <td class="align-content-center">@clinic.Specialization</td>
+                    <td class="align-content-center">@clinic.Price</td>
+                    <td>
+                        <a asp-controller="Clinic" asp-action="Details" asp-route-Id="@clinic.Id" class="btn btn-warning">
+                            <i class="fas fa-eye"></i> Details
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Clinic" asp-action="Edit" asp-route-Id="@clinic.Id" class="btn btn-success">
+                            <i class="fas fa-edit"></i> Update
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Clinic" asp-action="Delete" asp-route-Id="@clinic.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-4 alert alert-warning">
+        <h3>There is no Clinics !</h3>
+    </div>
+}
+
