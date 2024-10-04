@@ -35,17 +35,17 @@
                     <td class="align-content-center">@clinic.Specialization</td>
                     <td class="align-content-center">@clinic.Price</td>
                     <td>
-                        <a asp-controller="Department" asp-action="Details" asp-route-Id="@clinic.Id" class="btn btn-warning">
+                        <a asp-controller="Clinic" asp-action="Details" asp-route-Id="@clinic.Id" class="btn btn-warning">
                             <i class="fas fa-eye"></i> Details
                         </a>
                     </td>
                     <td>
-                        <a asp-controller="Department" asp-action="Edit" asp-route-Id="@clinic.Id" class="btn btn-success">
+                        <a asp-controller="Clinic" asp-action="Edit" asp-route-Id="@clinic.Id" class="btn btn-success">
                             <i class="fas fa-edit"></i> Update
                         </a>
                     </td>
                     <td>
-                        <a asp-controller="Department" asp-action="Delete" asp-route-Id="@clinic.Id" class="btn btn-danger">
+                        <a asp-controller="Clinic" asp-action="Delete" asp-route-Id="@clinic.Id" class="btn btn-danger">
                             <i class="fas fa-trash"></i> Delete
                         </a>
                     </td>
