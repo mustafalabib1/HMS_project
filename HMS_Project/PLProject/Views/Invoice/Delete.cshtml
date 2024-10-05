@@ -1,0 +1,46 @@
+﻿@model InvoiceViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Are U Sure?</h1>
+<br />
+<br />
+<br />
+<form asp-asp-controller="Invoice" asp-action="Delete" method="post">
+    <div class="mb-3">
+        <label asp-for="InvoiceDate" class="form-label"></label>
+        <input asp-for="InvoiceDate" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TotalAmount" class="form-label"></label>
+        <input asp-for="TotalAmount" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReceptionistId" class="form-label"></label>
+        <input asp-for="ReceptionistId" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ApointmentId" class="form-label"></label>
+        <input asp-for="ApointmentId" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PaymentStatus" class="form-label"></label>
+        <input asp-for="PaymentStatus" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PaymentType" class="form-label"></label>
+        <input asp-for="PaymentType" class="form-control" readonly />
+    </div>
+    
+
+    <button type="submit" class="btn btn-danger mt-2">
+        <i class="fas fa-trash"></i> Delete
+    </button>
+
+    <a asp-controller="Invoice" asp-action="Index" class="btn btn-primary mt-2">Back To List</a>
+</form>
+
