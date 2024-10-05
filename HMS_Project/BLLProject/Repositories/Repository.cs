@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,5 +39,9 @@ namespace BLLProject.Repositories
 
         public IEnumerable<T> GetALL() => context.Set<T>().AsNoTracking().ToList();
 
+        public IQueryable<T> Find(Expression<Func<T, bool>> filter)
+        {
+           return context.Set<T>().Where(filter);
+        }
     }
 }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 namespace DALProject.Data.Contexts
 {
-    public class HMSdbcontext : DbContext
+    public partial class HMSdbcontext : DbContext
     {
         public HMSdbcontext(DbContextOptions<HMSdbcontext> options) : base(options)
         {
@@ -26,9 +26,11 @@ namespace DALProject.Data.Contexts
                 .HasOne(p => p.Pharmacist)
                 .WithMany(p => p.Prescriptions)
                 .OnDelete(DeleteBehavior.NoAction);
-        }
+         }
+		partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
+
+		public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Apointment> Apointments { get; set; }
         public virtual DbSet<Receptionist> Receptionists { get; set; }//Receptionists  table inherit from User (TPC)

@@ -25,12 +25,15 @@ namespace HMS_Project.ViewModels
 			Interactions = activeSubstance.ActSub1.Select(interaction => new ActiveSubstanceInteractionViewModel
 			{
 				Interaction = interaction.Interaction,
-				OtherSubstanceName = interaction.ActSub2?.ActiveSubstancesName ?? "Unknown"
+				OtherSubstanceName = interaction.ActSub2?.ActiveSubstancesName ?? "Unknown",
+				ActSubId=interaction.ActiveSubstanceId2??0
 			})
 			.Concat(activeSubstance.ActSub2.Select(interaction => new ActiveSubstanceInteractionViewModel
 			{
 				Interaction = interaction.Interaction,
-				OtherSubstanceName = interaction.ActSub1?.ActiveSubstancesName ?? "Unknown"
+				OtherSubstanceName = interaction.ActSub1?.ActiveSubstancesName ?? "Unknown",
+				ActSubId = interaction.ActiveSubstanceId1 ?? 0
+
 			}))
 			.ToHashSet();
 		}
@@ -40,8 +43,10 @@ namespace HMS_Project.ViewModels
 		public string ActiveSubstancesName { get; set; } = null!;
 		public IEnumerable<ActiveSubstance>? ActiveSubstancesDateReader { get; set; }
 		public IEnumerable<Medication>? MedicationsDateReader { get; set; }
-		public ICollection<Medication> Medications { get; set; }
-		public ICollection<ActiveSubstanceInteractionViewModel>? Interactions { get; set; }
+		public HashSet<int> MedicationId { get; set; }
+		public HashSet<int> ActivSubstanceId { get; set; }
+		public ICollection<Medication>? Medications { get; set; } =new HashSet<Medication>();
+		public ICollection<ActiveSubstanceInteractionViewModel>? Interactions { get; set; } = new HashSet<ActiveSubstanceInteractionViewModel>();
 
 		public static explicit operator ActiveSubstance(ActiveSubstanceViewModel viewModel)
 		{
@@ -50,13 +55,12 @@ namespace HMS_Project.ViewModels
 				ActiveSubstancesName = viewModel.ActiveSubstancesName,
 				Medications = viewModel.Medications
 			};
-			foreach (var interactionViewModel in viewModel.Interactions)
+			foreach (var InteractionSubsatance in viewModel.ActivSubstanceId)
 			{
 				activeSubstance.ActSub1.Add(new ActiveSubstanceInteraction
 				{
-					Interaction = interactionViewModel.Interaction,
-					ActiveSubstanceId2 = interactionViewModel.ActSubId
-				});
+					ActiveSubstanceId2 = InteractionSubsatance
+                });
 			}
 			return activeSubstance;
 		}

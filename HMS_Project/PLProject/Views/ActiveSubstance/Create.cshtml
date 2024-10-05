@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label>Select Existing Active Substances (optional):</label>
-        <select asp-for="Interactions" class="form-control select2-multiple" multiple="multiple">
+        <select asp-for="ActivSubstanceId" class="form-control select2-multiple" multiple="multiple">
             @foreach (var substance in Model.ActiveSubstancesDateReader)
             {
                 <option value="@substance.ActiveSubstancesId">@substance.ActiveSubstancesName</option>
@@ -25,10 +25,10 @@
 
     <div class="form-group">
         <label>Select Medications (optional):</label>
-        <select asp-for="Medications" class="form-control select2-multiple" multiple="multiple">
+        <select asp-for="MedicationId" class="form-control select2-multiple" multiple="multiple">
             @foreach (var medication in Model.MedicationsDateReader)
             {
-                <option value="@medication">@medication.MedName</option>
+                <option value="@medication.MedicationId">@medication.MedName</option>
             }
         </select>
     </div>
@@ -39,12 +39,9 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+    }
     <script src="~/select2/js/select2.min.js"></script>
     <link href="~/select2/css/select2.min.css" rel="stylesheet" />
-
-    @* <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> *@
 
     <script>
         $(document).ready(function () {
