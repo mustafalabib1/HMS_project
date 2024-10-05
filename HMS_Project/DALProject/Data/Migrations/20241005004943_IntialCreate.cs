@@ -5,7 +5,7 @@
 namespace DALProject.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MedicationId : Migration
+    public partial class IntialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

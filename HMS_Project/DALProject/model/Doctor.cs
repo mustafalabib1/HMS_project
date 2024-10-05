@@ -8,6 +8,7 @@ namespace DALProject.model
 {
     public class Doctor : HmsUser
     {
+        public int Id { get; set; }
         #region One2Many With DoctorSpecializationLookup
         public string Specialization { get; set; } = null!; 
         public virtual DoctorSpecializationLookup DoctorSpecialization { get; set; }=null!;

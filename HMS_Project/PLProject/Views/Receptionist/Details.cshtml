@@ -1,0 +1,36 @@
+﻿@model Receptionist
+@{
+    ViewData["Title"] = "Receptionist Details";
+}
+
+<h1>Receptionist Details</h1>
+<br />
+<br />
+
+<div>
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label"></label>
+        <input asp-for="FullName" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Gender" class="form-label"></label>
+        <input asp-for="Gender" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DateOfBirth" class="form-label"></label>
+        <input asp-for="DateOfBirth" class="form-control" readonly />
+    </div>
+
+    <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@Model.SSN" class="btn btn-primary">Edit</a>
+    <a asp-controller="Doctor" asp-action="Index" class="btn btn-light">Back To List</a>
+</div>

@@ -1,0 +1,46 @@
+﻿@model PharmacistViewModel
+@{
+    ViewData["Title"] = "Edit Pharmacist";
+}
+
+<h1>Edit Pharmacist</h1>
+<br />
+<br />
+
+<form asp-controller="Pharmacist" asp-action="Edit" method="post">
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">
+        <i class="fas fa-save"></i> Save Changes
+    </button>
+    <a asp-controller="Pharmacist" asp-action="Index" class="btn btn-danger mt-2"><i class="fa-solid fa-xmark"></i> Cancel</a>
+</form>
+
+<!-- Scripts for Validation -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

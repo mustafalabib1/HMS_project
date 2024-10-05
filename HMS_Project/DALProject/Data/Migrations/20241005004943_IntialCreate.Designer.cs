@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Data.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    [Migration("20241004144423_MedicationId")]
-    partial class MedicationId
+    [Migration("20241005004943_IntialCreate")]
+    partial class IntialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

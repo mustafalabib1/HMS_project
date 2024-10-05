@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace HMS_Project.ViewModels
         }
         public PharmacistViewModel(Pharmacist pharmacist)
         {
+            Id = pharmacist.Id;
             SSN = pharmacist.SSN;
             string[] name = pharmacist.FullName.Split();
             if (name.Length == 3)
@@ -35,7 +37,7 @@ namespace HMS_Project.ViewModels
             Address = pharmacist.Address;
             Gender = Enum.TryParse(pharmacist.Gender, out Gender Gendervalue) ? Gendervalue : null;
         }
-
+        public int Id { get; set; }  
         [Required]
         public long SSN { get; set; }
         [Required]
@@ -58,6 +60,7 @@ namespace HMS_Project.ViewModels
         {
             return new Pharmacist()
             {
+                Id = pharmacistViewModel.Id,
                 SSN = pharmacistViewModel.SSN,
                 Email = pharmacistViewModel.Email,
                 UserPassword = pharmacistViewModel.UserPassword,

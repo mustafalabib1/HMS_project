@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NurseViewModel>
+@{
+    ViewData["Title"] = "Nurses";
+}
+
+<h1> All Nurses </h1>
+<br />
+<br />
+
+<a asp-action="Create" asp-controller="Nurse" class="btn btn-primary"> Create New Nurse </a>
+<br />
+
+@if (Model.Count() > 0)
+{
+    <table class=" table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(N => N.FirstName)</th>
+                <th>@Html.DisplayNameFor(N => N.LastName)</th>
+                <th>@Html.DisplayNameFor(N => N.Email)</th>
+                <th>@Html.DisplayNameFor(N => N.Phone)</th>
+                <th>@Html.DisplayNameFor(N => N.Gender)</th>
+                <th>@Html.DisplayNameFor(N => N.DateOfBirth)</th>
+
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nurse in Model)
+            {
+                <tr>
+                    <td>@nurse.FirstName</td>
+                    <td>@nurse.LastName</td>
+                    <td>@nurse.Email</td>
+                    <td>@nurse.Phone</td>
+                    <td>@nurse.Gender</td>
+                    <td>@nurse.DateOfBirth</td>
+
+                    <td>
+                        <a asp-controller="Nurse" asp-action="Details" asp-route-Id="@nurse.SSN" class="btn btn-warning">
+                            <i class="fas fa-eye"></i>Details
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Nurse" asp-action="Edit" asp-route-Id="@nurse.SSN" class="btn btn-success">
+                            <i class="fas fa-edit"></i>Update
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Nurse" asp-action="Delete" asp-route-Id="@nurse.SSN" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <div class="mt-4 alert alert-warning">
+        <h3>
+            There is no Nurses !
+        </h3>
+    </div>
+}
+
+

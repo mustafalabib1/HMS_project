@@ -15,6 +15,7 @@ namespace HMS_Project.ViewModels
         }
         public ReceptionistViewModel(Receptionist receptionist)
         {
+
             SSN = receptionist.SSN;
             string[] name = receptionist.FullName.Split();
             if (name.Length == 3)
@@ -35,7 +36,7 @@ namespace HMS_Project.ViewModels
             Address = receptionist.Address;
             Gender = Enum.TryParse(receptionist.Gender, out Gender Gendervalue) ? Gendervalue : null;
         }
-
+        public int Id { get; set; }
         [Required]
         public long SSN { get; set; }
         [Required]
