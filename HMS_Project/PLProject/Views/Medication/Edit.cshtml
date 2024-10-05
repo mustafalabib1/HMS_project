@@ -1,4 +1,4 @@
-﻿@model Medication
+﻿@model HMS_Project.ViewModels.MedicationViewModel
 
 @{
     ViewData["Title"] = "Medication Edit";
@@ -8,17 +8,7 @@
 <br />
 <br />
 
-@* /medication/Edit [HttpPost] *@
 <form asp-controller="Medication" asp-action="Edit" method="post">
-
-    @* We have problems:
-    1. First, it might change the ID that comes on routing.
-    1.1. Open inspect and show them that.
-    1.2. How to handle that.
-    2. Second, it may use action as [API endpoint].
-    2.1. Open Postman and show them that.
-    2.2. How to handle that.
-    *@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="mb-3">
@@ -42,5 +32,3 @@
     <input type="submit" value="Save" class="btn btn-primary" />
     <a asp-controller="Medication" asp-action="Index" class="btn btn-light">Cancel</a>
 </form>
-
-
