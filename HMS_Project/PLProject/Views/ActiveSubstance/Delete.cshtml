@@ -87,9 +87,12 @@
 
     <!-- Delete and Cancel Buttons -->
     <div class="mt-4">
-        <input type="submit" value="Delete" class="btn btn-danger">
-        <a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
-            <i class="fas fa-arrow-left"></i> Cancel
+        <button type="submit" class="btn btn-danger mt-2">
+            <i class="fas fa-trash"></i> Delete
+        </button>
+
+        <a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-primary mt-2">
+            <i class="fas fa-arrow-left"></i> Back To List
         </a>
     </div>
 </form>

@@ -2,6 +2,7 @@ using BLLProject.Interfaces;
 using BLLProject.Repositories;
 using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using NuGet.Protocol.Core.Types;
 
 namespace PLProject
@@ -23,6 +24,7 @@ namespace PLProject
             });
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
+            builder.Services.AddScoped<HMSdbcontextProcedures>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

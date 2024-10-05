@@ -17,6 +17,9 @@ namespace DALProject.model
         /// </summary>
         public string PaymentType { get; set; } = null!;
 
+        // public string Receptionists { get; set; } = null!;
+        //public string ApointmentDate { get; set; } = null!;
+
         #region One2Many With Receptionist
         public long? ReceptionistId { get; set; }
         public virtual Receptionist Receptionist { get; set; } = null!;

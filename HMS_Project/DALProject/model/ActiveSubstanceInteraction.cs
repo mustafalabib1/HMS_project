@@ -5,7 +5,7 @@ namespace DALProject.model;
 
 public class ActiveSubstanceInteraction
 {
-    public string Interaction { get; set; } = null!;
+    public string? Interaction { get; set; } = null!;
 
     #region Many2Many With ActiveSbustance
     public int? ActiveSubstanceId1 { get; set; }
