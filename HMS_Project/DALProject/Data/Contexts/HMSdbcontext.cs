@@ -17,7 +17,8 @@ namespace DALProject.Data.Contexts
         public HMSdbcontext(DbContextOptions<HMSdbcontext> options) : base(options)
         {
         }
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);

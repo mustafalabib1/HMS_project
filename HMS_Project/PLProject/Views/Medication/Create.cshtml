@@ -1,62 +1,62 @@
-﻿@model MedicationViewModel
+﻿@model HMS_Project.ViewModels.MedicationViewModel
 
 @{
-    ViewData["Title"] = "Create Medication";
+    ViewData["Title"] = "Create New Medication";
 }
 
-<h1>Create New Medication</h1>
-<br />
-<br />
+<h2>Create New Medication</h2>
 
-<form asp-controller="Medication" asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="MedName" class="form-label"></label>
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="MedName"></label>
         <input asp-for="MedName" class="form-control" />
         <span asp-validation-for="MedName" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Strength" class="form-label"></label>
-        <input asp-for="Strength" class="form-control" type="number" />
+    <div class="form-group">
+        <label asp-for="Strength"></label>
+        <input asp-for="Strength" class="form-control" />
         <span asp-validation-for="Strength" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label>Select Active Substances (optional):</label>
+    <div class="form-group">
+        <label>Select Existing Active Substances (optional):</label>
         <select asp-for="ActSubInMed" class="form-control select2-multiple" multiple="multiple">
-            @if (Model.ActSubDateReader != null && Model.ActSubDateReader.Any())
+            @foreach (var substance in Model.ActSubDateReader)
             {
-                foreach (var substance in Model.ActSubDateReader)
-                {
-                    <option value="@substance.ActiveSubstancesId">@substance.ActiveSubstancesName</option>
-                }
-            }
-            else
-            {
-                <option disabled>No active substances available</option>
+                <option value="@substance.ActiveSubstancesId">@substance.ActiveSubstancesName</option>
             }
         </select>
-        <span asp-validation-for="ActSubInMed" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="form-group">
         <label>Select Prescriptions (optional):</label>
-        <select asp-for="PrescriptionItemInMed" class="form-control select2-multiple" multiple="multiple">
-            @if (Model.PrescriptionItemsReader != null && Model.PrescriptionItemsReader.Any())
+        <select asp-for="ActSubInMed" class="form-control select2-multiple" multiple="multiple">
+            @foreach (var prescription in Model.PrescriptionItemsReader)
             {
-                foreach (var prescription in Model.PrescriptionItemsReader)
-                {
-                    <option value="@prescription.PrescriptionId">@prescription.Prescription</option>
-                }
-            }
-            else
-            {
-                <option disabled>No prescriptions available</option>
+                <option value="@prescription.Id">@prescription.Prescription</option>
             }
         </select>
-        <span asp-validation-for="PrescriptionItemInMed" class="text-danger"></span>
     </div>
 
-    <input type="submit" value="Create" class="btn btn-primary" />
-    <a asp-controller="Medication" asp-action="Index" class="btn btn-light">Back To List</a>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/select2/js/select2.min.js"></script>
+    <link href="~/select2/css/select2.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            // Initialize Select2 for both dropdowns
+            $('.select2-multiple').select2({
+                placeholder: "Select from the list",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
+}

@@ -1,30 +1,94 @@
-﻿@model Medication
+﻿@model HMS_Project.ViewModels.MedicationViewModel
 
 @{
     ViewData["Title"] = "Medication Details";
 }
 
-<h1>Medication Details</h1>
-<br />
-<br />
-<div>
-    <div class="mb-3">
-        <label asp-for="MedicationId" class="form-label"></label>
-        <input asp-for="MedicationId" class="form-control" readonly />
+<h1 class="mb-4">Medication Details</h1>
+
+<div class="container">
+    <!-- Medication Name -->
+    <div class="form-group mb-3">
+        <label asp-for="MedName" class="form-label fw-bold"></label>
+        <input asp-for="MedName" class="form-control form-control-plaintext ps-1" readonly />
+        <span asp-validation-for="MedName" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="MedName" class="form-label"></label>
-        <input asp-for="MedName" class="form-control" readonly />
+    <!-- Medication Strength -->
+    <div class="form-group mb-3">
+        <label asp-for="Strength" class="form-label fw-bold"></label>
+        <input asp-for="Strength" class="form-control form-control-plaintext ps-1" readonly />
+        <span asp-validation-for="Strength" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Strength" class="form-label"></label>
-        <input asp-for="Strength" class="form-control" readonly />
+    <!-- Active Substances -->
+    <div class="mb-4">
+        <h4 class="mb-3">Active Substances</h4>
+        @if (Model.ActSubInMed.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(m => m.ActSubInMed.First().ActiveSubstancesName)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var activeSubstance in Model.ActSubInMed)
+                        {
+                            <tr class="align-middle">
+                                <td>@activeSubstance.ActiveSubstancesName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle"></i> No active substances found for this medication.
+            </div>
+        }
     </div>
 
-    <a asp-controller="Medication" asp-action="Edit" asp-route-id="@Model.MedicationId" class="btn btn-primary">Edit</a>
-    <a asp-controller="Medication" asp-action="Index" class="btn btn-light">Back To List</a>
+    <!-- Prescriptions -->
+    <div class="mb-4">
+        <h4 class="mb-3">Prescriptions</h4>
+        @if (Model.PrescriptionItemInMed.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(m => m.PrescriptionItemInMed.First().Prescription)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prescription in Model.PrescriptionItemInMed)
+                        {
+                            <tr class="align-middle">
+                                <td>@prescription.Prescription</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle"></i> No prescriptions found for this medication.
+            </div>
+        }
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Medication" asp-action="Edit" asp-route-id="@Model.MedicationId" class="btn btn-primary">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+        <a asp-controller="Medication" asp-action="Index" class="btn btn-secondary ms-2">
+            <i class="fas fa-arrow-left"></i> Back To List
+        </a>
+    </div>
 </div>
-
-

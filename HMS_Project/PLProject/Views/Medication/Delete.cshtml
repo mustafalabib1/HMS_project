@@ -1,46 +1,68 @@
-﻿@model Medication
+﻿@model HMS_Project.ViewModels.MedicationViewModel
 
 @{
-    ViewData["Title"] = "Medication Edit";
+    ViewData["Title"] = "Delete Medication";
 }
 
-<h1>Medication Edit</h1>
-<br />
-<br />
+<h1 class="mb-4 text-danger">Are You Sure You Want to Delete This Medication?</h1>
 
-@* /medication/Edit [HttpPost] *@
-<form asp-controller="Medication" asp-action="Edit" method="post">
+<div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this medication, all related data will be removed permanently.
+</div>
 
-    @* We have problems:
-    1. First, it might change the ID that comes on routing.
-    1.1. Open inspect and show them that.
-    1.2. How to handle that.
-    2. Second, it may use action as [API endpoint].
-    2.1. Open Postman and show them that.
-    2.2. How to handle that.
-    *@
+<form asp-controller="Medication" asp-action="DeleteConfirmed" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="mb-3">
-        <label asp-for="MedicationId" class="form-label"></label>
-        <input asp-for="MedicationId" class="form-control" readonly />
-        <span asp-validation-for="MedicationId" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="MedName" class="form-label"></label>
-        <input asp-for="MedName" class="form-control" />
+    <!-- Medication Name -->
+    <div class="form-group mb-3">
+        <label asp-for="MedName" class="form-label fw-bold"></label>
+        <input asp-for="MedName" class="form-control form-control-plaintext ps-1" readonly />
         <span asp-validation-for="MedName" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Strength" class="form-label"></label>
-        <input asp-for="Strength" class="form-control" />
+    <!-- Medication Strength -->
+    <div class="form-group mb-3">
+        <label asp-for="Strength" class="form-label fw-bold"></label>
+        <input asp-for="Strength" class="form-control form-control-plaintext ps-1" readonly />
         <span asp-validation-for="Strength" class="text-danger"></span>
     </div>
 
-    <input type="submit" value="Save" class="btn btn-primary" />
-    <a asp-controller="Medication" asp-action="Index" class="btn btn-light">Cancel</a>
+    <!-- Active Substances -->
+    <div class="mb-4">
+        <h4 class="mb-3">Active Substances in This Medication</h4>
+        @if (Model.ActSubInMed != null && Model.ActSubInMed.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(m => m.ActSubInMed.First().ActiveSubstancesName)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var activeSubstance in Model.ActSubInMed)
+                        {
+                            <tr class="align-middle">
+                                <td>@activeSubstance.ActiveSubstancesName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle"></i> No active substances found for this medication.
+            </div>
+        }
+    </div>
+
+    <!-- Delete and Cancel Buttons -->
+    <div class="mt-4">
+        <input type="submit" value="Delete" class="btn btn-danger">
+        <a asp-controller="Medication" asp-action="Index" class="btn btn-secondary ms-2">
+            <i class="fas fa-arrow-left"></i> Cancel
+        </a>
+    </div>
 </form>
-
-
