@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Clinic
+    public class Clinic : ModelBase
     {
-        public int ClinicId { get; set; }
         public double Price { get; set; }
         public string Name { get; set; } = null!;
         public string Phone { get; set; } = null!;

@@ -13,7 +13,7 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Clinic> builder)
         {
-            builder.Property(c => c.ClinicId)
+            builder.Property(c => c.Id)
                 .UseIdentityColumn(10, 10);
 
             builder.Property(c => c.Phone)

@@ -1,5 +1,6 @@
 ﻿using BLLProject.Interfaces;
 using DALProject.Data.Contexts;
+using DALProject.model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLLProject.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : ModelBase
     {
         private readonly HMSdbcontext context;
 

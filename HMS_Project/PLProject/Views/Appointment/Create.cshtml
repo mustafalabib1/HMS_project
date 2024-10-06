@@ -13,7 +13,7 @@
             <option value="">Select Clinic</option>
             @foreach (var clinic in Model.Clinics)
             {
-                <option value="@clinic.ClinicId">@clinic.Name</option>
+                <option value="@clinic.Id">@clinic.Name</option>
             }
         </select>
         <span asp-validation-for="ClinicId" class="text-danger"></span>

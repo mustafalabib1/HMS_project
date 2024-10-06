@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DALProject.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLLProject.Interfaces
 {
-    public interface IRepository <T> where T : class
+    public interface IRepository <T> where T : ModelBase
     {
         public int Add(T entity);
 

@@ -14,7 +14,7 @@ namespace HMS_Project.ViewModels
         public ClinicViewModel() { }
         public ClinicViewModel(Clinic clinic)
         {
-            Id = clinic.ClinicId;
+            Id = clinic.Id;
             Name = clinic.Name;
             Phone = clinic.Phone;
             Price = clinic.Price;

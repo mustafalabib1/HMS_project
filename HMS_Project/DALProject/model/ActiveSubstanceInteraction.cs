@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DALProject.model;
 
-public class ActiveSubstanceInteraction
+public class ActiveSubstanceInteraction : ModelBase
 {
     public string? Interaction { get; set; } = null!;
 
