@@ -1,15 +1,14 @@
 ﻿namespace DALProject.model
 {
-    public class Prescription
+    public class Prescription : ModelBase
     {
-        public int PrescriptionID { get; set; }
 
         #region One2Many With PrescriptionItem
         public virtual ICollection<PrescriptionItem> PrescriptionItems { get; set; } = new HashSet<PrescriptionItem>();
         #endregion
 
         #region One2Many With Pharmacist
-        public long? PharmacistId { get; set; }
+        public int? PharmacistId { get; set; }
         public virtual Pharmacist Pharmacist { get; set; } = null!;
         #endregion
         
@@ -19,7 +18,7 @@
         #endregion
 
         #region One2Many With Doctor
-        public long DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
     }

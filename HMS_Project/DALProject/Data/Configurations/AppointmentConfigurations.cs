@@ -14,7 +14,7 @@ namespace DALProject.Data.Configurations
         public void Configure(EntityTypeBuilder<Apointment> builder)
         {
             #region ApointmentConfiguration 
-            builder.HasKey(a => a.ApointmentId);
+            builder.HasKey(a => a.Id);
             builder.Property(a => a.ApointmentDate).HasColumnType($"{DB_DataTypes_Helper.date}");
             builder.Property(a => a.ApointmentTime).HasColumnType($"{DB_DataTypes_Helper.time}");
             builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(15);
@@ -54,7 +54,7 @@ namespace DALProject.Data.Configurations
             builder 
                 .HasOne(a=>a.Prescription)
                 .WithOne(p=>p.Apointment)
-                .HasForeignKey<Apointment>(p=>p.ApointmentId)
+                .HasForeignKey<Apointment>(p=>p.Id)
                 .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
@@ -62,8 +62,7 @@ namespace DALProject.Data.Configurations
             builder
                 .HasOne(a=>a.Invoice)
                 .WithOne(i=>i.Apointment)
-                .HasForeignKey<Invoice>(i=>i.ApointmentId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .HasForeignKey<Invoice>(i=>i.Id);
             #endregion
         }
     }

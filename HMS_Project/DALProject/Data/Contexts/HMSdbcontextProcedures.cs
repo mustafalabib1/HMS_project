@@ -43,7 +43,7 @@ namespace DALProject.Data.Contexts
             _context = context;
         }
 
-        public virtual async Task<int> sp_DeleteActiveSubstanceAsync(int? ActiveSubstancesId, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<int> sp_DeleteActiveSubstanceAsync(int? Id, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterreturnValue = new SqlParameter
             {
@@ -56,13 +56,13 @@ namespace DALProject.Data.Contexts
             {
                 new SqlParameter
                 {
-                    ParameterName = "ActiveSubstancesId",
-                    Value = ActiveSubstancesId ?? Convert.DBNull,
+                    ParameterName = "Id",
+                    Value = Id ?? Convert.DBNull,
                     SqlDbType = System.Data.SqlDbType.Int,
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[sp_DeleteActiveSubstance] @ActiveSubstancesId = @ActiveSubstancesId", sqlParameters, cancellationToken);
+            var _ = await _context.Database.ExecuteSqlRawAsync("EXEC @returnValue = [dbo].[sp_DeleteActiveSubstance] @Id = @Id", sqlParameters, cancellationToken);
 
             returnValue?.SetValue(parameterreturnValue.Value);
 

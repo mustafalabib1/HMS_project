@@ -26,7 +26,7 @@ public class DoctorViewModel
         UserPassword = doctor.UserPassword;
         Address = doctor.Address;
         Gender = Enum.TryParse(doctor.Gender, out Gender Gendervalue) ? Gendervalue : null;
-        specialization = doctor.Specialization;
+        specialization = doctor.DoctorSpecialization.Specialization;
     }
 
     public int Id { get; set; }  
@@ -41,6 +41,7 @@ public class DoctorViewModel
     public string? Address { get; set; }
     public Gender? Gender { get; set; }
     public string? specialization { get; set; }
+    public int? specializationId { get; set; }
     public decimal? Price { get; set; } // إضافة خاصية Price إذا كانت مطلوبة
     public IEnumerable<DoctorSpecializationLookup>? SpecializationsDateReader { get; set; }
 
@@ -57,7 +58,7 @@ public class DoctorViewModel
             Phone = doctorViewModwl.Phone,
             FullName = $"{doctorViewModwl.FirstName} {doctorViewModwl.MiddleName} {doctorViewModwl.LastName}",
             DateOfBirth = doctorViewModwl.DateOfBirth,
-            Specialization = doctorViewModwl.specialization,
+            SpecializationId = doctorViewModwl.specializationId??0,
         };
     }
 

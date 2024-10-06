@@ -13,6 +13,6 @@ namespace DALProject.Data.Contexts
 {
     public partial interface IHMSdbcontextProcedures
     {
-        Task<int> sp_DeleteActiveSubstanceAsync(int? ActiveSubstancesId, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+        Task<int> sp_DeleteActiveSubstanceAsync(int? Id, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
     }
 }

@@ -14,7 +14,6 @@ namespace DALProject.Data.Configurations
         public void Configure(EntityTypeBuilder<DoctorSpecializationLookup> builder)
         {
             #region configuration 
-            builder.HasKey(s => s.Specialization);
             builder.Property(s => s.Specialization).HasMaxLength(50);
             #endregion
 
@@ -22,7 +21,7 @@ namespace DALProject.Data.Configurations
             builder
                     .HasMany(s => s.Doctors)
                     .WithOne(c => c.DoctorSpecialization)
-                    .HasForeignKey(c => c.Specialization);
+                    .HasForeignKey(c => c.SpecializationId);
             #endregion
         }
     }

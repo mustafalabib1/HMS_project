@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class ClinicSpecializationLookup
+    public class ClinicSpecializationLookup: ModelBase
     {
-        public int Id { get; set; }
         public string Specialization { get; set; } = null!;
 
         #region One2Many With Clinic

@@ -14,7 +14,7 @@ namespace HMS_Project.ViewModels
 
         public MedicationViewModel(Medication medication)
         {
-            MedicationId = medication.MedicationId;
+            MedicationId = medication.Id;
             MedName = medication.MedName;
             Strength = medication.Strength;
             ActSubInMed = medication.ActiveSubstances.ToHashSet();
@@ -37,7 +37,7 @@ namespace HMS_Project.ViewModels
         {
             return new Medication()
             {
-                MedicationId = medViewModel.MedicationId,
+                Id = medViewModel.MedicationId,
                 MedName = medViewModel.MedName,
                 Strength = medViewModel.Strength,
                 ActiveSubstances = medViewModel.ActSubInMed

@@ -15,7 +15,7 @@ namespace HMS_Project.ViewModels
         }
         public DoctorApointmentViewModel(Apointment apointment)
         {
-            ApointmentId=apointment.ApointmentId;
+            ApointmentId=apointment.Id;
             Patient = apointment.Patient;
         }
         public int ApointmentId { get; set; }
@@ -28,7 +28,7 @@ namespace HMS_Project.ViewModels
         {
             return new Apointment
             {
-                ApointmentId = doctorViewModel.ApointmentId,
+				Id = doctorViewModel.ApointmentId,
                 Examination = doctorViewModel.Examination,
                 // Assuming the `Prescription` property can be assigned
                 //Prescription = (Prescription)Prescription

@@ -31,7 +31,7 @@ namespace HMS_Project.ViewModels
         
         public IEnumerable<Doctor> DoctorsDateReader { get;set; }= new HashSet<Doctor>();
         [Required]
-        public long DoctorId { get; set; }
+        public int DoctorId { get; set; }
 
         public static explicit operator Apointment(BookingApointmentViewModel ViewModel)
         {

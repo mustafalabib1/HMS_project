@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Invoice
+    public class Invoice : ModelBase
     {
-        public int InvoiceID { get; set; }
         public DateTime InvoiceDate { get; set; }
         public decimal TotalAmount { get; set; }
         public bool PaymentStatus { get; set; }
@@ -21,7 +20,7 @@ namespace DALProject.model
         //public string ApointmentDate { get; set; } = null!;
 
         #region One2Many With Receptionist
-        public long? ReceptionistId { get; set; }
+        public int? ReceptionistId { get; set; }
         public virtual Receptionist Receptionist { get; set; } = null!;
         #endregion
 

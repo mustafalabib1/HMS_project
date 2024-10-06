@@ -104,7 +104,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid)
             {
                 doctor.FullName = doctorViewModel.FirstName;
-                doctor.Specialization = doctorViewModel.specialization;
+                doctor.SpecializationId = doctorViewModel.specializationId??0;
                 doctor.Phone = doctorViewModel.Phone;
 
                 doctorRepo.Update(doctor);

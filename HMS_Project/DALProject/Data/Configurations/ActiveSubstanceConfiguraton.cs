@@ -14,7 +14,7 @@ namespace DALProject.Data.Configurations
         public void Configure(EntityTypeBuilder<ActiveSubstance> builder)
         {
             #region Active Substance Configuration 
-            builder.HasKey(e => e.ActiveSubstancesId);
+            builder.HasKey(e => e.Id);
 
             builder.HasIndex(e => e.ActiveSubstancesName).IsUnique();
             builder.Property(e => e.ActiveSubstancesName).HasMaxLength(50);

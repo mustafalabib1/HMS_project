@@ -28,7 +28,7 @@ namespace PLProject.Controllers
             var medications = medicationRepository.GetALL().ToList();
             var medicationVM = medications.Select(m => new MedicationViewModel
             {
-                MedicationId = m.MedicationId,
+                MedicationId = m.Id,
                 MedName = m.MedName,
                 Strength = m.Strength
             }).ToList();
@@ -99,7 +99,7 @@ namespace PLProject.Controllers
 
             var medicationViewModel = new MedicationViewModel
             {
-                MedicationId = medication.MedicationId, // Assuming you have an Id property
+                MedicationId = medication.Id, // Assuming you have an Id property
                 MedName = medication.MedName,
                 Strength = medication.Strength,
                 // Populate other necessary fields if needed
@@ -118,7 +118,7 @@ namespace PLProject.Controllers
 
             var medication = new Medication
             {
-                MedicationId = medicationViewModel.MedicationId, // Ensure the ID is set correctly
+                Id = medicationViewModel.MedicationId, // Ensure the ID is set correctly
                 MedName = medicationViewModel.MedName,
                 Strength = medicationViewModel.Strength,
                 // Update other necessary fields if needed

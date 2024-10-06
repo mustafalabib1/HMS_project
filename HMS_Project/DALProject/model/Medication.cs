@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace DALProject.model;
 
-public class Medication
+public class Medication : ModelBase
 {
-    public int MedicationId { get; set; }
-
     public string MedName { get; set; } = null!;
 
     public int Strength { get; set; }

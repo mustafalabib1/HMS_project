@@ -18,7 +18,7 @@
         <select asp-for="ActivSubstanceId" class="form-control select2-multiple" multiple="multiple">
             @foreach (var substance in Model.ActiveSubstancesDateReader)
             {
-                <option value="@substance.ActiveSubstancesId">@substance.ActiveSubstancesName</option>
+                <option value="@substance.Id">@substance.ActiveSubstancesName</option>
             }
         </select>
     </div>
@@ -28,7 +28,7 @@
         <select asp-for="MedicationId" class="form-control select2-multiple" multiple="multiple">
             @foreach (var medication in Model.MedicationsDateReader)
             {
-                <option value="@medication.MedicationId">@medication.MedName</option>
+                <option value="@medication.Id">@medication.MedName</option>
             }
         </select>
     </div>

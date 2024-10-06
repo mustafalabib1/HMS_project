@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class DoctorScheduleLookup
+    public class DoctorScheduleLookup : ModelBase
     {
         //public virtual DayOfWeek Day { get; set; }
         public string Day { get; set; } = null!;
@@ -14,7 +14,7 @@ namespace DALProject.model
         public  TimeOnly EndTime { get; set; }
 
         #region One2Many With Doctors
-        public long DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
     }

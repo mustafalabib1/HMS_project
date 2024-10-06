@@ -1,4 +1,4 @@
-﻿using DALProject.Data.Migrations;
+﻿//using DALProject.Data.Migrations;
 using DALProject.model;
 using System;
 using System.Collections.Generic;

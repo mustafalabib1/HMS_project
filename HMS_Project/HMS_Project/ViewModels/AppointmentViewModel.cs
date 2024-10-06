@@ -14,7 +14,7 @@ namespace HMS_Project.ViewModels
 
         public ApointmentViewModel(Apointment Apointment)
         {
-            ApointmentId = Apointment.ApointmentId;
+            ApointmentId = Apointment.Id;
             ApointmentDate = Apointment.ApointmentDate;
             ApointmentTime = Apointment.ApointmentTime;
             ApointmentStatus = ApointmentStatusEnum.Scheduled.ToString();
@@ -53,18 +53,18 @@ namespace HMS_Project.ViewModels
 
         [Display(Name = "Receptionist Name")]
         [Required(ErrorMessage = " Please Choose a Receptionist for this Appointment.")]
-        public long? ReceptionistId { get; set; }
+        public int? ReceptionistId { get; set; }
 
         public IEnumerable<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
 
         [Display(Name = "Doctor Name")]
         [Required(ErrorMessage = " Please Choose a Doctor for this Appointment.")]
-        public long DoctorId { get; set; }
+        public int DoctorId { get; set; }
 
         // needs to be reviewed
         [Display(Name = "Patient Id")]
         [Required]
-        public long PatientId { get; set; }
+        public int PatientId { get; set; }
         // needs to be reviewed
 
         //[Required]
@@ -77,7 +77,7 @@ namespace HMS_Project.ViewModels
         {
             return new Apointment()
             {
-                ApointmentId = ApointmentViewModel.ApointmentId,
+                Id = ApointmentViewModel.ApointmentId,
                 ApointmentDate = ApointmentViewModel.ApointmentDate,
                 ApointmentTime = ApointmentViewModel.ApointmentTime,
                 ApointmentStatus = ApointmentViewModel.ApointmentStatus,

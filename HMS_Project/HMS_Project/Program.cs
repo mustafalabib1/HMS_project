@@ -188,26 +188,26 @@ namespace HMS_Project
 			#region Add list of ClinicSpecializationLookup
 			//HashSet<ClinicSpecializationLookup> clinicSpecializations = new HashSet<ClinicSpecializationLookup>()
 			//{
-			//    new ClinicSpecializationLookup(){ Specialization="General"},
-			//    new ClinicSpecializationLookup(){ Specialization="Cardiology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Dermatology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Neurology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Orthopedics"},
-			//    new ClinicSpecializationLookup(){ Specialization="Pediatrics"},
-			//    new ClinicSpecializationLookup(){ Specialization="Psychiatry"},
-			//    new ClinicSpecializationLookup(){ Specialization="Surgery"},
-			//    new ClinicSpecializationLookup(){ Specialization="Oncology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Gynecology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Endocrinology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Ophthalmology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Urology"},
-			//    new ClinicSpecializationLookup(){ Specialization="Dental"},
+			//	new ClinicSpecializationLookup(){ Specialization="General"},
+			//	new ClinicSpecializationLookup(){ Specialization="Cardiology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Dermatology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Neurology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Orthopedics"},
+			//	new ClinicSpecializationLookup(){ Specialization="Pediatrics"},
+			//	new ClinicSpecializationLookup(){ Specialization="Psychiatry"},
+			//	new ClinicSpecializationLookup(){ Specialization="Surgery"},
+			//	new ClinicSpecializationLookup(){ Specialization="Oncology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Gynecology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Endocrinology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Ophthalmology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Urology"},
+			//	new ClinicSpecializationLookup(){ Specialization="Dental"},
 			//};
-			//context.ClinicsSpecializationLookups.AddRange(clinicSpecializations);
-			//context.SaveChanges();
+   //         Context.ClinicsSpecializationLookups.AddRange(clinicSpecializations);
+   //         Context.SaveChanges();
 			#endregion
 
-			
+
 
 
 		}

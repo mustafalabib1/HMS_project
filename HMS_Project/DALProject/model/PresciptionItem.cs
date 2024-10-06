@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class PrescriptionItem
+    public class PrescriptionItem : ModelBase
     {
-        public int Id { get; set; } 
         public string FullDosage { get; set; } = null!;
 
         #region One2One With ActiveSubstance

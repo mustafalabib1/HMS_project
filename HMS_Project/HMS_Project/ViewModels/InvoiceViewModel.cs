@@ -13,7 +13,7 @@ namespace HMS_Project.ViewModels
         public InvoiceViewModel() { }
         public InvoiceViewModel(Invoice invoice) 
         {
-            InvoiceID = invoice.InvoiceID;
+            Id = invoice.Id;
             InvoiceDate = invoice.InvoiceDate;
             TotalAmount = invoice.TotalAmount;
             PaymentStatus = invoice.PaymentStatus;
@@ -22,7 +22,7 @@ namespace HMS_Project.ViewModels
             ApointmentId = invoice.ApointmentId;
         }
 
-        public int InvoiceID { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Invoice Date")]
         [Required(ErrorMessage = " Please Choose a Date.")]
@@ -43,7 +43,7 @@ namespace HMS_Project.ViewModels
 
         [Display(Name = "Receptionist Name")]
         [Required(ErrorMessage = " Please Select Receptionist Name.")]
-        public long? ReceptionistId { get; set; }
+        public int? ReceptionistId { get; set; }
         public IEnumerable<Apointment>  ApointmentsReader { get; set; } = new HashSet<Apointment>();
         [Display(Name = "Appointment Date")]
         [Required(ErrorMessage = " Please Select Receptionist Name.")]
@@ -55,7 +55,7 @@ namespace HMS_Project.ViewModels
         {
             return new Invoice()
             {
-                InvoiceID = invoiceViewModel.InvoiceID,
+                Id = invoiceViewModel.Id,
                 InvoiceDate = invoiceViewModel.InvoiceDate,
                 TotalAmount = invoiceViewModel.TotalAmount,
                 PaymentStatus = invoiceViewModel.PaymentStatus,

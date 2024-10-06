@@ -80,7 +80,7 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Edit(InvoiceViewModel invoiceViewModel)
         {
-            Invoice invoice = repository.Get(invoiceViewModel.InvoiceID);
+            Invoice invoice = repository.Get(invoiceViewModel.Id);
 
             if (ModelState.IsValid) // server side validation
             {
@@ -118,7 +118,7 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Delete(InvoiceViewModel invoiceViewModel)
         {
-            var ivoice = repository.Get(invoiceViewModel.InvoiceID);
+            var ivoice = repository.Get(invoiceViewModel.Id);
             try
             {
                 repository.Delete(ivoice);

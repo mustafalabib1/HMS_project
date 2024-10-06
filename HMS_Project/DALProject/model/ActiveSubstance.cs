@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace DALProject.model;
 
-public class ActiveSubstance
+public class ActiveSubstance : ModelBase
 {
-    public int ActiveSubstancesId { get; set; }
     public string ActiveSubstancesName { get; set; } = null!;
 
     #region Many2Many With Medication

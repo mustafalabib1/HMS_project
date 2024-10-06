@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DALProject.model;
 
-public class HmsUser
+public class HmsUser : ModelBase
 {
     public long SSN { get; set; } 
     public string FullName { get; set; } = null!;

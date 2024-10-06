@@ -24,7 +24,7 @@
         <select asp-for="ActSubInMed" class="form-control select2-multiple" multiple="multiple">
             @foreach (var substance in Model.ActSubDateReader)
             {
-                <option value="@substance.ActiveSubstancesId">@substance.ActiveSubstancesName</option>
+                <option value="@substance.Id">@substance.ActiveSubstancesName</option>
             }
         </select>
     </div>

@@ -86,7 +86,7 @@
 								<td>@Medication.MedName</td>
 								<td>@Medication.Strength</td>
 								<td>
-									<a asp-controller="ActiveSubstance" asp-action="Delete" asp-route-ActId="@Model.Id" asp-route-Id="@Medication.MedicationId" class="btn btn-danger" title="Delete this record" onclick="return confirm('Are you sure you want to delete this?');">
+									<a asp-controller="ActiveSubstance" asp-action="Delete" asp-route-ActId="@Model.Id" asp-route-Id="@Medication.Id" class="btn btn-danger" title="Delete this record" onclick="return confirm('Are you sure you want to delete this?');">
 										<i class="fas fa-trash"></i> Delete
 									</a>
 								</td>

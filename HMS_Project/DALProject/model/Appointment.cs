@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Apointment
+    public class Apointment : ModelBase
     {
-        public  int ApointmentId { get; set; }
         public DateOnly ApointmentDate { get; set; }
         public TimeOnly ApointmentTime { get; set; }
         /// <summary>
@@ -19,7 +18,7 @@ namespace DALProject.model
 
 
         #region One2Many With Receptionist
-        public long? ReceptionistId { get; set; }
+        public int? ReceptionistId { get; set; }
         public virtual Receptionist Receptionist { get; set; } = null!;
         #endregion
 
@@ -29,12 +28,12 @@ namespace DALProject.model
         #endregion
 
         #region One2Many With Patient
-        public long PatientId { get; set; }
+        public int PatientId { get; set; }
         public virtual Patient Patient { get; set; } = null!; 
         #endregion
 
         #region One2Many With Doctor
-        public virtual long DoctorId { get; set; }
+        public virtual int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
 

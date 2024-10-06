@@ -17,7 +17,7 @@ namespace HMS_Project.ViewModels
 		}
 		public ActiveSubstanceViewModel(ActiveSubstance activeSubstance)
 		{
-			Id = activeSubstance.ActiveSubstancesId;
+			Id = activeSubstance.Id;
 			ActiveSubstancesName = activeSubstance.ActiveSubstancesName;
 
 			Medications = activeSubstance.Medications.ToHashSet();

@@ -15,7 +15,7 @@ namespace HMS_Project.ViewModels
         // Constructor that takes an Apointment object
         public ApointmentReceptionistViewModel(Apointment Apointment)
         {
-            ApointmentId = Apointment.ApointmentId;
+            Id = Apointment.Id;
             ApointmentDate = Apointment.ApointmentDate;
             ApointmentTime = Apointment.ApointmentTime;
 
@@ -23,7 +23,7 @@ namespace HMS_Project.ViewModels
             ApointmentStatus = Enum.GetName(typeof(ApointmentStatusEnum), Apointment.ApointmentStatus) ?? ApointmentStatusEnum.Scheduled.ToString();
         }
         [Required]
-        public int ApointmentId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public DateOnly ApointmentDate { get; set; }
@@ -36,7 +36,7 @@ namespace HMS_Project.ViewModels
         {
             return new Apointment()
             {
-                ApointmentId   = ApointmentViewModel.ApointmentId,
+                Id   = ApointmentViewModel.Id,
                 ApointmentDate = ApointmentViewModel.ApointmentDate,
                 ApointmentTime = ApointmentViewModel.ApointmentTime,
                 ApointmentStatus = ApointmentViewModel.ApointmentStatus,

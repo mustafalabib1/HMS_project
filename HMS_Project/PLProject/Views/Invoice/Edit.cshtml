@@ -41,7 +41,7 @@
             <option value="">Select Apointment Date</option>
             @foreach (var Appoint in Model.ApointmentsReader)
             {
-                <option value="@Appoint.ApointmentId">@Appoint.ApointmentDate</option>
+                <option value="@Appoint.Id">@Appoint.ApointmentDate</option>
             }
         </select>
         <span asp-validation-for="ApointmentId" class="text-danger"></span>
