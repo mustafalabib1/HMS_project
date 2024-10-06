@@ -8,69 +8,8 @@
 <br />
 <br />
 <form asp-asp-controller="Invoice" asp-action="Edit" method="post">
-    <div class="mb-3">
-        <label asp-for="InvoiceDate" class="form-label"></label>
-        <input asp-for="InvoiceDate" class="form-control" type="date" value="" />
-        <span asp-validation-for="InvoiceDate" class="text-danger"></span>
-    </div>
 
-    <div class="mb-3">
-        <label asp-for="TotalAmount" class="form-label"></label>
-        <input asp-for="TotalAmount" class="form-control" value="" />
-        <span asp-validation-for="TotalAmount" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Payment Status</label>
-
-        <div class="form-check">
-            <input asp-for="PaymentStatus" class="form-check-input" type="radio" value="Paid" />
-            <label class="form-check-label" for="PaymentStatus">Paid</label>
-        </div>
-
-        <div class="form-check">
-            <input asp-for="PaymentStatus" class="form-check-input" type="radio" value="Not Paid" />
-            <label class="form-check-label" for="PaymentStatus">Not Paid</label>
-        </div>
-
-        <span asp-validation-for="PaymentStatus" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mt-2">
-        <label asp-for="ApointmentId" class="mb-3"></label>
-        <select asp-for="ApointmentId" class="form-control" required>
-            <option value="">Select Apointment Date</option>
-            @foreach (var Appoint in Model.ApointmentsReader)
-            {
-                <option value="@Appoint.Id">@Appoint.ApointmentDate</option>
-            }
-        </select>
-        <span asp-validation-for="ApointmentId" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mt-2">
-        <label asp-for="ReceptionistId" class="mb-3"></label>
-        <select asp-for="ReceptionistId" class="form-control" required>
-            <option value="">Select Receptionist</option>
-            @foreach (var receptionist in Model.ReceptionistsReader)
-            {
-                <option value="@receptionist.SSN">@receptionist.FullName</option>
-            }
-        </select>
-        <span asp-validation-for="ReceptionistId" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mt-2">
-        <label asp-for="PaymentType" class="mb-3"></label>
-        <select asp-for="PaymentType" class="form-control" required>
-            <option value="">Select Type Of Pay</option>
-            @foreach (var Type in Enum.GetValues(typeof(PaymentType)))
-            {
-                <option value="@Type">@Type</option>
-            }
-        </select>
-        <span asp-validation-for="PaymentType" class="text-danger"></span>
-    </div>
-
+    <partial name="PartialViews/CreateEditInvoicePartial" model="@Model"></partial>
 
 
     <input type="submit" value="Save" class="btn btn-primary mt-2" />

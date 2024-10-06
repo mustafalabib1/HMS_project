@@ -28,27 +28,14 @@
             @foreach (var invoice in Model)
             {
                 <tr>
-                    <td class="align-content-center">@invoice.InvoiceDate</td>
-                    <td class="align-content-center">@invoice.TotalAmount</td>
-                    <td class="align-content-center">@invoice.PaymentStatus</td>
-                    <td class="align-content-center">@invoice.PaymentType</td>
-                    <td class="align-content-center">@invoice.ApointmentId</td>
-                    <td class="align-content-center">@invoice.ReceptionistId</td>
-                    <td>
-                        <a asp-controller="Invoice" asp-action="Details" asp-route-Id="@invoice.Id" class="btn btn-warning">
-                            <i class="fas fa-eye"></i> Details
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Invoice" asp-action="Edit" asp-route-Id="@invoice.Id" class="btn btn-success">
-                            <i class="fas fa-edit"></i> Update
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Invoice" asp-action="Delete" asp-route-Id="@invoice.Id" class="btn btn-danger">
-                            <i class="fas fa-trash"></i> Delete
-                        </a>
-                    </td>
+                    <td class="align-content-center">@Html.DisplayFor(I=> invoice.InvoiceDate)</td>
+                    <td class="align-content-center">@Html.DisplayFor(I => invoice.TotalAmount)</td>
+                    <td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentStatus)</td>
+                    <td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentType)</td>
+                    <td class="align-content-center">@Html.DisplayFor(I => invoice.ApointmentId)</td>
+                    <td class="align-content-center">@Html.DisplayFor(I => invoice.ReceptionistId)</td>
+                  
+                    <partial name="_ButtonsPartial" model="@invoice.Id"></partial>
                 </tr>
             }
         </tbody>

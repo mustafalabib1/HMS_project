@@ -30,25 +30,12 @@
             @foreach (var clinic in Model)
             {
                 <tr>
-                    <td class="align-content-center">@clinic.Name</td>
-                    <td class="align-content-center">@clinic.Phone</td>
-                    <td class="align-content-center">@clinic.Specialization</td>
-                    <td class="align-content-center">@clinic.Price</td>
-                    <td>
-                        <a asp-controller="Clinic" asp-action="Details" asp-route-Id="@clinic.Id" class="btn btn-warning">
-                            <i class="fas fa-eye"></i> Details
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Clinic" asp-action="Edit" asp-route-Id="@clinic.Id" class="btn btn-success">
-                            <i class="fas fa-edit"></i> Update
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Clinic" asp-action="Delete" asp-route-Id="@clinic.Id" class="btn btn-danger">
-                            <i class="fas fa-trash"></i> Delete
-                        </a>
-                    </td>
+                    <td class="align-content-center">@Html.DisplayFor(C=> clinic.Name)</td>
+                    <td class="align-content-center">@Html.DisplayFor(C => clinic.Phone)</td>
+                    <td class="align-content-center">@Html.DisplayFor(C => clinic.Specialization)</td>
+                    <td class="align-content-center">@Html.DisplayFor(C => clinic.Price)</td>
+
+                    <partial name="_ButtonsPartial" model="@clinic.Id"></partial>
                 </tr>
             }
         </tbody>

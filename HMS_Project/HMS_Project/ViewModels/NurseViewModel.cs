@@ -18,7 +18,7 @@ namespace HMS_Project.ViewModels
         }
         public NurseViewModel(Nurse nurse)
         {
-            SSN = nurse.SSN;
+            Id = nurse.Id;
             string[] name = nurse.FullName.Split();
             if (name.Length == 3)
             {
@@ -39,7 +39,8 @@ namespace HMS_Project.ViewModels
             Gender = Enum.TryParse(nurse.Gender, out Gender Gendervalue) ? Gendervalue : null;
             ClinicId = nurse.ClinicId;
         }
-        
+        public int Id { get; set; }
+
         [Required]
         public long SSN { get; set; }
         [Required]

@@ -32,28 +32,14 @@
             @foreach (var nurse in Model)
             {
                 <tr>
-                    <td>@nurse.FirstName</td>
-                    <td>@nurse.LastName</td>
-                    <td>@nurse.Email</td>
-                    <td>@nurse.Phone</td>
-                    <td>@nurse.Gender</td>
-                    <td>@nurse.DateOfBirth</td>
+                    <td>@Html.DisplayFor(N=> nurse.FirstName)</td>
+                    <td>@Html.DisplayFor(N => nurse.LastName)</td>
+                    <td>@Html.DisplayFor(N => nurse.Email)</td>
+                    <td>@Html.DisplayFor(N => nurse.Phone)</td>
+                    <td>@Html.DisplayFor(N => nurse.Gender)</td>
+                    <td>@Html.DisplayFor(N => nurse.DateOfBirth)</td>
 
-                    <td>
-                        <a asp-controller="Nurse" asp-action="Details" asp-route-Id="@nurse.SSN" class="btn btn-warning">
-                            <i class="fas fa-eye"></i>Details
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Nurse" asp-action="Edit" asp-route-Id="@nurse.SSN" class="btn btn-success">
-                            <i class="fas fa-edit"></i>Update
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Nurse" asp-action="Delete" asp-route-Id="@nurse.SSN" class="btn btn-danger">
-                            <i class="fas fa-trash"></i>Delete
-                        </a>
-                    </td>
+                    <partial name="_ButtonsPartial" model="@nurse.Id"></partial> 
                 </tr>
             }
         </tbody>
