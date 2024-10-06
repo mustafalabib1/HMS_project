@@ -78,8 +78,11 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(InvoiceViewModel invoiceViewModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([FromRoute]int Id,InvoiceViewModel invoiceViewModel)
         {
+            if (Id != invoiceViewModel.Id) return BadRequest();
+            
             Invoice invoice = repository.Get(invoiceViewModel.Id);
 
             if (ModelState.IsValid) // server side validation
@@ -116,8 +119,11 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(InvoiceViewModel invoiceViewModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([FromRoute]int Id,InvoiceViewModel invoiceViewModel)
         {
+            if (Id != invoiceViewModel.Id) return BadRequest();
+
             var ivoice = repository.Get(invoiceViewModel.Id);
             try
             {
