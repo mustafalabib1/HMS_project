@@ -1,4 +1,4 @@
-﻿@model Receptionist
+﻿@model ReceptionistViewModel
 @{
     ViewData["Title"] = "Receptionist Details";
 }
@@ -9,8 +9,16 @@
 
 <div>
     <div class="mb-3">
-        <label asp-for="FullName" class="form-label"></label>
-        <input asp-for="FullName" class="form-control" readonly />
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="MiddleName" class="form-label"></label>
+        <input asp-for="MiddleName" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" readonly />
     </div>
 
     <div class="mb-3">
@@ -31,6 +39,6 @@
         <input asp-for="DateOfBirth" class="form-control" readonly />
     </div>
 
-    <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@Model.SSN" class="btn btn-primary">Edit</a>
-    <a asp-controller="Doctor" asp-action="Index" class="btn btn-light">Back To List</a>
+    <partial name="_ButtonsInDetailsPartial" model="Model.Id" />
+
 </div>

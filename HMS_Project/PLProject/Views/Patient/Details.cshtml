@@ -31,7 +31,7 @@
         <input asp-for="DateOfBirth" class="form-control" readonly />
     </div>
 
-    <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@Model.SSN" class="btn btn-primary">Edit</a>
-    <a asp-controller="Doctor" asp-action="Index" class="btn btn-light">Back To List</a>
+    <partial name="_ButtonsInDetailsPartial" model="Model.Id" />
+
 </div>
 

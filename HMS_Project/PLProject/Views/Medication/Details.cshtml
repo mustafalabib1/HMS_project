@@ -83,12 +83,6 @@
         }
     </div>
 
-    <div class="mt-4">
-        <a asp-controller="Medication" asp-action="Edit" asp-route-id="@Model.MedicationId" class="btn btn-primary">
-            <i class="fas fa-edit"></i> Edit
-        </a>
-        <a asp-controller="Medication" asp-action="Index" class="btn btn-secondary ms-2">
-            <i class="fas fa-arrow-left"></i> Back To List
-        </a>
-    </div>
+    <partial name="_ButtonsInDetailsPartial" model="Model.MedicationId" />
+
 </div>

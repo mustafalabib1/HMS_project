@@ -41,7 +41,7 @@
                                     <input type="hidden" name="ActId" value="@Model.Id" />
                                     <input type="hidden" name="InteractId" value="@substance.ActSubId" />
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fa-solid fa-floppy-disk"></i> Save
+                                        <i class="fas fa-save"></i> Save
                                     </button>
                                 </td>
                                 </form>
@@ -115,7 +115,7 @@
                                     <input type="hidden" name="ActId" value="@Model.Id" />
                                     <input type="hidden" name="MedId" value="@medication.Id" />
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fa-solid fa-floppy-disk"></i> Save
+                                        <i class="fas fa-save"></i> Save
                                     </button>
                                 </td>
                                 </form>
@@ -161,15 +161,8 @@
     </div>
 
     <!-- Action Buttons -->
-    <div class="mt-4">
-        <!-- Button that submits the form -->
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('editForm').submit();">
-            <i class="fas fa-edit"></i> Edit
-        </button>
-        <a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
-            <i class="fas fa-arrow-left"></i> Back To List
-        </a>
-    </div>
+    <partial name="_ButtonsInEditPartial" />
+
 </div>
 
 @section Scripts {

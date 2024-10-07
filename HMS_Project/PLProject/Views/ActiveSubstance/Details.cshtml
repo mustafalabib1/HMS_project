@@ -8,12 +8,5 @@
 <div class="container">
 	<partial name="PartialViews/DetailsDeletePartial" model="@Model" />
 
-	<div class="mt-4">
-		<a asp-controller="ActiveSubstance" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
-			<i class="fas fa-edit"></i> Edit
-		</a>
-		<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
-			<i class="fas fa-arrow-left"></i> Back To List
-		</a>
-	</div>
+	<partial name="_ButtonsInDetailsPartial" model="Model.Id"/>
 </div>

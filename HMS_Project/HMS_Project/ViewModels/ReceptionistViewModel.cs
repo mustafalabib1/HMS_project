@@ -15,7 +15,7 @@ namespace HMS_Project.ViewModels
         }
         public ReceptionistViewModel(Receptionist receptionist)
         {
-
+             Id = receptionist.Id;
             SSN = receptionist.SSN;
             string[] name = receptionist.FullName.Split();
             if (name.Length == 3)

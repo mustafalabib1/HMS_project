@@ -7,21 +7,25 @@ namespace PLProject.Controllers
 {
     public class ReceptionistController : Controller
     {
+        #region DPI
         private readonly IRepository<Receptionist> receptionistRepo;
+        private readonly IWebHostEnvironment env;
 
-        public IRepository<Receptionist> SpecializationRepo { get; }
-
-        public ReceptionistController(IRepository<Receptionist> SpecializationRepo, IRepository<Receptionist> ReceptionistCRepo)
+        public ReceptionistController(IRepository<Receptionist> ReceptionistCRepo, IWebHostEnvironment _env)
         {
-            this.SpecializationRepo = SpecializationRepo;
             receptionistRepo = ReceptionistCRepo;
+            env = _env;
         }
+        #endregion
+
+        #region Index
         public IActionResult Index()
         {
             var Receptionists = receptionistRepo.GetALL();
             var ReceptionistsViewModels = Receptionists.Select(R => (ReceptionistViewModel)R).ToList();
             return View(ReceptionistsViewModels);
-        }
+        } 
+        #endregion
 
         #region create
         public IActionResult Create()
@@ -43,18 +47,18 @@ namespace PLProject.Controllers
         #endregion
 
         #region Details
-        public IActionResult Details(int? Id)
+        public IActionResult Details(int? Id, string viewname = "Details")
         {
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
             var receptionist = receptionistRepo.Get(Id.Value);
-            var ReceptionistView = (Receptionist)receptionist;
+            var ReceptionistView = (ReceptionistViewModel)receptionist;
 
             if (receptionist is null)
                 return NotFound(); // 404
 
-            return View(ReceptionistView);
+            return View(viewname,ReceptionistView);
         }
 
         #endregion
@@ -99,16 +103,8 @@ namespace PLProject.Controllers
         #region Delete
         public IActionResult Delete(int? Id)
         {
-            if (!Id.HasValue)
-                return BadRequest(); // 400
 
-            var receptionist = receptionistRepo.Get(Id.Value);
-            var receptionistViewModel = (ReceptionistViewModel)receptionist;
-
-            if (receptionist is null)
-                return NotFound(); // 404
-
-            return View(receptionistViewModel);
+            return Details(Id, "Delete");
         }
 
         [HttpPost]
@@ -122,8 +118,13 @@ namespace PLProject.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View(receptionist);
+
+                if (env.IsDevelopment())
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                else
+                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+
+                return View(receptionistViewModel);
             }
         }
         #endregion

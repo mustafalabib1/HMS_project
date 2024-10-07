@@ -12,9 +12,8 @@
 <partial name="PartialViews/DetailsDeleteInvoicePartial" model="@Model"></partial>
 
 
-    <a asp-controller="Invoice" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+	<partial name="_ButtonsInDetailsPartial" model="Model.Id" />
 
-<a asp-controller="Invoice" asp-action="Index" class="btn btn-primary mt-2">Back To List</a>
 
 </div>
 

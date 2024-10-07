@@ -50,12 +50,8 @@
         </select>
         <span asp-validation-for="specialization" class="text-danger"></span>
     </div>
-
-    <button type="submit" class="btn btn-success mt-2">
-        <i class="fas fa-save"></i> Save Changes
-    </button>
-    <a asp-controller="Doctor" asp-action="Index" class="btn btn-danger mt-2"><i class="fa-solid fa-xmark"></i> Cancel</a>
-</form>
+    <!-- Action Buttons -->
+    <partial name="_ButtonsInEditPartial" /></form>
 
 <!-- Scripts for Validation -->
 @section Scripts {

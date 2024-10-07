@@ -38,10 +38,8 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success mt-2">
-        <i class="fas fa-save"></i> Save Changes
-    </button>
-    <a asp-controller="Clinic" asp-action="Index" class="btn btn-danger mt-2"><i class="fa-solid fa-xmark"></i> Cancel</a>
+    <!-- Action Buttons -->
+    <partial name="_ButtonsInEditPartial" />
 </form>
 
 <!-- Scripts for Validation -->
