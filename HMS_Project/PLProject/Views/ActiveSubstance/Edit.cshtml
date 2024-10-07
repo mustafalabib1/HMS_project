@@ -9,31 +9,7 @@
 <div class="container">
     <!-- Active Substance Name -->
     <form id="editForm" asp-action="Edit" method="post">
-        <div class="form-group">
-            <label asp-for="ActiveSubstancesName"></label>
-            <input asp-for="ActiveSubstancesName" class="form-control" />
-            <span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label>Add new Active Substances (optional):</label>
-            <select asp-for="ActivSubstanceId" class="form-control select2-multiple" multiple="multiple">
-                @foreach (var substance in Model.ActiveSubstancesDateReader)
-                {
-                    <option value="@substance.Id">@substance.ActiveSubstancesName</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Add new Medications (optional):</label>
-            <select asp-for="MedicationId" class="form-control select2-multiple" multiple="multiple">
-                @foreach (var medication in Model.MedicationsDateReader)
-                {
-                    <option value="@medication.Id">@medication.MedName</option>
-                }
-            </select>
-        </div>
+        <partial name="PartialViews/CreateEditPartial" model="@Model" />
     </form>
 
     <!-- Interactions with Other Substances -->
@@ -65,7 +41,7 @@
                                     <input type="hidden" name="ActId" value="@Model.Id" />
                                     <input type="hidden" name="InteractId" value="@substance.ActSubId" />
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i class="fa-solid fa-floppy-disk"></i> Save
                                     </button>
                                 </td>
                                 </form>
@@ -139,7 +115,7 @@
                                     <input type="hidden" name="ActId" value="@Model.Id" />
                                     <input type="hidden" name="MedId" value="@medication.Id" />
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i class="fa-solid fa-floppy-disk"></i> Save
                                     </button>
                                 </td>
                                 </form>

@@ -43,8 +43,8 @@ namespace HMS_Project.ViewModels
 		public string ActiveSubstancesName { get; set; } = null!;
 		public IEnumerable<ActiveSubstance>? ActiveSubstancesDateReader { get; set; }
 		public IEnumerable<Medication>? MedicationsDateReader { get; set; }
-		public HashSet<int> MedicationId { get; set; }
-		public HashSet<int> ActivSubstanceId { get; set; }
+		public HashSet<int>? MedicationId { get; set; } = new HashSet<int>();
+		public HashSet<int>? ActivSubstanceId { get; set; } = new HashSet<int>();
 		public ICollection<Medication>? Medications { get; set; } =new HashSet<Medication>();
 		public ICollection<ActiveSubstanceInteractionViewModel>? Interactions { get; set; } = new HashSet<ActiveSubstanceInteractionViewModel>();
 

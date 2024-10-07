@@ -172,6 +172,7 @@ public class ActiveSubstanceController : Controller
         activeSubstance.Medications.AddRange(substance.Medications);
         // Add New interactions to the active substance
         activeSubstance.ActSub1.AddRange(((ActiveSubstance)substance).ActSub1);
+        activeSubstance.ActiveSubstancesName = substance.ActiveSubstancesName;
 
         // If the model is invalid, repopulate lists and return the view
         if (!ModelState.IsValid)
