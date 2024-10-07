@@ -19,7 +19,7 @@ namespace PLProject.Controllers
         public IActionResult Index()
         {
             var Receptionists = receptionistRepo.GetALL();
-            var ReceptionistsViewModels = Receptionists.Select(R => (Receptionist)R).ToList();
+            var ReceptionistsViewModels = Receptionists.Select(R => (ReceptionistViewModel)R).ToList();
             return View(ReceptionistsViewModels);
         }
 
@@ -30,11 +30,11 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Receptionist receptionist)
+        public IActionResult Create(ReceptionistViewModel receptionist)
         {
             if (ModelState.IsValid) // server side validation
             {
-                var count = receptionistRepo.Add((receptionist));
+                var count = receptionistRepo.Add((Receptionist)receptionist);
                 if (count > 0)
                     return RedirectToAction(nameof(Index));
             }

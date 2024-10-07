@@ -20,3 +20,20 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Define classes for fixed-width columns */
+.equal-width-1 {
+    width: 25%; /* Example width for the first column */
+}
+
+.equal-width-2 {
+    width: 55%; /* Example width for the second column */
+}
+
+.equal-width-3 {
+    width: 10%; /* Example width for edit column */
+}
+
+.equal-width-4 {
+    width: 10%; /* Example width for delete column */
+}

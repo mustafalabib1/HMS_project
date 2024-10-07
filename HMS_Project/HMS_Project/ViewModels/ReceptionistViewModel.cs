@@ -65,7 +65,7 @@ namespace HMS_Project.ViewModels
                 Address = receptionistViewModel.Address,
                 Gender = receptionistViewModel.Gender.ToString(),
                 Phone = receptionistViewModel.Phone,
-                FullName = $"{receptionistViewModel.FirstName} {receptionistViewModel.MiddleName} {receptionistViewModel.LastName}",
+                FullName = $"{receptionistViewModel.FirstName.Trim()} {receptionistViewModel.MiddleName.Trim()} {receptionistViewModel.LastName.Trim()}",
                 DateOfBirth = receptionistViewModel.DateOfBirth
             };
         }

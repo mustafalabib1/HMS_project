@@ -26,7 +26,7 @@ namespace HMS_Project.ViewModels
 			{
 				Interaction = interaction.Interaction,
 				OtherSubstanceName = interaction.ActSub2?.ActiveSubstancesName ?? "Unknown",
-				ActSubId=interaction.ActiveSubstanceId2??0
+				ActSubId=interaction.ActiveSubstanceId2??0,
 			})
 			.Concat(activeSubstance.ActSub2.Select(interaction => new ActiveSubstanceInteractionViewModel
 			{

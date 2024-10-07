@@ -71,7 +71,7 @@ namespace HMS_Project.ViewModels
                 Address = nurseViewModel.Address,
                 Gender = nurseViewModel.Gender.ToString(),
                 Phone = nurseViewModel.Phone,
-                FullName = $"{nurseViewModel.FirstName} {nurseViewModel.MiddleName} {nurseViewModel.LastName}",
+                FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}",
                 DateOfBirth = nurseViewModel.DateOfBirth,
                 ClinicId = nurseViewModel.ClinicId,
             };

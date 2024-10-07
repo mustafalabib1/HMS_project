@@ -1,4 +1,4 @@
-﻿@model Receptionist
+﻿@model ReceptionistViewModel
 
 @{
     ViewData["Title"] = "Create Receptionist";
@@ -6,19 +6,34 @@
 
 <h2>Create Receptionist</h2>
 
+
 <form asp-action="Create" method="post">
     <!-- SSN Input Field -->
-    <div class="form-group mt-2">
+    <div class="form-group mt-2" >
         <label asp-for="SSN"></label>
-        <input asp-for="SSN" class="form-control" placeholder="Enter Doctor's SSN" value="" />
+        <input asp-for="SSN" class="form-control" placeholder="Enter Receptionist's SSN" value="" />
         <span asp-validation-for="SSN" class="text-danger"></span>
     </div>
 
     <!-- First Name Input Field -->
     <div class="form-group mt-2">
-        <label asp-for="FullName"></label>
-        <input asp-for="FullName" class="form-control" placeholder="Enter First Name" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <!-- Middle Name Input Field -->
+    <div class="form-group mt-2">
+        <label asp-for="MiddleName"></label>
+        <input asp-for="MiddleName" class="form-control" placeholder="Enter Middle Name " />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+
+    <!-- Last Name Input Field -->
+    <div class="form-group mt-2">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
     <!-- Date of Birth Input Field -->
@@ -73,10 +88,8 @@
 
 <!-- Scripts for Validation -->
 @section Scripts {
-    @{
+@{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
 }
-
-
+}
 

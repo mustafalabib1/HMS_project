@@ -56,7 +56,7 @@ public class DoctorViewModel
             Address = doctorViewModwl.Address,
             Gender = doctorViewModwl.Gender.ToString(),
             Phone = doctorViewModwl.Phone,
-            FullName = $"{doctorViewModwl.FirstName} {doctorViewModwl.MiddleName} {doctorViewModwl.LastName}",
+            FullName = $"{doctorViewModwl.FirstName.Trim()} {doctorViewModwl.MiddleName.Trim()} {doctorViewModwl.LastName.Trim()}",
             DateOfBirth = doctorViewModwl.DateOfBirth,
             SpecializationId = doctorViewModwl.specializationId??0,
         };

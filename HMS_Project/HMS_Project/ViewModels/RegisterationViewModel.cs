@@ -69,7 +69,7 @@ namespace HMS_Project.ViewModels
                 Address = PatViewModel.Address,
                 Gender = PatViewModel.Gender.ToString(),
                 Phone = PatViewModel.Phone,
-                FullName = $"{PatViewModel.FirstName} {PatViewModel.MiddleName} {PatViewModel.LastName}",
+                FullName = $"{PatViewModel.FirstName.Trim()} {PatViewModel.MiddleName.Trim()} {PatViewModel.LastName.Trim()}",
                 DateOfBirth = PatViewModel.DateOfBirth
             };
         }
