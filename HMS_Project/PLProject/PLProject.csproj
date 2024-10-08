@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BLLProject\BLLProject.csproj" />
-    <ProjectReference Include="..\HMS_Project\HMS_Project.csproj" />
   </ItemGroup>
 
   <ItemGroup>

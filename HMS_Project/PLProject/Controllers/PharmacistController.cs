@@ -1,6 +1,6 @@
 ﻿using BLLProject.Interfaces;
 using DALProject.model;
-using HMS_Project.ViewModels;
+using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PLProject.Controllers

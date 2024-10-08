@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HMS_Project", "HMS_Project\HMS_Project.csproj", "{E5E6C204-FE51-40D1-B47F-FA6071248D42}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALProject", "DALProject\DALProject.csproj", "{21401E6A-633F-4578-8F5E-64E7A4582A3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLLProject", "BLLProject\BLLProject.csproj", "{ADD3C45F-35BA-4358-989C-4D42A166EECD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLLProject", "BLLProject\BLLProject.csproj", "{ADD3C45F-35BA-4358-989C-4D42A166EECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLProject", "PLProject\PLProject.csproj", "{0EFDC12A-A6A1-4F9B-BAE0-4D3B843B2BC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLProject", "PLProject\PLProject.csproj", "{0EFDC12A-A6A1-4F9B-BAE0-4D3B843B2BC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E5E6C204-FE51-40D1-B47F-FA6071248D42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5E6C204-FE51-40D1-B47F-FA6071248D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5E6C204-FE51-40D1-B47F-FA6071248D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5E6C204-FE51-40D1-B47F-FA6071248D42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21401E6A-633F-4578-8F5E-64E7A4582A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21401E6A-633F-4578-8F5E-64E7A4582A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21401E6A-633F-4578-8F5E-64E7A4582A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
