@@ -36,19 +36,21 @@ public class ActiveSubstanceController : Controller
     #region Index
     public IActionResult Index(string searchQuery, int? page)
     {
-        // Fetch all ActiveSubstance entries
-        var substances = ActiveSubstanceRepo.GetALL().ToList();
 
-        // Map ActiveSubstance to ActiveSubstanceViewModel
-        var ActSubVM = substances.Select(a => (ActiveSubstanceViewModel)a).ToList();
-
+         IEnumerable<ActiveSubstance> susbstances;
         // Filter by ActiveSubstanceName (if provided)
         if (!string.IsNullOrEmpty(searchQuery))
         {
-            ActSubVM = ActSubVM.Where(s => s.ActiveSubstancesName
-            .Contains(searchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
+           susbstances = ActiveSubstanceRepo.Find(s => s.ActiveSubstancesName.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
+        }
+        else
+        {
+             // Fetch all ActiveSubstance entries
+            susbstances=ActiveSubstanceRepo.GetALL();
         }
 
+        // Map ActiveSubstance to ActiveSubstanceViewModel
+        var ActSubVM = susbstances.Select(a => (ActiveSubstanceViewModel)a).ToList();
         // Pagination logic
         int pageSize = 10;
         int pageNumber = page ?? 1;
