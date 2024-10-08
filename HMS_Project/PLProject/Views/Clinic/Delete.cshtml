@@ -7,30 +7,10 @@
 <br />
 
 <form asp-asp-controller="Clinic" asp-action="Delete" method="post">
-    <div class="mb-3">
-    <label asp-for="Name" class="form-label"></label>
-    <input asp-for="Name" class="form-control" readonly />
-    <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Specialization" class="form-label"></label>
-        <input asp-for="Specialization" class="form-control" readonly />
-        <span asp-validation-for="Specialization" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Phone" class="form-label"></label>
-        <input asp-for="Phone" class="form-control" readonly />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Price" class="form-label"></label>
-        <input asp-for="Price" class="form-control" readonly />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
+    
+    <partial name="PartialViews/DetailsDeleteClinicPartial" />
 
     <!-- Delete and Cancel Buttons -->
     <partial name="_ButtonsInDeletePartial" />
+
 </form>

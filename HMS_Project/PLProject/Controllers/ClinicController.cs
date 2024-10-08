@@ -101,7 +101,9 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ClinicViewModel clinicViewModel)
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Edit([FromRoute] int Id, ClinicViewModel clinicViewModel)
         {
             Clinic clinic = clinicRepo.Get(clinicViewModel.Id);
 
@@ -139,7 +141,8 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(ClinicViewModel clinicViewModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([FromRoute] int Id, ClinicViewModel clinicViewModel)
         {
             var clinic = clinicRepo.Get(clinicViewModel.Id);
             try
