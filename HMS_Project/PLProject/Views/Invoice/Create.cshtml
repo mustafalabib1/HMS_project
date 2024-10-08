@@ -17,4 +17,7 @@
     <input type="submit" value="Create" class="btn btn-primary mt-2" />
     <a asp-controller="Invoice" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
 </form>
+@section ClientSideValidation {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
 
