@@ -22,42 +22,60 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Home and Privacy -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="Index">Doctor</a>
+
+                        <!-- Dropdown for Staff -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="staffDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Staff
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="staffDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Doctor" asp-action="Index">Doctor</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Nurse" asp-action="Index">Nurses</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Pharmacist" asp-action="Index">Pharmacist</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Receptionist" asp-action="Index">Receptionist</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ActiveSubstance" asp-action="Index">ActiveSubstance</a>
+
+                        <!-- Dropdown for Medical -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="medicalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Medical
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="medicalDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="ActiveSubstance" asp-action="Index">Active Substance</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Medication" asp-action="Index">Medication</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Clinic" asp-action="Index">Clinic</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Clinic" asp-action="Index">Clinic</a>
-                        </li>
+
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Appointment</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Medication" asp-action="Index">Medication</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Invoice" asp-action="Index">Invoices</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Nurse" asp-action="Index">Nurses</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Index">Patient</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pharmacist" asp-action="Index">Pharmacist</a>
+
+
+
+                        <!-- Dropdown for Billing -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="billingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Billing
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="billingDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Receptionist" asp-action="Index">Receptionist</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
