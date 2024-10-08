@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pharmacist>
+﻿@model IEnumerable<PharmacistViewModel>
 @{
     ViewData["Title"] = "Pharmacists";
 }
@@ -16,11 +16,13 @@
     <table class=" table table-striped table-hover">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(P => P.FullName)</th>
-                <th>@Html.DisplayNameFor(P => P.Email)</th>
-                <th>@Html.DisplayNameFor(P => P.Phone)</th>
-                <th>@Html.DisplayNameFor(P => P.Gender)</th>
-                <th>@Html.DisplayNameFor(P => P.DateOfBirth)</th>
+                <th>@Html.DisplayNameFor(p => p.FirstName)</th>
+                <th>@Html.DisplayNameFor(p => p.LastName)</th>
+                <th>@Html.DisplayNameFor(p => p.Email)</th>
+                <th>@Html.DisplayNameFor(p => p.Phone)</th>
+                <th>@Html.DisplayNameFor(p => p.Gender)</th>
+                <th>@Html.DisplayNameFor(p => p.DateOfBirth)</th>
+
 
                 <th>Details</th>
                 <th>Update</th>
@@ -32,7 +34,8 @@
             @foreach (var Pharmacist in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(p => Pharmacist.FullName)</td>
+                    <td>@Html.DisplayFor(p => Pharmacist.FirstName)</td>
+                    <td>@Html.DisplayFor(p => Pharmacist.LastName)</td>
                     <td>@Html.DisplayFor(p => Pharmacist.Email)</td>
                     <td>@Html.DisplayFor(p => Pharmacist.Phone)</td>
                     <td>@Html.DisplayFor(p => Pharmacist.Gender)</td>

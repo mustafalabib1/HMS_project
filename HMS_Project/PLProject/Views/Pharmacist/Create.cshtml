@@ -1,4 +1,4 @@
-﻿@model Pharmacist
+﻿@model PharmacistViewModel
 
 @{
     ViewData["Title"] = "Create Pharmacist";
@@ -16,9 +16,23 @@
 
     <!-- First Name Input Field -->
     <div class="form-group mt-2">
-        <label asp-for="FullName"></label>
-        <input asp-for="FullName" class="form-control" placeholder="Enter First Name" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <!-- Middle Name Input Field -->
+    <div class="form-group mt-2">
+        <label asp-for="MiddleName"></label>
+        <input asp-for="MiddleName" class="form-control" placeholder="Enter Middle Name " />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+
+    <!-- Last Name Input Field -->
+    <div class="form-group mt-2">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
     <!-- Date of Birth Input Field -->
