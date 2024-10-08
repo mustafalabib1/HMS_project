@@ -8,68 +8,9 @@
 <br />
 
 <form asp-controller="Pharmacist" asp-action="Edit" method="post">
-    <!-- SSN Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="SSN"></label>
-        <input asp-for="SSN" class="form-control" placeholder=" Pharmacist's SSN "/>
-        <span asp-validation-for="SSN" class="text-danger"></span>
-    </div>
 
-    <!-- First Name Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
+    <partial name="PartialViews/CreateEditPharmacistPartial" />
 
-    <!-- Middle Name Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="MiddleName"></label>
-        <input asp-for="MiddleName" class="form-control" placeholder="Enter Middle Name " />
-        <span asp-validation-for="MiddleName" class="text-danger"></span>
-    </div>
-
-    <!-- Last Name Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
-
-    <!-- Date of Birth Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="DateOfBirth"></label>
-        <input asp-for="DateOfBirth" class="form-control" type="date" value="" />
-        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-    </div>
-
-    <!-- Phone Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" placeholder="Enter Phone Number" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-
-    <!-- Email Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" placeholder="Enter Email Address" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <!-- Password Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="UserPassword"></label>
-        <input asp-for="UserPassword" class="form-control" type="password" placeholder="Enter Password" />
-        <span asp-validation-for="UserPassword" class="text-danger"></span>
-    </div>
-
-    <!-- Address Input Field -->
-    <div class="form-group mt-2">
-        <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" placeholder="Enter Address (optional)" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
     <!-- Action Buttons -->
     <partial name="_ButtonsInEditPartial" />
 </form>
