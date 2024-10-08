@@ -43,29 +43,15 @@ namespace HMS_Project.ViewModels
         [Display(Name = "Price per Visit")]
         public double? Price { get; set; }
 
-        //public IEnumerable<Nurse> NursesDateReader { get; set; } = new HashSet<Nurse>();
-        //public ICollection<Nurse> NursesInClinic { get; set; } = new HashSet<Nurse>();
-        //public IEnumerable<Doctor> DoctorsDateReader { get; set; } = new HashSet<Doctor>();
-        //public ICollection<Doctor> DoctorsInClinic { get; set; } = new HashSet<Doctor>();
-
-        //HashSet<Apointment> UpcomingApointments { get; set; } = new HashSet<Apointment>();
-
-        //// Maybe if we want to display the number of Doctors, Nurses and Apointments in the clinic we should use it new view 
-        //public int TotalDoctors { get; set; }
-        //public int TotalNurses { get; set; }
-        //public int TotalApointments { get; set; }
-
-
         public static explicit operator Clinic(ClinicViewModel _clinicViewModel)
         {
             return new Clinic()
             {
+                Id = _clinicViewModel.Id,
                 Name = _clinicViewModel.Name,
                 Phone = _clinicViewModel.Phone,
                 Price = _clinicViewModel.Price ?? default,
                 Specialization = _clinicViewModel.Specialization,
-                //Doctors = _clinicViewModel.DoctorsInClinic,
-                //Apointments = _clinicViewModel.UpcomingApointments
             };
         }
 
