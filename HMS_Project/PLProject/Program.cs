@@ -1,10 +1,12 @@
+using BLLProject;
 using BLLProject.Interfaces;
 using BLLProject.Repositories;
 using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using NuGet.Protocol.Core.Types;
-using Microsoft.AspNetCore.Identity;
 using DALProject.model;
 
 namespace PLProject
@@ -27,10 +29,11 @@ namespace PLProject
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<HMSdbcontext>();
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<HMSdbcontext>();
 
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();
 
             var app = builder.Build();
