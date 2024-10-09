@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PLProject.ViewModels
 {
-    public class ReceptionistViewModel
+    public class ReceptionistViewModel : UserViewModel
     {
         public ReceptionistViewModel()
         {
@@ -36,25 +36,6 @@ namespace PLProject.ViewModels
             Address = receptionist.Address;
             Gender = Enum.TryParse(receptionist.Gender, out Gender Gendervalue) ? Gendervalue : null;
         }
-        public int Id { get; set; }
-        [Required]
-        public long SSN { get; set; }
-        [Required]
-        public string FirstName { get; set; } = null!;
-        [Required]
-        public string MiddleName { get; set; } = null!;
-        [Required]
-        public string LastName { get; set; } = null!;
-        [Required]
-        public DateOnly DateOfBirth { get; set; }
-        public string? Phone { get; set; } = null!;
-        [EmailAddress]
-        public string Email { get; set; } = null!;
-        [Required]
-        public string UserPassword { get; set; } = null!;
-        public string? Address { get; set; }
-        public Gender? Gender { get; set; }
-
         public static explicit operator Receptionist(ReceptionistViewModel receptionistViewModel)
         {
             return new Receptionist()

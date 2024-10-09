@@ -1,12 +1,14 @@
-﻿@model DoctorViewModel
+﻿@model PatientViewModel
 @{
-    ViewData["Title"] = "Delete Doctor";
+    ViewData["Title"] = "Delete Patient";
 }
-<h1>Are you sure you want to delete this doctor?</h1>
+
+<h1>Are you sure you want to delete this Patient?</h1>
 <br />
 <br />
 
-<form asp-controller="Doctor" asp-action="Delete" method="post">
+<form asp-controller="Patient" asp-action="Delete" method="post">
+
     <partial name="userpartialviews\_UserDetailsDeletePartial" model="@Model" />
 
     <!-- Delete and Cancel Buttons -->

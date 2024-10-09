@@ -1,13 +1,13 @@
-﻿@model PharmacistViewModel
+﻿@model NurseViewModel
 @{
-    ViewData["Title"] = "Edit Pharmacist";
+    ViewData["Title"] = "Edit Nurse";
 }
 
-<h1>Edit Pharmacist</h1>
+<h1>Edit Nurse</h1>
 <br />
 <br />
 
-<form asp-controller="Pharmacist" asp-action="Edit" method="post">
+<form asp-controller="Nurse" asp-action="Edit" method="post">
 
     <partial name="userpartialviews\_UserEditPartial" model="@Model" />
     <!-- Action Buttons -->

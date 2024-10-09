@@ -160,8 +160,15 @@
         }
     </div>
 
-    <!-- Action Buttons -->
-    <partial name="_ButtonsInEditPartial" />
+    <div class="mt-4">
+        <!-- Button that submits the form -->
+        <button type="button" class="btn btn-primary" onclick="document.getElementById('editForm').submit();">
+            <i class="fas fa-edit"></i> Edit
+        </button>
+        <a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
+            <i class="fas fa-arrow-left"></i> Back To List
+        </a>
+    </div>
 
 </div>
 

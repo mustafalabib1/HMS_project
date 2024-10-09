@@ -76,15 +76,10 @@ namespace PLProject.Controllers
         public IActionResult Edit(PharmacistViewModel pharmacistViewModel)
         {
             var pharmacist = pharmacistRepo.Get(pharmacistViewModel.Id);
-
+            pharmacistViewModel.UserPassword = pharmacist.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
-                // Mapping the model
-                pharmacist.FullName = pharmacistViewModel.FirstName;
-                pharmacist.Phone = pharmacistViewModel.Phone;
-                pharmacist.Email = pharmacistViewModel.Email;
-
-                pharmacistRepo.Update(pharmacist);
+                pharmacistRepo.Update((Pharmacist)pharmacistViewModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(pharmacistViewModel);

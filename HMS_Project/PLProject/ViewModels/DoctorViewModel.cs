@@ -1,6 +1,7 @@
 ﻿using DALProject.model;
+using PLProject.ViewModels;
 
-public class DoctorViewModel
+public class DoctorViewModel:UserViewModel
 {
     public DoctorViewModel() { }
 
@@ -29,17 +30,6 @@ public class DoctorViewModel
         specialization = doctor.DoctorSpecialization.Specialization;
     }
 
-    public int Id { get; set; }  
-    public long SSN { get; set; }
-    public string FirstName { get; set; } = null!;
-    public string MiddleName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
-    public DateOnly DateOfBirth { get; set; }
-    public string? Phone { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public string UserPassword { get; set; } = null!;
-    public string? Address { get; set; }
-    public Gender? Gender { get; set; }
     public string? specialization { get; set; }
     public int? specializationId { get; set; }
     public decimal? Price { get; set; } // إضافة خاصية Price إذا كانت مطلوبة

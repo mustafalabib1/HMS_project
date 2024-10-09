@@ -1,58 +1,12 @@
-﻿@model IEnumerable<Patient>
+﻿@model IEnumerable<PatientViewModel>
 @{
     ViewData["Title"] = "Patients";
+    ViewData["User"] = "Patient";
+
 }
 
-<h1> All Patients </h1>
-<br />
-<br />
+<partial name="userpartialviews\_UserIndexPartial" model="@Model" />
 
-
-<a asp-action="Create" asp-controller="Patient" class="btn btn-primary"> Create New Patient </a>
-<br />
-
-@if (Model.Count() > 0)
-{
-    <table class=" table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(P => P.FullName)</th>
-                <th>@Html.DisplayNameFor(P => P.Email)</th>
-                <th>@Html.DisplayNameFor(P => P.Phone)</th>
-                <th>@Html.DisplayNameFor(P => P.Gender)</th>
-                <th>@Html.DisplayNameFor(P => P.DateOfBirth)</th>
-
-                <th>Details</th>
-                <th>Update</th>
-                <th>Delete</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var patient in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(P=> patient.FullName)</td>
-                    <td>@Html.DisplayFor(P => patient.Email)</td>
-                    <td>@Html.DisplayFor(P => patient.Phone)</td>
-                    <td>@Html.DisplayFor(P => patient.Gender)</td>
-                    <td>@Html.DisplayFor(P => patient.DateOfBirth)</td>
-
-                    <partial name="_ButtonsPartial" model="@patient.Id"></partial>
-                </tr>
-            }
-        </tbody>
-
-    </table>
-}
-else
-{
-    <div class="mt-4 alert alert-warning">
-        <h3>
-            There is no Patients !
-        </h3>
-    </div>
-}
 
 
 

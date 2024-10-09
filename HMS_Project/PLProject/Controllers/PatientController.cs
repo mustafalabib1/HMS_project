@@ -8,38 +8,37 @@ namespace PLProject.Controllers
 {
     public class PatientController : Controller
     {
-        private readonly IRepository<Patient> patientRepo;
+        private readonly IRepository<Patient> PatientRepo;
 
-        public IRepository<Patient> SpecializationRepo { get; }
-
-        public PatientController(IRepository<Patient> SpecializationRepo, IRepository<Patient> PatientRepo)
+        public PatientController(IRepository<Patient> PatientRepo)
         {
-            this.SpecializationRepo = SpecializationRepo;
-            patientRepo = PatientRepo;
+            this.PatientRepo = PatientRepo;
         }
+
+
         public IActionResult Index()
         {
-            var patients = patientRepo.GetALL();
-            var patientViewModels = patients.Select(p => (Patient)p).ToList();
-            return View(patientViewModels);
+            var Patients = PatientRepo.GetALL();
+            var PatientViewModels = Patients.Select(p => (PatientViewModel)p).ToList();
+            return View(PatientViewModels);
         }
 
-        #region create
+
+        #region Create
         public IActionResult Create()
         {
-            return View();
+            return View(new PatientViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(Patient patient)
+        public IActionResult Create(PatientViewModel PatientViewModel)
         {
             if (ModelState.IsValid) // server side validation
             {
-                var count = patientRepo.Add((patient));
-                if (count > 0)
-                    return RedirectToAction(nameof(Index));
+                PatientRepo.Add((Patient)PatientViewModel);
+                return RedirectToAction(nameof(Index));
             }
-            return View(patient);
+            return View(PatientViewModel);
         }
         #endregion
 
@@ -49,20 +48,75 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var patient = patientRepo.Get(Id.Value);
-            var patientViewModel = (Patient)patient;
+            var Patient = PatientRepo.Get(Id.Value);
+            var PatientViewModel = (PatientViewModel)Patient;
 
-            if (patient is null)
+            if (Patient is null)
                 return NotFound(); // 404
 
-            return View(patientViewModel);
+            return View(PatientViewModel);
+        }
+        #endregion
+
+        #region Edit
+        public IActionResult Edit(int? Id)
+        {
+            if (!Id.HasValue)
+                return BadRequest(); // 400
+
+            var Patient = PatientRepo.Get(Id.Value);
+
+            if (Patient is null)
+                return NotFound(); // 404
+
+            var PatientViewModel = (PatientViewModel)Patient;
+            return View(PatientViewModel);
         }
 
+        [HttpPost]
+        public IActionResult Edit(PatientViewModel PatientViewModel)
+        {
+            var Patient = PatientRepo.Get(PatientViewModel.Id);
+            PatientViewModel.UserPassword = Patient.UserPassword;
+            if (ModelState.IsValid) // server side validation
+            {
+                PatientRepo.Update((Patient)PatientViewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(PatientViewModel);
+        }
         #endregion
 
         #region Delete
+        public IActionResult Delete(int? Id)
+        {
+            if (!Id.HasValue)
+                return BadRequest(); // 400
 
+            var Patient = PatientRepo.Get(Id.Value);
+            var PatientViewModel = (PatientViewModel)Patient;
+
+            if (Patient is null)
+                return NotFound(); // 404
+
+            return View(PatientViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(PatientViewModel PatientViewModel)
+        {
+            var Patient = PatientRepo.Get(PatientViewModel.Id);
+            try
+            {
+                PatientRepo.Delete(Patient);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(PatientViewModel);
+            }
+        }
         #endregion
-
     }
 }

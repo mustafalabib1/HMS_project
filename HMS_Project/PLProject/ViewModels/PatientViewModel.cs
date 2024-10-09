@@ -12,12 +12,12 @@ namespace PLProject.ViewModels
     /// <summary>
     /// patient resgastion 
     /// </summary>
-    public class RegisterationViewModel
+    public class PatientViewModel:UserViewModel
     {
-        public RegisterationViewModel()
+        public PatientViewModel()
         {
         }
-        public RegisterationViewModel(Patient patient)
+        public PatientViewModel(Patient patient)
         {
             SSN = patient.SSN;
             string[] name = patient.FullName.Split();
@@ -39,27 +39,8 @@ namespace PLProject.ViewModels
             Address = patient.Address;
             Gender = Enum.TryParse(patient.Gender, out Gender Gendervalue) ? Gendervalue : null;
         }
-        //public HashSet<DoctorSpecializationLookup> Specializations { get; set; }
-        //public string Specializations { get; set; };
-        [Required]
-        public long SSN { get; set; }
-        [Required]
-        public string FirstName { get; set; } = null!;
-        [Required]
-        public string MiddleName { get; set; } = null!;
-        [Required]
-        public string LastName { get; set; } = null!;
-        [Required]
-        public DateOnly DateOfBirth { get; set; }
-        public string? Phone { get; set; } = null!;
-        [EmailAddress]
-        public string Email { get; set; } = null!;
-        [Required]
-        public string UserPassword { get; set; } = null!;
-        public string? Address { get; set; }
-        public Gender? Gender { get; set; }
 
-        public static explicit operator Patient(RegisterationViewModel PatViewModel)
+        public static explicit operator Patient(PatientViewModel PatViewModel)
         {
             return new Patient()
             {
@@ -75,9 +56,9 @@ namespace PLProject.ViewModels
         }
         //we shoud make explicit casting patient to PatViewModle but this is not important in this case 
 
-        public static explicit operator RegisterationViewModel(Patient patient)
+        public static explicit operator PatientViewModel(Patient patient)
         {
-            return new RegisterationViewModel(patient);
+            return new PatientViewModel(patient);
         }
     }
 }

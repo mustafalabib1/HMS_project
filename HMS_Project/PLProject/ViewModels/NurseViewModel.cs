@@ -1,4 +1,5 @@
 ﻿using DALProject.model;
+using PLProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PLProject.ViewModels
 {
-    public class NurseViewModel
+    public class NurseViewModel:UserViewModel
     {
         public NurseViewModel()
         {
@@ -39,25 +40,7 @@ namespace PLProject.ViewModels
             Gender = Enum.TryParse(nurse.Gender, out Gender Gendervalue) ? Gendervalue : null;
             ClinicId = nurse.ClinicId;
         }
-        public int Id { get; set; }
 
-        [Required]
-        public long SSN { get; set; }
-        [Required]
-        public string FirstName { get; set; } = null!;
-        [Required]
-        public string MiddleName { get; set; } = null!;
-        [Required]
-        public string LastName { get; set; } = null!;
-        [Required]
-        public DateOnly DateOfBirth { get; set; }
-        public string? Phone { get; set; } = null!;
-        [EmailAddress]
-        public string Email { get; set; } = null!;
-        [Required]
-        public string UserPassword { get; set; } = null!;
-        public string? Address { get; set; }
-        public Gender? Gender { get; set; }
         public ICollection<Clinic> ClinicDateReader { get; set; } = new HashSet<Clinic>();
         public int? ClinicId { get; set; }
 
@@ -76,7 +59,6 @@ namespace PLProject.ViewModels
                 ClinicId = nurseViewModel.ClinicId,
             };
         }
-        //we shoud make explicit casting Nurse to NurseViewModel but this is not important in this case 
 
         public static explicit operator NurseViewModel(Nurse nurse)
         {

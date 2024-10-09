@@ -1,62 +1,9 @@
 ﻿@model IEnumerable<PharmacistViewModel>
 @{
     ViewData["Title"] = "Pharmacists";
+    ViewData["User"] = "Pharmacist";
+
 }
 
-<h1> All Pharmacists </h1>
-<br />
-<br />
-
-
-<a asp-action="Create" asp-controller="Pharmacist" class="btn btn-primary"> Create New Pharmacist </a>
-<br />
-
-@if (Model.Count() > 0)
-{
-    <table class=" table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(p => p.FirstName)</th>
-                <th>@Html.DisplayNameFor(p => p.LastName)</th>
-                <th>@Html.DisplayNameFor(p => p.Email)</th>
-                <th>@Html.DisplayNameFor(p => p.Phone)</th>
-                <th>@Html.DisplayNameFor(p => p.Gender)</th>
-                <th>@Html.DisplayNameFor(p => p.DateOfBirth)</th>
-
-
-                <th>Details</th>
-                <th>Update</th>
-                <th>Delete</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Pharmacist in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(p => Pharmacist.FirstName)</td>
-                    <td>@Html.DisplayFor(p => Pharmacist.LastName)</td>
-                    <td>@Html.DisplayFor(p => Pharmacist.Email)</td>
-                    <td>@Html.DisplayFor(p => Pharmacist.Phone)</td>
-                    <td>@Html.DisplayFor(p => Pharmacist.Gender)</td>
-                    <td>@Html.DisplayFor(p => Pharmacist.DateOfBirth)</td>
-
-                    <partial name="_ButtonsPartial" model="@Pharmacist.Id"></partial>
-                </tr>
-            }
-        </tbody>
-
-    </table>
-}
-else
-{
-    <div class="mt-4 alert alert-warning">
-        <h3>
-            There is no Pharmacists !
-        </h3>
-    </div>
-}
-
-
-
+<partial name="userpartialviews\_UserIndexPartial" model="@Model" />
 

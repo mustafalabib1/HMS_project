@@ -7,39 +7,37 @@ namespace PLProject.Controllers
 {
     public class NurseController : Controller
     {
-        private readonly IRepository<Nurse> nurseRepo;
+        private readonly IRepository<Nurse> NurseRepo;
 
-        public IRepository<DoctorSpecializationLookup> SpecializationRepo { get; }
-
-        public NurseController(IRepository<Nurse> SpecializationRepo, IRepository<Nurse> NurseRepo)
+        public NurseController(IRepository<Nurse> NurseRepo)
         {
-            this.nurseRepo = SpecializationRepo;
-            nurseRepo = NurseRepo;
+            this.NurseRepo = NurseRepo;
         }
+
+
         public IActionResult Index()
         {
-            var nurses = nurseRepo.GetALL();
-            var nurseViewModels = nurses.Select(c => (NurseViewModel)c).ToList();
-            return View(nurseViewModels);
+            var Nurses = NurseRepo.GetALL();
+            var NurseViewModels = Nurses.Select(p => (NurseViewModel)p).ToList();
+            return View(NurseViewModels);
         }
 
 
-        #region create
+        #region Create
         public IActionResult Create()
         {
-            return View();
+            return View(new NurseViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(Nurse nurse)
+        public IActionResult Create(NurseViewModel NurseViewModel)
         {
             if (ModelState.IsValid) // server side validation
             {
-                var count = nurseRepo.Add((nurse));
-                if (count > 0)
-                    return RedirectToAction(nameof(Index)/*"Index"*/);
+                NurseRepo.Add((Nurse)NurseViewModel);
+                return RedirectToAction(nameof(Index));
             }
-            return View(nurse); 
+            return View(NurseViewModel);
         }
         #endregion
 
@@ -49,18 +47,75 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var nurse = nurseRepo.Get(Id.Value);
-            var nurseViewModel = (NurseViewModel)nurse;
+            var Nurse = NurseRepo.Get(Id.Value);
+            var NurseViewModel = (NurseViewModel)Nurse;
 
-            if (nurse is null)
+            if (Nurse is null)
                 return NotFound(); // 404
 
-            return View(nurseViewModel);
+            return View(NurseViewModel);
         }
-
         #endregion
 
+        #region Edit
+        public IActionResult Edit(int? Id)
+        {
+            if (!Id.HasValue)
+                return BadRequest(); // 400
 
+            var Nurse = NurseRepo.Get(Id.Value);
+
+            if (Nurse is null)
+                return NotFound(); // 404
+
+            var NurseViewModel = (NurseViewModel)Nurse;
+            return View(NurseViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NurseViewModel NurseViewModel)
+        {
+            var Nurse = NurseRepo.Get(NurseViewModel.Id);
+            NurseViewModel.UserPassword = Nurse.UserPassword;
+            if (ModelState.IsValid) // server side validation
+            {
+                NurseRepo.Update((Nurse)NurseViewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(NurseViewModel);
+        }
+        #endregion
+
+        #region Delete
+        public IActionResult Delete(int? Id)
+        {
+            if (!Id.HasValue)
+                return BadRequest(); // 400
+
+            var Nurse = NurseRepo.Get(Id.Value);
+            var NurseViewModel = (NurseViewModel)Nurse;
+
+            if (Nurse is null)
+                return NotFound(); // 404
+
+            return View(NurseViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(NurseViewModel NurseViewModel)
+        {
+            var Nurse = NurseRepo.Get(NurseViewModel.Id);
+            try
+            {
+                NurseRepo.Delete(Nurse);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(NurseViewModel);
+            }
+        }
+        #endregion
     }
-
 }

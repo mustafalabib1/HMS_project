@@ -81,17 +81,11 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Edit(ReceptionistViewModel receptionistViewModel)
         {
+            var receptionist =receptionistRepo.Get(receptionistViewModel.Id);
+            receptionistViewModel.UserPassword = receptionist.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
-                var receptionist = receptionistRepo.Get(receptionistViewModel.Id);
-                receptionist.FullName = $"{receptionistViewModel.FirstName} {receptionistViewModel.MiddleName} {receptionistViewModel.LastName}";
-                receptionist.DateOfBirth = receptionistViewModel.DateOfBirth;
-                receptionist.Phone = receptionistViewModel.Phone;
-                receptionist.Email = receptionistViewModel.Email;
-                receptionist.Address = receptionistViewModel.Address;
-                receptionist.Gender = receptionistViewModel.Gender.ToString();
-
-                receptionistRepo.Update(receptionist);
+                receptionistRepo.Update((Receptionist)receptionistViewModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(receptionistViewModel);

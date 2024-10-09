@@ -100,14 +100,10 @@ namespace PLProject.Controllers
         public IActionResult Edit(DoctorViewModel doctorViewModel)
         {
             Doctor doctor = doctorRepo.Get(doctorViewModel.Id);
-
+            doctorViewModel.UserPassword=doctor.UserPassword;
             if (ModelState.IsValid)
             {
-                doctor.FullName = doctorViewModel.FirstName;
-                doctor.SpecializationId = doctorViewModel.specializationId??0;
-                doctor.Phone = doctorViewModel.Phone;
-
-                doctorRepo.Update(doctor);
+                doctorRepo.Update((Doctor)doctorViewModel);
                 return RedirectToAction(nameof(Index));
             }
             doctorViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
@@ -145,8 +141,5 @@ namespace PLProject.Controllers
             }
         }
         #endregion
-
-
-
     }
 }

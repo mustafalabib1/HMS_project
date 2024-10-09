@@ -8,18 +8,7 @@
 
 <form asp-action="Create" method="post">
 
-    <partial name="PartialViews/CreateEditPharmacistPartial" />
-
-    <!-- Gender Dropdown -->
-    <div class="form-group mt-2">
-        <label asp-for="Gender"></label>
-        <select asp-for="Gender" class="form-control">
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        <span asp-validation-for="Gender" class="text-danger"></span>
-    </div>
+    <partial name="userpartialviews\_UserCreatePartial" />
 
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary mt-2">Submit</button>

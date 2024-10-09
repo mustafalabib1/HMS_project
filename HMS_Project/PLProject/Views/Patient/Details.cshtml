@@ -8,28 +8,7 @@
 <br />
 
 <div>
-    <div class="mb-3">
-        <label asp-for="FullName" class="form-label"></label>
-        <input asp-for="FullName" class="form-control" readonly />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" readonly />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Phone" class="form-label"></label>
-        <input asp-for="Phone" class="form-control" readonly />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Gender" class="form-label"></label>
-        <input asp-for="Gender" class="form-control" readonly />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="DateOfBirth" class="form-label"></label>
-        <input asp-for="DateOfBirth" class="form-control" readonly />
-    </div>
+    <partial name="userpartialviews\_UserDetailsDeletePartial" model="@Model" />
 
     <partial name="_ButtonsInDetailsPartial" model="Model.Id" />
 
