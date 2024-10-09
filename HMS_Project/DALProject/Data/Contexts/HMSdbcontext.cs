@@ -1,4 +1,6 @@
 ﻿using DALProject.model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,15 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 namespace DALProject.Data.Contexts
 {
-    public partial class HMSdbcontext : DbContext
+    public partial class HMSdbcontext : IdentityDbContext<IdentityUser>
     {
         public HMSdbcontext(DbContextOptions<HMSdbcontext> options) : base(options)
         {
         }
          protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
 
@@ -29,8 +33,9 @@ namespace DALProject.Data.Contexts
          }
 		partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
+        public virtual DbSet<AppUser> AppUsers { get; set; }
 
-		public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
+        public virtual DbSet<Patient> Patients { get; set; } // Patient table inherit from User (TPC)
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Apointment> Apointments { get; set; }
         public virtual DbSet<Receptionist> Receptionists { get; set; }//Receptionists  table inherit from User (TPC)

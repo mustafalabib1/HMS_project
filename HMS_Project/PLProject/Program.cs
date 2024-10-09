@@ -4,6 +4,8 @@ using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NuGet.Protocol.Core.Types;
+using Microsoft.AspNetCore.Identity;
+using DALProject.model;
 
 namespace PLProject
 {
@@ -15,6 +17,8 @@ namespace PLProject
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
+
             // Configure the DbContext 
             builder.Services.AddDbContext<HMSdbcontext>(options =>
             {
@@ -22,9 +26,13 @@ namespace PLProject
                 .UseLazyLoadingProxies()
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<HMSdbcontext>();
+
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             builder.Services.AddScoped<HMSdbcontextProcedures>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -40,7 +48,11 @@ namespace PLProject
 
             app.UseRouting();
 
+            // Always add authentication before authorization
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
