@@ -30,7 +30,8 @@ namespace PLProject
             });
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<HMSdbcontext>();
+                .AddEntityFrameworkStores<HMSdbcontext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IEmailSender, EmailSender>();
