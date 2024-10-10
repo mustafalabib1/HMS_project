@@ -16,7 +16,6 @@ namespace PLProject.ViewModels
             PrescriptionID = prescription.Id;
             PrescriptionItems = (HashSet<PrescriptionItem>)prescription.PrescriptionItems;
             PharmacistId = prescription.PharmacistId;
-            ApointmentId = prescription.ApointmentId;
             DoctorId = prescription.DoctorId;
         }
 
@@ -34,7 +33,6 @@ namespace PLProject.ViewModels
                 Id = prescriptionViewModel.PrescriptionID,
                 PrescriptionItems = prescriptionViewModel.PrescriptionItems,
                 PharmacistId = prescriptionViewModel?.PharmacistId,
-                ApointmentId = prescriptionViewModel.ApointmentId,
                 DoctorId = prescriptionViewModel.DoctorId,
             };
         }

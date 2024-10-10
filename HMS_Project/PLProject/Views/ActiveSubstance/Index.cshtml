@@ -1,6 +1,4 @@
 ﻿@model IPagedList<ActiveSubstanceViewModel>
-@using X.PagedList
-@using X.PagedList.Mvc.Core
 
 @{
 	ViewData["Title"] = "Active Substances";
@@ -42,7 +40,7 @@
 							@foreach (var substance in Model)
 							{
 								<tr>
-									<td>@Html.DisplayFor(S => substance.ActiveSubstancesName)</td>
+									<td>@substance.ActiveSubstancesName)</td>
 									<partial name="_ButtonsPartial" model="@substance.Id"></partial>
 								</tr>
 							}
@@ -103,9 +101,14 @@
 					</nav>
 				</div>
 			}
+			else if (@ViewData["CurrentFilter"] is not null)
+			{
+				<div class="mt-4 alert alert-warning text-center">
+					<h3><i class="fas fa-exclamation-triangle"></i> No Active Substances Found</h3>
+				</div>
+			}
 			else
 			{
-				<!-- Improved empty state with icon and call-to-action -->
 				<div class="mt-4 alert alert-warning text-center">
 					<h3><i class="fas fa-exclamation-triangle"></i> No Active Substances Found</h3>
 					<p>You can add new active substances by clicking the button below.</p>

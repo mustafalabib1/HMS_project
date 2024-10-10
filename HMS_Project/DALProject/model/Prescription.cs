@@ -11,11 +11,6 @@
         public int? PharmacistId { get; set; }
         public virtual Pharmacist Pharmacist { get; set; } = null!;
         #endregion
-        
-        #region One2One With Apointment
-        public int ApointmentId { get; set; }
-        public virtual Apointment Apointment { get; set; }=null!;
-        #endregion
 
         #region One2Many With Doctor
         public int DoctorId { get; set; }

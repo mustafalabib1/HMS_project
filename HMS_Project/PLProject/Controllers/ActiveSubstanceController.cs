@@ -41,7 +41,7 @@ public class ActiveSubstanceController : Controller
         // Filter by ActiveSubstanceName (if provided)
         if (!string.IsNullOrEmpty(searchQuery))
         {
-           susbstances = ActiveSubstanceRepo.Find(s => s.ActiveSubstancesName.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
+           susbstances = ActiveSubstanceRepo.Find(s => s.ActiveSubstancesName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
         }
         else
         {

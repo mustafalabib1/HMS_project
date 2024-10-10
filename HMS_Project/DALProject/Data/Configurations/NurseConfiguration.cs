@@ -9,21 +9,23 @@ using System.Threading.Tasks;
 
 namespace DALProject.Data.Configurations
 {
-    public class NurseConfiguration : IEntityTypeConfiguration<Nurse>
-    {
-        public void Configure(EntityTypeBuilder<Nurse> builder)
-        {
-            #region User Configuration 
-             
-            builder.HasIndex(e => e.Email).IsUnique();
-            builder.Property(e => e.SSN).ValueGeneratedNever();
-            builder.Property(e => e.Email).HasMaxLength(50);
-            builder.Property(e => e.FullName).HasMaxLength(100);
-            builder.Property(e => e.Phone).HasMaxLength(20);
-            builder.Property(e => e.UserPassword).HasMaxLength(50);
-            builder.Property(p => p.Address).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(100);
-            builder.Property(u => u.Gender).HasMaxLength(10);
-            #endregion
-        }
-    }
+	public class NurseConfiguration : IEntityTypeConfiguration<Nurse>
+	{
+		public void Configure(EntityTypeBuilder<Nurse> builder)
+		{
+			#region User Configuration 
+
+			builder.HasIndex(e => e.Email).IsUnique();
+			builder.Property(e => e.SSN).ValueGeneratedNever();
+			builder.Property(e => e.Email).HasMaxLength(50);
+			builder.Property(e => e.FullName).HasMaxLength(100);
+			builder.Property(e => e.Phone).HasMaxLength(20);
+			builder.Property(e => e.UserPassword).HasMaxLength(50);
+			builder.Property(p => p.Address).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(100);
+			builder.Property(u => u.Gender).HasMaxLength(10);
+			builder.Property(e => e.Gender)
+	.HasConversion((Gender) => Gender.ToString(), (genderAsString) => (Gender)Enum.Parse(typeof(Gender), genderAsString, true));
+			#endregion
+		}
+	}
 }

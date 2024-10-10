@@ -13,5 +13,5 @@ public class HmsUser : ModelBase
     public string Email { get; set; } = null!;
     public string UserPassword { get; set; } = null!;
     public string? Address { get; set; }
-    public string? Gender { get; set; }
+    public Gender? Gender { get; set; }
 }

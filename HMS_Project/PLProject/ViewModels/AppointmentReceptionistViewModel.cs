@@ -20,7 +20,7 @@ namespace PLProject.ViewModels
             ApointmentTime = Apointment.ApointmentTime;
 
             // Map enum to string to ensure correct status is displayed
-            ApointmentStatus = Enum.GetName(typeof(ApointmentStatusEnum), Apointment.ApointmentStatus) ?? ApointmentStatusEnum.Scheduled.ToString();
+            ApointmentStatus =Apointment.ApointmentStatus;
         }
         [Required]
         public int Id { get; set; }
@@ -29,8 +29,8 @@ namespace PLProject.ViewModels
         public DateOnly ApointmentDate { get; set; }
 
         [Required]
-        public TimeOnly ApointmentTime { get; set; }
-        public string ApointmentStatus { get; set; } = null!;
+        public TimeOnly? ApointmentTime { get; set; }
+        public ApointmentStatusEnum ApointmentStatus { get; set; }
 
         public static explicit operator Apointment(ApointmentReceptionistViewModel ApointmentViewModel)
         {

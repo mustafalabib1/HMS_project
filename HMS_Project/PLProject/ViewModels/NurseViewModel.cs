@@ -37,7 +37,7 @@ namespace PLProject.ViewModels
             Email = nurse.Email;
             UserPassword = nurse.UserPassword;
             Address = nurse.Address;
-            Gender = Enum.TryParse(nurse.Gender, out Gender Gendervalue) ? Gendervalue : null;
+            Gender = nurse.Gender;
             ClinicId = nurse.ClinicId;
         }
 
@@ -52,7 +52,7 @@ namespace PLProject.ViewModels
                 Email = nurseViewModel.Email,
                 UserPassword = nurseViewModel.UserPassword,
                 Address = nurseViewModel.Address,
-                Gender = nurseViewModel.Gender.ToString(),
+                Gender = nurseViewModel.Gender,
                 Phone = nurseViewModel.Phone,
                 FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}",
                 DateOfBirth = nurseViewModel.DateOfBirth,

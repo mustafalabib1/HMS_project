@@ -9,13 +9,9 @@ namespace DALProject.model
     public class Apointment : ModelBase
     {
         public DateOnly ApointmentDate { get; set; }
-        public TimeOnly ApointmentTime { get; set; }
-        /// <summary>
-        ///  ApointmentStatus take his value from enum ApointmentStatus
-        /// </summary>
-        public string ApointmentStatus { get; set; } = null!;
-        public virtual string Examination { get; set; } = null!;
-
+        public TimeOnly? ApointmentTime { get; set; }
+        public ApointmentStatusEnum ApointmentStatus { get; set; } = ApointmentStatusEnum.Scheduled;
+        public virtual string? Examination { get; set; } = null!;
 
         #region One2Many With Receptionist
         public int? ReceptionistId { get; set; }
@@ -24,12 +20,12 @@ namespace DALProject.model
 
         #region One2Many With Clinic
         public int ClinicId { get; set; }
-        public  virtual Clinic Clinic { get; set; } = null!;
+        public virtual Clinic Clinic { get; set; } = null!;
         #endregion
 
         #region One2Many With Patient
         public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; } = null!; 
+        public virtual Patient Patient { get; set; } = null!;
         #endregion
 
         #region One2Many With Doctor
@@ -38,11 +34,13 @@ namespace DALProject.model
         #endregion
 
         #region One2One With Invoice
-        public virtual Invoice Invoice { get; set; }= null!;
+        public virtual Invoice Invoice { get; set; } = null!;
         #endregion
 
         #region One2One With Prescription
+        public int? PrescriptionId { get; set; }
         public virtual Prescription Prescription { get; set; } = null!;
         #endregion
+
     }
 }

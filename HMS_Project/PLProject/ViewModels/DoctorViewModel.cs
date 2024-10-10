@@ -26,7 +26,7 @@ public class DoctorViewModel:UserViewModel
         Email = doctor.Email;
         UserPassword = doctor.UserPassword;
         Address = doctor.Address;
-        Gender = Enum.TryParse(doctor.Gender, out Gender Gendervalue) ? Gendervalue : null;
+        Gender = doctor.Gender;
         specialization = doctor.DoctorSpecialization.Specialization;
     }
 
@@ -44,7 +44,7 @@ public class DoctorViewModel:UserViewModel
             Email = doctorViewModwl.Email,
             UserPassword = doctorViewModwl.UserPassword,
             Address = doctorViewModwl.Address,
-            Gender = doctorViewModwl.Gender.ToString(),
+            Gender = doctorViewModwl.Gender,
             Phone = doctorViewModwl.Phone,
             FullName = $"{doctorViewModwl.FirstName.Trim()} {doctorViewModwl.MiddleName.Trim()} {doctorViewModwl.LastName.Trim()}",
             DateOfBirth = doctorViewModwl.DateOfBirth,

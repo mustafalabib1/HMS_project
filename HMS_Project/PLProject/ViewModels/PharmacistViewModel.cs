@@ -35,7 +35,7 @@ namespace PLProject.ViewModels
             Email = pharmacist.Email;
             UserPassword = pharmacist.UserPassword;
             Address = pharmacist.Address;
-            Gender = Enum.TryParse(pharmacist.Gender, out Gender Gendervalue) ? Gendervalue : null;
+            Gender =pharmacist.Gender;
         }
 
         public static explicit operator Pharmacist(PharmacistViewModel pharmacistViewModel)
@@ -47,7 +47,7 @@ namespace PLProject.ViewModels
                 Email = pharmacistViewModel.Email,
                 UserPassword = pharmacistViewModel.UserPassword,
                 Address = pharmacistViewModel.Address,
-                Gender = pharmacistViewModel.Gender.ToString(),
+                Gender = pharmacistViewModel.Gender,
                 Phone = pharmacistViewModel.Phone,
                 FullName = $"{pharmacistViewModel.FirstName.Trim()} {pharmacistViewModel.MiddleName.Trim()} {pharmacistViewModel.LastName.Trim()}",
                 DateOfBirth = pharmacistViewModel.DateOfBirth

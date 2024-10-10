@@ -23,7 +23,9 @@ namespace DALProject.Data.Configurations
             builder.Property(e => e.UserPassword).HasMaxLength(50);
             builder.Property(p => p.Address).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(100); 
             builder.Property(u=>u.Gender).HasMaxLength(10);
-            #endregion
-        }
+			builder.Property(e => e.Gender)
+				.HasConversion((Gender) => Gender.ToString(),(genderAsString) => (Gender)Enum.Parse(typeof(Gender), genderAsString, true));
+			#endregion
+		}
     }
 }

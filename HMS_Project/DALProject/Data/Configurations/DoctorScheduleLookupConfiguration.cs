@@ -16,6 +16,10 @@ namespace DALProject.Data.Configurations
             builder.HasKey(ds => new { ds.Day, ds.DoctorId });
             builder.Property(ds=> ds.Day).HasMaxLength(10);
 
+            builder.Property(d => d.Day)
+                .HasConversion((DayOfWeek) => DayOfWeek.ToString(), (DayOfWeekAsString) => (DayOfWeek)Enum.Parse(typeof(DayOfWeek), DayOfWeekAsString, true));
+
+
             #region One2Many With doctor
             builder
                 .HasOne(ds => ds.Doctor)

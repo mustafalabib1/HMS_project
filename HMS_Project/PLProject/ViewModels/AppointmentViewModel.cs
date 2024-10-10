@@ -17,7 +17,7 @@ namespace PLProject.ViewModels
             ApointmentId = Apointment.Id;
             ApointmentDate = Apointment.ApointmentDate;
             ApointmentTime = Apointment.ApointmentTime;
-            ApointmentStatus = ApointmentStatusEnum.Scheduled.ToString();
+            ApointmentStatus = ApointmentStatusEnum.Scheduled;
             Examination = Apointment.Examination;
             ReceptionistId = Apointment.ReceptionistId;
             ClinicId = Apointment.ClinicId;
@@ -36,11 +36,10 @@ namespace PLProject.ViewModels
 
         [Display(Name = "Apointment Time")]
         [Required]
-        public TimeOnly ApointmentTime { get; set; }
+        public TimeOnly? ApointmentTime { get; set; }
 
         [Display(Name = "Apointment Status")]
-        public string ApointmentStatus { get; set; } = null!;
-
+        public ApointmentStatusEnum ApointmentStatus { get; set; } 
         public virtual string Examination { get; set; } = null!;
 
         public IEnumerable<Clinic> Clinics { get; set; } = new HashSet<Clinic>();

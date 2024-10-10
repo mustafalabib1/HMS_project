@@ -37,7 +37,7 @@ namespace PLProject.ViewModels
             Email = patient.Email;
             UserPassword = patient.UserPassword;
             Address = patient.Address;
-            Gender = Enum.TryParse(patient.Gender, out Gender Gendervalue) ? Gendervalue : null;
+            Gender = patient.Gender;
         }
 
         public static explicit operator Patient(PatientViewModel PatViewModel)
@@ -48,7 +48,7 @@ namespace PLProject.ViewModels
                 Email = PatViewModel.Email,
                 UserPassword = PatViewModel.UserPassword,
                 Address = PatViewModel.Address,
-                Gender = PatViewModel.Gender.ToString(),
+                Gender = PatViewModel.Gender,
                 Phone = PatViewModel.Phone,
                 FullName = $"{PatViewModel.FirstName.Trim()} {PatViewModel.MiddleName.Trim()} {PatViewModel.LastName.Trim()}",
                 DateOfBirth = PatViewModel.DateOfBirth

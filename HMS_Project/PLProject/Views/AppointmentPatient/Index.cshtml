@@ -1,0 +1,29 @@
+﻿@model IPagedList<AppointmentGenarelVM>
+@{
+	ViewData["Title"] = $"All Appointment For {Model.FirstOrDefault().Patient.FullName}";
+}
+
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="mb-4">@ViewData["Title"]</h1>
+
+			<div class="row">
+				<div class="col-sm">
+					<a asp-controller="AppointmentPatient" asp-action="Create" class="btn btn-primary">Create New Appointment</a>
+				</div>
+			</div>
+			<partial name="_ApointmentIndexPartial" model="@Model" />
+
+		</div>
+	</div>
+</div>
+
+<script>
+	// Optional: JavaScript to handle search input interaction
+	document.getElementById('search-btn').addEventListener('click', function () {
+		const query = document.getElementById('search-input').value;
+		alert('Search for: ' + query); // Implement search functionality here
+	});
+</script>

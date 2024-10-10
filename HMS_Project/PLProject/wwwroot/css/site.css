@@ -37,3 +37,114 @@ body {
 .equal-width-4 {
     width: 10%; /* Example width for delete column */
 }
+/*************************************************************************************************************************************/
+/*************************************************************************************************************************************/
+/*************************************************************************************************************************************/
+ /*appointment style*/
+.clinic-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Remove default margin */
+}
+
+.clinic-item {
+    margin-bottom: 10px;
+}
+
+.clinic-link {
+    display: block;
+    padding: 12px; /* Slightly increased padding for better touch interaction */
+    background-color: #f0f0f0;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .clinic-link:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .clinic-link.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold; /* Highlight active clinic with bold text */
+    }
+
+.month-navigation {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensure buttons are vertically centered */
+}
+
+    .month-navigation a {
+        width: 140px; /* Fixed width for buttons */
+        text-align: center;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .month-navigation a:hover {
+            background-color: #0056b3; /* Darker hover state for buttons */
+        }
+
+    .month-navigation .invisible {
+        visibility: hidden;
+    }
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    border-collapse: collapse; /* Clean border look */
+}
+
+    .table th, .table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+.available {
+    background-color: #d4edda;
+    cursor: pointer; /* Indicate that available days are interactive */
+    transition: background-color 0.3s ease;
+}
+
+    .available:hover {
+        background-color: #c3e6cb; /* Lighter green on hover */
+    }
+
+.unavailable {
+    background-color: #ff7878;
+    color: #6c757d;
+}
+
+    .unavailable:hover {
+        background-color: #ff6161; /* Slightly darker hover effect */
+    }
+
+.form-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+    .form-group button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }

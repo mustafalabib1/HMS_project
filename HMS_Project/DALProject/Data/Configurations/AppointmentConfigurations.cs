@@ -15,10 +15,13 @@ namespace DALProject.Data.Configurations
         {
             #region ApointmentConfiguration 
             builder.HasKey(a => a.Id);
+            builder.Property(a => a.Id).UseIdentityColumn(1, 1);
             builder.Property(a => a.ApointmentDate).HasColumnType($"{DB_DataTypes_Helper.date}");
             builder.Property(a => a.ApointmentTime).HasColumnType($"{DB_DataTypes_Helper.time}");
             builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(15);
             builder.Property(a => a.Examination).HasMaxLength(100); 
+            builder.Property(a => a.ApointmentStatus).
+                HasConversion(status=>status.ToString(), (statusAsString) => (ApointmentStatusEnum)Enum.Parse(typeof(ApointmentStatusEnum), statusAsString, true));
             #endregion
 
             #region One2Many With Receptionist
@@ -53,8 +56,7 @@ namespace DALProject.Data.Configurations
             #region One2One With Prescription
             builder 
                 .HasOne(a=>a.Prescription)
-                .WithOne(p=>p.Apointment)
-                .HasForeignKey<Apointment>(p=>p.Id)
+                .WithOne().HasForeignKey<Apointment>(p=>p.PrescriptionId)
                 .OnDelete(DeleteBehavior.NoAction);
             #endregion
 

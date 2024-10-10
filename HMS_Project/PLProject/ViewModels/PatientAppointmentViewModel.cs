@@ -17,7 +17,7 @@ namespace PLProject.ViewModels
         public BookingApointmentViewModel(Apointment Apointment)
         {
             ApointmentDate=Apointment.ApointmentDate;
-            ApointmentStatus = Enum.TryParse(Apointment.ApointmentStatus, out ApointmentStatusEnum AppStat) ? AppStat : ApointmentStatusEnum.Scheduled;
+            ApointmentStatus =Apointment.ApointmentStatus;
             ClinicId=Apointment.ClinicId;
             DoctorId = Apointment.DoctorId;
         }
@@ -38,7 +38,7 @@ namespace PLProject.ViewModels
             return new Apointment()
             {
                 ApointmentDate = ViewModel.ApointmentDate,
-                ApointmentStatus = ViewModel.ApointmentStatus.ToString(),
+                ApointmentStatus = ViewModel.ApointmentStatus,
                 ClinicId = ViewModel.ClinicId,
                 DoctorId = ViewModel.DoctorId,
             };

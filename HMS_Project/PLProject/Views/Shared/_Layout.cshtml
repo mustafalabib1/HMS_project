@@ -54,10 +54,15 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Clinic" asp-action="Index">Clinic</a></li>
                             </ul>
                         </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Appointment</a>
+                        <!-- Dropdown for appointment -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="AppointmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Appointment
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="AppointmentDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AppointmentPatient" asp-action="Index">Appointment Patient</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AppointmentDoctor" asp-action="Index">Appointment Doctor</a></li>
+                            </ul>
                         </li>
 
                         <li class="nav-item">

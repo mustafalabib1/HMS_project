@@ -34,7 +34,7 @@ namespace PLProject.ViewModels
             Email = receptionist.Email;
             UserPassword = receptionist.UserPassword;
             Address = receptionist.Address;
-            Gender = Enum.TryParse(receptionist.Gender, out Gender Gendervalue) ? Gendervalue : null;
+            Gender =receptionist.Gender;
         }
         public static explicit operator Receptionist(ReceptionistViewModel receptionistViewModel)
         {
@@ -44,13 +44,12 @@ namespace PLProject.ViewModels
                 Email = receptionistViewModel.Email,
                 UserPassword = receptionistViewModel.UserPassword,
                 Address = receptionistViewModel.Address,
-                Gender = receptionistViewModel.Gender.ToString(),
+                Gender = receptionistViewModel.Gender,
                 Phone = receptionistViewModel.Phone,
                 FullName = $"{receptionistViewModel.FirstName.Trim()} {receptionistViewModel.MiddleName.Trim()} {receptionistViewModel.LastName.Trim()}",
                 DateOfBirth = receptionistViewModel.DateOfBirth
             };
         }
-        //we shoud make explicit casting Receptionist to ReceptionistViewModel but this is not important in this case 
 
         public static explicit operator ReceptionistViewModel(Receptionist receptionist)
         {

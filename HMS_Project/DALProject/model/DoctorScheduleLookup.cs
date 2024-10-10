@@ -9,7 +9,7 @@ namespace DALProject.model
     public class DoctorScheduleLookup : ModelBase
     {
         //public virtual DayOfWeek Day { get; set; }
-        public string Day { get; set; } = null!;
+        public DayOfWeek Day { get; set; }
         public  TimeOnly StartTime {  get; set; }
         public  TimeOnly EndTime { get; set; }
 
