@@ -44,5 +44,7 @@ namespace BLLProject.Repositories
         {
            return context.Set<T>().Where(filter);
         }
+
+
     }
 }

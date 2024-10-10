@@ -34,6 +34,7 @@ namespace PLProject
                 .AddDefaultTokenProviders();
 
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();
 

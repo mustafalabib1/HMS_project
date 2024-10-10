@@ -7,19 +7,20 @@ namespace PLProject.Controllers
 {
     public class InvoiceController : Controller
     {
-        private readonly IRepository<Invoice> repository;
+        private readonly IInvoiceRepository invoiceRepository;
         private readonly IRepository<Receptionist> recprepository;
         private readonly IRepository<Apointment> apprepository;
 
-        public InvoiceController(IRepository<Invoice> repository, IRepository<Receptionist> Recprepository, IRepository<Apointment> Apprepository)
+        public InvoiceController(IInvoiceRepository invoiceRepository, IRepository<Receptionist> Recprepository, IRepository<Apointment> Apprepository)
         {
-            this.repository = repository;
-           recprepository = Recprepository;
+         
+            this.invoiceRepository = invoiceRepository;
+            recprepository = Recprepository;
            apprepository = Apprepository;
         }
         public IActionResult Index()
         {
-            var Invoices = repository.GetALL();
+            var Invoices = invoiceRepository.GetALL();
             var InvoiceViewModel = Invoices.Select(c => (InvoiceViewModel)c).ToList();
             return View(Invoices);
         }
@@ -49,7 +50,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            var invoice = repository.Get(Id.Value);
+            var invoice = invoiceRepository.Get(Id.Value);
             var invoiceViewModel = (InvoiceViewModel)invoice;
 
             if (invoice is null)
@@ -65,7 +66,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            var invoice = repository.Get(Id.Value);
+            var invoice = invoiceRepository.Get(Id.Value);
 
             if (invoice is null)
                 return NotFound();
@@ -83,7 +84,7 @@ namespace PLProject.Controllers
         {
             if (Id != invoiceViewModel.Id) return BadRequest();
             
-            Invoice invoice = repository.Get(invoiceViewModel.Id);
+            Invoice invoice = invoiceRepository.Get(invoiceViewModel.Id);
 
             if (ModelState.IsValid) // server side validation
             {
@@ -95,7 +96,7 @@ namespace PLProject.Controllers
                 invoice.PaymentStatus = invoiceViewModel.PaymentStatus;
                 invoice.PaymentType = invoiceViewModel.PaymentType.ToString();
 
-                repository.Update(invoice);
+                invoiceRepository.Update(invoice);
                 return RedirectToAction(nameof(Index));
             }
             invoiceViewModel.ReceptionistsReader = recprepository.GetALL();
@@ -109,7 +110,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); 
 
-            var invoice = repository.Get(Id.Value);
+            var invoice = invoiceRepository.Get(Id.Value);
             var invoiceviewmodel = (InvoiceViewModel)invoice;
 
             if (invoice is null)
@@ -124,10 +125,10 @@ namespace PLProject.Controllers
         {
             if (Id != invoiceViewModel.Id) return BadRequest();
 
-            var ivoice = repository.Get(invoiceViewModel.Id);
+            var ivoice = invoiceRepository.Get(invoiceViewModel.Id);
             try
             {
-                repository.Delete(ivoice);
+                invoiceRepository.Delete(ivoice);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
