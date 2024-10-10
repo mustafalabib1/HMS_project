@@ -1,9 +1,13 @@
+using BLLProject;
 using BLLProject.Interfaces;
 using BLLProject.Repositories;
 using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using NuGet.Protocol.Core.Types;
+using DALProject.model;
 
 namespace PLProject
 {
@@ -15,6 +19,8 @@ namespace PLProject
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
+
             // Configure the DbContext 
             builder.Services.AddDbContext<HMSdbcontext>(options =>
             {
@@ -22,9 +28,15 @@ namespace PLProject
                 .UseLazyLoadingProxies()
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<HMSdbcontext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -40,7 +52,11 @@ namespace PLProject
 
             app.UseRouting();
 
+            // Always add authentication before authorization
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
