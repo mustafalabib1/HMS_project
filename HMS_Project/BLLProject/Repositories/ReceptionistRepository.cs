@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLLProject.Repositories
 {
-    internal class ReceptionistRepository : Repository<Invoice> , IReceptionistRepository
+    internal class ReceptionistRepository : Repository<Receptionist> , IReceptionistRepository
     {
         private readonly HMSdbcontext context;
 
@@ -18,7 +18,5 @@ namespace BLLProject.Repositories
         {
             this.context = context;
         }
-
-       
-    }
+	}
 }

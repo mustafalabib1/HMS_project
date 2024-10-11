@@ -13,7 +13,7 @@ namespace DALProject.model
         public string Duration { get; set; } = null!;
 
         #region One2Many With Medication 
-        public virtual string? MedicationCode { get; set; }
+        public int? MedicationId{ get; set; }
         public virtual Medication Medication { get; set; } = null!;
         #endregion
 

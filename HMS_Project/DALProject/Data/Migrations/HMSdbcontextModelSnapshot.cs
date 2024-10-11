@@ -131,7 +131,8 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("PrescriptionId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("PrescriptionId");
 
                     b.Property<int?>("ReceptionistId")
                         .HasColumnType("int");
@@ -159,7 +160,7 @@ namespace DALProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 10L, 10);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("ClinicSpecializationId")
                         .HasColumnType("int");
@@ -193,7 +194,7 @@ namespace DALProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 10L, 10);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Specialization")
                         .IsRequired()
@@ -269,7 +270,14 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.DoctorScheduleLookup", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Day")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -279,13 +287,10 @@ namespace DALProject.Data.Migrations
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
 
-                    b.HasKey("Day", "DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
@@ -313,7 +318,10 @@ namespace DALProject.Data.Migrations
             modelBuilder.Entity("DALProject.model.Invoice", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("ApointmentId")
                         .HasColumnType("int");
@@ -572,8 +580,8 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.PrescriptionItemMedication", b =>
                 {
-                    b.Property<string>("MedicationCode")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("MedicationId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PrescriptionItemId")
                         .HasColumnType("int");
@@ -588,12 +596,7 @@ namespace DALProject.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("MedicationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MedicationCode", "PrescriptionItemId");
-
-                    b.HasIndex("MedicationId");
+                    b.HasKey("MedicationId", "PrescriptionItemId");
 
                     b.HasIndex("PrescriptionItemId");
 
@@ -803,12 +806,10 @@ namespace DALProject.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -845,12 +846,10 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -953,7 +952,7 @@ namespace DALProject.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("DALProject.model.Prescription", "Prescription")
-                        .WithOne()
+                        .WithOne("Apointment")
                         .HasForeignKey("DALProject.model.Apointment", "PrescriptionId")
                         .OnDelete(DeleteBehavior.NoAction);
 
@@ -1017,7 +1016,7 @@ namespace DALProject.Data.Migrations
                     b.HasOne("DALProject.model.Apointment", "Apointment")
                         .WithOne("Invoice")
                         .HasForeignKey("DALProject.model.Invoice", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DALProject.model.Receptionist", "Receptionist")
@@ -1205,6 +1204,9 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Prescription", b =>
                 {
+                    b.Navigation("Apointment")
+                        .IsRequired();
+
                     b.Navigation("PrescriptionItems");
                 });
 

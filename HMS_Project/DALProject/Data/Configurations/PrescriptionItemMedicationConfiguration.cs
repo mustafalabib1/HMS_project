@@ -14,7 +14,8 @@ namespace DALProject.Data.Configurations
         public void Configure(EntityTypeBuilder<PrescriptionItemMedication> builder)
         {
             #region PrescriptionItemMedicationConfiguration
-            builder.HasKey(p => new { p.MedicationCode, p.PrescriptionItemId });
+            builder.HasKey(p => new { p.MedicationId, p.PrescriptionItemId });
+
             builder.Property(p => p.Dosage).HasMaxLength(100);
             builder.Property(p => p.Duration).HasMaxLength(100);
             #endregion

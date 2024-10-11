@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,10 +36,11 @@ namespace DALProject.model
 
         #region One2One With Invoice
         public virtual Invoice Invoice { get; set; } = null!;
-        #endregion
+		#endregion
 
-        #region One2One With Prescription
-        public int? PrescriptionId { get; set; }
+		#region One2One With Prescription
+		[Column("PrescriptionId")]
+		public int? PrescriptionId { get; set; }
         public virtual Prescription Prescription { get; set; } = null!;
         #endregion
 
