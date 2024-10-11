@@ -1,12 +1,15 @@
 ﻿using BLLProject.Interfaces;
 using DALProject.model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PLProject.Helpers;
 using PLProject.ViewModels.AppointmentViewModel;
 using X.PagedList;
 
 namespace PLProject.Controllers
 {
+	[Authorize(Roles = Roles.Doctor)]
 	public class AppointmentDoctorController : Controller
 	{
 		private readonly IRepository<Apointment> appointmentRepo;

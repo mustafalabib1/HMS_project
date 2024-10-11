@@ -33,6 +33,14 @@ namespace PLProject
                 .AddEntityFrameworkStores<HMSdbcontext>()
                 .AddDefaultTokenProviders();
 
+            // Configure the cookie settings used for authentication middleware.
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
+
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();

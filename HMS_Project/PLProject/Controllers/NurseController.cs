@@ -2,9 +2,12 @@
 using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using PLProject.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class NurseController : Controller
     {
         private readonly IRepository<Nurse> NurseRepo;

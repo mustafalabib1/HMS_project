@@ -3,10 +3,13 @@ using DALProject.Data.Contexts;
 using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using PLProject.Helpers;
 
 namespace PLProject.Controllers
 {
-	public class DoctorController : Controller
+    [Authorize(Roles = Roles.Admin)]
+    public class DoctorController : Controller
 	{
           private readonly IRepository<Doctor> doctorRepo;
         public IRepository<DoctorSpecializationLookup> SpecializationRepo { get; }
