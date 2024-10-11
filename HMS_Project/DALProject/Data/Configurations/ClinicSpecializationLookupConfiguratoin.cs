@@ -15,7 +15,7 @@ namespace DALProject.Data.Configurations
         {
             #region configuration 
             builder.HasKey(s => s.Id);
-            builder.Property(s => s.Id).UseIdentityColumn(10,10);
+            builder.Property(s => s.Id).UseIdentityColumn(1,1);
             builder.HasIndex(s => s.Specialization).IsUnique();
             builder.Property(s => s.Specialization).HasMaxLength(50); 
             #endregion

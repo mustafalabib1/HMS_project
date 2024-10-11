@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Receptionist : HmsUser
+    public class Receptionist : HmsUser 
     {
         #region One2Many With Invoice
         public virtual ICollection<Invoice> invoices { get; set; } = new HashSet<Invoice>();

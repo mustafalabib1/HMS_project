@@ -13,10 +13,10 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Clinic> builder)
         {
-            builder.Property(c => c.Id)
-                .UseIdentityColumn(10, 10);
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
 
-            builder.Property(c => c.Phone)
+			builder.Property(c => c.Phone)
                 .HasColumnType($"{DB_DataTypes_Helper.nvarchar}")
                 .HasMaxLength(20);
             

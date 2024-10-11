@@ -13,8 +13,10 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<PrescriptionItem> builder)
         {
-            #region PrescriptionItem Configuration
-            builder.Property(p => p.FullDosage).HasMaxLength(100);
+			#region PrescriptionItem Configuration
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
+			builder.Property(p => p.FullDosage).HasMaxLength(100);
             #endregion
 
             #region One2Many With Prescription

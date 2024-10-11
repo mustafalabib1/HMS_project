@@ -13,9 +13,10 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            #region User Configuration 
-             
-            builder.HasIndex(e => e.Email).IsUnique();
+			#region User Configuration 
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
+			builder.HasIndex(e => e.Email).IsUnique();
             builder.Property(e => e.SSN).ValueGeneratedNever();
             builder.Property(e => e.Email).HasMaxLength(50);
             builder.Property(e => e.FullName).HasMaxLength(100);
