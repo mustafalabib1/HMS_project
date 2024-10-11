@@ -8,17 +8,17 @@ namespace PLProject.Controllers
 {
     public class PatientController : Controller
     {
-        private readonly IRepository<Patient> PatientRepo;
+        private readonly IUnitOfWork unitOfWork;
 
-        public PatientController(IRepository<Patient> PatientRepo)
+        public PatientController(IUnitOfWork unitOfWork)
         {
-            this.PatientRepo = PatientRepo;
+            this.unitOfWork = unitOfWork;
         }
 
 
         public IActionResult Index()
         {
-            var Patients = PatientRepo.GetALL();
+            var Patients = unitOfWork.Repository<Patient>().GetALL();
             var PatientViewModels = Patients.Select(p => (PatientViewModel)p).ToList();
             return View(PatientViewModels);
         }
@@ -35,7 +35,7 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid) // server side validation
             {
-                PatientRepo.Add((Patient)PatientViewModel);
+                unitOfWork.Repository<Patient>().Add((Patient)PatientViewModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(PatientViewModel);
@@ -48,7 +48,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var Patient = PatientRepo.Get(Id.Value);
+            var Patient = unitOfWork.Repository<Patient>().Get(Id.Value);
             var PatientViewModel = (PatientViewModel)Patient;
 
             if (Patient is null)
@@ -64,7 +64,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var Patient = PatientRepo.Get(Id.Value);
+            var Patient = unitOfWork.Repository<Patient>().Get(Id.Value);
 
             if (Patient is null)
                 return NotFound(); // 404
@@ -76,11 +76,11 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Edit(PatientViewModel PatientViewModel)
         {
-            var Patient = PatientRepo.Get(PatientViewModel.Id);
+            var Patient = unitOfWork.Repository<Patient>().Get(PatientViewModel.Id);
             PatientViewModel.UserPassword = Patient.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
-                PatientRepo.Update((Patient)PatientViewModel);
+                unitOfWork.Repository<Patient>().Update((Patient)PatientViewModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(PatientViewModel);
@@ -93,7 +93,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var Patient = PatientRepo.Get(Id.Value);
+            var Patient = unitOfWork.Repository<Patient>().Get(Id.Value);
             var PatientViewModel = (PatientViewModel)Patient;
 
             if (Patient is null)
@@ -105,10 +105,10 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Delete(PatientViewModel PatientViewModel)
         {
-            var Patient = PatientRepo.Get(PatientViewModel.Id);
+            var Patient = unitOfWork.Repository<Patient>().Get(PatientViewModel.Id);
             try
             {
-                PatientRepo.Delete(Patient);
+                unitOfWork.Repository<Patient>().Delete(Patient);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

@@ -10,25 +10,23 @@ using System;
 
 public class ActiveSubstanceController : Controller
 {
-    #region DPI
-    private readonly IRepository<ActiveSubstance> ActiveSubstanceRepo;
-
-    private readonly IRepository<Medication> MedicationRepo;
     private readonly IWebHostEnvironment env;
     private readonly HMSdbcontextProcedures procedures;
-    private readonly IRepository<ActiveSubstanceInteraction> ActInteractRepo;
+    private readonly IUnitOfWork unitOfWork;
+    #region DPI
+
 
     public ActiveSubstanceController(
-        IRepository<ActiveSubstance> ActiveSubstanceRepo,
-        IRepository<Medication> MedicationRepo, IWebHostEnvironment _env,
+        IWebHostEnvironment _env,
         HMSdbcontextProcedures procedures,
-        IRepository<ActiveSubstanceInteraction> ActInteractRepo)
+        IUnitOfWork unitOfWork
+      )
     {
-        this.ActiveSubstanceRepo = ActiveSubstanceRepo;
-        this.MedicationRepo = MedicationRepo;
+      
         env = _env;
         this.procedures = procedures;
-        this.ActInteractRepo = ActInteractRepo;
+        this.unitOfWork = unitOfWork;
+      
     }
 
     #endregion
@@ -41,12 +39,12 @@ public class ActiveSubstanceController : Controller
         // Filter by ActiveSubstanceName (if provided)
         if (!string.IsNullOrEmpty(searchQuery))
         {
-           susbstances = ActiveSubstanceRepo.Find(s => s.ActiveSubstancesName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
+           susbstances = unitOfWork.Repository<ActiveSubstance>().Find(s => s.ActiveSubstancesName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
         }
         else
         {
              // Fetch all ActiveSubstance entries
-            susbstances=ActiveSubstanceRepo.GetALL();
+            susbstances= unitOfWork.Repository<ActiveSubstance>().GetALL();
         }
 
         // Map ActiveSubstance to ActiveSubstanceViewModel
@@ -68,8 +66,8 @@ public class ActiveSubstanceController : Controller
 
         var viewModel = new ActiveSubstanceViewModel()
         {
-            ActiveSubstancesDateReader = (ActiveSubstanceRepo.GetALL()),
-            MedicationsDateReader = MedicationRepo.GetALL(),
+            ActiveSubstancesDateReader = (unitOfWork.Repository<ActiveSubstance>().GetALL()),
+            MedicationsDateReader = unitOfWork.Repository<Medication>().GetALL(),
         };
         return View(viewModel);
     }
@@ -80,19 +78,19 @@ public class ActiveSubstanceController : Controller
     {
         foreach (var MedId in model.MedicationId)
         {
-            model.Medications.Add(MedicationRepo.Get(MedId));
+            model.Medications.Add(unitOfWork.Repository<Medication>().Get(MedId));
         }
         if (ModelState.IsValid)
         {
 
-            ActiveSubstanceRepo.Add((ActiveSubstance)model);
+            unitOfWork.Repository<ActiveSubstance>().Add((ActiveSubstance)model);
 
             return RedirectToAction("Success"); // Redirect after successful creation
         }
 
         // Reload the lists if the model state is invalid
-        model.ActiveSubstancesDateReader = (ActiveSubstanceRepo.GetALL());
-        model.MedicationsDateReader = MedicationRepo.GetALL();
+        model.ActiveSubstancesDateReader = (unitOfWork.Repository<ActiveSubstance>().GetALL());
+        model.MedicationsDateReader = unitOfWork.Repository<Medication>().GetALL();
 
         return View(model);
     }
@@ -109,7 +107,7 @@ public class ActiveSubstanceController : Controller
     {
         if (!Id.HasValue)
             return BadRequest(); // 400
-        var substandce = ActiveSubstanceRepo.Get(Id.Value);
+        var substandce = unitOfWork.Repository<ActiveSubstance>().Get(Id.Value);
         var substancevm = (ActiveSubstanceViewModel)substandce;
 
         if (substancevm is null)
@@ -117,9 +115,9 @@ public class ActiveSubstanceController : Controller
         if (viewname == "Edit")
         {
             //get Activesubstance that are not exist on this substance 
-            substancevm.ActiveSubstancesDateReader = ActiveSubstanceRepo.Find(x => !substancevm.Interactions.Select(i => i.ActSubId).Contains(x.Id));
+            substancevm.ActiveSubstancesDateReader = unitOfWork.Repository<ActiveSubstance>().Find(x => !substancevm.Interactions.Select(i => i.ActSubId).Contains(x.Id));
             //get Medication that are not exist on this substance 
-            substancevm.MedicationsDateReader = MedicationRepo.Find(x => !substancevm.Medications.Select(m => m.Id).Contains(x.Id));
+            substancevm.MedicationsDateReader = unitOfWork.Repository<Medication>().Find(x => !substancevm.Medications.Select(m => m.Id).Contains(x.Id));
         }
 
         return View(viewname, substancevm);
@@ -165,10 +163,10 @@ public class ActiveSubstanceController : Controller
     public IActionResult Edit(ActiveSubstanceViewModel substance)
     {
         // Add medications associated with the substance
-        substance.Medications.AddRange(MedicationRepo.Find(x => substance.MedicationId.Contains(x.Id)));
+        substance.Medications.AddRange(unitOfWork.Repository<Medication>().Find(x => substance.MedicationId.Contains(x.Id)));
 
         // Get the active substance from the repository
-        var activeSubstance = ActiveSubstanceRepo.Get(substance.Id);
+        var activeSubstance = unitOfWork.Repository<ActiveSubstance>().Get(substance.Id);
 
         // Add New medication to the active substance
         activeSubstance.Medications.AddRange(substance.Medications);
@@ -180,11 +178,11 @@ public class ActiveSubstanceController : Controller
         if (!ModelState.IsValid)
         {
             // Get active substances that are not already part of this substance's interactions
-            substance.ActiveSubstancesDateReader = ActiveSubstanceRepo.Find(
+            substance.ActiveSubstancesDateReader = unitOfWork.Repository<ActiveSubstance>().Find(
                 x => !substance.Interactions.Select(i => i.ActSubId).Contains(x.Id));
 
             // Get medications that are not already part of this substance
-            substance.MedicationsDateReader = MedicationRepo.Find(
+            substance.MedicationsDateReader = unitOfWork.Repository<Medication>().Find(
                 x => !substance.Medications.Select(m => m.Id).Contains(x.Id));
 
             return View(substance);
@@ -193,7 +191,7 @@ public class ActiveSubstanceController : Controller
         try
         {
             // Update the active substance in the repository
-            ActiveSubstanceRepo.Update(activeSubstance);
+            unitOfWork.Repository<ActiveSubstance>().Update(activeSubstance);
             return RedirectToAction(nameof(Edit), new { Id = substance.Id });
         }
         catch (Exception ex)
@@ -212,7 +210,7 @@ public class ActiveSubstanceController : Controller
         if (!ActId.HasValue || !InteractId.HasValue)
             return BadRequest(); // 400
 
-        var substance = ActiveSubstanceRepo.Get(ActId.Value);
+        var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
 
         if (substance is null)
             return NotFound(); // 404
@@ -226,7 +224,7 @@ public class ActiveSubstanceController : Controller
         try
         {
             interaction.Interaction = Interaction;
-            ActInteractRepo.Update(interaction);
+            unitOfWork.Repository<ActiveSubstanceInteraction>().Update(interaction);
             // Redirect to Edit action and pass ActId as route parameter
             return RedirectToAction(nameof(Edit), new { Id = ActId });
         }
@@ -249,7 +247,7 @@ public class ActiveSubstanceController : Controller
         if (!ActId.HasValue || !InteractId.HasValue)
             return BadRequest(); // 400
 
-        var substance = ActiveSubstanceRepo.Get(ActId.Value);
+        var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
 
         if (substance is null)
             return NotFound(); // 404
@@ -260,7 +258,7 @@ public class ActiveSubstanceController : Controller
         if (interaction is null)
             return NotFound(); // 404
 
-        ActInteractRepo.Delete(interaction);
+        unitOfWork.Repository<ActiveSubstanceInteraction>().Delete(interaction);
 
 
         // Redirect to Edit action and pass ActId as route parameter
@@ -273,7 +271,7 @@ public class ActiveSubstanceController : Controller
         if (!ActId.HasValue || !MedId.HasValue)
             return BadRequest(); // 400
 
-        var substance = ActiveSubstanceRepo.Get(ActId.Value);
+        var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
 
         if (substance is null)
             return NotFound(); // 404
@@ -286,7 +284,7 @@ public class ActiveSubstanceController : Controller
         try
         {
             med.Strength = Strength;
-            MedicationRepo.Update(med);
+            unitOfWork.Repository<Medication>().Update(med);
             // Redirect to Edit action and pass ActId as route parameter
             return RedirectToAction(nameof(Edit), new { Id = ActId });
         }
@@ -308,7 +306,7 @@ public class ActiveSubstanceController : Controller
         if (!ActId.HasValue || !MedId.HasValue)
             return BadRequest(); // 400
 
-        var substance = ActiveSubstanceRepo.Get(ActId.Value);
+        var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
 
         if (substance is null)
             return NotFound(); // 404
@@ -320,7 +318,7 @@ public class ActiveSubstanceController : Controller
 
         try
         {
-            MedicationRepo.Delete(med);
+            unitOfWork.Repository<Medication>().Delete(med);
             // Redirect to Edit action and pass ActId as route parameter
             return RedirectToAction(nameof(Edit), new { Id = ActId });
         }

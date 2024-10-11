@@ -33,8 +33,7 @@ namespace PLProject
                 .AddEntityFrameworkStores<HMSdbcontext>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();
 

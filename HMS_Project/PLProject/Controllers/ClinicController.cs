@@ -8,20 +8,18 @@ namespace PLProject.Controllers
 {
     public class ClinicController : Controller
     {
+        private readonly IUnitOfWork unitOfWork;
         #region DPI
-        private readonly IRepository<Clinic> clinicRepo;
 
-        public IRepository<ClinicSpecializationLookup> SpecializationRepo { get; }
 
-        public ClinicController(IRepository<ClinicSpecializationLookup> SpecializationRepo, IRepository<Clinic> ClinicRepo)
+        public ClinicController(IUnitOfWork unitOfWork)
         {
-            this.SpecializationRepo = SpecializationRepo;
-            clinicRepo = ClinicRepo;
+            this.unitOfWork = unitOfWork;
         }
         #endregion
         public IActionResult Index()
         {
-            var clinics = clinicRepo.GetALL();
+            var clinics = unitOfWork.Repository<Clinic>().GetALL();
             var clinicViewModels = clinics.Select(c => (ClinicViewModel)c).ToList();
             return View(clinicViewModels);
         }
@@ -37,7 +35,7 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid) // server side validation
             {
-                SpecializationRepo.Add(clinicSpecializationLookup);
+                unitOfWork.Repository<ClinicSpecializationLookup>().Add(clinicSpecializationLookup);
                 return RedirectToAction(nameof(Index));
             }
             return View(clinicSpecializationLookup);
@@ -47,7 +45,7 @@ namespace PLProject.Controllers
         #region Create
         public IActionResult Create()
         {
-            var ViewModel = new ClinicViewModel() { SpecializationsDateReader = SpecializationRepo.GetALL() };
+            var ViewModel = new ClinicViewModel() { SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL() };
 
             return View(ViewModel);
         }
@@ -57,10 +55,10 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid) // server side validation
             {
-                clinicRepo.Add((Clinic)clinicViewModel);
+                unitOfWork.Repository<Clinic>().Add((Clinic)clinicViewModel);
                 return RedirectToAction(nameof(Index));
             }
-            clinicViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
+            clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
             return View(clinicViewModel);
         }
         #endregion
@@ -71,7 +69,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var clinic = clinicRepo.Get(Id.Value);
+            var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
             var clinicViewModel = (ClinicViewModel)clinic;
 
             if (clinic is null)
@@ -89,14 +87,14 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var clinic = clinicRepo.Get(Id.Value);
+            var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
 
             if (clinic is null)
                 return NotFound(); // 404
 
             var clinicViewModel = (ClinicViewModel)clinic;
 
-            clinicViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
+            clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
             return View(clinicViewModel);
         }
 
@@ -105,7 +103,7 @@ namespace PLProject.Controllers
 
         public IActionResult Edit([FromRoute] int Id, ClinicViewModel clinicViewModel)
         {
-            Clinic clinic = clinicRepo.Get(clinicViewModel.Id);
+            Clinic clinic = unitOfWork.Repository<Clinic>().Get(clinicViewModel.Id);
 
             if (ModelState.IsValid) // server side validation
             {
@@ -115,10 +113,10 @@ namespace PLProject.Controllers
                 clinic.Phone = clinicViewModel.Phone;
                 clinic.Price = clinicViewModel.Price ?? default;
 
-                clinicRepo.Update(clinic);
+                unitOfWork.Repository<Clinic>().Update(clinic);
                 return RedirectToAction(nameof(Index));
             }
-            clinicViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
+            clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
             return View(clinicViewModel);
         }
 
@@ -131,7 +129,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var clinic = clinicRepo.Get(Id.Value);
+            var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
             var clinicViewModel = (ClinicViewModel)clinic;
 
             if (clinic is null)
@@ -144,10 +142,10 @@ namespace PLProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete([FromRoute] int Id, ClinicViewModel clinicViewModel)
         {
-            var clinic = clinicRepo.Get(clinicViewModel.Id);
+            var clinic = unitOfWork.Repository<Clinic>().Get(clinicViewModel.Id);
             try
             {
-                clinicRepo.Delete(clinic);
+                unitOfWork.Repository<Clinic>().Delete(clinic);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
