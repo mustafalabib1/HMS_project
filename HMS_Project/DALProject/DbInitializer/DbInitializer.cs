@@ -14,11 +14,11 @@ namespace DALProject.DbInitializer
 {
     public class DbInitializer : IDbInitializer
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly HMSdbcontext _dbContext;
 
-        public DbInitializer(UserManager<IdentityUser> userManager,
+        public DbInitializer(UserManager<AppUser> userManager,
             RoleManager<IdentityRole> roleManager,
             HMSdbcontext dbContext)
         {
@@ -56,7 +56,8 @@ namespace DALProject.DbInitializer
                 _userManager.CreateAsync(new AppUser
                 {
                     UserName = "admin",
-                    Email = "admin@hmsproject.com"
+                    Email = "admin@hmsproject.com",
+                    SSN = 123456789
                 }, "Admin#123").GetAwaiter().GetResult();
 
                 AppUser user = _dbContext.AppUsers.FirstOrDefault(u => u.Email == "admin@hmsproject.com");

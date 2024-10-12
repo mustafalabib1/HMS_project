@@ -32,7 +32,7 @@ namespace PLProject
             #endregion
 
             #region Identity
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
                 options.User.RequireUniqueEmail = true
             )
                 .AddEntityFrameworkStores<HMSdbcontext>()

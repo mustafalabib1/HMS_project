@@ -19,7 +19,6 @@ namespace PLProject.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var users = _unitOfWork.Repository<AppUser>().GetALL();
             return View();
         }
     }
