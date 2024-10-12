@@ -7,9 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using PLProject.Helpers;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
     public class MedicationController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

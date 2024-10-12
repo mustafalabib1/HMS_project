@@ -13,7 +13,8 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<DoctorScheduleLookup> builder)
         {
-            builder.HasKey(ds => new { ds.Day, ds.DoctorId });
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
             builder.Property(ds=> ds.Day).HasMaxLength(10);
 
             builder.Property(d => d.Day)

@@ -18,7 +18,5 @@ namespace BLLProject.Repositories
         {
             this.context = context;
         }
-
-       
-    }
+	}
 }

@@ -56,7 +56,7 @@ namespace DALProject.Data.Configurations
             #region One2One With Prescription
             builder 
                 .HasOne(a=>a.Prescription)
-                .WithOne().HasForeignKey<Apointment>(p=>p.PrescriptionId)
+                .WithOne(a=>a.Apointment).HasForeignKey<Apointment>(p=>p.PrescriptionId)
                 .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
@@ -64,7 +64,8 @@ namespace DALProject.Data.Configurations
             builder
                 .HasOne(a=>a.Invoice)
                 .WithOne(i=>i.Apointment)
-                .HasForeignKey<Invoice>(i=>i.Id);
+                .HasForeignKey<Invoice>(i=>i.Id)
+				.OnDelete(DeleteBehavior.Restrict);
             #endregion
         }
     }

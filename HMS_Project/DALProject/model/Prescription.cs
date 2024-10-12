@@ -16,5 +16,6 @@
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
+        public virtual Apointment Apointment { get; set; }
     }
 }

@@ -2,9 +2,12 @@
 using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using PLProject.Helpers;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class ReceptionistController : Controller
     {
         #region DPI

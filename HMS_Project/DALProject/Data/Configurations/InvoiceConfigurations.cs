@@ -14,8 +14,10 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Invoice> builder)
         {
-            #region Invoice Configuration 
-            builder
+			#region Invoice Configuration 
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
+			builder
                     .Property(i => i.InvoiceDate)
                     //.HasColumnType(DataType.DateTime)
                     .HasComputedColumnSql("GETDATE()");

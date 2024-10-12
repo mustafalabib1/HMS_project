@@ -13,8 +13,10 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Medication> builder)
         {
-            #region Mediction configuration 
-            builder.Property(e => e.MedName).HasMaxLength(50);
+			#region Mediction configuration 
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
+			builder.Property(e => e.MedName).HasMaxLength(50);
             #endregion
         }
     }

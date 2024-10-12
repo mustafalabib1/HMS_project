@@ -13,8 +13,10 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<DoctorSpecializationLookup> builder)
         {
-            #region configuration 
-            builder.Property(s => s.Specialization).HasMaxLength(50);
+			#region configuration 
+			builder.HasKey(a => a.Id);
+			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
+			builder.Property(s => s.Specialization).HasMaxLength(50);
             #endregion
 
             #region One2Many With Doctor

@@ -40,7 +40,7 @@
 							@foreach (var substance in Model)
 							{
 								<tr>
-									<td>@substance.ActiveSubstancesName)</td>
+									<td>@substance.ActiveSubstancesName</td>
 									<partial name="_ButtonsPartial" model="@substance.Id"></partial>
 								</tr>
 							}

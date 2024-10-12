@@ -7,9 +7,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PLProject.ViewModels.AppointmentViewModel;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using PLProject.Helpers;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = Roles.Patient)]
     public class AppointmentPatientController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

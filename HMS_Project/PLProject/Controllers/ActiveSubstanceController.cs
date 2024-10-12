@@ -7,7 +7,10 @@ using X.PagedList;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Packaging;
 using System;
+using PLProject.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
 public class ActiveSubstanceController : Controller
 {
     private readonly IWebHostEnvironment env;
