@@ -54,6 +54,7 @@ namespace BLLProject.Repositories
         //helper
         private IQueryable<T> ApplySpec(ISpecification<T> spec) => SpecificationEvaluator<T>.GetQuery(context.Set<T>(), spec);
 
-
+       
+       
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLLProject.Specification
 {
-    internal class SpecificationEvaluator<TEntity> where TEntity : ModelBase
+    public class SpecificationEvaluator<TEntity> where TEntity : ModelBase
     {
         public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> InputQuery  , ISpecification<TEntity> spec )
         {
