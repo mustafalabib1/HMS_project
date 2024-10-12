@@ -9,6 +9,7 @@ using System.Linq;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using PLProject.Helpers;
+using BLLProject.Specification;
 
 namespace PLProject.Controllers
 {
@@ -79,7 +80,10 @@ namespace PLProject.Controllers
 
         public IActionResult Details(int id)
         {
-            var medication = unitOfWork.Repository<Medication>().Get(id);
+            var spec = new BaseSpecification<Medication>(e => e.Id == id);
+            spec.Includes.Add(e => e.PrescriptionItemMedications);
+            spec.Includes.Add(e => e.ActiveSubstances);
+            var medication = unitOfWork.Repository<Medication>().GetEntityWithSpec(spec);
             if (medication == null)
                 return NotFound();
 

@@ -4,6 +4,7 @@ using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PLProject.Helpers;
+using BLLProject.Specification;
 
 namespace PLProject.Controllers
 {
@@ -52,7 +53,11 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            var invoice = unitOfWork.Repository<Invoice>().Get(Id.Value);
+            var spec = new BaseSpecification<Invoice>(e => e.Id == Id);
+            spec.Includes.Add(e => e.Receptionist);
+            spec.Includes.Add(d => d.Apointment);
+
+            var invoice = unitOfWork.Repository<Invoice>().GetEntityWithSpec(spec);
             var invoiceViewModel = (InvoiceViewModel)invoice;
 
             if (invoice is null)

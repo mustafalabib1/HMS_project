@@ -5,6 +5,7 @@ using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PLProject.Helpers;
+using BLLProject.Specification;
 
 namespace PLProject.Controllers
 {
@@ -71,7 +72,10 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
+            var spec = new BaseSpecification<Doctor>(e => e.Id == Id);
+            spec.Includes.Add(e => e.DoctorSpecialization);
+
+            var doctor = unitOfWork.Repository<Doctor>().GetEntityWithSpec(spec);
             var doctorViewModel = (DoctorViewModel)doctor;
 
             if (doctor is null)

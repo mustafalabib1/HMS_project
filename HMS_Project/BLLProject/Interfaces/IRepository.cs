@@ -22,6 +22,7 @@ namespace BLLProject.Interfaces
         public IEnumerable<T> GetALL();
 
         public IQueryable<T> Find(Expression<Func<T, bool>> filter);
+       
 
         public T GetEntityWithSpec(ISpecification<T> spec); 
         public IEnumerable<T> GetALLWithSpec(ISpecification<T> spec);
