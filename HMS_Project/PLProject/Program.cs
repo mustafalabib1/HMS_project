@@ -48,8 +48,7 @@ namespace PLProject
             #endregion
 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();
 

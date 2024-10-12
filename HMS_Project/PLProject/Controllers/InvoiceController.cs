@@ -34,7 +34,7 @@ namespace PLProject.Controllers
             };
 
             return View(invoiceviewmodel);
-            unitOfWork.Complete();
+           
            
         }
 
@@ -42,6 +42,7 @@ namespace PLProject.Controllers
         public IActionResult Create(ApointmentViewModel model)
         {
             return View();
+            
         } 
         #endregion
 
@@ -139,7 +140,7 @@ namespace PLProject.Controllers
                 //        unitOfWork.Repository<Apointment>().Delete(emp);
                 //    }
                 //}
-                unitOfWork.Complete();
+             
                 unitOfWork.Repository<Invoice>().Delete(ivoice);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));

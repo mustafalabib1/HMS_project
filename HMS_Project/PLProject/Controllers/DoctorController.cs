@@ -105,6 +105,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.Repository<Doctor>().Update((Doctor)doctorViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
@@ -133,6 +134,7 @@ namespace PLProject.Controllers
             try
             {
                 unitOfWork.Repository<Doctor>().Delete(doctor);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

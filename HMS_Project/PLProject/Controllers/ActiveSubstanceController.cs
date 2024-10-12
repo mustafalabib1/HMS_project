@@ -73,6 +73,7 @@ public class ActiveSubstanceController : Controller
             MedicationsDateReader = unitOfWork.Repository<Medication>().GetALL(),
         };
         return View(viewModel);
+
     }
 
     // POST: Handle form submission
@@ -87,6 +88,7 @@ public class ActiveSubstanceController : Controller
         {
 
             unitOfWork.Repository<ActiveSubstance>().Add((ActiveSubstance)model);
+            unitOfWork.Complete();
 
             return RedirectToAction("Success"); // Redirect after successful creation
         }
@@ -195,6 +197,7 @@ public class ActiveSubstanceController : Controller
         {
             // Update the active substance in the repository
             unitOfWork.Repository<ActiveSubstance>().Update(activeSubstance);
+            unitOfWork.Complete();
             return RedirectToAction(nameof(Edit), new { Id = substance.Id });
         }
         catch (Exception ex)
@@ -262,6 +265,7 @@ public class ActiveSubstanceController : Controller
             return NotFound(); // 404
 
         unitOfWork.Repository<ActiveSubstanceInteraction>().Delete(interaction);
+        unitOfWork.Complete();
 
 
         // Redirect to Edit action and pass ActId as route parameter
@@ -288,6 +292,7 @@ public class ActiveSubstanceController : Controller
         {
             med.Strength = Strength;
             unitOfWork.Repository<Medication>().Update(med);
+            unitOfWork.Complete();
             // Redirect to Edit action and pass ActId as route parameter
             return RedirectToAction(nameof(Edit), new { Id = ActId });
         }
@@ -322,6 +327,7 @@ public class ActiveSubstanceController : Controller
         try
         {
             unitOfWork.Repository<Medication>().Delete(med);
+            unitOfWork.Complete();
             // Redirect to Edit action and pass ActId as route parameter
             return RedirectToAction(nameof(Edit), new { Id = ActId });
         }

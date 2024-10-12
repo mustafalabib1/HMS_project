@@ -91,6 +91,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Receptionist>().Update((Receptionist)receptionistViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(receptionistViewModel);
@@ -113,6 +114,7 @@ namespace PLProject.Controllers
             try
             {
                 unitOfWork.Repository<Receptionist>().Delete(receptionist);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

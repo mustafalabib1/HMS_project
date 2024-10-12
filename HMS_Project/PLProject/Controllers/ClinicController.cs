@@ -117,6 +117,7 @@ namespace PLProject.Controllers
                 clinic.Price = clinicViewModel.Price ?? default;
 
                 unitOfWork.Repository<Clinic>().Update(clinic);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
@@ -149,6 +150,7 @@ namespace PLProject.Controllers
             try
             {
                 unitOfWork.Repository<Clinic>().Delete(clinic);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

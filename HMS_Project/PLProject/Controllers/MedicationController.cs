@@ -128,6 +128,7 @@ namespace PLProject.Controllers
             try
             {
                 unitOfWork.Repository<Medication>().Update(medication);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -166,6 +167,7 @@ namespace PLProject.Controllers
                 return NotFound();
 
             unitOfWork.Repository<Medication>().Delete(medication);
+            unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
         }
 
