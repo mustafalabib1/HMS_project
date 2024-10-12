@@ -38,6 +38,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Pharmacist>().Add((Pharmacist)pharmacistViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(pharmacistViewModel);

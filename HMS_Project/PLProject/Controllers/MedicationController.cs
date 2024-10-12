@@ -71,6 +71,7 @@ namespace PLProject.Controllers
                     // Assuming you have a way to handle active substances and prescriptions
                 };
                 unitOfWork.Repository<Medication>().Add(medication);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -82,7 +83,9 @@ namespace PLProject.Controllers
         {
             var spec = new BaseSpecification<Medication>(e => e.Id == id);
             spec.Includes.Add(e => e.PrescriptionItemMedications);
+            
             spec.Includes.Add(e => e.ActiveSubstances);
+            
             var medication = unitOfWork.Repository<Medication>().GetEntityWithSpec(spec);
             if (medication == null)
                 return NotFound();

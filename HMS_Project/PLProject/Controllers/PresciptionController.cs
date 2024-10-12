@@ -1,4 +1,5 @@
 ﻿using BLLProject.Interfaces;
+using BLLProject.Repositories;
 using DALProject.model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,13 @@ namespace PLProject.Controllers
 	public class PrescriptionController : Controller
 	{
         #region DPI
-		private readonly IRepository<Prescription> prescriptionRepo;
+		
+        private readonly IUnitOfWork unitOfWork;
 
-        public PrescriptionController(IRepository<Prescription> PrescriptionRepo)
+        public PrescriptionController(IUnitOfWork unitOfWork)
         {
-            prescriptionRepo = PrescriptionRepo;
+           
+            this.unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -25,13 +28,13 @@ namespace PLProject.Controllers
             // Filter by ActiveSubstanceName (if provided)
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                prescriptions= prescriptionRepo.Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)
+                prescriptions= unitOfWork.Repository<Prescription>().Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)
                 &&p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
             }
             else
             {
                 // Fetch all prescriptions entries for this day 
-                prescriptions= prescriptionRepo./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
+                prescriptions= unitOfWork.Repository<Prescription>()./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
             }
             var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
             // Pagination logic
@@ -58,7 +61,9 @@ namespace PLProject.Controllers
             }
             else if (ModelState.IsValid)
             {
-                prescriptionRepo.Add(new Prescription().ConvertPrescriptionViewModelToPresciption(model));
+                unitOfWork.Repository<Prescription>().Add(new Prescription().ConvertPrescriptionViewModelToPresciption(model));
+                unitOfWork.Complete();
+                
             }
             // If the model is invalid, return the view with the same model to show errors
             return View(model);
