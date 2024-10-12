@@ -13,8 +13,6 @@ namespace PLProject.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         #region DPI
-
-
         public ClinicController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;

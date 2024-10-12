@@ -28,13 +28,15 @@ namespace PLProject
                 options
                 .UseLazyLoadingProxies()
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            }); 
+            });
             #endregion
 
             #region Identity
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-        .AddEntityFrameworkStores<HMSdbcontext>()
-        .AddDefaultTokenProviders();
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+                options.User.RequireUniqueEmail = true
+            )
+                .AddEntityFrameworkStores<HMSdbcontext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -44,7 +46,7 @@ namespace PLProject
                 options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Identity/Account/Logout";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            }); 
+            });
             #endregion
 
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
@@ -72,6 +74,10 @@ namespace PLProject
             app.UseAuthorization();
 
             app.MapRazorPages();
+
+            app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
