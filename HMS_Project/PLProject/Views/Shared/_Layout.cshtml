@@ -8,11 +8,81 @@
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-
     <link rel="stylesheet" href="~/PLProject.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header class="header">
+        <div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="logo">
+                                <a asp-controller="Home" asp-action="Index"><img src="img/logo.png" alt="logo"></a>
+                            </div>
+                            <div class="mobile-nav"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li class="active">
+                                            <a asp-controller="Home" asp-action="Index">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Staff</a>
+                                            <ul class="dropdown">
+                                                <li><a asp-controller="Doctor" asp-action="Index">Doctor</a></li>
+                                                <li><a asp-controller="Nurse" asp-action="Index">Nurses</a></li>
+                                                <li><a asp-controller="Pharmacist" asp-action="Index">Pharmacist</a></li>
+                                                <li><a asp-controller="Receptionist" asp-action="Index">Receptionist</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Medical</a>
+                                            <ul class="dropdown">
+                                                <li><a asp-controller="ActiveSubstance" asp-action="Index">Active Substance</a></li>
+                                                <li><a asp-controller="Medication" asp-action="Index">Medication</a></li>
+                                                <li><a asp-controller="Clinic" asp-action="Index">Clinic</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Appointment</a>
+                                            <ul class="dropdown">
+                                                <li><a asp-controller="AppointmentPatient" asp-action="Index">Appointment Patient</a></li>
+                                                <li><a asp-controller="AppointmentDoctor" asp-action="Index">Appointment Doctor</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Patient" asp-action="Index">Patient</a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Prescription" asp-action="Index">Prescription</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Billing</a>
+                                            <ul class="dropdown">
+                                                <li><a asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-12 d-flex align-items-center">
+                            <div class="get-quote">
+                                @* <a href="appointment.html" class="btn btn-primary">Register</a>
+                                <a href="appointment.html" class="btn btn-primary">Login</a> *@
+                                <partial name="_LoginPartial" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @* <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PLProject</a>
@@ -89,12 +159,13 @@
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
+    </header> 
+    @* <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
+    </div> *@
+    @RenderBody()
 
     <footer class="border-top footer text-muted">
         <div class="container">
