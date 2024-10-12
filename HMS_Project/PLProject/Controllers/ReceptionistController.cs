@@ -44,7 +44,8 @@ namespace PLProject.Controllers
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Receptionist>().Add((Receptionist)receptionist);
-                 return RedirectToAction(nameof(Index));
+                unitOfWork.Complete();
+                return RedirectToAction(nameof(Index));
             }
             return View(receptionist);
         }

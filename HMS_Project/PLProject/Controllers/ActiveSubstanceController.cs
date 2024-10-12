@@ -171,14 +171,17 @@ public class ActiveSubstanceController : Controller
     {
         // Add medications associated with the substance
         substance.Medications.AddRange(unitOfWork.Repository<Medication>().Find(x => substance.MedicationId.Contains(x.Id)));
+        unitOfWork.Complete();
 
         // Get the active substance from the repository
         var activeSubstance = unitOfWork.Repository<ActiveSubstance>().Get(substance.Id);
 
         // Add New medication to the active substance
         activeSubstance.Medications.AddRange(substance.Medications);
+        unitOfWork.Complete();
         // Add New interactions to the active substance
         activeSubstance.ActSub1.AddRange(((ActiveSubstance)substance).ActSub1);
+        unitOfWork.Complete();
         activeSubstance.ActiveSubstancesName = substance.ActiveSubstancesName;
 
         // If the model is invalid, repopulate lists and return the view

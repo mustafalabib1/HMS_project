@@ -40,6 +40,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecializationLookup);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(doctorSpecializationLookup);
@@ -59,6 +60,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.Repository<Doctor>().Add((Doctor)doctorViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();

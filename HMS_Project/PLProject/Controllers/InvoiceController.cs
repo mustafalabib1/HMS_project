@@ -43,7 +43,8 @@ namespace PLProject.Controllers
         public IActionResult Create(ApointmentViewModel model)
         {
             return View();
-            
+            unitOfWork.Complete();
+
         } 
         #endregion
 

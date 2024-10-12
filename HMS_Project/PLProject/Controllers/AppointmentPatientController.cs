@@ -87,6 +87,7 @@ namespace PLProject.Controllers
                                             day.AvailableDoctors = new List<DoctorScheduleLookup>();
                                         }
                                         day.AvailableDoctors.Add(item);
+                                        unitOfWork.Complete();
 
                                     }
                                 }
@@ -94,6 +95,7 @@ namespace PLProject.Controllers
                     }
 
                     availabilityList.Add(day);
+                    unitOfWork.Complete();
                 }
 
                 model.AvailableDays = availabilityList;
@@ -114,6 +116,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
+                unitOfWork.Complete();
 
                 TempData["SuccessMessage"] = "Appointment booked successfully!";
                 return RedirectToAction("Index");

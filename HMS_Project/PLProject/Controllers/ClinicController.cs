@@ -38,6 +38,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<ClinicSpecializationLookup>().Add(clinicSpecializationLookup);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(clinicSpecializationLookup);
@@ -58,6 +59,7 @@ namespace PLProject.Controllers
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Clinic>().Add((Clinic)clinicViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
