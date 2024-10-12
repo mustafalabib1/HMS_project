@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLLProject.Specification
 {
-    internal class BaseSpecification<T> : ISpecification<T> where T : ModelBase
+    public class BaseSpecification<T> : ISpecification<T> where T : ModelBase
     {
         public Expression<Func<T, bool>> Criteria { get ; set ; }
         public List<Expression<Func<T, object>>> Includes { get; set; } = new List<Expression<Func<T, object>>>();

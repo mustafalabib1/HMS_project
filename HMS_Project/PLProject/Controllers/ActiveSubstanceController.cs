@@ -9,6 +9,7 @@ using NuGet.Packaging;
 using System;
 using PLProject.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using BLLProject.Specification;
 
 [Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
 public class ActiveSubstanceController : Controller
@@ -46,7 +47,8 @@ public class ActiveSubstanceController : Controller
         }
         else
         {
-             // Fetch all ActiveSubstance entries
+            // Fetch all ActiveSubstance entries
+
             susbstances= unitOfWork.Repository<ActiveSubstance>().GetALL();
         }
 
@@ -253,6 +255,8 @@ public class ActiveSubstanceController : Controller
         if (!ActId.HasValue || !InteractId.HasValue)
             return BadRequest(); // 400
 
+
+       
         var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
 
         if (substance is null)
