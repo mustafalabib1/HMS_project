@@ -2,7 +2,7 @@
 using DALProject.model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PLProject.Helpers;
+using DALProject.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
