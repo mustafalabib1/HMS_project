@@ -11,12 +11,14 @@ namespace PLProject.Controllers
     public class ReceptionistController : Controller
     {
         #region DPI
-        private readonly IRepository<Receptionist> receptionistRepo;
+        
+        private readonly IUnitOfWork unitOfWork;
         private readonly IWebHostEnvironment env;
 
-        public ReceptionistController(IRepository<Receptionist> ReceptionistCRepo, IWebHostEnvironment _env)
+        public ReceptionistController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
         {
-            receptionistRepo = ReceptionistCRepo;
+          
+            this.unitOfWork = unitOfWork;
             env = _env;
         }
         #endregion
@@ -24,7 +26,7 @@ namespace PLProject.Controllers
         #region Index
         public IActionResult Index()
         {
-            var Receptionists = receptionistRepo.GetALL();
+            var Receptionists = unitOfWork.Repository<Receptionist>().GetALL();
             var ReceptionistsViewModels = Receptionists.Select(R => (ReceptionistViewModel)R).ToList();
             return View(ReceptionistsViewModels);
         } 
@@ -41,12 +43,12 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid) // server side validation
             {
-                var count = receptionistRepo.Add((Receptionist)receptionist);
-                if (count > 0)
-                    return RedirectToAction(nameof(Index));
+                unitOfWork.Repository<Receptionist>().Add((Receptionist)receptionist);
+                 return RedirectToAction(nameof(Index));
             }
             return View(receptionist);
         }
+    
         #endregion
 
         #region Details
@@ -55,7 +57,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var receptionist = receptionistRepo.Get(Id.Value);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(Id.Value);
             var ReceptionistView = (ReceptionistViewModel)receptionist;
 
             if (receptionist is null)
@@ -73,7 +75,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var receptionist = receptionistRepo.Get(Id.Value);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(Id.Value);
             if (receptionist is null)
                 return NotFound(); // 404
 
@@ -84,11 +86,11 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Edit(ReceptionistViewModel receptionistViewModel)
         {
-            var receptionist =receptionistRepo.Get(receptionistViewModel.Id);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.Id);
             receptionistViewModel.UserPassword = receptionist.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
-                receptionistRepo.Update((Receptionist)receptionistViewModel);
+                unitOfWork.Repository<Receptionist>().Update((Receptionist)receptionistViewModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(receptionistViewModel);
@@ -107,10 +109,10 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Delete(ReceptionistViewModel receptionistViewModel)
         {
-            var receptionist = receptionistRepo.Get(receptionistViewModel.Id);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.Id);
             try
             {
-                receptionistRepo.Delete(receptionist);
+                unitOfWork.Repository<Receptionist>().Delete(receptionist);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

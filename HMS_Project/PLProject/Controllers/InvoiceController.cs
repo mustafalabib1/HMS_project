@@ -10,20 +10,15 @@ namespace PLProject.Controllers
     [Authorize(Roles =$"{Roles.Admin}, {Roles.Receptionist}")]
     public class InvoiceController : Controller
     {
-        private readonly IInvoiceRepository invoiceRepository;
-        private readonly IRepository<Receptionist> recprepository;
-        private readonly IRepository<Apointment> apprepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public InvoiceController(IInvoiceRepository invoiceRepository, IRepository<Receptionist> Recprepository, IRepository<Apointment> Apprepository)
+        public InvoiceController(IUnitOfWork unitOfWork)
         {
-         
-            this.invoiceRepository = invoiceRepository;
-            recprepository = Recprepository;
-           apprepository = Apprepository;
+            this.unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            var Invoices = invoiceRepository.GetALL();
+            var Invoices = unitOfWork.Repository<Invoice>().GetALL();
             var InvoiceViewModel = Invoices.Select(c => (InvoiceViewModel)c).ToList();
             return View(Invoices);
         }
@@ -33,11 +28,14 @@ namespace PLProject.Controllers
             var invoiceviewmodel = new InvoiceViewModel()
             {
                 PaymentType = PaymentType.Cash,
-                ReceptionistsReader = recprepository.GetALL(),
-                ApointmentsReader = apprepository.GetALL(),
-
+                ReceptionistsReader = unitOfWork.Repository<Receptionist>().GetALL(),
+                ApointmentsReader = unitOfWork.Repository<Apointment>().GetALL(),
+               
             };
+
             return View(invoiceviewmodel);
+            unitOfWork.Complete();
+           
         }
 
         [HttpPost]
@@ -53,7 +51,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            var invoice = invoiceRepository.Get(Id.Value);
+            var invoice = unitOfWork.Repository<Invoice>().Get(Id.Value);
             var invoiceViewModel = (InvoiceViewModel)invoice;
 
             if (invoice is null)
@@ -69,14 +67,15 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            var invoice = invoiceRepository.Get(Id.Value);
+            var invoice = unitOfWork.Repository<Invoice>().Get(Id.Value);
+         
 
             if (invoice is null)
                 return NotFound();
             var invoiceviewmodel = (InvoiceViewModel)invoice;
 
-            invoiceviewmodel.ReceptionistsReader = recprepository.GetALL();
-            invoiceviewmodel.ApointmentsReader = apprepository.GetALL();
+            invoiceviewmodel.ReceptionistsReader = unitOfWork.Repository<Receptionist>().GetALL();
+            invoiceviewmodel.ApointmentsReader = unitOfWork.Repository<Apointment>().GetALL();
 
             return View(invoiceviewmodel);
         }
@@ -87,7 +86,7 @@ namespace PLProject.Controllers
         {
             if (Id != invoiceViewModel.Id) return BadRequest();
             
-            Invoice invoice = invoiceRepository.Get(invoiceViewModel.Id);
+            Invoice invoice = unitOfWork.Repository<Invoice>().Get(invoiceViewModel.Id);
 
             if (ModelState.IsValid) // server side validation
             {
@@ -99,11 +98,12 @@ namespace PLProject.Controllers
                 invoice.PaymentStatus = invoiceViewModel.PaymentStatus;
                 invoice.PaymentType = invoiceViewModel.PaymentType.ToString();
 
-                invoiceRepository.Update(invoice);
+                unitOfWork.Repository<Invoice>().Update(invoice);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            invoiceViewModel.ReceptionistsReader = recprepository.GetALL();
-            invoiceViewModel.ApointmentsReader = apprepository.GetALL();
+            invoiceViewModel.ReceptionistsReader = unitOfWork.Repository<Receptionist>().GetALL();
+            invoiceViewModel.ApointmentsReader = unitOfWork.Repository<Apointment>().GetALL();
             return View(invoiceViewModel);
         }
         #endregion
@@ -113,7 +113,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); 
 
-            var invoice = invoiceRepository.Get(Id.Value);
+            var invoice = unitOfWork.Repository<Invoice>().Get(Id.Value);
             var invoiceviewmodel = (InvoiceViewModel)invoice;
 
             if (invoice is null)
@@ -128,11 +128,22 @@ namespace PLProject.Controllers
         {
             if (Id != invoiceViewModel.Id) return BadRequest();
 
-            var ivoice = invoiceRepository.Get(invoiceViewModel.Id);
+            var ivoice = unitOfWork.Repository<Invoice>().Get(invoiceViewModel.Id);
             try
             {
-                invoiceRepository.Delete(ivoice);
+                //var model = unitOfWork.Repository<Invoice>().Get(invoiceViewModel.Id);
+                //if (model.Apointment is not null)
+                //{
+                //    foreach (var emp in model.Apointment)
+                //    {
+                //        unitOfWork.Repository<Apointment>().Delete(emp);
+                //    }
+                //}
+                unitOfWork.Complete();
+                unitOfWork.Repository<Invoice>().Delete(ivoice);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
+
             }
             catch (Exception ex)
             {

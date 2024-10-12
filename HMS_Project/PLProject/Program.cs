@@ -36,6 +36,8 @@ namespace PLProject
         .AddEntityFrameworkStores<HMSdbcontext>()
         .AddDefaultTokenProviders();
 
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             // Configure the cookie settings used for authentication middleware.
             builder.Services.ConfigureApplicationCookie(options =>
             {

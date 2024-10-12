@@ -1,6 +1,7 @@
 ﻿using BLLProject.Interfaces;
 using DALProject.Data.Contexts;
 using DALProject.model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace BLLProject.Repositories
         public InvoiceRepository(HMSdbcontext context) : base(context)
         {
             this.context = context;
+        }
+
+        public new Invoice Get(int Id)
+        {
+            var Invoices= context.Invoices.Include(r => r.Receptionist).Where(R => R.Id == Id).FirstOrDefault();
+            return Invoices;
+            
         }
     }
 }

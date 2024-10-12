@@ -1,4 +1,5 @@
 ﻿using BLLProject.Interfaces;
+using BLLProject.Specification;
 using DALProject.Data.Contexts;
 using DALProject.model;
 using Microsoft.EntityFrameworkCore;
@@ -19,21 +20,21 @@ namespace BLLProject.Repositories
         {
             this.context = context;
         }
-        public int Add(T entity)
+        public void Add(T entity)
         {
             context.Set<T>().Add(entity);
-            return context.SaveChanges();
+          
         }
 
-        public int Delete(T entity)
+        public void Delete(T entity)
         {
             context.Set<T>().Remove(entity);
-            return context.SaveChanges();
+            
         }
-        public int Update(T entity)
+        public void Update(T entity)
         {
             context.Set<T>().Update(entity);
-            return context.SaveChanges();
+           
         }
 
         public T Get(int Id) => context.Set<T>().Find(Id);
@@ -44,6 +45,14 @@ namespace BLLProject.Repositories
         {
            return context.Set<T>().Where(filter);
         }
+
+        public T GetEntityWithSpec(ISpecification<T> spec) => ApplySpec(spec).FirstOrDefault();
+
+        public IEnumerable<T> GetALLWithSpec(ISpecification<T> spec) => ApplySpec(spec).AsNoTracking().ToList();
+
+
+        //helper
+        private IQueryable<T> ApplySpec(ISpecification<T> spec) => SpecificationEvaluator<T>.GetQuery(context.Set<T>(), spec);
 
 
     }
