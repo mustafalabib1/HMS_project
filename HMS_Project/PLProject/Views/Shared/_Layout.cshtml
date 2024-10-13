@@ -50,11 +50,13 @@
                                                 </ul>
                                             </li>
                                         }
-
-                                        <li>
-                                            <a asp-controller="AppointmentPatient" asp-action="Index">Book Appointment</a>
-                                        </li>
-
+                                        
+                                        @if (!User.Identity.IsAuthenticated || User.IsInRole(Roles.Patient))
+                                        {
+                                            <li>
+                                                <a asp-controller="AppointmentPatient" asp-action="Index">Book Appointment</a>
+                                            </li>
+                                        }
                                         @if (User.IsInRole(Roles.Doctor))
                                         {
                                             <li class="active">
