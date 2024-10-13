@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using DALProject.model;
+using System.Net.Mail;
 
 namespace PLProject.Areas.Identity.Pages.Account
 {
@@ -111,7 +112,7 @@ namespace PLProject.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             // Check if the user is trying to login with email or username
-            var _UserName = new EmailAddressAttribute().IsValid(Input.Email) ? _userManager.FindByEmailAsync(Input.Email).Result.UserName : Input.Email;
+            var _UserName = new EmailAddressAttribute().IsValid(Input.Email) ? new MailAddress(Input.Email).User : Input.Email;
 
             if (ModelState.IsValid)
             {
