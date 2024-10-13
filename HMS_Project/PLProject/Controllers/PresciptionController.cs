@@ -1,7 +1,9 @@
 ﻿using BLLProject.Interfaces;
+using BLLProject.Repositories;
 using DALProject.Data.Contexts;
 using DALProject.Data.Migrations;
 using DALProject.model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PLProject.ViewModels;
@@ -10,33 +12,34 @@ using X.PagedList;
 
 namespace PLProject.Controllers
 {
+	[Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
 	public class PrescriptionController : Controller
 	{
+		private readonly IUnitOfWork unitOfWork;
 		#region DPI
-		private readonly IRepository<Prescription> prescriptionRepo;
 		private readonly IWebHostEnvironment env;
 
-		public PrescriptionController(IRepository<Prescription> PrescriptionRepo, IWebHostEnvironment _env)
+		public PrescriptionController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
 		{
-			prescriptionRepo = PrescriptionRepo;
+			this.unitOfWork = unitOfWork;
 			env = _env;
 		}
 		#endregion
 
 		public IActionResult Index(string searchQuery, int? page)
 		{
-
+			
 			IEnumerable<Prescription> prescriptions;
 			// Filter by ActiveSubstanceName (if provided)
 			if (!string.IsNullOrEmpty(searchQuery))
 			{
-				prescriptions = prescriptionRepo.Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
+				prescriptions = unitOfWork.Repository<Prescription>().Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
 				&& p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
 			}
 			else
 			{
 				// Fetch all prescriptions entries for this day 
-				prescriptions = prescriptionRepo./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
+				prescriptions = unitOfWork.Repository<Prescription>()./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
 			}
 			var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
 			// Pagination logic
@@ -69,7 +72,8 @@ namespace PLProject.Controllers
 				prescription.DoctorId = 2;
 				try
 				{
-					prescriptionRepo.Add(prescription);
+					unitOfWork.Repository<Prescription>().Add(prescription);
+					unitOfWork.Complete();
 					// Update the active substance in the repository
 				}
 				catch (Exception ex)
@@ -91,7 +95,7 @@ namespace PLProject.Controllers
 			if (!Id.HasValue)
 				return BadRequest(); // 400
 
-			var prescription = prescriptionRepo.Get(Id.Value);
+			var prescription = unitOfWork.Repository<Prescription>().Get(Id.Value);
 			var prescriptionVM = prescription.ConvertPresciptionToPrescriptionViewModel();
 
 			if (prescriptionVM is null)
@@ -120,13 +124,14 @@ namespace PLProject.Controllers
 
 			try
 			{
-				var updatedPrescription = prescriptionRepo.Get(viewModel.prescriptionId);
+				var updatedPrescription = unitOfWork.Repository<Prescription>().Get(viewModel.prescriptionId);
 
 				//// Update the Prescription
 				
 				updatedPrescription.ConvertPrescriptionViewModelToPresciption(viewModel);
 				
-				prescriptionRepo.Update(updatedPrescription);
+				unitOfWork.Repository<Prescription>().Update(updatedPrescription);
+				unitOfWork.Complete();
 
 				return RedirectToAction(nameof(Index), new { Id = viewModel.prescriptionId });
 			}
