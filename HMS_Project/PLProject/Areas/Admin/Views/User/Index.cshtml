@@ -1,9 +1,42 @@
-﻿@model IEnumerable<AppUser>
+﻿@model IEnumerable<AppUserViewModel>
 
 @{
-    ViewData["Title"] = "User Management";
+    ViewData["Title"] = "Users Management";
 }
 
-<h2 class="text-center">User Management</h2>
+<h2 class="text-center">Users </h2>
 <br />
 <br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>UserName</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
+                        <th>Actions </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.UserName</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@string.Join(" ' ", user.Roles)</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

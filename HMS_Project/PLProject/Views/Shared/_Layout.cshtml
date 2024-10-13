@@ -78,6 +78,16 @@
                                                 </ul>
                                             </li>
                                         }
+                                        @if (User.IsInRole(Roles.Admin))
+                                        {
+                                            <li>
+                                                <a href="#">Users</a>
+                                                <ul class="dropdown">
+                                                    <li><a asp-area="Admin" asp-controller="User" asp-action="Index">Users</a></li>
+                                                    <li><a asp-area="Admin" asp-controller="User" asp-action="roles">Roles</a></li>
+                                                </ul>
+                                            </li>
+                                        }
                                     </ul>
                                 </nav>
                             </div>
