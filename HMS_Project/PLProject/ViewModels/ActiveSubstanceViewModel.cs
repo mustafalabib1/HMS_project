@@ -39,7 +39,7 @@ namespace PLProject.ViewModels
 		}
 		public int Id { get; set; }
 
-		[Required(ErrorMessage = "Name is Required"), Display(Name = "Active Substances Name")]
+		[Required(ErrorMessage = "Active Substance is Required"), Display(Name = "Active Substance Name")]
 		public string ActiveSubstancesName { get; set; } = null!;
 		public IEnumerable<ActiveSubstance>? ActiveSubstancesDateReader { get; set; }
 		public IEnumerable<Medication>? MedicationsDateReader { get; set; }

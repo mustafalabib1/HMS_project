@@ -1,0 +1,118 @@
+﻿@model PrescriptionViewModel
+@inject IUnitOfWork unitOfWork
+@{
+	ViewData["Title"] = "Edit";
+	int i;
+	for (i = 0; i < Model.PrescriptionItems.Count; i++)
+	{
+		Model.PrescriptionItems[i].MedicationsDatareader = unitOfWork.Repository<ActiveSubstance>().Get(Model.PrescriptionItems[i].ActiveSubstanceId).Medications;
+	}
+}
+<div class="container mt-5">
+	<h1>Edit</h1>
+
+	<script type="text/javascript">
+		var medicationsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.PrescriptionItems.Select(pi => pi.MedicationsDatareader.Select(m => new { m.Id, m.MedName }))));
+	</script>
+
+	<form asp-action="Edit" method="post">
+		<input asp-for="prescriptionId" hidden />
+		<div id="itemsContainer">
+			@for (i = 0; i < Model.PrescriptionItems.Count; i++)
+			{
+				<input asp-for="PrescriptionItems[i].ActiveSubstanceId" hidden />
+				<div class="row mb-2 item-row" data-index="@i">
+					<div class="col">
+						<label asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-label fw-bold"></label>
+						<input asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-control form-control-plaintext ps-1" readonly />
+					</div>
+					<div class="col">
+						<label asp-for="PrescriptionItems[i].FullDosage" class="form-label fw-bold"></label>
+						<input asp-for="PrescriptionItems[i].FullDosage" class="form-control form-control-plaintext ps-1" readonly />
+					</div>
+				</div>
+
+				<div class="medications-container" data-prescription-index="@i">
+					@for (int j = 0; j < Model.PrescriptionItems[i].Medications.Count; j++)
+					{
+						<div class="row mb-2 item-row medication-row" data-medication-index="@j">
+							<div class="col">
+								<label class="form-label fw-bold">Medication</label>
+								<select class="form-select" asp-for="PrescriptionItems[i].Medications[j].MedicationId">
+									<option value="">Select Medication...</option>
+									@foreach (var medication in Model.PrescriptionItems[i].MedicationsDatareader)
+									{
+										<option value="@medication.Id">@medication.MedName</option>
+									}
+								</select>
+							</div>
+
+							<div class="col">
+								<label asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-label fw-bold"></label>
+								<input asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-control" />
+							</div>
+
+							<div class="col">
+								<label asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-label fw-bold"></label>
+								<input asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-control" />
+							</div>
+						</div>
+					}
+				</div>
+
+				<button type="button" class="btn btn-success add-medication-button" data-index="@i">+ Add item</button>
+			}
+		</div>
+
+		<button type="submit" class="btn btn-primary mt-3">Submit</button>
+	</form>
+</div>
+@section Scripts {
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// Delegate event handler for "+ Add item" button clicks
+			$(document).on('click', '.add-medication-button', function (e) {
+				e.preventDefault();
+
+				// Get the current prescription index
+				var prescriptionIndex = $(this).data('index');
+				var medicationsContainer = $('.medications-container[data-prescription-index="' + prescriptionIndex + '"]');
+
+				// Increment the medication index
+				var newMedicationIndex = medicationsContainer.find('.medication-row').length;
+
+				// Create a new medication row
+				var newMedicationRow = `
+													<div class="row mb-2 item-row medication-row" data-medication-index="${newMedicationIndex}">
+														<div class="col">
+															<label class="form-label fw-bold">Medication</label>
+															<select class="form-select" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].MedicationId">
+																<option value="">Select Medication...</option>
+												`;
+
+				// Populate the medications dropdown from the JavaScript variable
+				medicationsData[prescriptionIndex].forEach(function (medication) {
+					newMedicationRow += `<option value="${medication.Id}">${medication.MedName}</option>`;
+				});
+
+				newMedicationRow += `
+															</select>
+														</div>
+														<div class="col">
+															<label class="form-label fw-bold">Dosage</label>
+															<input type="text" class="form-control" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].Dosage" />
+														</div>
+														<div class="col">
+															<label class="form-label fw-bold">Duration</label>
+															<input type="text" class="form-control" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].Duration" />
+														</div>
+													</div>
+												`;
+
+				// Append the new medication row to the correct prescription item
+				medicationsContainer.append(newMedicationRow);
+			});
+		});
+	</script>
+}

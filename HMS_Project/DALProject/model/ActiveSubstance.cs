@@ -21,7 +21,7 @@ public class ActiveSubstance : ModelBase
     #endregion
 
     #region One2One With PrescriptionItem
-    public virtual PrescriptionItem PatrescriptionItem { get; set; } = null!;
+    public virtual PrescriptionItem? PatrescriptionItem { get; set; } = null!;
     #endregion
 }
 

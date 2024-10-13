@@ -18,7 +18,7 @@ namespace DALProject.model
         #endregion
 
         #region One2Many With PrescriptionItem
-        public virtual int? PrescriptionItemId { get; set; }
+        public virtual int PrescriptionItemId { get; set; }
         public virtual PrescriptionItem PrescriptionItem { get; set; } = null!; 
         #endregion
     }

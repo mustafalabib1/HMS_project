@@ -36,6 +36,7 @@ namespace PLProject.ViewModels
             UserPassword = pharmacist.UserPassword;
             Address = pharmacist.Address;
             Gender =pharmacist.Gender;
+            Id = pharmacist.Id;
         }
 
         public static explicit operator Pharmacist(PharmacistViewModel pharmacistViewModel)

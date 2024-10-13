@@ -34,6 +34,7 @@ public class DoctorViewModel:UserViewModel
     public int? specializationId { get; set; }
     public decimal? Price { get; set; } // إضافة خاصية Price إذا كانت مطلوبة
     public IEnumerable<DoctorSpecializationLookup>? SpecializationsDateReader { get; set; }
+    public List<DoctorScheduleLookup> schedule { get; set; }
 
     public static explicit operator Doctor(DoctorViewModel doctorViewModwl)
     {

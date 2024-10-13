@@ -45,6 +45,8 @@ namespace DALProject.Data.Contexts
         public virtual DbSet<Medication> Medication { get; set; }
         public virtual DbSet<Pharmacist> Pharmacists { get; set; } //Pharmacists  table inherit from User (TPC)
         public virtual DbSet<Prescription> Prescriptions { get; set; }
+        public virtual DbSet<PrescriptionItemMedication> PrescriptionItemMedication { get; set; }
+        public virtual DbSet<PrescriptionItem> PrescriptionItem {  get; set; }
 
         public virtual DbSet<Doctor> Doctors { get; set; } //Doctors  table inherit from User (TPC)
         public virtual DbSet<DoctorScheduleLookup> DoctorScheduleLookups { get; set; }

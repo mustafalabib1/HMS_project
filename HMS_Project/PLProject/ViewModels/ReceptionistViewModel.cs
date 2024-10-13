@@ -35,6 +35,7 @@ namespace PLProject.ViewModels
             UserPassword = receptionist.UserPassword;
             Address = receptionist.Address;
             Gender =receptionist.Gender;
+            Id = receptionist.Id;
         }
         public static explicit operator Receptionist(ReceptionistViewModel receptionistViewModel)
         {

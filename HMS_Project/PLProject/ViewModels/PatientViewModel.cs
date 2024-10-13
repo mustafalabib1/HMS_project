@@ -38,6 +38,7 @@ namespace PLProject.ViewModels
             UserPassword = patient.UserPassword;
             Address = patient.Address;
             Gender = patient.Gender;
+            Id= patient.Id;
         }
 
         public static explicit operator Patient(PatientViewModel PatViewModel)

@@ -1,0 +1,57 @@
+﻿@model PrescriptionViewModel
+@inject IUnitOfWork unitOfWork
+
+@{
+	ViewData["Title"] = "Details";
+	var SubstanceList = unitOfWork.Repository<ActiveSubstance>().GetALL();
+}
+<div class="container mt-5">
+	<h1>Details</h1>
+
+	<div>
+		<div id="itemsContainer">
+			@for (int i = 0; i < Model.PrescriptionItems.Count; i++)
+			{
+				<div class="row mb-2 item-row">
+					<div class="col">
+						<label asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-label fw-bold"></label>
+						<input asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-control form-control-plaintext ps-1" readonly />
+					</div>
+					<div class="col">
+						<label asp-for="PrescriptionItems[i].FullDosage" class="form-label fw-bold"></label>
+						<input asp-for="PrescriptionItems[i].FullDosage" class="form-control form-control-plaintext ps-1" readonly />
+					</div>
+				</div>
+				@for (int j = 0; j < Model.PrescriptionItems[i].Medications.Count; j++)
+				{
+					<div class="row mb-2 item-row medications-container" data-prescription-index="@i">
+
+						<div class="col medication-row" data-medication-index="@j">
+							<label class="form-label fw-bold">Medication</label>
+							<input asp-for="PrescriptionItems[i].Medications[j].Medication.MedName" class="form-control" readonly />
+						</div>
+
+						<div class="col">
+							<label asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-label fw-bold"></label>
+							<input asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-control" readonly />
+						</div>
+
+						<div class="col">
+							<label asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-label fw-bold"></label>
+							<input asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-control" readonly />
+						</div>
+
+					</div>
+				}
+			}
+		</div>
+		<div class="mt-4">
+			<a asp-action="Edit" asp-route-id="@Model.prescriptionId" class="btn btn-primary ms-2">
+				<i class="fas fa-edit"></i> Edit
+			</a>
+			<a asp-action="Index" class="btn btn-secondary ms-2">
+				<i class="fas fa-arrow-left"></i> Back To List
+			</a>
+		</div>
+	</div>
+</div>
