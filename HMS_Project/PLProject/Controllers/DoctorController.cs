@@ -3,24 +3,25 @@ using DALProject.Data.Contexts;
 using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using BLLProject.Specification;
 
 namespace PLProject.Controllers
 {
-	public class DoctorController : Controller
+    [Authorize(Roles = Roles.Admin)]
+    public class DoctorController : Controller
 	{
-          private readonly IRepository<Doctor> doctorRepo;
-        public IRepository<DoctorSpecializationLookup> SpecializationRepo { get; }
+        private readonly IUnitOfWork unitOfWork;
 
-        public DoctorController(IRepository<DoctorSpecializationLookup> SpecializationRepo, IRepository<Doctor> DoctorRepo)
+        public DoctorController(IUnitOfWork unitOfWork)
         {
-            this.SpecializationRepo = SpecializationRepo;
-            doctorRepo = DoctorRepo;
+            this.unitOfWork = unitOfWork;
         }
 
         #region Index (List Doctors)
         public IActionResult Index()
         {
-            var doctors = doctorRepo.GetALL();
+            var doctors = unitOfWork.Repository<Doctor>().GetALL();
             var doctorViewModels = doctors.Select(d => (DoctorViewModel)d).ToList();
             return View(doctorViewModels);
         }
@@ -37,7 +38,8 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                SpecializationRepo.Add(doctorSpecializationLookup);
+                unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecializationLookup);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(doctorSpecializationLookup);
@@ -47,7 +49,7 @@ namespace PLProject.Controllers
         #region Create
         public IActionResult Create()
         {
-            var ViewModel = new DoctorViewModel() { SpecializationsDateReader = SpecializationRepo.GetALL() };
+            var ViewModel = new DoctorViewModel() { SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL() };
             return View(ViewModel);
         }
 
@@ -56,10 +58,11 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                doctorRepo.Add((Doctor)doctorViewModel);
+                unitOfWork.Repository<Doctor>().Add((Doctor)doctorViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            doctorViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
+            doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
             return View(doctorViewModel);
         }
         #endregion
@@ -70,7 +73,10 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var doctor = doctorRepo.Get(Id.Value);
+            var spec = new BaseSpecification<Doctor>(e => e.Id == Id);
+            spec.Includes.Add(e => e.DoctorSpecialization);
+
+            var doctor = unitOfWork.Repository<Doctor>().GetEntityWithSpec(spec);
             var doctorViewModel = (DoctorViewModel)doctor;
 
             if (doctor is null)
@@ -86,27 +92,28 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var doctor = doctorRepo.Get(Id.Value);
+            var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
 
             if (doctor is null)
                 return NotFound(); // 404
 
             var doctorViewModel = (DoctorViewModel)doctor;
-            doctorViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
+            doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
             return View(doctorViewModel);
         }
 
         [HttpPost]
         public IActionResult Edit(DoctorViewModel doctorViewModel)
         {
-            Doctor doctor = doctorRepo.Get(doctorViewModel.Id);
+            Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
             doctorViewModel.UserPassword=doctor.UserPassword;
             if (ModelState.IsValid)
             {
-                doctorRepo.Update((Doctor)doctorViewModel);
+                unitOfWork.Repository<Doctor>().Update((Doctor)doctorViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            doctorViewModel.SpecializationsDateReader = SpecializationRepo.GetALL();
+            doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
             return View(doctorViewModel);
         }
         #endregion
@@ -117,7 +124,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var doctor = doctorRepo.Get(Id.Value);
+            var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
             var doctorViewModel = (DoctorViewModel)doctor;
 
             if (doctor is null)
@@ -128,10 +135,11 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Delete(DoctorViewModel doctorViewModel)
         {
-            var doctor = doctorRepo.Get(doctorViewModel.Id);
+            var doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
             try
             {
-                doctorRepo.Delete(doctor);
+                unitOfWork.Repository<Doctor>().Delete(doctor);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

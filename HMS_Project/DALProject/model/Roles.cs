@@ -1,4 +1,4 @@
-﻿namespace PLProject.Helpers
+﻿namespace DALProject.model
 {
     public static class Roles
     {

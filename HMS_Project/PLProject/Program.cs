@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using NuGet.Protocol.Core.Types;
 using DALProject.model;
+using DALProject.DbInitializer;
 
 namespace PLProject
 {
@@ -21,20 +22,35 @@ namespace PLProject
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
-            // Configure the DbContext 
+            #region DbContext
             builder.Services.AddDbContext<HMSdbcontext>(options =>
             {
                 options
                 .UseLazyLoadingProxies()
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            #endregion
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+            #region Identity
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+                options.User.RequireUniqueEmail = true
+            )
                 .AddEntityFrameworkStores<HMSdbcontext>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Configure the cookie settings used for authentication middleware.
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
+            #endregion
+
+            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<HMSdbcontextProcedures>();
 
@@ -60,8 +76,23 @@ namespace PLProject
             app.MapRazorPages();
 
             app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            #region Update and Initialize Database
+            // Applies pending migrations also if there are no roles, create the default
+            // admin user with email = admin@hmsproject.com and password = Admin#123
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                dbInitializer.Initialize();
+            }
+            #endregion
 
             app.Run();
         }

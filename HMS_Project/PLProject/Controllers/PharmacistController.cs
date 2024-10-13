@@ -2,22 +2,24 @@
 using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class PharmacistController : Controller
     {
-        private readonly IRepository<Pharmacist> pharmacistRepo;
+        private readonly IUnitOfWork unitOfWork;
 
-        public PharmacistController(IRepository<Pharmacist> pharmacistRepo)
+        public PharmacistController(IUnitOfWork unitOfWork)
         {
-            this.pharmacistRepo = pharmacistRepo;
+            this.unitOfWork = unitOfWork;
         }
 
 
         public IActionResult Index()
         {
-            var pharmacists = pharmacistRepo.GetALL();
+            var pharmacists = unitOfWork.Repository<Pharmacist>().GetALL();
             var pharmacistViewModels = pharmacists.Select(p => (PharmacistViewModel)p).ToList();
             return View(pharmacistViewModels);
         }
@@ -34,7 +36,8 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid) // server side validation
             {
-                pharmacistRepo.Add((Pharmacist)pharmacistViewModel);
+                unitOfWork.Repository<Pharmacist>().Add((Pharmacist)pharmacistViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(pharmacistViewModel);
@@ -47,7 +50,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var pharmacist = pharmacistRepo.Get(Id.Value);
+            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(Id.Value);
             var pharmacistViewModel = (PharmacistViewModel)pharmacist;
 
             if (pharmacist is null)
@@ -63,7 +66,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var pharmacist = pharmacistRepo.Get(Id.Value);
+            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(Id.Value);
 
             if (pharmacist is null)
                 return NotFound(); // 404
@@ -75,11 +78,12 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Edit(PharmacistViewModel pharmacistViewModel)
         {
-            var pharmacist = pharmacistRepo.Get(pharmacistViewModel.Id);
+            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(pharmacistViewModel.Id);
             pharmacistViewModel.UserPassword = pharmacist.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
-                pharmacistRepo.Update((Pharmacist)pharmacistViewModel);
+                unitOfWork.Repository<Pharmacist>().Update((Pharmacist)pharmacistViewModel);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(pharmacistViewModel);
@@ -92,7 +96,7 @@ namespace PLProject.Controllers
             if (!Id.HasValue)
                 return BadRequest(); // 400
 
-            var pharmacist = pharmacistRepo.Get(Id.Value);
+            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(Id.Value);
             var pharmacistViewModel = (PharmacistViewModel)pharmacist;
 
             if (pharmacist is null)
@@ -104,10 +108,11 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult Delete(PharmacistViewModel pharmacistViewModel)
         {
-            var pharmacist = pharmacistRepo.Get(pharmacistViewModel.Id);
+            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(pharmacistViewModel.Id);
             try
             {
-                pharmacistRepo.Delete(pharmacist);
+                unitOfWork.Repository<Pharmacist>().Delete(pharmacist);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

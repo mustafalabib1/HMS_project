@@ -7,35 +7,25 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PLProject.ViewModels.AppointmentViewModel;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = Roles.Patient)]
     public class AppointmentPatientController : Controller
     {
-        private readonly IRepository<Apointment> appointmentRepo;
-        private readonly IRepository<Clinic> clinicRepo;
-        private readonly IRepository<Receptionist> receptionistRepo;
-        private readonly IRepository<Doctor> doctorRepo;
-        private readonly IRepository<DoctorScheduleLookup> doctorScheduleRepo;
+        private readonly IUnitOfWork unitOfWork;
 
-        public AppointmentPatientController(IRepository<Apointment> appointmentRepo,
-            IRepository<Clinic> clinicRepo,
-            IRepository<Receptionist> receptionistRepo,
-            IRepository<Doctor> doctorRepo,
-            IRepository<DoctorScheduleLookup> doctorScheduleRepo)
+        public AppointmentPatientController(IUnitOfWork unitOfWork)
         {
-            this.appointmentRepo = appointmentRepo;
-            this.clinicRepo = clinicRepo;
-            this.receptionistRepo = receptionistRepo;
-            this.doctorRepo = doctorRepo;
-            this.doctorScheduleRepo = doctorScheduleRepo;
+            this.unitOfWork = unitOfWork;
         }
 
 		#region Get all Appointment for patient 
 		public IActionResult Index( int? page,int PatientId= 1)
 		{
 
-			var appointments = appointmentRepo.Find(a => a.PatientId == PatientId).Include(a=>a.Patient).Include(a=>a.Doctor).Include(a=>a.Clinic).ToList();
+			var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientId == PatientId).Include(a=>a.Patient).Include(a=>a.Doctor).Include(a=>a.Clinic).ToList();
             var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
 			// Pagination logic
 			int pageSize = 10;
@@ -57,9 +47,9 @@ namespace PLProject.Controllers
             // If clinicId is provided, fetch available appointments
             if (model.SelectedClinicId.HasValue)
             {
-                var doctors = doctorRepo.Find(d => d.ClinicId == model.SelectedClinicId.Value).ToList();
+                var doctors = unitOfWork.Repository<Doctor>().Find(d => d.ClinicId == model.SelectedClinicId.Value).ToList();
 
-                var availableDays = doctorScheduleRepo.Find(ds => doctors.Select(d => d.Id).Contains(ds.Id)).GroupBy(ds => ds.Day);
+                var availableDays = unitOfWork.Repository<DoctorScheduleLookup>().Find(ds => doctors.Select(d => d.Id).Contains(ds.Id)).GroupBy(ds => ds.Day);
 
                 int daysInCurrentMonth = DateTime.DaysInMonth(model.SelectedYear, model.SelectedMonth);
 
@@ -84,7 +74,7 @@ namespace PLProject.Controllers
                             if (avaday.Key == day.Date.DayOfWeek)
                                 foreach (var item in avaday)
                                 {
-                                    var count = appointmentRepo
+                                    var count = unitOfWork.Repository<Apointment>()
                                         .Find(a => a.ApointmentDate == DateOnly.FromDateTime(day.Date)
                                               && a.ApointmentTime < item.StartTime
                                               && a.ApointmentTime < item.EndTime).Count();
@@ -96,6 +86,7 @@ namespace PLProject.Controllers
                                             day.AvailableDoctors = new List<DoctorScheduleLookup>();
                                         }
                                         day.AvailableDoctors.Add(item);
+                                        unitOfWork.Complete();
 
                                     }
                                 }
@@ -103,6 +94,7 @@ namespace PLProject.Controllers
                     }
 
                     availabilityList.Add(day);
+                    unitOfWork.Complete();
                 }
 
                 model.AvailableDays = availabilityList;
@@ -122,7 +114,8 @@ namespace PLProject.Controllers
             model.PatientId = 1;
             if (ModelState.IsValid)
             {
-                appointmentRepo.Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
+                unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
+                unitOfWork.Complete();
 
                 TempData["SuccessMessage"] = "Appointment booked successfully!";
                 return RedirectToAction("Index");

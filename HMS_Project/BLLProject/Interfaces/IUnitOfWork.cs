@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace BLLProject.Interfaces
 {
-    public interface IReceptionistRepository : IRepository<Receptionist>
+    public interface IUnitOfWork : IDisposable
     {
+        Repository<T> Repository<T>() where T : ModelBase;
+
+        int Complete();
     }
 }

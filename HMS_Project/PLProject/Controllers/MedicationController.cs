@@ -7,25 +7,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using BLLProject.Specification;
 
 namespace PLProject.Controllers
 {
+    [Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
     public class MedicationController : Controller
     {
-        private readonly IRepository<Medication> medicationRepository;
-        private readonly IRepository<ActiveSubstance> activeSubstanceRepository; // Assuming you have this repository
+        private readonly IUnitOfWork unitOfWork;
         private readonly IWebHostEnvironment env;
 
-        public MedicationController(IRepository<Medication> medicationRepository, IRepository<ActiveSubstance> activeSubstanceRepository, IWebHostEnvironment env)
+        public MedicationController(IUnitOfWork unitOfWork , IWebHostEnvironment env)
         {
-            this.medicationRepository = medicationRepository;
-            this.activeSubstanceRepository = activeSubstanceRepository; // Initialize the active substance repository
+            this.unitOfWork = unitOfWork;
             this.env = env;
         }
 
         public IActionResult Index(string searchQuery, int? page)
         {
-            var medications = medicationRepository.GetALL().ToList();
+            var medications = unitOfWork.Repository<Medication>().GetALL().ToList();
             var medicationVM = medications.Select(m => new MedicationViewModel
             {
                 MedicationId = m.Id,
@@ -51,7 +52,7 @@ namespace PLProject.Controllers
         {
             var model = new MedicationViewModel
             {
-                ActSubDateReader = activeSubstanceRepository.GetALL().ToList(), // Load active substances
+                ActSubDateReader = unitOfWork.Repository<ActiveSubstance>().GetALL().ToList(), // Load active substances
                 PrescriptionItemsReader = new List<PrescriptionItem>() // Assuming you have a way to get prescriptions
             };
             return View(model);
@@ -68,17 +69,23 @@ namespace PLProject.Controllers
                     Strength = medicationViewModel.Strength,
                     // Assuming you have a way to handle active substances and prescriptions
                 };
-                medicationRepository.Add(medication);
+                unitOfWork.Repository<Medication>().Add(medication);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
 
-            medicationViewModel.ActSubDateReader = activeSubstanceRepository.GetALL().ToList(); // Reload active substances
+            medicationViewModel.ActSubDateReader = unitOfWork.Repository<ActiveSubstance>().GetALL().ToList(); // Reload active substances
             return View(medicationViewModel);
         }
 
         public IActionResult Details(int id)
         {
-            var medication = medicationRepository.Get(id);
+            var spec = new BaseSpecification<Medication>(e => e.Id == id);
+            spec.Includes.Add(e => e.PrescriptionItemMedications);
+            
+            spec.Includes.Add(e => e.ActiveSubstances);
+            
+            var medication = unitOfWork.Repository<Medication>().GetEntityWithSpec(spec);
             if (medication == null)
                 return NotFound();
 
@@ -93,7 +100,7 @@ namespace PLProject.Controllers
 
         public IActionResult Edit(int id)
         {
-            var medication = medicationRepository.Get(id);
+            var medication = unitOfWork.Repository<Medication>().Get(id);
             if (medication == null)
                 return NotFound();
 
@@ -126,7 +133,8 @@ namespace PLProject.Controllers
 
             try
             {
-                medicationRepository.Update(medication);
+                unitOfWork.Repository<Medication>().Update(medication);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -143,7 +151,7 @@ namespace PLProject.Controllers
 
         public IActionResult Delete(int id)
         {
-            var medication = medicationRepository.Get(id);
+            var medication = unitOfWork.Repository<Medication>().Get(id);
             if (medication == null)
                 return NotFound();
 
@@ -160,11 +168,12 @@ namespace PLProject.Controllers
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
-            var medication = medicationRepository.Get(id);
+            var medication = unitOfWork.Repository<Medication>().Get(id);
             if (medication == null)
                 return NotFound();
 
-            medicationRepository.Delete(medication);
+            unitOfWork.Repository<Medication>().Delete(medication);
+            unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
         }
 
