@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
-using PLProject.Helpers;
 using BLLProject.Specification;
 
 namespace PLProject.Controllers

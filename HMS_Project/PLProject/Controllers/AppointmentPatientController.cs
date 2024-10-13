@@ -8,7 +8,6 @@ using System.Linq;
 using PLProject.ViewModels.AppointmentViewModel;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
-using PLProject.Helpers;
 
 namespace PLProject.Controllers
 {

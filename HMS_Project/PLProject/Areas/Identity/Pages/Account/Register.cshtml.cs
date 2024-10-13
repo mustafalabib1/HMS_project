@@ -21,7 +21,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using PLProject.Helpers;
 
 namespace PLProject.Areas.Identity.Pages.Account
 {
