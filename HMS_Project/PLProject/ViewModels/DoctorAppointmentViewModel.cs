@@ -1,5 +1,5 @@
 ﻿using DALProject.model;
-using PLProject.ViewModels.Presciption;
+using PLProject.ViewModels.PrescriptionVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

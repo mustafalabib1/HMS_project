@@ -11,7 +11,7 @@ namespace DALProject.model
         public string FullDosage { get; set; } = null!;
 
         #region One2One With ActiveSubstance
-        public virtual int? ActiveSubstanceId { get; set; }
+        public virtual int ActiveSubstanceId { get; set; }
         public virtual ActiveSubstance ActiveSubstance { get; set; } = null!;
         #endregion
 
@@ -21,7 +21,7 @@ namespace DALProject.model
         #endregion
 
         #region One2Many With Medication
-        public virtual ICollection<PrescriptionItemMedication> Medications { get; set; } = new HashSet<PrescriptionItemMedication>();
+        public virtual ICollection<PrescriptionItemMedication> Medications { get; set; }
         #endregion
     }
 }

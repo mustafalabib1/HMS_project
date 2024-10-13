@@ -39,6 +39,7 @@ namespace PLProject.ViewModels
             Address = nurse.Address;
             Gender = nurse.Gender;
             ClinicId = nurse.ClinicId;
+            Id=nurse.Id;
         }
 
         public ICollection<Clinic> ClinicDateReader { get; set; } = new HashSet<Clinic>();

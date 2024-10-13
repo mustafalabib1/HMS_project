@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PLProject.ViewModels.Presciption
+namespace PLProject.ViewModels.PrescriptionVM
 {
     public class PrescriptionViewModel
     {

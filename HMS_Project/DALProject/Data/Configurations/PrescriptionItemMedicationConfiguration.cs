@@ -18,6 +18,7 @@ namespace DALProject.Data.Configurations
 
             builder.Property(p => p.Dosage).HasMaxLength(100);
             builder.Property(p => p.Duration).HasMaxLength(100);
+            builder.Property(p => p.PrescriptionItemId).IsRequired();
             #endregion
 
             #region One2Many With Medicatoin
@@ -29,7 +30,8 @@ namespace DALProject.Data.Configurations
             #region One2Many With PrescriptionItem
             builder
                 .HasOne(p => p.PrescriptionItem)
-                .WithMany(p => p.Medications);
+                .WithMany(p => p.Medications)
+                .HasForeignKey(p=>p.PrescriptionItemId);
             #endregion
         }
     }

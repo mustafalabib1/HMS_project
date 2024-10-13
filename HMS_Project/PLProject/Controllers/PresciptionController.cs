@@ -1,68 +1,143 @@
 ﻿using BLLProject.Interfaces;
+using DALProject.Data.Contexts;
+using DALProject.Data.Migrations;
 using DALProject.model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PLProject.ViewModels.Presciption;
+using PLProject.ViewModels;
+using PLProject.ViewModels.PrescriptionVM;
 using X.PagedList;
 
 namespace PLProject.Controllers
 {
 	public class PrescriptionController : Controller
 	{
-        #region DPI
+		#region DPI
 		private readonly IRepository<Prescription> prescriptionRepo;
+		private readonly IWebHostEnvironment env;
 
-        public PrescriptionController(IRepository<Prescription> PrescriptionRepo)
-        {
-            prescriptionRepo = PrescriptionRepo;
-        }
-        #endregion
+		public PrescriptionController(IRepository<Prescription> PrescriptionRepo, IWebHostEnvironment _env)
+		{
+			prescriptionRepo = PrescriptionRepo;
+			env = _env;
+		}
+		#endregion
 
-        public IActionResult Index(string searchQuery, int? page)
-        {
+		public IActionResult Index(string searchQuery, int? page)
+		{
 
-            IEnumerable<Prescription> prescriptions;
-            // Filter by ActiveSubstanceName (if provided)
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                prescriptions= prescriptionRepo.Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)
-                &&p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
-            }
-            else
-            {
-                // Fetch all prescriptions entries for this day 
-                prescriptions= prescriptionRepo./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
-            }
-            var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
-            // Pagination logic
-            int pageSize = 10;
-            int pageNumber = page ?? 1;
+			IEnumerable<Prescription> prescriptions;
+			// Filter by ActiveSubstanceName (if provided)
+			if (!string.IsNullOrEmpty(searchQuery))
+			{
+				prescriptions = prescriptionRepo.Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
+				&& p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
+			}
+			else
+			{
+				// Fetch all prescriptions entries for this day 
+				prescriptions = prescriptionRepo./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
+			}
+			var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
+			// Pagination logic
+			int pageSize = 10;
+			int pageNumber = page ?? 1;
 
-            ViewData["CurrentFilter"] = searchQuery;
-            var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
-            return View(paginatedList);
-        }
-        #region Create 
-        public IActionResult Create()
-        {
-            return View(new PrescriptionViewModel());
-        }
+			ViewData["CurrentFilter"] = searchQuery;
+			var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
+			return View(paginatedList);
+		}
+		#region Create 
+		public IActionResult Create()
+		{
+			return View(new PrescriptionViewModel());
+		}
 
-        [HttpPost]
-        public IActionResult Create(PrescriptionViewModel model)
-        {
-            model.DoctorId = 2;
-            if (!model.HasItems)
-            {
-                ModelState.AddModelError(string.Empty, "You must add at least one item.");
-            }
-            else if (ModelState.IsValid)
-            {
-                prescriptionRepo.Add(new Prescription().ConvertPrescriptionViewModelToPresciption(model));
-            }
-            // If the model is invalid, return the view with the same model to show errors
-            return View(model);
-        } 
-        #endregion
-    }
+		[HttpPost]
+		public IActionResult Create(PrescriptionViewModel model)
+		{
+			if (!model.HasItems)
+			{
+				ModelState.AddModelError(string.Empty, "You must add at least one item.");
+			}
+			else if (ModelState.IsValid)
+			{
+				var prescription = new Prescription()
+				{
+					PrescriptionItems = model.PrescriptionItems.Select(pi => pi.PrescriptionItemDoctorVMToPrescriptionItem()).ToList(),
+				};
+				prescription.DoctorId = 2;
+				try
+				{
+					prescriptionRepo.Add(prescription);
+					// Update the active substance in the repository
+				}
+				catch (Exception ex)
+				{
+					// Handle exceptions and add error messages to the model state
+					var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
+					ModelState.AddModelError(string.Empty, errorMessage);
+					return View(model);
+				}
+			}
+			// If the model is invalid, return the view with the same model to show errors
+			return View(model);
+		}
+		#endregion
+
+		#region Details
+		public IActionResult Details(int? Id, string viewname = "Details")
+		{
+			if (!Id.HasValue)
+				return BadRequest(); // 400
+
+			var prescription = prescriptionRepo.Get(Id.Value);
+			var prescriptionVM = prescription.ConvertPresciptionToPrescriptionViewModel();
+
+			if (prescriptionVM is null)
+				return NotFound(); // 404
+
+			return View(viewname, prescriptionVM);
+		}
+		#endregion
+
+
+		#region Edit
+		public IActionResult Edit(int? Id)
+		{
+			return Details(Id, "Edit");
+		}
+
+		[HttpPost]
+		public IActionResult Edit(PrescriptionViewModel viewModel)
+		{
+
+			// If the model is invalid, repopulate lists and return the view
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
+
+			try
+			{
+				var updatedPrescription = prescriptionRepo.Get(viewModel.prescriptionId);
+
+				//// Update the Prescription
+				
+				updatedPrescription.ConvertPrescriptionViewModelToPresciption(viewModel);
+				
+				prescriptionRepo.Update(updatedPrescription);
+
+				return RedirectToAction(nameof(Index), new { Id = viewModel.prescriptionId });
+			}
+			catch (Exception ex)
+			{
+				// Handle exceptions and add error messages to the model state
+				var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
+				ModelState.AddModelError(string.Empty, errorMessage);
+				return View(viewModel);
+			}
+		}
+		#endregion
+	}
 }

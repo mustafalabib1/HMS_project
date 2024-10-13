@@ -32,15 +32,23 @@
 									<th>@Html.DisplayNameFor(a => a.FirstOrDefault().Patient.FullName)</th>
 									<th>Details</th>
 									<th>Update</th>
-									<th>Delete</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach (var Prescription in Model)
 								{
 									<tr>
-										<td>@Prescription.Patient?.FullName??patient name</td>
-										<partial name="_ButtonsPartial" model="@Prescription.prescriptionId"></partial>
+										<td>@(Prescription.Patient?.FullName??"patient name")</td>
+										<td>
+											<a asp-action="Details" asp-route-Id="@Prescription.prescriptionId" class="btn btn-warning">
+												<i class="fas fa-eye pe-1"></i>Details
+											</a>
+										</td>
+										<td>
+											<a asp-action="Edit" asp-route-Id="@Prescription.prescriptionId" class="btn btn-success">
+												<i class="fas fa-edit pe-1"></i>Update
+											</a>
+										</td>
 									</tr>
 								}
 							</tbody>
