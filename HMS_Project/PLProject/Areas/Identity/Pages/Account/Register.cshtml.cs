@@ -77,13 +77,9 @@ namespace PLProject.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            /// 
             [Required]
             [Display(Name = "Full Name")]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             public string FullName { get; set; }
 
             [Required]
@@ -91,20 +87,12 @@ namespace PLProject.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -122,24 +110,11 @@ namespace PLProject.Areas.Identity.Pages.Account
 
             [Display(Name = "Address")]
             public string Address { get; set; }
-
-            public string Role { get; set; }
-            [ValidateNever]
-            public IEnumerable<SelectListItem> RoleList { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            Input = new InputModel
-            {
-                RoleList = _roleManager.Roles.Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Name
-                })
-            };
-
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -152,6 +127,12 @@ namespace PLProject.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.FullName = Input.FullName;
+                user.PhoneNumber = Input.PhoneNumber;
+                user.DateOfBirth = Input.BirthDate;
+                user.Gender = Input.Gender;
+                user.Address = Input.Address;
+
                 var _UserName = Input.Email.Split('@')[0];
                 await _userStore.SetUserNameAsync(user, _UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -161,14 +142,9 @@ namespace PLProject.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (!string.IsNullOrEmpty(Input.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user, Input.Role);
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, Roles.Patient);
-                    }
+                    
+                    await _userManager.AddToRoleAsync(user, Roles.Patient);
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
