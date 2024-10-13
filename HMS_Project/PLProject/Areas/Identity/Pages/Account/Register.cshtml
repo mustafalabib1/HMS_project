@@ -1,12 +1,70 @@
 ﻿@page
 @model RegisterModel
 @{
+    Layout = "/Views/Shared/_GuestLayout.cshtml";
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<section class="container">
+    <header>Create New Account</header>
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form">
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div class="input-box">
+            <label asp-for="Input.FullName">Full Name</label>
+            <input asp-for="Input.FullName" class="form-control" aria-required="true" placeholder="Enter full name" />
+            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+        </div>
+        <div class="input-box">
+            <label asp-for="Input.Email">Email Address</label>
+            <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="Enter email address" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="input-box">
+            <label asp-for="Input.Password">Password</label>
+            <input asp-for="Input.Password" class="form-control" aria-required="true" placeholder="Enter password" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="input-box">
+            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" aria-required="true" placeholder="Enter password again" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="column">
+            <div class="input-box">
+                <label asp-for="Input.PhoneNumber">Phone Number</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="Enter phone number" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="input-box">
+                <label asp-for="Input.BirthDate">Birth Date</label>
+                <input asp-for="Input.BirthDate" class="form-control" aria-required="true" placeholder="Enter birth date" value=""/>
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="gender-box">
+            <h3>Gender</h3>
+            <div class="gender-option">
+                <div class="gender">
+                    <input asp-for="Input.Gender" type="radio" id="check-male" name="gender" checked value="Male"/>
+                    <label for="check-male">male</label>
+                </div>
+                <div class="gender">
+                    <input asp-for="Input.Gender" type="radio" id="check-male" name="gender" value="Female" />
+                    <label for="check-female">Female</label>
+                </div>
+            </div>
+        </div>
+        <div class="input-box address">
+            <label asp-for="Input.Address">Address</label>
+            <input asp-for="Input.Address" class="form-control" aria-required="true" placeholder="Enter address" />
+            <span asp-validation-for="Input.Address" class="text-danger"></span>
+        </div>
+        <p class="mb-0 mt-3">Already have an account? <a asp-area="Identity" asp-page="/Account/Login">Login</a></p>
+        <button id="registerSubmit" type="submit">Register</button>
+    </form>
+</section>
 
-<div class="row">
+@* <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
@@ -45,8 +103,10 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
                         </p>
                     </div>
                 }
@@ -66,7 +126,7 @@
             }
         </section>
     </div>
-</div>
+</div> *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
