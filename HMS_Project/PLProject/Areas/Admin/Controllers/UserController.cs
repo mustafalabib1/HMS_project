@@ -119,6 +119,67 @@ namespace PLProject.Areas.Admin.Controllers
 
         #endregion
 
+        #region Edit User
+
+        public async Task<IActionResult> Edit(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                return NotFound();
+
+            var viewModel = new ProfileFormViewModel
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ProfileFormViewModel model)
+        {
+            if(!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+                return NotFound();
+
+            var userWithSameEmail = await _userManager.FindByEmailAsync(model.Email);
+
+            if (userWithSameEmail != null && userWithSameEmail.Id != user.Id)
+            {
+                ModelState.AddModelError("Email", "This Email is already taken");
+                return View(model);
+            }
+
+            var userWithSameUserName = await _userManager.FindByNameAsync(model.UserName);
+            if (userWithSameUserName != null && userWithSameUserName.Id != user.Id)
+            {
+                ModelState.AddModelError("Email", "This UserName is already taken");
+                return View(model);
+            }
+
+            user.FullName = model.FullName;
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Address = model.Address ?? string.Empty;
+
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        #endregion
+
         #region Manage Roles
         public async Task<IActionResult> ManageRoles(string userId)
         {
@@ -167,7 +228,5 @@ namespace PLProject.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
-
-
     }
 }
