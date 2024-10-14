@@ -1,6 +1,6 @@
 ﻿@model IPagedList<AppointmentGenarelVM>
 @{
-	ViewData["Title"] = $"All Appointment For {Model.FirstOrDefault().Patient.FullName}";
+	ViewData["Title"] = $"All Appointment For {Model.FirstOrDefault()?.Patient.FullName ?? "N/A"}";
 }
 
 

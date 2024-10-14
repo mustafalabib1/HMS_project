@@ -7,6 +7,7 @@
 <h2 class="text-center">Users </h2>
 <br />
 <br />
+<a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-primary">Add New User</a>
 
 <div class="container">
     <div class="row">
@@ -26,17 +27,34 @@
                 <tbody>
                     @foreach (var user in Model)
                     {
-                        <tr>
+                        <tr class="align-content-center">
                             <td>@user.Id</td>
                             <td>@user.UserName</td>
                             <td>@user.FullName</td>
                             <td>@user.Email</td>
                             <td>@user.PhoneNumber</td>
-                            <td>@string.Join(" ' ", user.Roles)</td>
-                            <td></td>
+                            <td>@string.Join(", ", user.Roles)</td>
+                            <td>
+@*                             <td>
+                                <a asp-action="Details" asp-route-Id="@Model" class="btn btn-warning">
+                                    <i class="fas fa-eye pe-1"></i>Details
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-Id="@Model" class="btn btn-success">
+                                    <i class="fas fa-edit pe-1"></i>Update
+                                </a>
+                            </td> *@
+
+                                <a asp-area="Admin" asp-controller="User" asp-action="ManageRoles" asp-route-userId="@user.Id" class="btn btn-success">
+                                    <i class="fas fa-edit pe-1"></i>Manage Roles
+                                </a>
+
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
+</div>

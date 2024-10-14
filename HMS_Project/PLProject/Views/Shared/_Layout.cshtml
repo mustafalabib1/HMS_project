@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-12">
                             <div class="logo">
-                                <a asp-controller="Home" asp-action="Index"><img src="img/logo.png" alt="logo"></a>
+                                <a asp-area="" asp-controller="Home" asp-action="Index"><img src="@Url.Content("~/img/logo.png")" alt="Logo" /></a>
                             </div>
                             <div class="mobile-nav"></div>
                         </div>
@@ -27,7 +27,7 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="active">
-                                            <a asp-controller="Home" asp-action="Index">Home</a>
+                                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                         </li>
 
                                         @if (User.IsInRole(Roles.Admin))
@@ -35,18 +35,18 @@
                                             <li>
                                                 <a href="#">Staff</a>
                                                 <ul class="dropdown">
-                                                    <li><a asp-controller="Doctor" asp-action="Index">Doctor</a></li>
-                                                    <li><a asp-controller="Nurse" asp-action="Index">Nurses</a></li>
-                                                    <li><a asp-controller="Pharmacist" asp-action="Index">Pharmacist</a></li>
-                                                    <li><a asp-controller="Receptionist" asp-action="Index">Receptionist</a></li>
+                                                    <li><a asp-area="" asp-controller="Doctor" asp-action="Index">Doctor</a></li>
+                                                    <li><a asp-area="" asp-controller="Nurse" asp-action="Index">Nurses</a></li>
+                                                    <li><a asp-area="" asp-controller="Pharmacist" asp-action="Index">Pharmacist</a></li>
+                                                    <li><a asp-area="" asp-controller="Receptionist" asp-action="Index">Receptionist</a></li>
                                                 </ul>
                                             </li>
                                             <li>
                                                 <a href="#">Medical</a>
                                                 <ul class="dropdown">
-                                                    <li><a asp-controller="ActiveSubstance" asp-action="Index">Active Substance</a></li>
-                                                    <li><a asp-controller="Medication" asp-action="Index">Medication</a></li>
-                                                    <li><a asp-controller="Clinic" asp-action="Index">Clinic</a></li>
+                                                    <li><a asp-area="" asp-controller="ActiveSubstance" asp-action="Index">Active Substance</a></li>
+                                                    <li><a asp-area="" asp-controller="Medication" asp-action="Index">Medication</a></li>
+                                                    <li><a asp-area="" asp-controller="Clinic" asp-action="Index">Clinic</a></li>
                                                 </ul>
                                             </li>
                                         }
@@ -54,19 +54,19 @@
                                         @if (!User.Identity.IsAuthenticated || User.IsInRole(Roles.Patient))
                                         {
                                             <li>
-                                                <a asp-controller="AppointmentPatient" asp-action="Index">Book Appointment</a>
-                                            </li>
-                                        }
-                                        @if (User.IsInRole(Roles.Doctor))
-                                        {
-                                            <li class="active">
-                                                <a asp-controller="AppointmentDoctor" asp-action="Index">My Appointment</a>
+                                                <a asp-area="" asp-controller="AppointmentPatient" asp-action="Index">Book Appointment</a>
                                             </li>
                                         }
                                         @if (User.IsInRole(Roles.Doctor))
                                         {
                                             <li>
-                                                <a asp-controller="Prescription" asp-action="Index">Prescription</a>
+                                                <a asp-area="" asp-controller="AppointmentDoctor" asp-action="Index">My Appointment</a>
+                                            </li>
+                                        }
+                                        @if (User.IsInRole(Roles.Pharmacist))
+                                        {
+                                            <li>
+                                                <a asp-area="" asp-controller="Prescription" asp-action="Index">Prescription</a>
                                             </li>
                                         }
                                         @if (User.IsInRole(Roles.Receptionist) || User.IsInRole(Roles.Admin))
@@ -74,7 +74,7 @@
                                             <li>
                                                 <a href="#">Billing</a>
                                                 <ul class="dropdown">
-                                                    <li><a asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                                                    <li><a asp-area ="" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
                                                 </ul>
                                             </li>
                                         }
@@ -102,9 +102,9 @@
             </div>
         </div>
     </header>
-
+    <div class="container mt-5">
     @RenderBody()
-
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - PLProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
