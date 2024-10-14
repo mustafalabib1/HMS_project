@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="~/PLProject.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header class="header">
         <div class="header-inner">
@@ -18,7 +19,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-12">
                             <div class="logo">
-                                <a asp-controller="Home" asp-action="Index"><img src="img/logo.png" alt="logo"></a>
+                                <a asp-area="" asp-controller="Home" asp-action="Index"><img src="@Url.Content("~/img/logo.png")" alt="Logo" /></a>
                             </div>
                             <div class="mobile-nav"></div>
                         </div>
@@ -27,7 +28,7 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="active">
-                                            <a asp-controller="Home" asp-action="Index">Home</a>
+                                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                         </li>
 
                                         @if (User.IsInRole(Roles.Admin))
@@ -59,7 +60,7 @@
                                         }
                                         @if (User.IsInRole(Roles.Doctor))
                                         {
-                                            <li class="active">
+                                            <li>
                                                 <a asp-area="" asp-controller="AppointmentDoctor" asp-action="Index">My Appointment</a>
                                             </li>
                                         }
@@ -74,7 +75,17 @@
                                             <li>
                                                 <a href="#">Billing</a>
                                                 <ul class="dropdown">
-                                                    <li><a asp-area="" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                                                    <li><a asp-area ="" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                        @if (User.IsInRole(Roles.Admin))
+                                        {
+                                            <li>
+                                                <a href="#">Users</a>
+                                                <ul class="dropdown">
+                                                    <li><a asp-area="Admin" asp-controller="User" asp-action="Index">Users</a></li>
+                                                    <li><a asp-area="Admin" asp-controller="User" asp-action="roles">Roles</a></li>
                                                 </ul>
                                             </li>
                                         }
@@ -92,9 +103,9 @@
             </div>
         </div>
     </header>
-
+    <div class="container mt-5">
     @RenderBody()
-
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - PLProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

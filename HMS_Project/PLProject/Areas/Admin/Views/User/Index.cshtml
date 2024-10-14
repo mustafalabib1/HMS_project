@@ -1,9 +1,51 @@
-﻿@model IEnumerable<AppUser>
+﻿@model IEnumerable<AppUserViewModel>
 
 @{
-    ViewData["Title"] = "User Management";
+    ViewData["Title"] = "Users Management";
 }
 
-<h2 class="text-center">User Management</h2>
+<h2 class="text-center">Users </h2>
 <br />
 <br />
+<a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-primary">Add New User</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th style="white-space: nowrap;">User Name</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th style="white-space: nowrap;">Phone Number</th>
+                        <th>Role</th>
+                        <th>Actions </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr class="align-content-center">
+                            <td>@user.Id</td>
+                            <td>@user.UserName</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@string.Join(", ", user.Roles)</td>
+                            <td class="d-flex">
+                                <a asp-area="Admin" asp-controller="User" asp-action="ManageRoles" asp-route-userId="@user.Id" class="btn btn-success me-2" style="white-space: nowrap;">
+                                    <i class="fas fa-edit pe-1"></i>Manage Roles
+                                </a>
+                                <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-userId="@user.Id" class="btn btn-primary" style="white-space: nowrap;">
+                                    <i class="fa-regular fa-user"></i>Modify User
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

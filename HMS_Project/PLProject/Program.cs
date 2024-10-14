@@ -77,7 +77,7 @@ namespace PLProject
 
             app.MapControllerRoute(
                 name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{userId?}");   
 
             app.MapControllerRoute(
                 name: "default",
@@ -85,7 +85,7 @@ namespace PLProject
 
             #region Update and Initialize Database
             // Applies pending migrations also if there are no roles, create the default
-            // admin user with email = admin@hmsproject.com and password = Admin#123
+            // admin user with email = admin@hmsproject.com and password = Admin#123 you can also use username = admin
 
             using (var scope = app.Services.CreateScope())
             {
