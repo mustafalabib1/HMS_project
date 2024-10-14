@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using X.PagedList;
 using PLProject.Areas.Admin.ViewModels;
+using System.Data;
 
 namespace PLProject.Areas.Admin.Controllers
 {
@@ -31,7 +33,7 @@ namespace PLProject.Areas.Admin.Controllers
         #endregion
 
         #region Index
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filterRole, int page = 1)
         {
             var users = await _userManager.Users.Select(user => new AppUserViewModel
             {
@@ -44,12 +46,21 @@ namespace PLProject.Areas.Admin.Controllers
             }
                 ).ToListAsync();
 
+            if (!string.IsNullOrEmpty(filterRole))
+            {
+                users = users.Where(user => user.Roles.Contains(filterRole)).ToList();
+            }
+
             users = users
                 .OrderByDescending(user => user.Roles.Contains("Admin"))
                 .ThenBy(user => user.UserName)
                 .ToList();
 
-            return View(users);
+            int pageSize = 8;
+            var pagedUsers = users.ToPagedList(page, pageSize);
+            ViewData["filterRole"] = filterRole;
+
+            return View(pagedUsers);
         }
         #endregion
 
@@ -118,7 +129,7 @@ namespace PLProject.Areas.Admin.Controllers
         }
 
         #endregion
-
+            
         #region Edit User
 
         public async Task<IActionResult> Edit(string userId)
