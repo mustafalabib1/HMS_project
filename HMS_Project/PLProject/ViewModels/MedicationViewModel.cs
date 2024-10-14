@@ -1,54 +1,31 @@
-﻿using DALProject.model;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DALProject.model;
+using Microsoft.EntityFrameworkCore;
 
 namespace PLProject.ViewModels
 {
     public class MedicationViewModel
     {
-        public MedicationViewModel() { }
+        public int Id { get; set; }
 
-        public MedicationViewModel(Medication medication)
-        {
-            MedicationId = medication.Id;
-            MedName = medication.MedName;
-            Strength = medication.Strength;
-            ActSubInMed = medication.ActiveSubstances.ToHashSet();
-        }
-        public ICollection<PrescriptionItem> PrescriptionItemsReader { get; set; } = new HashSet<PrescriptionItem>();
-        public ICollection<ActiveSubstance> ActSubDateReader { get; set; } = new HashSet<ActiveSubstance>();
-        [Required]
-        public int MedicationId { get; set; }
+        [Required(ErrorMessage = "Medication Name is required.")]
+        [Display(Name = "Medication Name")]
+        public string Name { get; set; } = string.Empty;
 
-        [Required]
-        public string MedName { get; set; } = null!;
-
-        [Required]
+        [Required(ErrorMessage = "Strength is required.")]
+        [Display(Name = "Strength")]
+        [Range(1, int.MaxValue, ErrorMessage = "Strength must be a positive number.")]
         public int Strength { get; set; }
-        public ICollection<ActiveSubstance> ActSubInMed { get; set; } = new HashSet<ActiveSubstance>();
-        public ICollection<PrescriptionItem> PrescriptionItemInMed { get; set; } = new HashSet<PrescriptionItem>();
 
+        // This property can hold the IDs of active substances associated with the medication
+        public List<int> ActiveSubstanceIds { get; set; } = new List<int>();
 
-        public static explicit operator Medication(MedicationViewModel medViewModel)
-        {
-            return new Medication()
-            {
-                Id = medViewModel.MedicationId,
-                MedName = medViewModel.MedName,
-                Strength = medViewModel.Strength,
-                ActiveSubstances = medViewModel.ActSubInMed
-            };
-        }
+        // This property can hold a list of active substances for display purposes
+        public List<ActiveSubstanceViewModel> ActiveSubstances { get; set; } = new List<ActiveSubstanceViewModel>();
 
-
-        public static explicit operator MedicationViewModel(Medication medication)
-        {
-            return new MedicationViewModel(medication);
-        }
+        // Consider removing ActiveSubstanceNames if not used
+        // public List<string> ActiveSubstanceNames { get; set; } = new List<string>();
 
 
     }

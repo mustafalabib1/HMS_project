@@ -1,88 +1,25 @@
-﻿@model PLProject.ViewModels.MedicationViewModel
+﻿@model MedicationViewModel
 
 @{
     ViewData["Title"] = "Medication Details";
 }
 
-<h1 class="mb-4">Medication Details</h1>
+<h2>Medication Details</h2>
 
-<div class="container">
-    <!-- Medication Name -->
-    <div class="form-group mb-3">
-        <label asp-for="MedName" class="form-label fw-bold"></label>
-        <input asp-for="MedName" class="form-control form-control-plaintext ps-1" readonly />
-        <span asp-validation-for="MedName" class="text-danger"></span>
+
+
+
+
+
+<partial name="PartialViews/DetailsDeleteMedicationPartial" />
+
+
+    <div class="mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     </div>
 
-    <!-- Medication Strength -->
-    <div class="form-group mb-3">
-        <label asp-for="Strength" class="form-label fw-bold"></label>
-        <input asp-for="Strength" class="form-control form-control-plaintext ps-1" readonly />
-        <span asp-validation-for="Strength" class="text-danger"></span>
-    </div>
 
-    <!-- Active Substances -->
-    <div class="mb-4">
-        <h4 class="mb-3">Active Substances</h4>
-        @if (Model.ActSubInMed.Count() > 0)
-        {
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>@Html.DisplayNameFor(m => m.ActSubInMed.First().ActiveSubstancesName)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var activeSubstance in Model.ActSubInMed)
-                        {
-                            <tr class="align-middle">
-                                <td>@activeSubstance.ActiveSubstancesName</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-info mt-3">
-                <i class="fas fa-info-circle"></i> No active substances found for this medication.
-            </div>
-        }
-    </div>
 
-    <!-- Prescriptions -->
-    <div class="mb-4">
-        <h4 class="mb-3">Prescriptions</h4>
-        @if (Model.PrescriptionItemInMed.Count() > 0)
-        {
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>@Html.DisplayNameFor(m => m.PrescriptionItemInMed.First().Prescription)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var prescription in Model.PrescriptionItemInMed)
-                        {
-                            <tr class="align-middle">
-                                <td>@prescription.Prescription</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-info mt-3">
-                <i class="fas fa-info-circle"></i> No prescriptions found for this medication.
-            </div>
-        }
-    </div>
 
-    <partial name="_ButtonsInDetailsPartial" model="Model.MedicationId" />
-
-</div>
