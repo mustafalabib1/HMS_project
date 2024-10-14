@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using PLProject.Areas.Admin.ViewModels;
 
 namespace PLProject.Areas.Admin.Controllers
@@ -29,6 +30,7 @@ namespace PLProject.Areas.Admin.Controllers
         }
         #endregion
 
+        #region Index
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.Select(user => new AppUserViewModel
@@ -49,7 +51,75 @@ namespace PLProject.Areas.Admin.Controllers
 
             return View(users);
         }
+        #endregion
 
+        #region Add User
+        public async Task<IActionResult> Add()
+        {
+            var roles = await _roleManager.Roles.Select(role => new RoleViewModel { RoleId = role.Id, RoleName = role.Name }).ToListAsync();
+
+            var viewModel = new AddUserViewModel
+            {
+                Roles = roles
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(AddUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // if no roles selected
+            if (!model.Roles.Any(role => role.IsSelected))
+            {
+                ModelState.AddModelError("Roles", "Please select at least one role");
+                return View(model);
+            }
+
+            if (await _userManager.FindByEmailAsync(model.Email) != null)
+            {
+                ModelState.AddModelError("Email", "Email already exists");
+                return View(model);
+            }
+
+            if (await _userManager.FindByNameAsync(model.UserName) != null)
+            {
+                ModelState.AddModelError("UserName", "UserName already exists");
+                return View(model);
+            }
+
+            // Now the Model Should be fine
+            var user = new AppUser
+            {
+                UserName = model.UserName,
+                FullName = model.FullName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                DateOfBirth = model.BirthDate,
+                Gender = model.Gender
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("Roles ", error.Description);
+                }
+                return View(model);
+            }
+
+            await _userManager.AddToRolesAsync(user, model.Roles.Where(role => role.IsSelected).Select(role => role.RoleName));
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        #endregion
+
+        #region Manage Roles
         public async Task<IActionResult> ManageRoles(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -96,6 +166,8 @@ namespace PLProject.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        #endregion
+
 
     }
 }

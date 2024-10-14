@@ -12,13 +12,5 @@ namespace PLProject.Areas.Admin.ViewModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public IEnumerable<String> Roles { get; set; }
-
-        //public AppUserViewModel(AppUser user)
-        //{
-        //    Id = user.Id;
-        //    UserName = user.UserName;
-        //    Email = user.Email;
-        //    PhoneNumber = user.PhoneNumber;
-        //}
     }
 }
