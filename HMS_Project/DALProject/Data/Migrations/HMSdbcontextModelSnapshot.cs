@@ -124,8 +124,7 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Examination")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -1150,8 +1149,7 @@ namespace DALProject.Data.Migrations
 
                     b.Navigation("ActSub2");
 
-                    b.Navigation("PatrescriptionItem")
-                        .IsRequired();
+                    b.Navigation("PatrescriptionItem");
                 });
 
             modelBuilder.Entity("DALProject.model.Apointment", b =>

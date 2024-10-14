@@ -9,12 +9,11 @@
 					<th>@Html.DisplayNameFor(a => a.FirstOrDefault().ApointmentDate)</th>
 					<th>@Html.DisplayNameFor(a => a.FirstOrDefault().ApointmentTime)</th>
 					<th>@Html.DisplayNameFor(a => a.FirstOrDefault().ApointmentStatus)</th>
-					<th>Clinic @Html.DisplayNameFor(a => a.FirstOrDefault().Clinic.Name)</th>
-					<th>Doctor @Html.DisplayNameFor(a => a.FirstOrDefault().Doctor.FullName)</th>
-					<th>Patient @Html.DisplayNameFor(a => a.FirstOrDefault().Patient.FullName)</th>
+					<th>Clinic Name</th>
+					<th>Doctor Name</th>
+					<th>Patient Name</th>
 					<th>Details</th>
 					<th>Update</th>
-					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,7 +26,16 @@
 						<td>@appointment.Clinic.Name</td>
 						<td>@appointment.Doctor.FullName</td>
 						<td>@appointment.Patient.FullName</td>
-						<partial name="_ButtonsPartial" model="@appointment.Id"></partial>
+						<td>
+							<a asp-action="Details" asp-route-Id="@appointment.Id" class="btn btn-warning">
+								<i class="fas fa-eye pe-1"></i>Details
+							</a>
+						</td>
+						<td>
+							<a asp-action="Edit" asp-route-Id="@appointment.Id" class="btn btn-success">
+								<i class="fas fa-edit pe-1"></i>Update
+							</a>
+						</td>
 					</tr>
 				}
 			</tbody>

@@ -4,6 +4,7 @@ using DALProject.Data.Contexts;
 using DALProject.Data.Migrations;
 using DALProject.model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PLProject.ViewModels;
@@ -12,23 +13,26 @@ using X.PagedList;
 
 namespace PLProject.Controllers
 {
-	[Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
+	[Authorize(Roles = Roles.Doctor)]
 	public class PrescriptionController : Controller
 	{
-		private readonly IUnitOfWork unitOfWork;
-		#region DPI
-		private readonly IWebHostEnvironment env;
+        #region DPI
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IWebHostEnvironment env;
+        private readonly UserManager<AppUser> _userManager; // Add UserManager
 
-		public PrescriptionController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
-		{
-			this.unitOfWork = unitOfWork;
-			env = _env;
-		}
-		#endregion
+        public PrescriptionController(IUnitOfWork unitOfWork, IWebHostEnvironment _env, UserManager<AppUser> userManager)
+        {
+            this.unitOfWork = unitOfWork;
+            env = _env;
+            _userManager = userManager; // Initialize UserManager
+        }
+        #endregion
 
-		public IActionResult Index(string searchQuery, int? page)
+        #region Index
+        public IActionResult Index(string searchQuery, int? page)
 		{
-			
+
 			IEnumerable<Prescription> prescriptions;
 			// Filter by ActiveSubstanceName (if provided)
 			if (!string.IsNullOrEmpty(searchQuery))
@@ -49,44 +53,7 @@ namespace PLProject.Controllers
 			ViewData["CurrentFilter"] = searchQuery;
 			var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
 			return View(paginatedList);
-		}
-		#region Create 
-		public IActionResult Create()
-		{
-			return View(new PrescriptionViewModel());
-		}
-
-		[HttpPost]
-		public IActionResult Create(PrescriptionViewModel model)
-		{
-			if (!model.HasItems)
-			{
-				ModelState.AddModelError(string.Empty, "You must add at least one item.");
-			}
-			else if (ModelState.IsValid)
-			{
-				var prescription = new Prescription()
-				{
-					PrescriptionItems = model.PrescriptionItems.Select(pi => pi.PrescriptionItemDoctorVMToPrescriptionItem()).ToList(),
-				};
-				prescription.DoctorId = 2;
-				try
-				{
-					unitOfWork.Repository<Prescription>().Add(prescription);
-					unitOfWork.Complete();
-					// Update the active substance in the repository
-				}
-				catch (Exception ex)
-				{
-					// Handle exceptions and add error messages to the model state
-					var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
-					ModelState.AddModelError(string.Empty, errorMessage);
-					return View(model);
-				}
-			}
-			// If the model is invalid, return the view with the same model to show errors
-			return View(model);
-		}
+		} 
 		#endregion
 
 		#region Details
@@ -105,7 +72,6 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
-
 		#region Edit
 		public IActionResult Edit(int? Id)
 		{
@@ -113,7 +79,7 @@ namespace PLProject.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Edit(PrescriptionViewModel viewModel)
+		public async Task<IActionResult> EditAsync(PrescriptionViewModel viewModel)
 		{
 
 			// If the model is invalid, repopulate lists and return the view
@@ -124,7 +90,10 @@ namespace PLProject.Controllers
 
 			try
 			{
+				var user = await _userManager.GetUserAsync(User);
+				var PharmacistId = user.Id;
 				var updatedPrescription = unitOfWork.Repository<Prescription>().Get(viewModel.prescriptionId);
+				//updatedPrescription.PharmacistId = PharmacistId;
 
 				//// Update the Prescription
 				
@@ -133,7 +102,7 @@ namespace PLProject.Controllers
 				unitOfWork.Repository<Prescription>().Update(updatedPrescription);
 				unitOfWork.Complete();
 
-				return RedirectToAction(nameof(Index), new { Id = viewModel.prescriptionId });
+				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)
 			{

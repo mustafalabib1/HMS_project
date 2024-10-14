@@ -1,0 +1,186 @@
+﻿@model AppointmentGenarelVM
+@inject IUnitOfWork unitOfWork
+
+@{
+    ViewData["Title"] = "Edit Appointment";
+    var SubstanceList = unitOfWork.Repository<ActiveSubstance>().GetALL();
+}
+
+<div class="container mt-5">
+    <!-- Header Section -->
+    <h1 class="text-center mb-4">Edit Appointment</h1>
+
+    @if (Model is not null)
+    {
+        <!-- Appointment Info -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white text-center">
+                <strong>Appointment Information</strong>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <p><strong>Date:</strong> @Model.ApointmentDate.ToString("dd MMM yyyy")</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Patient Name:</strong> @Model.Patient.FullName</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Edit" method="post" class="row g-3">
+                    <!-- Examination Field -->
+                    <div class="col-md-12">
+                        <label asp-for="@Model.Examination" class="form-label">Examination</label>
+                        <textarea asp-for="@Model.Examination" class="form-control" rows="4" placeholder="Enter examination details"></textarea>
+                        <span asp-validation-for="Examination" class="text-danger"></span>
+
+                    </div>
+
+                    <input asp-for="Id" type="hidden"/>
+
+                    <!-- Prescription Section -->
+                    <div id="prescriptionItemsSection" class="mt-4" style="display: none;">
+                        <h4>Prescription Items</h4>
+                        <hr>
+                        <div id="itemsContainer" class="mb-3">
+                        </div>
+                        <button type="button" id="addItemButton" class="btn btn-success">
+                            <i class="fas fa-plus-circle"></i> Add Item
+                        </button>
+                        <button type="button" id="removePrescriptionButton" class="btn btn-danger">
+                            <i class="fas fa-times-circle"></i> Remove Prescription
+                        </button>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="col-12 d-flex justify-content-between mt-4">
+                        <button type="button" id="CreatePrescription" class="btn btn-primary">
+                            <i class="fas fa-prescription"></i> Create Prescription
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check-circle"></i> Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="mt-4 alert alert-warning text-center">
+            <h3><i class="fas fa-exclamation-triangle"></i> No Data Found</h3>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            // Function to add a new prescription item
+            function addNewItem() {
+                var itemCount = $('#itemsContainer .item-row').length;
+                var newRow = `
+                    <div class="row mb-3 item-row">
+                        <div class="col-md-6">
+                            <label>Select Active Substance:</label>
+                                    <select class="form-select" name="PrescriptionViewModel.PrescriptionItems[${itemCount}].ActiveSubstanceId">
+                                <option value="">Select Active Substance...</option>
+        @foreach (var substance in SubstanceList)
+        {
+                                        <option value="@substance.Id">@substance.ActiveSubstancesName</option>
+        }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Full Dosage:</label>
+                                    <input type="text" class="form-control" name="PrescriptionViewModel.PrescriptionItems[${itemCount}].FullDosage" placeholder="Enter dosage" />
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="button" class="btn btn-danger remove-item"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `;
+                $('#itemsContainer').append(newRow);
+            }
+
+            // Show prescription items section and add one item when 'Create Prescription' button is clicked
+            $('#CreatePrescription').click(function () {
+                $('#prescriptionItemsSection').slideDown();  // Smoothly reveal the section
+                addNewItem();  // Automatically add one prescription item
+                $(this).fadeOut();  // Fade out 'Create Prescription' button
+            });
+
+            // Hide prescription items section and re-enable 'Create Prescription' button
+            $('#removePrescriptionButton').click(function () {
+                $('#prescriptionItemsSection').slideUp();  // Smoothly hide the section
+                $('#CreatePrescription').fadeIn();  // Fade in 'Create Prescription' button
+                $('#itemsContainer').empty();  // Clear any added items
+            });
+
+            // Add additional items functionality
+            $('#addItemButton').click(function () {
+                addNewItem();  // Add a new item row
+            });
+
+            // Remove item functionality
+            $(document).on('click', '.remove-item', function () {
+                $(this).closest('.item-row').fadeOut(300, function () {
+                    $(this).remove();
+
+                    // Check if there are no more items; if so, hide the prescription section
+                    if ($('#itemsContainer .item-row').length === 0) {
+                        $('#prescriptionItemsSection').slideUp();
+                        $('#CreatePrescription').fadeIn();  // Show 'Create Prescription' button again
+                    }
+                });
+            });
+
+            // Function to validate the form before submission
+            function validateForm() {
+                let isValid = true;
+                let itemCount = $('#itemsContainer .item-row').length;
+
+                // Validate prescription items only if the section is visible
+                if ($('#prescriptionItemsSection').is(':visible')) {
+                    if (itemCount === 0) {
+                        alert("You must add at least one item.");
+                        return false;
+                    }
+
+                    $('#itemsContainer .item-row').each(function () {
+                        const substanceSelect = $(this).find('select');
+                        const dosageInput = $(this).find('input[type="text"]');
+
+                        if (substanceSelect.val() === "" || substanceSelect.val() == null) {
+                            alert("Please select an active substance for all rows.");
+                            isValid = false;
+                            return false;
+                        }
+
+                        if (dosageInput.val() === "" || dosageInput.val() == null) {
+                            alert("Please enter the dosage for all rows.");
+                            isValid = false;
+                            return false;
+                        }
+                    });
+                }
+
+                return isValid;
+            }
+
+            // Override form submission
+            $('form').submit(function (e) {
+                if (!validateForm()) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+}

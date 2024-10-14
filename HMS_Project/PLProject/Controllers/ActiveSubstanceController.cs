@@ -19,11 +19,7 @@ public class ActiveSubstanceController : Controller
     #region DPI
 
 
-    public ActiveSubstanceController(
-        IWebHostEnvironment _env,
-        HMSdbcontextProcedures procedures,
-        IUnitOfWork unitOfWork
-      )
+    public ActiveSubstanceController( IWebHostEnvironment _env, HMSdbcontextProcedures procedures, IUnitOfWork unitOfWork)
     {
       
         env = _env;

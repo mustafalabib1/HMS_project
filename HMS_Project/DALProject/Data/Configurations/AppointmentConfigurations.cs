@@ -19,7 +19,6 @@ namespace DALProject.Data.Configurations
             builder.Property(a => a.ApointmentDate).HasColumnType($"{DB_DataTypes_Helper.date}");
             builder.Property(a => a.ApointmentTime).HasColumnType($"{DB_DataTypes_Helper.time}");
             builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(15);
-            builder.Property(a => a.Examination).HasMaxLength(100); 
             builder.Property(a => a.ApointmentStatus).
                 HasConversion(status=>status.ToString(), (statusAsString) => (ApointmentStatusEnum)Enum.Parse(typeof(ApointmentStatusEnum), statusAsString, true));
             #endregion

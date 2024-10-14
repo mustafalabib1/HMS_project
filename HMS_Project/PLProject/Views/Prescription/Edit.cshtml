@@ -1,118 +1,159 @@
 ﻿@model PrescriptionViewModel
 @inject IUnitOfWork unitOfWork
 @{
-	ViewData["Title"] = "Edit";
-	int i;
-	for (i = 0; i < Model.PrescriptionItems.Count; i++)
-	{
-		Model.PrescriptionItems[i].MedicationsDatareader = unitOfWork.Repository<ActiveSubstance>().Get(Model.PrescriptionItems[i].ActiveSubstanceId).Medications;
-	}
+    ViewData["Title"] = "Edit Prescription";
+    int i;
+    for (i = 0; i < Model.PrescriptionItems.Count; i++)
+    {
+        Model.PrescriptionItems[i].MedicationsDatareader = unitOfWork.Repository<ActiveSubstance>().Get(Model.PrescriptionItems[i].ActiveSubstanceId).Medications;
+    }
 }
 <div class="container mt-5">
-	<h1>Edit</h1>
+    <!-- Page Header -->
+    <h1 class="text-center mb-4">Edit Prescription</h1>
 
-	<script type="text/javascript">
-		var medicationsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.PrescriptionItems.Select(pi => pi.MedicationsDatareader.Select(m => new { m.Id, m.MedName }))));
-	</script>
+    <script type="text/javascript">
+        var medicationsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.PrescriptionItems.Select(pi => pi.MedicationsDatareader.Select(m => new { m.Id, m.MedName }))));
+    </script>
 
-	<form asp-action="Edit" method="post">
-		<input asp-for="prescriptionId" hidden />
-		<div id="itemsContainer">
-			@for (i = 0; i < Model.PrescriptionItems.Count; i++)
-			{
-				<input asp-for="PrescriptionItems[i].ActiveSubstanceId" hidden />
-				<div class="row mb-2 item-row" data-index="@i">
-					<div class="col">
-						<label asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-label fw-bold"></label>
-						<input asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-control form-control-plaintext ps-1" readonly />
-					</div>
-					<div class="col">
-						<label asp-for="PrescriptionItems[i].FullDosage" class="form-label fw-bold"></label>
-						<input asp-for="PrescriptionItems[i].FullDosage" class="form-control form-control-plaintext ps-1" readonly />
-					</div>
-				</div>
+    <!-- Prescription Form -->
+    <form asp-action="Edit" method="post" class="row g-4">
+        <!-- Hidden Fields -->
+        <input asp-for="prescriptionId" hidden />
 
-				<div class="medications-container" data-prescription-index="@i">
-					@for (int j = 0; j < Model.PrescriptionItems[i].Medications.Count; j++)
-					{
-						<div class="row mb-2 item-row medication-row" data-medication-index="@j">
-							<div class="col">
-								<label class="form-label fw-bold">Medication</label>
-								<select class="form-select" asp-for="PrescriptionItems[i].Medications[j].MedicationId">
-									<option value="">Select Medication...</option>
-									@foreach (var medication in Model.PrescriptionItems[i].MedicationsDatareader)
-									{
-										<option value="@medication.Id">@medication.MedName</option>
-									}
-								</select>
-							</div>
+        <!-- Prescription Items Section -->
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <strong>Prescription Items</strong>
+                </div>
+                <div class="card-body">
+                    <div id="itemsContainer">
+                        @for (i = 0; i < Model.PrescriptionItems.Count; i++)
+                        {
+                            <input asp-for="PrescriptionItems[i].ActiveSubstanceId" hidden />
+                            <!-- Prescription Item Row -->
+                            <div class="row mb-3 item-row border-bottom pb-3" data-index="@i">
+                                <div class="col-md-4">
+                                    <label asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-label fw-bold">Active Substance</label>
+                                    <input asp-for="PrescriptionItems[i].ActiveSubstance.ActiveSubstancesName" class="form-control-plaintext ps-1" readonly />
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="PrescriptionItems[i].FullDosage" class="form-label fw-bold">Dosage</label>
+                                    <input asp-for="PrescriptionItems[i].FullDosage" class="form-control-plaintext ps-1" readonly />
+                                </div>
+                            </div>
 
-							<div class="col">
-								<label asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-label fw-bold"></label>
-								<input asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-control" />
-							</div>
+                            <!-- Medications Section for Each Item -->
+                            <div class="medications-container mb-4" data-prescription-index="@i">
+                                <h5 class="text-secondary mb-3">Medications</h5>
+                                @for (int j = 0; j < Model.PrescriptionItems[i].Medications.Count; j++)
+                                {
+                                    <div class="row mb-3 medication-row" data-medication-index="@j">
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Medication</label>
+                                            <select class="form-select" asp-for="PrescriptionItems[i].Medications[j].MedicationId">
+                                                <option value="">Select Medication...</option>
+                                                @foreach (var medication in Model.PrescriptionItems[i].MedicationsDatareader)
+                                                {
+                                                    <option value="@medication.Id">@medication.MedName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-label fw-bold">Dosage</label>
+                                            <input asp-for="PrescriptionItems[i].Medications[j].Dosage" class="form-control" placeholder="Enter dosage" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-label fw-bold">Duration (days)</label>
+                                            <input asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-control" placeholder="Enter duration" />
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-end">
+                                            <!-- Remove Medication Button -->
+                                            <button type="button" class="btn btn-danger remove-medication-button" data-prescription-index="@i" data-medication-index="@j">
+                                                <i class="fas fa-minus-circle"></i> Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
 
-							<div class="col">
-								<label asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-label fw-bold"></label>
-								<input asp-for="PrescriptionItems[i].Medications[j].Duration" class="form-control" />
-							</div>
-						</div>
-					}
-				</div>
+                            <!-- Add Medication Button -->
+                            <button type="button" class="btn btn-sm btn-outline-success add-medication-button" data-index="@i">
+                                <i class="fas fa-plus-circle"></i> Add Medication
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				<button type="button" class="btn btn-success add-medication-button" data-index="@i">+ Add item</button>
-			}
-		</div>
-
-		<button type="submit" class="btn btn-primary mt-3">Submit</button>
-	</form>
+        <!-- Submit Button -->
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary mt-3">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </form>
 </div>
+
+<!-- Custom Scripts Section -->
 @section Scripts {
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			// Delegate event handler for "+ Add item" button clicks
-			$(document).on('click', '.add-medication-button', function (e) {
-				e.preventDefault();
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delegate event handler for "+ Add item" button clicks
+            $(document).on('click', '.add-medication-button', function (e) {
+                e.preventDefault();
 
-				// Get the current prescription index
-				var prescriptionIndex = $(this).data('index');
-				var medicationsContainer = $('.medications-container[data-prescription-index="' + prescriptionIndex + '"]');
+                // Get the current prescription index
+                var prescriptionIndex = $(this).data('index');
+                var medicationsContainer = $('.medications-container[data-prescription-index="' + prescriptionIndex + '"]');
 
-				// Increment the medication index
-				var newMedicationIndex = medicationsContainer.find('.medication-row').length;
+                // Increment the medication index
+                var newMedicationIndex = medicationsContainer.find('.medication-row').length;
 
-				// Create a new medication row
-				var newMedicationRow = `
-													<div class="row mb-2 item-row medication-row" data-medication-index="${newMedicationIndex}">
-														<div class="col">
-															<label class="form-label fw-bold">Medication</label>
-															<select class="form-select" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].MedicationId">
-																<option value="">Select Medication...</option>
-												`;
+                // Create a new medication row
+                var newMedicationRow = `
+                        <div class="row mb-3 item-row medication-row" data-medication-index="${newMedicationIndex}">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Medication</label>
+                                <select class="form-select" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].MedicationId">
+                                    <option value="">Select Medication...</option>`;
+                medicationsData[prescriptionIndex].forEach(function (medication) {
+                    newMedicationRow += `<option value="${medication.Id}">${medication.MedName}</option>`;
+                });
+                newMedicationRow += `
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Dosage</label>
+                                <input type="text" class="form-control" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].Dosage" placeholder="Enter dosage" />
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Duration (days)</label>
+                                <input type="text" class="form-control" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].Duration" placeholder="Enter duration" />
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger remove-medication-button" data-prescription-index="${prescriptionIndex}" data-medication-index="${newMedicationIndex}">
+                                    <i class="fas fa-minus-circle"></i> Remove
+                                </button>
+                            </div>
+                        </div>`;
 
-				// Populate the medications dropdown from the JavaScript variable
-				medicationsData[prescriptionIndex].forEach(function (medication) {
-					newMedicationRow += `<option value="${medication.Id}">${medication.MedName}</option>`;
-				});
+                // Append the new medication row to the correct prescription item
+                medicationsContainer.append(newMedicationRow);
+            });
 
-				newMedicationRow += `
-															</select>
-														</div>
-														<div class="col">
-															<label class="form-label fw-bold">Dosage</label>
-															<input type="text" class="form-control" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].Dosage" />
-														</div>
-														<div class="col">
-															<label class="form-label fw-bold">Duration</label>
-															<input type="text" class="form-control" name="PrescriptionItems[${prescriptionIndex}].Medications[${newMedicationIndex}].Duration" />
-														</div>
-													</div>
-												`;
+            // Delegate event handler for "Remove Medication" button clicks
+            $(document).on('click', '.remove-medication-button', function (e) {
+                e.preventDefault();
 
-				// Append the new medication row to the correct prescription item
-				medicationsContainer.append(newMedicationRow);
-			});
-		});
-	</script>
+                // Find and remove the medication row
+                var prescriptionIndex = $(this).data('prescription-index');
+                var medicationIndex = $(this).data('medication-index');
+                $(this).closest('.medication-row').remove();
+            });
+        });
+    </script>
 }
