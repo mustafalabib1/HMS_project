@@ -52,18 +52,18 @@ namespace PLProject.ViewModels
 
         [Display(Name = "Receptionist Name")]
         [Required(ErrorMessage = " Please Choose a Receptionist for this Appointment.")]
-        public int? ReceptionistId { get; set; }
+        public string? ReceptionistId { get; set; }
 
         public IEnumerable<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
 
         [Display(Name = "Doctor Name")]
         [Required(ErrorMessage = " Please Choose a Doctor for this Appointment.")]
-        public int DoctorId { get; set; }
+        public string DoctorId { get; set; }
 
         // needs to be reviewed
         [Display(Name = "Patient Id")]
         [Required]
-        public int PatientId { get; set; }
+        public string PatientId { get; set; }
         // needs to be reviewed
 
         //[Required]

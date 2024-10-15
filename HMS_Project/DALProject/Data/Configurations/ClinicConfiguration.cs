@@ -25,7 +25,7 @@ namespace DALProject.Data.Configurations
                     .HasMany(c => c.Nurses)
                     .WithOne(n => n.Clinic)
                     .HasForeignKey(n => n.ClinicId)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region One2Many With Doctor

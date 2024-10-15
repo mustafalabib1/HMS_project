@@ -15,7 +15,7 @@ namespace DALProject.model
         public virtual string? Examination { get; set; } = null!;
 
         #region One2Many With Receptionist
-        public int? ReceptionistId { get; set; }
+        public string? ReceptionistId { get; set; }
         public virtual Receptionist Receptionist { get; set; } = null!;
         #endregion
 
@@ -25,12 +25,12 @@ namespace DALProject.model
         #endregion
 
         #region One2Many With Patient
-        public int PatientId { get; set; }
+        public string PatientId { get; set; }=null!;
         public virtual Patient Patient { get; set; } = null!;
         #endregion
 
         #region One2Many With Doctor
-        public virtual int DoctorId { get; set; }
+        public string DoctorId { get; set; } = null!;
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
 

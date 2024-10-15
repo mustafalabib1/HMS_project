@@ -20,7 +20,7 @@ namespace DALProject.Data.Configurations
             builder.Property(a => a.ApointmentTime).HasColumnType($"{DB_DataTypes_Helper.time}");
             builder.Property(a => a.ApointmentStatus).HasColumnType($"{DB_DataTypes_Helper.nvarchar}").HasMaxLength(15);
             builder.Property(a => a.ApointmentStatus).
-                HasConversion(status=>status.ToString(), (statusAsString) => (ApointmentStatusEnum)Enum.Parse(typeof(ApointmentStatusEnum), statusAsString, true));
+                HasConversion(status => status.ToString(), (statusAsString) => (ApointmentStatusEnum)Enum.Parse(typeof(ApointmentStatusEnum), statusAsString, true));
             #endregion
 
             #region One2Many With Receptionist
@@ -28,43 +28,46 @@ namespace DALProject.Data.Configurations
                     .HasOne(a => a.Receptionist)
                     .WithMany(a => a.Apointments)
                     .HasForeignKey(a => a.ReceptionistId)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region One2Many With Patient
             builder
                     .HasOne(a => a.Patient)
                     .WithMany(a => a.Apointments)
-                    .HasForeignKey(a => a.PatientId);
+                    .HasForeignKey(a => a.PatientId)
+                    .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region One2Many With Clinic 
             builder
                     .HasOne(a => a.Clinic)
                     .WithMany(c => c.Apointments)
-                    .HasForeignKey(c => c.ClinicId); 
+                    .HasForeignKey(c => c.ClinicId);
             #endregion
 
             #region One2Many With doctor 
-            builder 
-                .HasOne(a=>a.Doctor)
-                .WithMany(d=>d.Apointments)
-                .HasForeignKey(a=>a.DoctorId);
+            builder
+                .HasOne(a => a.Doctor)
+                .WithMany(d => d.Apointments)
+                .HasForeignKey(a => a.DoctorId)
+                                    .OnDelete(DeleteBehavior.Restrict);
+
             #endregion
 
             #region One2One With Prescription
-            builder 
-                .HasOne(a=>a.Prescription)
-                .WithOne(a=>a.Apointment).HasForeignKey<Apointment>(p=>p.PrescriptionId)
+            builder
+                .HasOne(a => a.Prescription)
+                .WithOne(a => a.Apointment).HasForeignKey<Apointment>(p => p.PrescriptionId)
                 .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
             #region One2One With Invoice
             builder
-                .HasOne(a=>a.Invoice)
-                .WithOne(i=>i.Apointment)
-                .HasForeignKey<Invoice>(i=>i.Id)
-				.OnDelete(DeleteBehavior.Restrict);
+                .HasOne(a => a.Invoice)
+                .WithOne(i => i.Apointment)
+                .HasForeignKey<Invoice>(i => i.Id)
+                .OnDelete(DeleteBehavior.Restrict);
             #endregion
         }
     }

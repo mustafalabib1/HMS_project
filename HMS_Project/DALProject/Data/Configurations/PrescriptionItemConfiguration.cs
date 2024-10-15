@@ -34,7 +34,7 @@ namespace DALProject.Data.Configurations
 				.HasOne(p => p.ActiveSubstance)
 				.WithOne(p => p.PatrescriptionItem)
 				.HasForeignKey<PrescriptionItem>(p => p.ActiveSubstanceId)
-				.OnDelete(DeleteBehavior.SetNull);
+				.OnDelete(DeleteBehavior.Restrict);
 			#endregion
 		}
 	}

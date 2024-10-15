@@ -1,4 +1,4 @@
-﻿@model IPagedList<AppUserViewModel>
+﻿@model IEnumerable<AppUserViewModel>
 
 @{
     ViewData["Title"] = "Users Management";
@@ -7,19 +7,9 @@
 <h2 class="text-center">Users </h2>
 <br />
 <br />
+<a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-primary">Add New User</a>
 
 <div class="container">
-    <div>
-        <a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-primary">Add New User</a>
-
-        <a href="@Url.Action("Index")" class="btn btn-secondary">Show All Users</a>
-        <a href="@Url.Action("Index", new { filterRole = "AdminAdmin" })" class="btn btn-secondary">Admins</a>
-        <a href="@Url.Action("Index", new { filterRole = "Doctor" })" class="btn btn-secondary">Doctors</a>
-        <a href="@Url.Action("Index", new { filterRole = "Patient" })" class="btn btn-secondary">Patients</a>
-        <a href="@Url.Action("Index", new { filterRole = "Receptionist" })" class="btn btn-secondary">Receptionists</a>
-        <a href="@Url.Action("Index", new { filterRole = "Nurse" })" class="btn btn-secondary">Nurses</a>
-        <a href="@Url.Action("Index", new { filterRole = "Pharmacist" })" class="btn btn-secondary">Pharmacists</a>
-    </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered table-striped">
@@ -38,7 +28,7 @@
                     @foreach (var user in Model)
                     {
                         <tr class="align-content-center">
-                            <td style="white-space: nowrap;">@user.Id</td>
+                            <td>@user.Id</td>
                             <td>@user.UserName</td>
                             <td>@user.FullName</td>
                             <td>@user.Email</td>
@@ -57,57 +47,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <!-- Pagination Controls -->
-    <div class="d-flex justify-content-center mt-4">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                @if (Model.HasPreviousPage)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1, filterRole = ViewData["filterRole"] })" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item disabled">
-                        <span class="page-link" aria-hidden="true">&laquo;</span>
-                    </li>
-                }
-
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    if (i == Model.PageNumber)
-                    {
-                        <li class="page-item active" aria-current="page">
-                            <span class="page-link">@i</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("Index", new { page = i, filterRole = ViewData["filterRole"] })">@i</a>
-                        </li>
-                    }
-                }
-
-                @if (Model.HasNextPage)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1, filterRole = ViewData["filterRole"] })" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item disabled">
-                        <span class="page-link" aria-hidden="true">&raquo;</span>
-                    </li>
-                }
-            </ul>
-        </nav>
     </div>
 </div>

@@ -56,7 +56,7 @@ namespace DALProject.DbInitializer
                 {
                     UserName = "admin",
                     Email = "admin@hmsproject.com",
-                    SSN = 123456789
+                    SSN = "1234567891012"
                 }, "Admin#123").GetAwaiter().GetResult();
 
                 AppUser user = _dbContext.AppUsers.FirstOrDefault(u => u.Email == "admin@hmsproject.com");
