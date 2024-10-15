@@ -19,7 +19,7 @@ namespace PLProject.ViewModels.PrescriptionVM
 
         public int? PharmacistId { get; set; }
 		[Required]
-		public string DoctorId { get; set; }
+		public int DoctorId { get; set; }
 		public Patient? Patient { get; set; }
 	}
 }

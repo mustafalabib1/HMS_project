@@ -1,5 +1,4 @@
-﻿using DALProject.model;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace PLProject.Areas.Admin.ViewModels
@@ -41,7 +40,7 @@ namespace PLProject.Areas.Admin.ViewModels
         public DateOnly BirthDate { get; set; }
 
         [Required]
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
 
         [Display(Name = "Address")]
         public string? Address { get; set; } 

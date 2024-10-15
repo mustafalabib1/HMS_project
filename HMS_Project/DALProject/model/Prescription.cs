@@ -8,14 +8,14 @@
         #endregion
 
         #region One2Many With Pharmacist
-        public string? PharmacistId { get; set; }
+        public int? PharmacistId { get; set; }
         public virtual Pharmacist Pharmacist { get; set; } = null!;
         #endregion
 
         #region One2Many With Doctor
-        public string DoctorId { get; set; } = null!;
+        public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
-        public virtual Apointment Apointment { get; set; }=null!;
+        public virtual Apointment Apointment { get; set; }
     }
 }

@@ -105,7 +105,7 @@ namespace PLProject.Areas.Identity.Pages.Account
             public DateOnly BirthDate { get; set; }
 
             [Display(Name = "Gender")]
-            public Gender Gender { get; set; }
+            public string Gender { get; set; }
 
             [Display(Name = "Address")]
             public string Address { get; set; }

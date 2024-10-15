@@ -53,7 +53,7 @@ namespace PLProject.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Display(Name = "SSN")]
-            public string SSN { get; set; }
+            public int SSN { get; set; }
 
             [Phone]
             [Display(Name = "Phone number")]
@@ -64,7 +64,7 @@ namespace PLProject.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            string _SSN = user.SSN;
+            int _SSN = user.SSN;
 
             Username = userName;
 

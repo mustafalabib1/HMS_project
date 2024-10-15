@@ -20,7 +20,7 @@ namespace DALProject.model
         //public string ApointmentDate { get; set; } = null!;
 
         #region One2Many With Receptionist
-        public string? ReceptionistId { get; set; }
+        public int? ReceptionistId { get; set; }
         public virtual Receptionist Receptionist { get; set; } = null!;
         #endregion
 

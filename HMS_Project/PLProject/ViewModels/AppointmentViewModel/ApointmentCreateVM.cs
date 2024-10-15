@@ -3,9 +3,9 @@
     public class ApointmentCreateVM
     {
         public int ClinicId { get; set; }
-        public string SelectedDoctorId { get; set; } = null!;
-        public string PatientId { get; set; }= null!;
-        public string SelectedDate { get; set; } = null!;  // For the date
-        public string SelectedTime { get; set; } = null!;  // For the time
+        public int SelectedDoctorId { get; set; }
+        public int PatientId { get; set; }
+        public string SelectedDate { get; set; }  // For the date
+        public string SelectedTime { get; set; }  // For the time
     }
 }

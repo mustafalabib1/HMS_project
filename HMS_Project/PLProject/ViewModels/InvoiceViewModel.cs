@@ -43,7 +43,7 @@ namespace PLProject.ViewModels
 
         [Display(Name = "Receptionist Name")]
         [Required(ErrorMessage = " Please Select Receptionist Name.")]
-        public string? ReceptionistId { get; set; }
+        public int? ReceptionistId { get; set; }
         public IEnumerable<Apointment>  ApointmentsReader { get; set; } = new HashSet<Apointment>();
         [Display(Name = "Appointment Date")]
         [Required(ErrorMessage = " Please Select Receptionist Name.")]

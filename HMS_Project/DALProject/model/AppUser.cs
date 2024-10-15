@@ -11,10 +11,10 @@ namespace DALProject.model
     {
         // From IdentityUser we have Id, UserName, PasswordHash, Email, PhoneNumber , etc.
         // adding the rest of HMS user properties
-        public string SSN { get; set; } = null!;
+        public int SSN { get; set; }
         public string FullName { get; set; } = null!;
         public string Address { get; set; } = null!;
-        public Gender Gender { get; set; }
+        public string Gender { get; set; } = null!;
         public DateOnly DateOfBirth { get; set; }
     }
 }
