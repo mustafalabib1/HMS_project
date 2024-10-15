@@ -845,3 +845,52 @@ ul {
 .features .single-features p {
     margin-top: 20px;
 }
+
+/*End Features*/
+
+.services {
+    background-color: #1a76d1;
+    margin-top: 50px;
+}
+
+.services .section-title {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.services .single-service {
+    margin: 30px 0;
+    position: relative;
+    padding-left: 50px;
+}
+
+.services .single-service i {
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    left: 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.services .single-service h4 {
+    text-transform: capitalize;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.services .single-service h4 a {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.services .single-service p {
+    color: black;
+}
