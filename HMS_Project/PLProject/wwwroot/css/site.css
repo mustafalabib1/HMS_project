@@ -766,3 +766,82 @@ ul {
     font-weight: 400;
     float: right;
 }
+
+/*End Schedule*/
+
+.features {
+    padding-top: 0;
+}
+
+.features .section-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.features.index2 {
+    padding-top: 100px;
+}
+
+.features.testimonial-page {
+    padding-top: 100px;
+}
+
+.features .single-features {
+    text-align: center;
+    position: relative;
+    padding: 10px 20px;
+}
+
+.features .single-features::before {
+    position: absolute;
+    content: "";
+    right: -72px;
+    top: 60px;
+    width: 118px;
+    border-bottom: 3px dotted #1a76d1;
+}
+
+.features .single-features.last::before {
+    display: none;
+}
+
+.features .single-features .signle-icon {
+    position: relative;
+}
+
+.features .single-features .signle-icon i {
+    font-size: 30px;
+    color: #1a76d1;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 0;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 100%;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.features .single-features:hover .signle-icon i {
+    background: #1A76D1;
+    color: #fff;
+    border-color: transparent;
+}
+
+.features .single-features h3 {
+    padding-top: 128px;
+    color: #2C2D3F;
+    font-weight: 600;
+    font-size: 21px;
+}
+
+.features .single-features p {
+    margin-top: 20px;
+}
