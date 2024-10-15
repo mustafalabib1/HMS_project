@@ -524,7 +524,8 @@ ul {
 
 .cover p {
     color: #2C2D3F;
-    margin-top: 27px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     font-weight: 600;
     font-size: 1.25rem;
 }
@@ -553,4 +554,58 @@ ul {
 
 .cover .btn.primary:before {
     background: #1A76D1;
+}
+
+.cover .book-box {
+    width: 700px;
+    height: 150px;
+    padding: 15px 10px;
+    background-color: white;
+    border-radius: 22px;
+    box-shadow: rgba(0, 0, 0, 0.29) 0px 6px 18px 0px;
+}
+
+.cover .book-box .title {
+    width: 100%;
+    border-bottom: 2px solid #1a76d1;
+    text-align: center;
+}
+
+.cover .book-box .title i {
+    font-size: 25px;
+    color: #1a76d1;
+}
+
+.cover .book-box .title p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1a76d1;
+}
+
+.cover .book-box .options select {
+    width: 290px;
+}
+
+.cover .book-box .options select,
+.cover .book-box .options button
+{
+    height: 65px;
+}
+
+.cover .book-box .options .spec {
+    border-radius: 11px 0 0 11px;
+}
+
+.cover .book-box .options button {
+    border-radius: 0 11px 11px 0;
+    outline: 0;
+    border: 0;
+    background-color: #1a76d1;
+    color: white;
+    font-size: 18px;
+    width: 100px;
+}
+
+.cover .book-box .options i {
+    font-size: 15px;
 }
