@@ -2,11 +2,13 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="title"><h1>Invoices</h1></div>
 
-<h1>Invoices</h1>
 <br />
 <br />
-<a asp-controller="Invoice" asp-action="Create" class="btn btn-primary">Create New Invoice</a>
+<div class="create-invoice">
+    <a asp-controller="Invoice" asp-action="Create" class="btn btn-primary" id="createbtn"><i class="fa-solid fa-plus"></i>Create New Invoice</a>
+</div>
 <br />
 @if (Model.Count() > 0)
 {
@@ -75,4 +77,35 @@ else
         <h3>There is no Invoices !</h3>
     </div>
 }
+<style>
+    .title {
+        font-family: 'Palatino', 'Times New Roman', serif; /* Fallback in case Palatino is not available */
+        font-weight: 700; /* Heavy (bold) font */
+        text-align: center; /* Center horizontally */
+        margin-top: 3vh; /* Optionally center vertically, adjust as needed */
+    }
+
+    .createbtn {
+        font-family: 'Palatino', serif;
+        font-weight: bold; /* Heavy font */
+        display: block; /* Ensures centering */
+        text-align: center; /* Centers text inside button */
+        margin: 0 auto; /* Centers the button */
+        width: fit-content; /* Adjusts the width to the content */
+    }
+
+    .create-invoice {
+        text-align: center;
+    }
+
+     .custom-alert {
+        width: 50%; /* Adjusts width as needed */
+        margin: 0 auto; /* Centers the div horizontally */
+        border-radius: 15px; /* Adds rounded corners */
+        animation: fadeIn 1.5s ease-in-out; /* Animation */
+        text-align: center; /* Centers the h3 inside */
+    }
+
+
+</style>
 
