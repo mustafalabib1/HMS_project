@@ -16,10 +16,12 @@ namespace PLProject.Controllers
 	public class AppointmentPatientController : Controller
 	{
 		private readonly IUnitOfWork unitOfWork;
+		private readonly IWebHostEnvironment env;
 
-		public AppointmentPatientController(IUnitOfWork unitOfWork)
+		public AppointmentPatientController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
 		{
 			this.unitOfWork = unitOfWork;
+			env = _env;
 		}
 
 		#region Get all Appointment for patient 
@@ -149,8 +151,36 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
-		#region Delete 
+		#region Delete
+		public IActionResult Delete(int? Id)
+		{
+			return Details(Id, "Delete");
+		}
 
+		[HttpPost]
+		public IActionResult Delete(AppointmentGenarelVM ViewModel)
+		{
+			try
+			{
+				var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
+				apointment.ApointmentStatus = ApointmentStatusEnum.Cancelled;
+
+				unitOfWork.Repository<Apointment>().Update(apointment);
+				unitOfWork.Complete();
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+
+				if (env.IsDevelopment())
+					ModelState.AddModelError(string.Empty, ex.Message);
+				else
+					ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+
+				return View(ViewModel);
+			}
+		}
 		#endregion
 	}
 }

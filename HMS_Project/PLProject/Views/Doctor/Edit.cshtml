@@ -5,7 +5,8 @@
         .Cast<DayOfWeek>()
         .Select(day => new SelectListItem { Value = day.ToString(), Text = day.ToString() })
         .ToList();
-}
+}<div class="container mt-5">
+
 
 <h1>Edit Doctor</h1>
 <br />
@@ -88,6 +89,7 @@
 
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
+</div>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -203,6 +205,7 @@
 
             updateDayOptions(); // Initial update to disable pre-selected days
         });
+
         $(document).ready(function () {
             // Handle delete button click event
             $(document).on('click', '.removeDayButton', function (e) {

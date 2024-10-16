@@ -32,15 +32,15 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddSpecialization(ClinicSpecializationLookup clinicSpecializationLookup)
+        public IActionResult AddSpecialization(DoctorSpecializationLookup doctorSpecialization)
         {
             if (ModelState.IsValid) // server side validation
             {
-                unitOfWork.Repository<ClinicSpecializationLookup>().Add(clinicSpecializationLookup);
+                unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecialization);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clinicSpecializationLookup);
+            return View(doctorSpecialization);
         }
         #endregion
 

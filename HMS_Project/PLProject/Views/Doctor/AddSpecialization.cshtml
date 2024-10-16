@@ -1,0 +1,58 @@
+﻿@model DoctorSpecializationLookup
+@{
+    ViewData["Title"] = "Add Specialization";
+}
+<div class="container mt-5">
+    <!-- Error Message -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorMessage">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <h1 class="mb-4">Add a New Doctor Specialization</h1>
+
+    <form asp-action="AddSpecialization" method="post" id="specializationForm">
+        <div class="row mb-4 align-items-center">
+            <!-- Label -->
+            <div class="col-md-3">
+                <label asp-for="Specialization" class="form-label fs-5">Specialization</label>
+            </div>
+            <!-- Input -->
+            <div class="col-md-12">
+                <input asp-for="Specialization" class="form-control form-control-lg" placeholder="e.g. Cardiology, Neurology" />
+                <span asp-validation-for="Specialization" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Submit Button with loading spinner -->
+        <div class="d-flex justify-content-between align-items-center">
+            <button type="submit" class="btn btn-primary btn-lg" id="submitButton">
+                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                Add Specialization
+            </button>
+            <a asp-action="Index" class="btn btn-secondary btn-lg">Back To List</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // Add spinner on form submission
+        $('#specializationForm').submit(function () {
+            $('#submitButton .spinner-border').removeClass('d-none');
+        });
+
+        // Automatically hide the error message after 5 seconds (5000 milliseconds)
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#errorMessage').fadeOut('slow');
+            }, 5000); // 5000 ms = 5 seconds
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

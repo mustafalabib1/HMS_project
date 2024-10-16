@@ -1,35 +1,35 @@
 ﻿@model DoctorViewModel
 
 @{
-    ViewData["Title"] = "Create Doctor";
+	ViewData["Title"] = "Create Doctor";
 }
+<div class="container mt-5">
+	<h2>Create Doctor</h2>
 
-<h2>Create Doctor</h2>
+	<form asp-action="Create" method="post">
 
-<form asp-action="Create" method="post">
+		<partial name="userpartialviews\_UserCreatePartial" />
 
-    <partial name="userpartialviews\_UserCreatePartial" />
+		<!-- Specializations Dropdown (Required, Single Selection) -->
+		<div class="form-group mt-2">
+			<label asp-for="specializationId"></label>
+			<select asp-for="specializationId" class="form-control" required>
+				<option value="">Select Specialization</option>
+				@foreach (var specialization in Model.SpecializationsDateReader)
+				{
+					<option value="@specialization.Id">@specialization.Specialization</option>
+				}
+			</select>
+			<span asp-validation-for="specialization" class="text-danger"></span>
+		</div>
 
-    <!-- Specializations Dropdown (Required, Single Selection) -->
-    <div class="form-group mt-2">
-        <label asp-for="specializationId"></label>
-        <select asp-for="specializationId" class="form-control" required>
-            <option value="">Select Specialization</option>
-            @foreach (var specialization in Model.SpecializationsDateReader)
-            {
-                <option value="@specialization.Id">@specialization.Specialization</option>
-            }
-        </select>
-        <span asp-validation-for="specialization" class="text-danger"></span>
-    </div>
-
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>
-
+		<!-- Submit Button -->
+		<button type="submit" class="btn btn-primary mt-2">Submit</button>
+	</form>
+</div>
 <!-- Scripts for Validation -->
 @section Scripts {
-@{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
