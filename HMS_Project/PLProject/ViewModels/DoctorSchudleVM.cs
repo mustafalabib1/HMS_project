@@ -20,7 +20,7 @@ namespace Project.ViewModels
         public TimeSpan EndTime { get; set; }
 
         [Required]
-        public int DoctorId { get; set; }
+        public string DoctorUserId { get; set; }
 
         public Doctor? doctor { get; set; } 
         

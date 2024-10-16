@@ -8,6 +8,7 @@ namespace PLProject.ViewModels
     public class UserViewModel
     {
         public int Id { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage = "SSN is required.")]
         public long SSN { get; set; }
@@ -44,7 +45,7 @@ namespace PLProject.ViewModels
         [StringLength(250, ErrorMessage = "Address can't be longer than 250 characters.")]
         public string? Address { get; set; }
 
-        public Gender? Gender { get; set; }
+        public string? Gender { get; set; }
     }
 
 }

@@ -99,7 +99,7 @@ namespace PLProject.Controllers
                 // Mapping the model
                 invoice.InvoiceDate = invoiceViewModel.InvoiceDate;
                 invoice.TotalAmount = invoiceViewModel.TotalAmount;
-                invoice.ReceptionistId = invoiceViewModel.ReceptionistId;
+                invoice.ReceptionistUserId = invoiceViewModel.ReceptionistUserId;
                 invoice.ApointmentId = invoiceViewModel.ApointmentId;
                 invoice.PaymentStatus = invoiceViewModel.PaymentStatus;
                 invoice.PaymentType = invoiceViewModel.PaymentType.ToString();

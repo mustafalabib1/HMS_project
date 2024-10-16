@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Doctor : HmsUser
+    public class Doctor : ModelBase
     {
 		// Relation With AppUser
 		public string? UserId { get; set; }

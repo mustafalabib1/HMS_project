@@ -19,10 +19,10 @@ namespace PLProject.ViewModels
             ApointmentTime = Apointment.ApointmentTime;
             ApointmentStatus = ApointmentStatusEnum.Scheduled;
             Examination = Apointment.Examination;
-            ReceptionistId = Apointment.ReceptionistId;
+            ReceptionistUserId = Apointment.ReceptionistUserId;
             ClinicId = Apointment.ClinicId;
-            PatientId = Apointment.PatientId;
-            DoctorId = Apointment.DoctorId;
+            PatientUserId = Apointment.PatientUserId;
+            DoctorUserId = Apointment.DoctorUserId;
             //InvoiceId = Apointment.Invoice.InvoiceID;
             //PrescriptionId = Apointment.Prescription.PrescriptionID;
         }
@@ -52,18 +52,18 @@ namespace PLProject.ViewModels
 
         [Display(Name = "Receptionist Name")]
         [Required(ErrorMessage = " Please Choose a Receptionist for this Appointment.")]
-        public int? ReceptionistId { get; set; }
+        public string? ReceptionistUserId { get; set; }
 
         public IEnumerable<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
 
         [Display(Name = "Doctor Name")]
         [Required(ErrorMessage = " Please Choose a Doctor for this Appointment.")]
-        public int DoctorId { get; set; }
+        public string DoctorUserId { get; set; }
 
         // needs to be reviewed
         [Display(Name = "Patient Id")]
         [Required]
-        public int PatientId { get; set; }
+        public string PatientUserId { get; set; }
         // needs to be reviewed
 
         //[Required]
@@ -81,10 +81,10 @@ namespace PLProject.ViewModels
                 ApointmentTime = ApointmentViewModel.ApointmentTime,
                 ApointmentStatus = ApointmentViewModel.ApointmentStatus,
                 Examination = ApointmentViewModel.Examination,
-                ReceptionistId = ApointmentViewModel.ReceptionistId,
+                ReceptionistUserId = ApointmentViewModel.ReceptionistUserId,
                 ClinicId = ApointmentViewModel.ClinicId,
-                PatientId = ApointmentViewModel.PatientId,
-                DoctorId = ApointmentViewModel.DoctorId,
+                PatientUserId = ApointmentViewModel.PatientUserId,
+                DoctorUserId = ApointmentViewModel.DoctorUserId,
             };
         }
 

@@ -26,15 +26,17 @@ namespace PLProject.Controllers
 		public IActionResult Index(int? page, int PatientId = 1)
 		{
 
-			var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientId == PatientId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
-			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
-			// Pagination logic
-			int pageSize = 10;
-			int pageNumber = page ?? 1;
+			//var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientId == PatientId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
+			//var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
+			//// Pagination logic
+			//int pageSize = 10;
+			//int pageNumber = page ?? 1;
 
-			var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
+			//var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
 
-			return View(paginatedList);
+			//return View(paginatedList);
+			return View();
+
 		}
 		#endregion
 
@@ -113,7 +115,7 @@ namespace PLProject.Controllers
 		[HttpPost]
 		public IActionResult ConfirmAppointment(ApointmentCreateVM model)
 		{
-			model.PatientId = 1;
+			model.PatientUserId = "";
 			if (ModelState.IsValid)
 			{
 				unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));

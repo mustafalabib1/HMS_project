@@ -17,8 +17,8 @@ namespace PLProject.ViewModels
         public PharmacistViewModel(Pharmacist pharmacist)
         {
             Id = pharmacist.Id;
-            SSN = pharmacist.SSN;
-            string[] name = pharmacist.FullName.Split();
+            SSN = pharmacist.AppUser.SSN;
+            string[] name = pharmacist.AppUser.FullName.Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];
@@ -30,11 +30,11 @@ namespace PLProject.ViewModels
                 FirstName = name[0];
                 LastName = name[1];
             }
-            DateOfBirth = pharmacist.DateOfBirth;
-            Phone = pharmacist.PhoneNumber;
-            Email = pharmacist.Email;
-            Address = pharmacist.Address;
-            Gender =pharmacist.Gender;
+            DateOfBirth = pharmacist.AppUser.DateOfBirth;
+            Phone = pharmacist.AppUser.PhoneNumber;
+            Email = pharmacist.AppUser.Email;
+            Address = pharmacist.AppUser.Address;
+            Gender =pharmacist.AppUser.Gender;
             Id = pharmacist.Id;
         }
 
@@ -43,13 +43,13 @@ namespace PLProject.ViewModels
             return new Pharmacist()
             {
                 Id = pharmacistViewModel.Id,
-                SSN = pharmacistViewModel.SSN,
-                Email = pharmacistViewModel.Email,
-                Address = pharmacistViewModel.Address,
-                Gender = pharmacistViewModel.Gender,
-                PhoneNumber = pharmacistViewModel.Phone,
-                FullName = $"{pharmacistViewModel.FirstName.Trim()} {pharmacistViewModel.MiddleName.Trim()} {pharmacistViewModel.LastName.Trim()}",
-                DateOfBirth = pharmacistViewModel.DateOfBirth
+                //SSN = pharmacistViewModel.SSN,
+                //Email = pharmacistViewModel.Email,
+                //Address = pharmacistViewModel.Address,
+                //Gender = pharmacistViewModel.Gender,
+                //PhoneNumber = pharmacistViewModel.Phone,
+                //FullName = $"{pharmacistViewModel.FirstName.Trim()} {pharmacistViewModel.MiddleName.Trim()} {pharmacistViewModel.LastName.Trim()}",
+                //DateOfBirth = pharmacistViewModel.DateOfBirth
             };
         }
         //we shoud make explicit casting Pharmacist to PharmacistViewModel but this is not important in this case 

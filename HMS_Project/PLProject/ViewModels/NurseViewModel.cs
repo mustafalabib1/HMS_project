@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PLProject.ViewModels
 {
-    public class NurseViewModel:UserViewModel
+    public class NurseViewModel : UserViewModel
     {
         public NurseViewModel()
         {
@@ -20,7 +20,7 @@ namespace PLProject.ViewModels
         public NurseViewModel(Nurse nurse)
         {
             Id = nurse.Id;
-            string[] name = nurse.FullName.Split();
+            string[] name = nurse.AppUser.FullName.Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];
@@ -32,11 +32,11 @@ namespace PLProject.ViewModels
                 FirstName = name[0];
                 LastName = name[1];
             }
-            DateOfBirth = nurse.DateOfBirth;
-            Phone = nurse.PhoneNumber;
-            Email = nurse.Email;
-            Address = nurse.Address;
-            Gender = nurse.Gender;
+            DateOfBirth = nurse.AppUser.DateOfBirth;
+            Phone = nurse.AppUser.PhoneNumber;
+            Email = nurse.AppUser.Email;
+            Address = nurse.AppUser.Address;
+            Gender = nurse.AppUser.Gender;
             ClinicId = nurse.ClinicId;
             Id=nurse.Id;
         }
@@ -48,13 +48,13 @@ namespace PLProject.ViewModels
         {
             return new Nurse()
             {
-                SSN = nurseViewModel.SSN,
-                Email = nurseViewModel.Email,
-                Address = nurseViewModel.Address,
-                Gender = nurseViewModel.Gender,
-                PhoneNumber = nurseViewModel.Phone,
-                FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}",
-                DateOfBirth = nurseViewModel.DateOfBirth,
+                //SSN = nurseViewModel.SSN,
+                //Email = nurseViewModel.Email,
+                //Address = nurseViewModel.Address,
+                //Gender = nurseViewModel.Gender,
+                //PhoneNumber = nurseViewModel.Phone,
+                //FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}",
+                //DateOfBirth = nurseViewModel.DateOfBirth,
                 ClinicId = nurseViewModel.ClinicId,
             };
         }

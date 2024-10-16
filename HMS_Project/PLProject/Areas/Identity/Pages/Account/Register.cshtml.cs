@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using BLLProject.Interfaces;
 using DALProject.model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,7 @@ namespace PLProject.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUnitOfWork _unitOfWork;
 
         public RegisterModel(
             RoleManager<IdentityRole> roleManager,
@@ -40,7 +42,8 @@ namespace PLProject.Areas.Identity.Pages.Account
             IUserStore<AppUser> userStore,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnitOfWork unitOfWork)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -49,6 +52,7 @@ namespace PLProject.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -146,6 +150,15 @@ namespace PLProject.Areas.Identity.Pages.Account
 
 
                     var userId = await _userManager.GetUserIdAsync(user);
+
+                    var Patient = new Patient
+                    {
+                        UserId = userId,
+                    };
+
+                    _unitOfWork.Repository<Patient>().Add(Patient);
+                    _unitOfWork.Complete();
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

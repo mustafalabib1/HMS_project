@@ -33,27 +33,29 @@ namespace PLProject.Controllers
         public IActionResult Index(string searchQuery, int? page)
 		{
 
-			IEnumerable<Prescription> prescriptions;
-			// Filter by ActiveSubstanceName (if provided)
-			if (!string.IsNullOrEmpty(searchQuery))
-			{
-				prescriptions = unitOfWork.Repository<Prescription>().Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
-				&& p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
-			}
-			else
-			{
-				// Fetch all prescriptions entries for this day 
-				prescriptions = unitOfWork.Repository<Prescription>()./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
-			}
-			var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
-			// Pagination logic
-			int pageSize = 10;
-			int pageNumber = page ?? 1;
+			//IEnumerable<Prescription> prescriptions;
+			//// Filter by ActiveSubstanceName (if provided)
+			//if (!string.IsNullOrEmpty(searchQuery))
+			//{
+			//	prescriptions = unitOfWork.Repository<Prescription>().Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
+			//	&& p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
+			//}
+			//else
+			//{
+			//	// Fetch all prescriptions entries for this day 
+			//	prescriptions = unitOfWork.Repository<Prescription>()./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
+			//}
+			//var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
+			//// Pagination logic
+			//int pageSize = 10;
+			//int pageNumber = page ?? 1;
 
-			ViewData["CurrentFilter"] = searchQuery;
-			var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
-			return View(paginatedList);
-		} 
+			//ViewData["CurrentFilter"] = searchQuery;
+			//var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
+			//return View(paginatedList);
+			return View();
+
+		}
 		#endregion
 
 		#region Details

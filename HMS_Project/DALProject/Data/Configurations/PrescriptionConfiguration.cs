@@ -20,7 +20,7 @@ namespace DALProject.Data.Configurations
 			builder
                     .HasOne(p => p.Pharmacist)
                     .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(p=>p.PharmacistId)
+                    .HasForeignKey(p=>p.PharmacistUserId)
                     .OnDelete(DeleteBehavior.SetNull);
             #endregion
 
@@ -28,7 +28,7 @@ namespace DALProject.Data.Configurations
             builder
                     .HasOne(p=>p.Doctor)
                     .WithMany(d=> d.Prescriptions)
-                    .HasForeignKey(n => n.DoctorId);
+                    .HasForeignKey(n => n.DoctorUserId);
             #endregion
         }
     }

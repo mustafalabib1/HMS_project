@@ -18,7 +18,7 @@ namespace PLProject.ViewModels
             TotalAmount = invoice.TotalAmount;
             PaymentStatus = invoice.PaymentStatus;
             PaymentType= Enum.TryParse(invoice.PaymentType, out PaymentType paymentType) ? paymentType : null;
-            ReceptionistId = invoice.ReceptionistId;
+            ReceptionistUserId = invoice.ReceptionistUserId;
             ApointmentId = invoice.ApointmentId;
         }
 
@@ -43,7 +43,7 @@ namespace PLProject.ViewModels
 
         [Display(Name = "Receptionist Name")]
         [Required(ErrorMessage = " Please Select Receptionist Name.")]
-        public int? ReceptionistId { get; set; }
+        public string? ReceptionistUserId { get; set; }
         public IEnumerable<Apointment>  ApointmentsReader { get; set; } = new HashSet<Apointment>();
         [Display(Name = "Appointment Date")]
         [Required(ErrorMessage = " Please Select Receptionist Name.")]

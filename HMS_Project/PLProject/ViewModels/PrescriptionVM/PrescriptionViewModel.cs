@@ -17,9 +17,9 @@ namespace PLProject.ViewModels.PrescriptionVM
         // Custom validation to check if at least one item is added
         public bool HasItems => PrescriptionItems != null && PrescriptionItems.Any();
 
-        public int? PharmacistId { get; set; }
+        public string? PharmacistUserId { get; set; }
 		[Required]
-		public int DoctorId { get; set; }
+		public string DoctorUserId { get; set; }
 		public Patient? Patient { get; set; }
 	}
 }

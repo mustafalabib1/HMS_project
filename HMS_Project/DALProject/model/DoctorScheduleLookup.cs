@@ -14,7 +14,7 @@ namespace DALProject.model
         public  TimeOnly EndTime { get; set; }
 
         #region One2Many With Doctors
-        public int DoctorId { get; set; }
+        public string DoctorUserId { get; set; }
         public virtual Doctor Doctor { get; set; } = null!;
         #endregion
     }

@@ -16,8 +16,8 @@ namespace PLProject.ViewModels
         public ReceptionistViewModel(Receptionist receptionist)
         {
              Id = receptionist.Id;
-            SSN = receptionist.SSN;
-            string[] name = receptionist.FullName.Split();
+            SSN = receptionist.AppUser.SSN;
+            string[] name = receptionist.AppUser.FullName.Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];
@@ -29,24 +29,24 @@ namespace PLProject.ViewModels
                 FirstName = name[0];
                 LastName = name[1];
             }
-            DateOfBirth = receptionist.DateOfBirth;
-            Phone = receptionist.PhoneNumber;
-            Email = receptionist.Email;
-            Address = receptionist.Address;
-            Gender =receptionist.Gender;
+            DateOfBirth = receptionist.AppUser.DateOfBirth;
+            Phone = receptionist.AppUser.PhoneNumber;
+            Email = receptionist.AppUser.Email;
+            Address = receptionist.AppUser.Address;
+            Gender =receptionist.AppUser.Gender;
             Id = receptionist.Id;
         }
         public static explicit operator Receptionist(ReceptionistViewModel receptionistViewModel)
         {
             return new Receptionist()
             {
-                SSN = receptionistViewModel.SSN,
-                Email = receptionistViewModel.Email,
-                Address = receptionistViewModel.Address,
-                Gender = receptionistViewModel.Gender,
-                PhoneNumber = receptionistViewModel.Phone,
-                FullName = $"{receptionistViewModel.FirstName.Trim()} {receptionistViewModel.MiddleName.Trim()} {receptionistViewModel.LastName.Trim()}",
-                DateOfBirth = receptionistViewModel.DateOfBirth
+                //SSN = receptionistViewModel.SSN,
+                //Email = receptionistViewModel.Email,
+                //Address = receptionistViewModel.Address,
+                //Gender = receptionistViewModel.Gender,
+                //PhoneNumber = receptionistViewModel.Phone,
+                //FullName = $"{receptionistViewModel.FirstName.Trim()} {receptionistViewModel.MiddleName.Trim()} {receptionistViewModel.LastName.Trim()}",
+                //DateOfBirth = receptionistViewModel.DateOfBirth
             };
         }
 
