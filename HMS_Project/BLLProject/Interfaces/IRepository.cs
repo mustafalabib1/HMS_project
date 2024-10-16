@@ -18,6 +18,7 @@ namespace BLLProject.Interfaces
         public void Delete(T entity);
 
         public T Get(int Id);
+        public T Get(string Id);
 
         public IEnumerable<T> GetALL();
 

@@ -38,6 +38,7 @@ namespace BLLProject.Repositories
         }
 
         public T Get(int Id) => context.Set<T>().Find(Id);
+        public T Get(string Id) => context.Set<T>().Find(Id);
 
         public IEnumerable<T> GetALL() => context.Set<T>().AsNoTracking().ToList();
 

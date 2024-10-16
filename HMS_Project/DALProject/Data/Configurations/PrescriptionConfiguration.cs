@@ -17,7 +17,8 @@ namespace DALProject.Data.Configurations
 			#region One2Many With Pharmacist 
 			builder.HasKey(a => a.Id);
 			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
-			builder
+			
+            builder
                     .HasOne(p => p.Pharmacist)
                     .WithMany(p => p.Prescriptions)
                     .HasForeignKey(p=>p.PharmacistUserId)

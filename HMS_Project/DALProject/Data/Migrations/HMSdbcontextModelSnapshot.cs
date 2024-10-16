@@ -37,7 +37,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("MedicationsId");
 
-                    b.ToTable("ActiveSubstanceMedication");
+                    b.ToTable("ActiveSubstanceMedication", (string)null);
                 });
 
             modelBuilder.Entity("ActiveSubstancePatient", b =>
@@ -52,7 +52,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("PatientshaveAllergyUserId");
 
-                    b.ToTable("ActiveSubstancePatient");
+                    b.ToTable("ActiveSubstancePatient", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.ActiveSubstance", b =>
@@ -73,7 +73,7 @@ namespace DALProject.Data.Migrations
                     b.HasIndex("ActiveSubstancesName")
                         .IsUnique();
 
-                    b.ToTable("ActiveSubstances");
+                    b.ToTable("ActiveSubstances", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.ActiveSubstanceInteraction", b =>
@@ -95,7 +95,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("ActiveSubstanceId2");
 
-                    b.ToTable("ActiveSubstanceInteraction");
+                    b.ToTable("ActiveSubstanceInteraction", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Apointment", b =>
@@ -152,7 +152,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("ReceptionistUserId");
 
-                    b.ToTable("Apointments");
+                    b.ToTable("Apointments", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.AppUser", b =>
@@ -267,7 +267,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("ClinicSpecializationId");
 
-                    b.ToTable("Clinics");
+                    b.ToTable("Clinics", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.ClinicSpecializationLookup", b =>
@@ -288,7 +288,7 @@ namespace DALProject.Data.Migrations
                     b.HasIndex("Specialization")
                         .IsUnique();
 
-                    b.ToTable("ClinicsSpecializationLookups");
+                    b.ToTable("ClinicsSpecializationLookups", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Doctor", b =>
@@ -314,7 +314,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.DoctorScheduleLookup", b =>
@@ -344,7 +344,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("DoctorUserId");
 
-                    b.ToTable("DoctorScheduleLookups");
+                    b.ToTable("DoctorScheduleLookups", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.DoctorSpecializationLookup", b =>
@@ -362,7 +362,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DoctorSpecializationLookup");
+                    b.ToTable("DoctorSpecializationLookup", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Invoice", b =>
@@ -399,7 +399,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("ReceptionistUserId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Medication", b =>
@@ -420,7 +420,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medication");
+                    b.ToTable("Medication", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Nurse", b =>
@@ -441,7 +441,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("ClinicId");
 
-                    b.ToTable("Nurses");
+                    b.ToTable("Nurses", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Patient", b =>
@@ -457,7 +457,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Pharmacist", b =>
@@ -473,7 +473,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Pharmacists");
+                    b.ToTable("Pharmacists", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Prescription", b =>
@@ -497,7 +497,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("PharmacistUserId");
 
-                    b.ToTable("Prescriptions");
+                    b.ToTable("Prescriptions", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.PrescriptionItem", b =>
@@ -527,7 +527,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("PrescriptionId");
 
-                    b.ToTable("PrescriptionItem");
+                    b.ToTable("PrescriptionItem", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.PrescriptionItemMedication", b =>
@@ -552,7 +552,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("PrescriptionItemId");
 
-                    b.ToTable("PrescriptionItemMedication");
+                    b.ToTable("PrescriptionItemMedication", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Receptionist", b =>
@@ -568,7 +568,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Receptionists");
+                    b.ToTable("Receptionists", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

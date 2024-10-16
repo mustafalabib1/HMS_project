@@ -18,10 +18,10 @@ namespace DALProject.model
         public DateOnly DateOfBirth { get; set; }
 
         // Relation with Users
-        public virtual Doctor Doctor { get; set; }
-		public virtual Receptionist Receptionist { get; set; }
-		public virtual Patient Patient{ get; set; }
-		public virtual Nurse Nurse { get; set; }
-		public virtual Pharmacist Pharmacist { get; set; }
+        public virtual Doctor? Doctor { get; set; }
+		public virtual Receptionist? Receptionist { get; set; }
+		public virtual Patient? Patient{ get; set; }
+		public virtual Nurse? Nurse { get; set; }
+		public virtual Pharmacist? Pharmacist { get; set; }
 	}
 }
