@@ -87,7 +87,6 @@ namespace PLProject.Controllers
         public IActionResult Edit(ReceptionistViewModel receptionistViewModel)
         {
             var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.Id);
-            receptionistViewModel.UserPassword = receptionist.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Receptionist>().Update((Receptionist)receptionistViewModel);

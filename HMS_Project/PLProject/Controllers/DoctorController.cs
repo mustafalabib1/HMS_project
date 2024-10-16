@@ -110,8 +110,6 @@ namespace PLProject.Controllers
 		{
 			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
 
-            doctorViewModel.UserPassword = doctor.UserPassword;
-			ModelState.Remove("UserPassword");
             if (ModelState.IsValid)
 			{
 				doctor.UpdatedDoctor(doctorViewModel);

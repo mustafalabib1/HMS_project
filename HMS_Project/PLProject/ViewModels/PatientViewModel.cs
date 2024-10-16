@@ -33,9 +33,8 @@ namespace PLProject.ViewModels
                 LastName = name[1];
             }
             DateOfBirth = patient.DateOfBirth;
-            Phone = patient.Phone;
+            Phone = patient.PhoneNumber;
             Email = patient.Email;
-            UserPassword = patient.UserPassword;
             Address = patient.Address;
             Gender = patient.Gender;
             Id= patient.Id;
@@ -47,10 +46,9 @@ namespace PLProject.ViewModels
             {
                 SSN = PatViewModel.SSN,
                 Email = PatViewModel.Email,
-                UserPassword = PatViewModel.UserPassword,
                 Address = PatViewModel.Address,
                 Gender = PatViewModel.Gender,
-                Phone = PatViewModel.Phone,
+                PhoneNumber = PatViewModel.Phone,
                 FullName = $"{PatViewModel.FirstName.Trim()} {PatViewModel.MiddleName.Trim()} {PatViewModel.LastName.Trim()}",
                 DateOfBirth = PatViewModel.DateOfBirth
             };

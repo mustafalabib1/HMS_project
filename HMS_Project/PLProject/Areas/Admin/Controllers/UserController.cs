@@ -17,11 +17,13 @@ namespace PLProject.Areas.Admin.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public UserController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
+		public UserController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         #region Roles Views
@@ -226,15 +228,30 @@ namespace PLProject.Areas.Admin.Controllers
                 return NotFound();
 
             var userRoles = await _userManager.GetRolesAsync(user);
+            bool roleChanged = false;
 
-            foreach (var role in model.Roles)
+			foreach (var role in model.Roles)
             {
                 if (userRoles.Any(r => r == role.RoleName) && !role.IsSelected)
-                    await _userManager.RemoveFromRoleAsync(user, role.RoleName);
+                {
+					await _userManager.RemoveFromRoleAsync(user, role.RoleName);
+                    roleChanged = true;
+				}
 
-                if (!userRoles.Any(r => r == role.RoleName) && role.IsSelected)
-                    await _userManager.AddToRoleAsync(user, role.RoleName);
-            }
+				if (!userRoles.Any(r => r == role.RoleName) && role.IsSelected)
+                {
+					await _userManager.AddToRoleAsync(user, role.RoleName);
+                    roleChanged = true;
+				}
+
+                if (roleChanged)
+				{
+					// Sign the user in again to refresh their claims
+					await _signInManager.SignOutAsync();  // Sign out the current session
+					await _signInManager.SignInAsync(user, isPersistent: false);  // Sign the user back in
+				}
+
+			}
 
             return RedirectToAction(nameof(Index));
         }

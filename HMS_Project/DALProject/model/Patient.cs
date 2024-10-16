@@ -8,8 +8,12 @@ namespace DALProject.model
 {
     public class Patient : HmsUser
     {
-        #region One2Many with ActiveSubstance Active Substance that has from it allergy
-        public virtual ICollection<ActiveSubstance> ActSbuAllergies { get; set; } = new HashSet<ActiveSubstance>(); 
+		// Relation With AppUser
+		public string? UserId { get; set; }
+		public virtual AppUser AppUser { get; set; }
+
+		#region One2Many with ActiveSubstance Active Substance that has from it allergy
+		public virtual ICollection<ActiveSubstance> ActSbuAllergies { get; set; } = new HashSet<ActiveSubstance>(); 
         #endregion
 
         #region One2Many With Apointment

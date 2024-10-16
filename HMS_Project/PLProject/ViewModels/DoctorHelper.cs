@@ -35,9 +35,8 @@ namespace PLProject.ViewModels
             doctor.SSN = doctorViewModel.SSN;
             doctor.FullName= $"{doctorViewModel.FirstName.Trim()} {doctorViewModel.MiddleName.Trim()} {doctorViewModel.LastName.Trim()}";
             doctor.Gender = doctorViewModel.Gender;
-            doctor.Phone = doctorViewModel.Phone;
+            doctor.PhoneNumber = doctorViewModel.Phone;
             doctor.Email = doctorViewModel.Email;
-            doctor.UserPassword = doctorViewModel.UserPassword;
             foreach (var (day, dayVM) in doctor.DoctorScheduleLookups.Zip(doctorViewModel.schedule, (model, ViewModel) => (model, ViewModel)))
             {
                 day.Day = dayVM.Day;

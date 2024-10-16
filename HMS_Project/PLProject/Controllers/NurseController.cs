@@ -79,7 +79,6 @@ namespace PLProject.Controllers
         public IActionResult Edit(NurseViewModel NurseViewModel)
         {
             var Nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.Id);
-            NurseViewModel.UserPassword = Nurse.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Nurse>().Update((Nurse)NurseViewModel);

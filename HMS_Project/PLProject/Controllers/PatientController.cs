@@ -78,7 +78,6 @@ namespace PLProject.Controllers
         public IActionResult Edit(PatientViewModel PatientViewModel)
         {
             var Patient = unitOfWork.Repository<Patient>().Get(PatientViewModel.Id);
-            PatientViewModel.UserPassword = Patient.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Patient>().Update((Patient)PatientViewModel);

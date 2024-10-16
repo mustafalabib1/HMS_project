@@ -24,9 +24,8 @@ public class DoctorViewModel : UserViewModel
             LastName = name[1];
         }
         DateOfBirth = doctor.DateOfBirth;
-        Phone = doctor.Phone;
+        Phone = doctor.PhoneNumber;
         Email = doctor.Email;
-        UserPassword = doctor.UserPassword;
         Address = doctor.Address;
         Gender = doctor.Gender;
         specialization = doctor.DoctorSpecialization.Specialization;
@@ -44,10 +43,9 @@ public class DoctorViewModel : UserViewModel
         var doctor = new Doctor();
         doctor.SSN = doctorViewModel.SSN;
         doctor.Email = doctorViewModel.Email;
-        doctor.UserPassword = doctorViewModel.UserPassword;
         doctor.Address = doctorViewModel.Address;
         doctor.Gender = doctorViewModel.Gender;
-        doctor.Phone = doctorViewModel.Phone;
+        doctor.PhoneNumber = doctorViewModel.Phone;
         doctor.FullName = $"{doctorViewModel.FirstName.Trim()} {doctorViewModel.MiddleName.Trim()} {doctorViewModel.LastName.Trim()}";
         doctor.DateOfBirth = doctorViewModel.DateOfBirth;
         doctor.SpecializationId = doctorViewModel.specializationId ?? 0;

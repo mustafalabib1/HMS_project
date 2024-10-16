@@ -79,7 +79,6 @@ namespace PLProject.Controllers
         public IActionResult Edit(PharmacistViewModel pharmacistViewModel)
         {
             var pharmacist = unitOfWork.Repository<Pharmacist>().Get(pharmacistViewModel.Id);
-            pharmacistViewModel.UserPassword = pharmacist.UserPassword;
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Pharmacist>().Update((Pharmacist)pharmacistViewModel);

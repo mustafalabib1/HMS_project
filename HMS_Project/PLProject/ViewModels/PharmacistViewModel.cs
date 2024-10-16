@@ -31,9 +31,8 @@ namespace PLProject.ViewModels
                 LastName = name[1];
             }
             DateOfBirth = pharmacist.DateOfBirth;
-            Phone = pharmacist.Phone;
+            Phone = pharmacist.PhoneNumber;
             Email = pharmacist.Email;
-            UserPassword = pharmacist.UserPassword;
             Address = pharmacist.Address;
             Gender =pharmacist.Gender;
             Id = pharmacist.Id;
@@ -46,10 +45,9 @@ namespace PLProject.ViewModels
                 Id = pharmacistViewModel.Id,
                 SSN = pharmacistViewModel.SSN,
                 Email = pharmacistViewModel.Email,
-                UserPassword = pharmacistViewModel.UserPassword,
                 Address = pharmacistViewModel.Address,
                 Gender = pharmacistViewModel.Gender,
-                Phone = pharmacistViewModel.Phone,
+                PhoneNumber = pharmacistViewModel.Phone,
                 FullName = $"{pharmacistViewModel.FirstName.Trim()} {pharmacistViewModel.MiddleName.Trim()} {pharmacistViewModel.LastName.Trim()}",
                 DateOfBirth = pharmacistViewModel.DateOfBirth
             };

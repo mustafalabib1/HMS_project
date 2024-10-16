@@ -30,9 +30,8 @@ namespace PLProject.ViewModels
                 LastName = name[1];
             }
             DateOfBirth = receptionist.DateOfBirth;
-            Phone = receptionist.Phone;
+            Phone = receptionist.PhoneNumber;
             Email = receptionist.Email;
-            UserPassword = receptionist.UserPassword;
             Address = receptionist.Address;
             Gender =receptionist.Gender;
             Id = receptionist.Id;
@@ -43,10 +42,9 @@ namespace PLProject.ViewModels
             {
                 SSN = receptionistViewModel.SSN,
                 Email = receptionistViewModel.Email,
-                UserPassword = receptionistViewModel.UserPassword,
                 Address = receptionistViewModel.Address,
                 Gender = receptionistViewModel.Gender,
-                Phone = receptionistViewModel.Phone,
+                PhoneNumber = receptionistViewModel.Phone,
                 FullName = $"{receptionistViewModel.FirstName.Trim()} {receptionistViewModel.MiddleName.Trim()} {receptionistViewModel.LastName.Trim()}",
                 DateOfBirth = receptionistViewModel.DateOfBirth
             };
