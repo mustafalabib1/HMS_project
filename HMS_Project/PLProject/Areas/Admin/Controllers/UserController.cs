@@ -18,12 +18,14 @@ namespace PLProject.Areas.Admin.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IUnitOfWork _unitOfWork;
 
-		public UserController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public UserController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUnitOfWork unitOfWork)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
         }
 
         #region Roles Views
@@ -131,7 +133,7 @@ namespace PLProject.Areas.Admin.Controllers
         }
 
         #endregion
-            
+
         #region Edit User
 
         public async Task<IActionResult> Edit(string userId)
@@ -157,7 +159,7 @@ namespace PLProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProfileFormViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(model);
 
             var user = await _userManager.FindByIdAsync(model.Id);
@@ -230,33 +232,33 @@ namespace PLProject.Areas.Admin.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
             bool roleChanged = false;
 
-			foreach (var role in model.Roles)
+            foreach (var role in model.Roles)
             {
                 if (userRoles.Any(r => r == role.RoleName) && !role.IsSelected)
                 {
-					await _userManager.RemoveFromRoleAsync(user, role.RoleName);
+                    await _userManager.RemoveFromRoleAsync(user, role.RoleName);
                     roleChanged = true;
-				}
+                }
 
-				if (!userRoles.Any(r => r == role.RoleName) && role.IsSelected)
+                if (!userRoles.Any(r => r == role.RoleName) && role.IsSelected)
                 {
-					await _userManager.AddToRoleAsync(user, role.RoleName);
+                    await _userManager.AddToRoleAsync(user, role.RoleName);
                     roleChanged = true;
-				}
+                }
 
-				if (roleChanged)
-				{
-					// Get the currently logged-in user (not the user being modified)
-					var currentUser = await _userManager.GetUserAsync(User);  // This retrieves the currently logged-in user
-					if (currentUser != null)
-					{
-						// Sign in the current user again to refresh their claims
-						await _signInManager.SignOutAsync();  // Sign out current user
-						await _signInManager.SignInAsync(currentUser, isPersistent: false);  // Sign in current user again
-					}
-				}
+                if (roleChanged)
+                {
+                    // if the current user is an admin and he changed his own roles reset his session
+                    var currentUser = await _userManager.GetUserAsync(User);
+                    if (currentUser != null && currentUser == user)
+                    {
+                        // Sign in the current user again to refresh their claims
+                        await _signInManager.SignOutAsync();  // Sign out current user
+                        await _signInManager.SignInAsync(currentUser, isPersistent: false);  // Sign in current user again
+                    }
+                }
 
-			}
+            }
 
             return RedirectToAction(nameof(Index));
         }
