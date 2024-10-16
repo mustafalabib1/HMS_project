@@ -74,6 +74,7 @@ namespace PLProject.Controllers
 
             var spec = new BaseSpecification<Clinic>(c => c.Id == Id);
             spec.Includes.Add(c => c.ClinicSpecilization);
+            unitOfWork.Complete();
 
             var clinic = unitOfWork.Repository<Clinic>().GetEntityWithSpec(spec);
             var clinicViewModel = (ClinicViewModel)clinic;
