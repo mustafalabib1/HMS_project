@@ -130,19 +130,26 @@ namespace PLProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Retrieve the existing medication from the database
                 var medication = unitOfWork.Repository<Medication>().Get(medicationViewModel.Id);
+
                 if (medication == null) return NotFound();
 
                 // Update medication properties
                 medication.MedName = medicationViewModel.Name;
                 medication.Strength = medicationViewModel.Strength;
+
+                // Update the active substances
                 medication.ActiveSubstances = medicationViewModel.ActiveSubstanceIds
                     .Select(id => new ActiveSubstance { Id = id })
                     .ToList();
 
                 // Save changes to the repository
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
+                unitOfWork.Repository<Medication>().Update(medication);
+
+                unitOfWork.Complete(); // Commit the changes to the database
+
+                return RedirectToAction(nameof(Index)); // Redirect to the index action after successful update
             }
 
             // If the model state is invalid, repopulate the active substances
@@ -152,8 +159,9 @@ namespace PLProject.Controllers
                 ActiveSubstancesName = a.ActiveSubstancesName
             }).ToList();
 
-            return View(medicationViewModel);
+            return View(medicationViewModel); // Return the view with the model to show validation errors
         }
+
 
         // Details Action
         public IActionResult Details(int id)
@@ -188,6 +196,11 @@ namespace PLProject.Controllers
                 Id = medication.Id,
                 Name = medication.MedName,
                 Strength = medication.Strength,
+                ActiveSubstances = medication.ActiveSubstances.Select(a => new ActiveSubstanceViewModel
+                {
+                    Id = a.Id,
+                    ActiveSubstancesName = a.ActiveSubstancesName,
+                }).ToList()
             };
 
             return View(medicationViewModel);
@@ -204,4 +217,6 @@ namespace PLProject.Controllers
                 unitOfWork.Complete(); // Save changes to the database
             }
             return RedirectToAction(nameof(Index));
-        } } } 
+        }
+    }
+}
