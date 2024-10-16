@@ -1,8 +1,8 @@
 ﻿@model ClinicAvailabilityViewModel
-@inject IRepository<Clinic> clinicRepo;
+@inject IUnitOfWork unitOfWork;
 @{
     // Fetch all clinics
-    var Clinics = clinicRepo.GetALL().ToList();
+    var Clinics = unitOfWork.Repository<Clinic>().GetALL().ToList();
 }
 <div class="row">
     <!-- Clinic Selection Section -->

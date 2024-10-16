@@ -8,11 +8,69 @@
 <br />
 
 <div>
-    <partial name="userpartialviews\_UserDetailsDeletePartial" model="@Model" />
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="MiddleName" class="form-label"></label>
+        <input asp-for="MiddleName" class="form-control" readonly />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" readonly />
+    </div>
 
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Gender" class="form-label"></label>
+        <input asp-for="Gender" class="form-control" readonly />
+    </div>
 
+    <div class="mb-3">
+        <label asp-for="DateOfBirth" class="form-label"></label>
+        <input asp-for="DateOfBirth" class="form-control" readonly />
+    </div>
+
+    <!-- Schedule Section -->
+    <h3 class="mt-4">Doctor's Schedule</h3>
+    <hr />
+
+    @if (Model.schedule != null && Model.schedule.Count > 0)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.schedule)
+                {
+                    <tr>
+                        <td>@item.Day</td>
+                        <td>@item.StartTime.ToString("hh\\:mm")</td> <!-- Display as HH:MM -->
+                        <td>@item.EndTime.ToString("hh\\:mm")</td>   <!-- Display as HH:MM -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No schedule available for this doctor.</p>
+    }
+
+    <!-- Include your partial buttons (Edit/Delete, etc.) -->
     <partial name="_ButtonsInDetailsPartial" model="Model.Id" />
-
 </div>
-
-

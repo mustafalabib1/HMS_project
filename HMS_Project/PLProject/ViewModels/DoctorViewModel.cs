@@ -1,7 +1,9 @@
 ﻿using DALProject.model;
+using NuGet.Packaging;
 using PLProject.ViewModels;
+using Project.ViewModels;
 
-public class DoctorViewModel:UserViewModel
+public class DoctorViewModel : UserViewModel
 {
     public DoctorViewModel() { }
 
@@ -28,29 +30,28 @@ public class DoctorViewModel:UserViewModel
         Address = doctor.Address;
         Gender = doctor.Gender;
         specialization = doctor.DoctorSpecialization.Specialization;
+        schedule = doctor.DoctorScheduleLookups.Select(schedule => schedule.MapToViewModel()).ToList();
     }
 
     public string? specialization { get; set; }
     public int? specializationId { get; set; }
     public decimal? Price { get; set; } // إضافة خاصية Price إذا كانت مطلوبة
     public IEnumerable<DoctorSpecializationLookup>? SpecializationsDateReader { get; set; }
-    public List<DoctorScheduleLookup> schedule { get; set; }
+    public List<DoctorScheduleVM>? schedule { get; set; } = new List<DoctorScheduleVM>();
 
-    public static explicit operator Doctor(DoctorViewModel doctorViewModwl)
+    public static explicit operator Doctor(DoctorViewModel doctorViewModel)
     {
-        return new Doctor()
-        {
-                
-            SSN = doctorViewModwl.SSN,
-            Email = doctorViewModwl.Email,
-            UserPassword = doctorViewModwl.UserPassword,
-            Address = doctorViewModwl.Address,
-            Gender = doctorViewModwl.Gender,
-            Phone = doctorViewModwl.Phone,
-            FullName = $"{doctorViewModwl.FirstName.Trim()} {doctorViewModwl.MiddleName.Trim()} {doctorViewModwl.LastName.Trim()}",
-            DateOfBirth = doctorViewModwl.DateOfBirth,
-            SpecializationId = doctorViewModwl.specializationId??0,
-        };
+        var doctor = new Doctor();
+        doctor.SSN = doctorViewModel.SSN;
+        doctor.Email = doctorViewModel.Email;
+        doctor.UserPassword = doctorViewModel.UserPassword;
+        doctor.Address = doctorViewModel.Address;
+        doctor.Gender = doctorViewModel.Gender;
+        doctor.Phone = doctorViewModel.Phone;
+        doctor.FullName = $"{doctorViewModel.FirstName.Trim()} {doctorViewModel.MiddleName.Trim()} {doctorViewModel.LastName.Trim()}";
+        doctor.DateOfBirth = doctorViewModel.DateOfBirth;
+        doctor.SpecializationId = doctorViewModel.specializationId ?? 0;
+        return doctor;
     }
 
     public static explicit operator DoctorViewModel(Doctor doctor)

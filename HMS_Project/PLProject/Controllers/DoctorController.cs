@@ -5,6 +5,9 @@ using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using BLLProject.Specification;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Project.ViewModels;
 
 namespace PLProject.Controllers
 {
@@ -106,10 +109,13 @@ namespace PLProject.Controllers
 		public IActionResult Edit(DoctorViewModel doctorViewModel)
 		{
 			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
-			doctorViewModel.UserPassword = doctor.UserPassword;
-			if (ModelState.IsValid)
+
+            doctorViewModel.UserPassword = doctor.UserPassword;
+			ModelState.Remove("UserPassword");
+            if (ModelState.IsValid)
 			{
-				unitOfWork.Repository<Doctor>().Update((Doctor)doctorViewModel);
+				doctor.UpdatedDoctor(doctorViewModel);
+				unitOfWork.Repository<Doctor>().Update(doctor);
 				unitOfWork.Complete();
 				return RedirectToAction(nameof(Index));
 			}
@@ -159,6 +165,34 @@ namespace PLProject.Controllers
 		{
 			return View();
 		}
-		#endregion
-	}
+        #endregion
+        #region Delete Schedule day 
+        [HttpPost]
+        public IActionResult DeleteScheduleDay(int ScheduleId)
+        {
+            try
+            {
+				// Find the schedule entry based on DoctorId and DayId
+				var scheduleDay = unitOfWork.Repository<DoctorScheduleLookup>().Get(ScheduleId);
+
+                if (scheduleDay == null)
+                {
+                    return Json(new { success = false, message = "Schedule day not found." });
+                }
+
+                // Delete the schedule day
+                unitOfWork.Repository<DoctorScheduleLookup>().Delete(scheduleDay);
+                unitOfWork.Complete();
+
+                // Return success response
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                // Return error response
+                return Json(new { success = false, message = "Error occurred: " + ex.Message });
+            }
+        }
+        #endregion
+    }
 }

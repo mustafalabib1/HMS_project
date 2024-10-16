@@ -1,6 +1,10 @@
 ﻿@model DoctorViewModel
 @{
     ViewData["Title"] = "Edit Doctor";
+    var days = Enum.GetValues(typeof(DayOfWeek))
+        .Cast<DayOfWeek>()
+        .Select(day => new SelectListItem { Value = day.ToString(), Text = day.ToString() })
+        .ToList();
 }
 
 <h1>Edit Doctor</h1>
@@ -8,10 +12,8 @@
 <br />
 
 <form asp-controller="Doctor" asp-action="Edit" method="post">
-
     <partial name="userpartialviews\_UserEditPartial" model="@Model" />
- 
-    <!-- Specializations Dropdown (Required, Single Selection) -->
+
     <div class="form-group mt-2">
         <label asp-for="specialization" class="mb-3"></label>
         <select asp-for="specialization" class="form-control" required>
@@ -23,12 +25,213 @@
         </select>
         <span asp-validation-for="specialization" class="text-danger"></span>
     </div>
-    <!-- Action Buttons -->
-    <partial name="_ButtonsInEditPartial" /></form>
 
-<!-- Scripts for Validation -->
+    <!-- Create Schedule Button (only shows if no schedule exists) -->
+    <div id="createScheduleContainer" class="mt-4 @(Model.schedule != null && Model.schedule.Count > 0 ? "d-none" : "")">
+        <button type="button" id="createScheduleButton" class="btn btn-primary mt-3">
+            <i class="fas fa-calendar-plus"></i> Create Schedule
+        </button>
+    </div>
+
+    <!-- Schedule Form Container -->
+    <div id="scheduleContainer" class="mt-4 @(Model.schedule != null && Model.schedule.Count > 0 ? "" : "d-none")">
+        <h4>Schedule</h4>
+        <hr>
+
+        <div id="itemsContainer">
+            @if (Model.schedule != null && Model.schedule.Count > 0)
+            {
+                for (int i = 0; i < Model.schedule.Count; i++)
+                {
+                    var item = Model.schedule[i];
+                    <div class="mb-3" data-index="@i">
+                        <div class="row" data-index="@i" id="day_@item.Id">
+                            <div class="col-md-4">
+                                <label asp-for="schedule[@i].Day"></label>
+                                <select asp-for="schedule[@i].Day" class="form-select schedule-day-select" required>
+                                    <option value="">Select day</option>
+                                    @foreach (var day in days)
+                                    {
+                                        <option value="@day.Value">@day.Text</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="schedule[@i].Day" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label asp-for="schedule[@i].StartTime">Start Time</label>
+                                <input type="time" asp-for="schedule[@i].StartTime" class="form-control" required />
+                                <span asp-validation-for="schedule[@i].StartTime" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label asp-for="schedule[@i].EndTime">End Time</label>
+                                <input type="time" asp-for="schedule[@i].EndTime" class="form-control" required />
+                                <span asp-validation-for="schedule[@i].EndTime" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger removeDayButton" data-schedule-id="@Model.schedule[i].Id" data-index="@i">
+                                    <i class="fas fa-times-circle"></i> Remove Day 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <button type="button" id="addDayButton" class="btn btn-success mt-4">
+            <i class="fas fa-plus-circle"></i> Add Day
+        </button>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var dayIndex = $('.schedule-day-select').length || 0;
+
+            // Function to update day dropdowns when days are added/removed
+            function updateDayOptions() {
+                // Collect the selected days
+                var selectedDays = [];
+                $('.schedule-day-select').each(function () {
+                    if ($(this).val()) {
+                        selectedDays.push($(this).val());
+                    }
+                });
+
+                // Disable options that are already selected
+                $('.schedule-day-select').each(function () {
+                    var currentVal = $(this).val();
+                    $(this).find('option').each(function () {
+                        // Disable options that are selected in other dropdowns, but allow the current selected option
+                        if ($(this).val() && selectedDays.includes($(this).val()) && $(this).val() !== currentVal) {
+                            $(this).prop('disabled', true);
+                        } else {
+                            $(this).prop('disabled', false);
+                        }
+                    });
+                });
+            }
+
+            // Function to add a new day row
+            function addNewDayRow() {
+                var newDayRow = `
+                    <div id="day_${dayIndex}" class="mb-3" data-index="${dayIndex}">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="schedule_${dayIndex}__Day">Day</label>
+                                <select name="schedule[${dayIndex}].Day" class="form-select schedule-day-select" required>
+                                    <option value="">Select day</option>
+                                    @foreach (var day in days)
+                                    {
+                                        <option value="@day.Value">@day.Text</option>
+                                    }
+                                </select>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="schedule_${dayIndex}__StartTime">Start Time</label>
+                                <input type="time" name="schedule[${dayIndex}].StartTime" class="form-control" required />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="schedule_${dayIndex}__EndTime">End Time</label>
+                                <input type="time" name="schedule[${dayIndex}].EndTime" class="form-control" required />
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger removeDayButton" data-index="${dayIndex}">
+                                    <i class="fas fa-times-circle"></i> Remove Day
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+
+                $('#itemsContainer').append(newDayRow);
+                dayIndex++;
+                updateDayOptions(); // Refresh available options when new day is added
+            }
+
+            // Add new day to the schedule
+            $('#addDayButton').click(function () {
+                addNewDayRow();
+            });
+
+            // Remove day from the schedule
+            $(document).on('click', '.removeDayButton', function () {
+                var index = $(this).data('index');
+
+                // Here, you can make an AJAX call to remove the day from the database if needed.
+                $.ajax({
+                    url: '@Url.Action("RemoveSchedule", "Doctor")', // Your action URL
+                    type: 'POST',
+                    data: { index: index }, // Send the index of the day to be removed
+                    success: function (result) {
+                        // Perform any actions on success if necessary
+                    },
+                    error: function (error) {
+                        console.log("Error removing schedule:", error);
+                    }
+                });
+
+                // Remove the day from the UI
+                $(this).closest(`#day_${index}`).remove();
+                updateDayOptions(); // Refresh available options after removal
+
+                // Hide schedule container if no days exist
+                if ($('.schedule-day-select').length === 0) {
+                    $('#scheduleContainer').addClass('d-none');
+                    $('#createScheduleContainer').removeClass('d-none');
+                }
+            });
+
+            // Update day dropdown when a day is selected
+            $(document).on('change', '.schedule-day-select', function () {
+                updateDayOptions(); // Refresh available options after a day is selected
+            });
+
+            // Show schedule form, auto-add one day when "Create Schedule" is clicked
+            $('#createScheduleButton').click(function () {
+                $('#scheduleContainer').removeClass('d-none');
+                $('#createScheduleContainer').addClass('d-none');
+                addNewDayRow(); // Automatically add one day row when creating a schedule
+            });
+
+            updateDayOptions(); // Initial update to disable pre-selected days
+        });
+        $(document).ready(function () {
+            // Handle delete button click event
+            $(document).on('click', '.removeDayButton', function (e) {
+                e.preventDefault(); // Prevent form submission
+
+                // Get schedule ID from button's data attributes
+                var scheduleId = $(this).data('schedule-id');
+
+                // Make an AJAX call to delete the day
+                $.ajax({
+                    url: '@Url.Action("DeleteScheduleDay", "Doctor")', // Action to call
+                    type: 'POST',
+                    data: { ScheduleId: scheduleId }, // Send doctorId and dayId
+                    success: function (result) {
+                        if (result.success) {
+                            // Remove the day from the UI on success
+                            $(`#day_${scheduleId}`).remove();
+                        } else {
+                            alert(result.message);
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error removing schedule day. Please try again.");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    @Html.Partial("_ValidationScriptsPartial")
 }

@@ -91,7 +91,7 @@ namespace PLProject.Controllers
 			try
 			{
 				var user = await _userManager.GetUserAsync(User);
-				var PharmacistId = user.Id;
+				//var PharmacistId = user.Id;
 				var updatedPrescription = unitOfWork.Repository<Prescription>().Get(viewModel.prescriptionId);
 				//updatedPrescription.PharmacistId = PharmacistId;
 

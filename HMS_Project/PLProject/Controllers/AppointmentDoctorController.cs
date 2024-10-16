@@ -100,7 +100,7 @@ namespace PLProject.Controllers
 				unitOfWork.Repository<Apointment>().Update(apointment);
 				unitOfWork.Complete();
 
-				return RedirectToAction(nameof(IndexAsync));
+				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)
 			{

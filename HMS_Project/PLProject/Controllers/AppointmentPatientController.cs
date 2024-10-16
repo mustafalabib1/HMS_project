@@ -148,6 +148,10 @@ namespace PLProject.Controllers
 			return View(viewname, apointmentVM);
 		}
 		#endregion
+
+		#region Delete 
+
+		#endregion
 	}
 }
 
