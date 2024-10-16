@@ -244,11 +244,16 @@ namespace PLProject.Areas.Admin.Controllers
                     roleChanged = true;
 				}
 
-                if (roleChanged)
+				if (roleChanged)
 				{
-					// Sign the user in again to refresh their claims
-					await _signInManager.SignOutAsync();  // Sign out the current session
-					await _signInManager.SignInAsync(user, isPersistent: false);  // Sign the user back in
+					// Get the currently logged-in user (not the user being modified)
+					var currentUser = await _userManager.GetUserAsync(User);  // This retrieves the currently logged-in user
+					if (currentUser != null)
+					{
+						// Sign in the current user again to refresh their claims
+						await _signInManager.SignOutAsync();  // Sign out current user
+						await _signInManager.SignInAsync(currentUser, isPersistent: false);  // Sign in current user again
+					}
 				}
 
 			}
