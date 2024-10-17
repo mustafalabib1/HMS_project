@@ -1,22 +1,139 @@
 ﻿@model ClinicViewModel
+@inject IUnitOfWork unitOfWork
+@{
+    var Specializations = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
+
+    var DoctorSpec = new BaseSpecification<Doctor>();
+    DoctorSpec.Includes.Add(d => d.Clinic);
+    var HMSDoctors = unitOfWork.Repository<Doctor>().GetALLWithSpec(DoctorSpec).ToList();
+
+    var NurseSpec = new BaseSpecification<Nurse>();
+    NurseSpec.Includes.Add(n => n.Clinic);
+    var HMSNures = unitOfWork.Repository<Nurse>().GetALLWithSpec(NurseSpec);
+}
 @{
     ViewData["Title"] = "Create Clinic";
 }
-<h1>Create New Clinic</h1>
-<br />
-<br />
 
-<form asp-asp-controller="Clinic" asp-action="Create" method="post">
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Create New Clinic</h1>
+    <p class="text-center text-muted">Fill out the details below to register a new clinic.</p>
 
-    <partial name="PartialViews/CreateEditClinicPartial" />
+    <form asp-asp-controller="Clinic" asp-action="Create" method="post" class="needs-validation" novalidate>
+        <!-- Clinic Information Section -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-info text-white">
+                <h4>Clinic Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Clinic Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter clinic name" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-    <input type="submit" value="Create" class="btn btn-primary mt-2" />
-    <a asp-controller="Clinic" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
-</form>
+                <!-- Specializations Dropdown (Required, Single Selection) -->
+                <div class="mb-3">
+                    <label asp-for="Specialization" class="form-label">Specialization</label>
+                    <select asp-for="Specialization" class="form-control select2-single" required>
+                        <option value="">Select Specialization</option>
+                        @foreach (var specialization in Specializations)
+                        {
+                            <option value="@specialization.Specialization">@specialization.Specialization</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Specialization" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
 
-<!-- Scripts for Validation -->
+        <!-- Clinic Staff Section -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h4>Clinic Staff</h4>
+            </div>
+            <div class="card-body">
+                <!-- Doctors Dropdown -->
+                <div class="mb-3">
+                    <label asp-for="Doctors" class="form-label">Assign Doctors</label>
+                    <select asp-for="DoctorsAddedId" class="form-control select2-multiple" multiple="multiple">
+                        <option value="">Select Doctor</option>
+                        @foreach (var doctor in HMSDoctors)
+                        {
+                            <option value="@doctor.Id">@doctor.AppUser.FullName @("Has clinic :"+doctor?.Clinic?.Name ?? "No Clinic")</option>
+                        }
+                    </select>
+                    <small class="text-muted">You can assign multiple doctors to the clinic.</small>
+                    <span asp-validation-for="Doctors" class="text-danger"></span>
+                </div>
+
+                <!-- Nurses Dropdown -->
+                <div class="mb-3">
+                    <label asp-for="Nurses" class="form-label">Assign Nurses</label>
+                    <select asp-for="NursesAddedId" class="form-control select2-multiple" multiple="multiple">
+                        <option value="">Select Nurse</option>
+                        @foreach (var Nure in HMSNures)
+                        {
+							<option value="@Nure.Id">@Nure.AppUser.FullName @("Has clinic :"+Nure?.Clinic?.Name ?? "No Clinic")</option>
+                        }
+                    </select>
+                    <small class="text-muted">You can assign multiple nurses to the clinic.</small>
+                    <span asp-validation-for="Nurses" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact and Pricing Section -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4>Contact & Pricing</h4>
+            </div>
+            <div class="card-body">
+                <!-- Phone -->
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label">Phone Number</label>
+                    <input asp-for="Phone" class="form-control" placeholder="Enter phone number" required />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <!-- Price -->
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label">Consultation Price</label>
+                    <input asp-for="Price" class="form-control" placeholder="Enter price" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-between mt-3">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle pe-2"></i>Create Clinic</button>
+            <a asp-controller="Clinic" asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+        </div>
+    </form>
+</div>
+
+<!-- Scripts for Select2 and Validation -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="~/select2/js/select2.min.js"></script>
+    <link href="~/select2/css/select2.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+               // Initialize Select2 for both single and multiple dropdowns
+               $('.select2-single').select2({
+                      placeholder: "Select Specialization",
+                      width: '100%'
+                  });
+
+            $('.select2-multiple').select2({
+                 placeholder: "Select from the list",
+                  allowClear: true,
+                  width: '100%'
+              });
+          });
+    </script>
 }

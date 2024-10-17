@@ -1,11 +1,30 @@
 ﻿@model ClinicViewModel
 @{
-    ViewData["Title"] = "View Clinic";
+	ViewData["Title"] = "View Clinic";
 }
-<h1>Clinic Details</h1>
-<br />
-<br />
+<div class="container mt-5">
+	<h1 class="mb-4">Clinic Details</h1>
 
-<partial name="PartialViews/DetailsDeleteClinicPartial" />
+	<partial name="PartialViews/DetailsDeleteClinicPartial" />
 
-<partial name="_ButtonsInDetailsPartial" model="Model.Id" />
+
+	<!-- Action Buttons -->
+	<div class="d-flex justify-content-end mt-4">
+		<!-- Delete and Cancel Buttons -->
+		<div class="mt-5 mb-5">
+			<button type="submit" class="btn btn-danger mt-2">
+				<i class="fas fa-trash"></i> Delete
+			</button>
+
+			<a asp-action="Index" class="btn btn-primary mt-2">
+				<i class="fas fa-arrow-left"></i> Back To List
+			</a>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

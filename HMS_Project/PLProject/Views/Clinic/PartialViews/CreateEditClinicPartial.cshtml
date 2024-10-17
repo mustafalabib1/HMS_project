@@ -1,5 +1,17 @@
 ﻿@model ClinicViewModel
+@inject IUnitOfWork unitOfWork
+@{
+    var Specializations = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
 
+    var DoctorSpec = new BaseSpecification<Doctor>();
+    DoctorSpec.Includes.Add(d => d.Clinic);
+    var HMSDoctors = unitOfWork.Repository<Doctor>().GetALLWithSpec(DoctorSpec);
+
+    var NurseSpec = new BaseSpecification<Nurse>();
+    NurseSpec.Includes.Add(n => n.Clinic);
+    var HMSNures = unitOfWork.Repository<Nurse>().GetALLWithSpec(NurseSpec);
+
+}
 <div class="mb-3">
     <label asp-for="Name" class="form-label"></label>
     <input asp-for="Name" class="form-control" />
@@ -11,12 +23,36 @@
     <label asp-for="Specialization" class="mb-3"></label>
     <select asp-for="Specialization" class="form-control" required>
         <option value="">Select Specialization</option>
-        @foreach (var specialization in Model.SpecializationsDateReader)
+        @foreach (var specialization in Specializations)
         {
             <option value="@specialization.Specialization">@specialization.Specialization</option>
         }
     </select>
     <span asp-validation-for="Specialization" class="text-danger"></span>
+</div>
+
+<div class="form-group mt-2">
+    <label asp-for="Doctors" class="mb-3"></label>
+    <select asp-for="Doctors" class="form-control select2-multiple" multiple="multiple">
+        <option value="">Select Doctor</option>
+        @foreach (var doctor in HMSDoctors)
+        {
+            <option value="@doctor.Id">@doctor.AppUser.FullName   @(doctor.Clinic.Name ?? "don't has clinic")</option>
+        }
+    </select>
+    <span asp-validation-for="Doctors" class="text-danger"></span>
+</div>
+
+<div class="form-group mt-2">
+    <label asp-for="Nurses" class="mb-3"></label>
+    <select asp-for="Nurses" class="form-control select2-multiple" multiple="multiple">
+        <option value="">Select Nurse</option>
+        @foreach (var Nure in HMSNures)
+        {
+            <option value="@Nure.Id">@Nure.AppUser.FullName   @(Nure.Clinic.Name ?? "don't has clinic")</option>
+        }
+    </select>
+    <span asp-validation-for="Nurses" class="text-danger"></span>
 </div>
 
 <div class="mb-3 mt-3">
@@ -35,4 +71,17 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="~/select2/js/select2.min.js"></script>
+    <link href="~/select2/css/select2.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            // Initialize Select2 for both dropdowns
+            $('.select2-multiple').select2({
+                placeholder: "Select from the list",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
 }
