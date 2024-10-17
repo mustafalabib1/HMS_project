@@ -2,11 +2,12 @@
 @{
 	ViewData["Title"] = "Details";
 }
-
+<div class="container mt-5">
 <h1 class="mb-4">Active Substance Details</h1>
 
 <div class="container">
 	<partial name="PartialViews/DetailsDeletePartial" model="@Model" />
 
 	<partial name="_ButtonsInDetailsPartial" model="Model.Id"/>
+</div>
 </div>

@@ -1,22 +1,82 @@
 ﻿@model ClinicViewModel
 
-<div class="mb-3">
-    <label asp-for="Name" class="form-label"></label>
-    <input asp-for="Name" class="form-control" readonly />
-    <span asp-validation-for="Name" class="text-danger"></span>
+<!-- Clinic Info Card -->
+<div class="card mb-4">
+	<div class="card-header bg-primary text-white">
+		Clinic Information
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<!-- Clinic Name -->
+			<div class="col-md-6 mb-3">
+				<label asp-for="Name" class="form-label fw-bold">Clinic Name</label>
+				<input asp-for="Name" class="form-control" readonly />
+			</div>
+			<!-- Clinic Specialization -->
+			<div class="col-md-6 mb-3">
+				<label asp-for="Specialization" class="form-label fw-bold">Specialization</label>
+				<input asp-for="Specialization" class="form-control" readonly />
+			</div>
+		</div>
+		<div class="row">
+			<!-- Phone -->
+			<div class="col-md-6 mb-3">
+				<label asp-for="Phone" class="form-label fw-bold">Phone Number</label>
+				<input asp-for="Phone" class="form-control" readonly />
+			</div>
+			<!-- Price -->
+			<div class="col-md-6 mb-3">
+				<label asp-for="Price" class="form-label fw-bold">Consultation Price</label>
+				<input asp-for="Price" class="form-control" readonly />
+			</div>
+		</div>
+	</div>
 </div>
-<div class="mb-3">
-    <label asp-for="Specialization" class="form-label"></label>
-    <input asp-for="Specialization" class="form-control" readonly />
-    <span asp-validation-for="Specialization" class="text-danger"></span>
+
+<!-- Assigned Doctors Card -->
+<div class="card mb-4">
+	<div class="card-header bg-success text-white">
+		Assigned Doctors
+	</div>
+	<div class="card-body">
+		@if (Model.Doctors != null && Model.Doctors.Any())
+		{
+			<ul class="list-group">
+				@foreach (var doctor in Model.Doctors)
+				{
+					<li class="list-group-item">
+						<strong>@doctor.FullName</strong> - @(doctor.Clinic?.Name ?? "No Clinic Assigned")
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p class="text-muted">No doctors assigned to this clinic.</p>
+		}
+	</div>
 </div>
-<div class="mb-3">
-    <label asp-for="Phone" class="form-label"></label>
-    <input asp-for="Phone" class="form-control" readonly />
-    <span asp-validation-for="Phone" class="text-danger"></span>
-</div>
-<div class="mb-3">
-    <label asp-for="Price" class="form-label"></label>
-    <input asp-for="Price" class="form-control" readonly />
-    <span asp-validation-for="Price" class="text-danger"></span>
+
+<!-- Assigned Nurses Card -->
+<div class="card mb-4">
+	<div class="card-header bg-info text-white">
+		Assigned Nurses
+	</div>
+	<div class="card-body">
+		@if (Model.Nurses != null && Model.Nurses.Any())
+		{
+			<ul class="list-group">
+				@foreach (var nurse in Model.Nurses)
+				{
+					<li class="list-group-item">
+						<strong>@nurse.FullName</strong> - @(nurse.Clinic?.Name ?? "No Clinic Assigned")
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p class="text-muted">No nurses assigned to this clinic.</p>
+		}
+	</div>
 </div>

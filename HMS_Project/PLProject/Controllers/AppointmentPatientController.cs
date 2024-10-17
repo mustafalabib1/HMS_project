@@ -81,7 +81,8 @@ namespace PLProject.Controllers
 									var count = unitOfWork.Repository<Apointment>()
 										.Find(a => a.ApointmentDate == DateOnly.FromDateTime(day.Date)
 											  && a.ApointmentTime < item.StartTime
-											  && a.ApointmentTime < item.EndTime).Count();
+											  && a.ApointmentTime < item.EndTime
+											  && a.ApointmentStatus!=ApointmentStatusEnum.Cancelled).Count();
 									if (count < 50)
 									{
 										day.IsAvailable = true;
@@ -158,8 +159,10 @@ namespace PLProject.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Delete(AppointmentGenarelVM ViewModel)
+		public IActionResult Delete([FromRoute]int Id ,AppointmentGenarelVM ViewModel)
 		{
+			if (Id != ViewModel.Id)
+				return BadRequest();
 			try
 			{
 				var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);

@@ -1,7 +1,7 @@
 ﻿@model ClinicViewModel
 @{
     ViewData["Title"] = "Delete Clinic";
-}
+}<div class="container mt-5">
 <h1>Are you sure ?</h1>
 <br />
 <br />
@@ -11,6 +11,9 @@
     <partial name="PartialViews/DetailsDeleteClinicPartial" />
 
     <!-- Delete and Cancel Buttons -->
-    <partial name="_ButtonsInDeletePartial" />
+        <div class="d-flex justify-content-end mt-4">
+            <partial name="_ButtonsInDeletePartial" />
+        </div>
 
 </form>
+</div>

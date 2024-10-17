@@ -1,191 +1,171 @@
 ﻿@model ActiveSubstanceViewModel
+@inject IUnitOfWork unitOfWork
 
 @{
-    ViewData["Title"] = "Edit";
+	ViewData["Title"] = "Edit Active Substance";
+
+	// Fetch the Active Substances that can be used in the dropdown, excluding the ones already in interactions
+	var spec = new BaseSpecification<ActiveSubstance>(a => !Model.Interactions.Select(i => i.ActSubId).Contains(a.Id));
+	var ActiveSubstancesDataReader = unitOfWork.Repository<ActiveSubstance>().GetALLWithSpec(spec).ToList();
 }
 
-<h1 class="mb-4">Active Substance Edit</h1>
+<div class="container mt-5">
+	<h2 class="mb-4">Edit Active Substance</h2>
 
-<div class="container">
-    <!-- Active Substance Name -->
-    <form id="editForm" asp-action="Edit" method="post">
-        <partial name="PartialViews/CreateEditPartial" model="@Model" />
-    </form>
+	<!-- Main form for editing the active substance and its interactions -->
+	<form id="editForm" asp-action="Edit" method="post">
+		<!-- Active Substance Name -->
+		<div class="form-group">
+			<label asp-for="ActiveSubstancesName"></label>
+			<input asp-for="ActiveSubstancesName" class="form-control" />
+			<span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
+		</div>
 
-    <!-- Interactions with Other Substances -->
-    <div class="mb-5">
-        <h4 class="mb-3">Interactions with Other Active Substances</h4>
-        @if (Model.Interactions.Count() > 0)
-        {
-            <div class="table-responsive">
-                <table class="table table-hover table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="equal-width-1">@Html.DisplayNameFor(a => a.Interactions.First().OtherSubstanceName)</th>
-                            <th class="equal-width-2">@Html.DisplayNameFor(a => a.Interactions.First().Interaction)</th>
-                            <th class="equal-width-3 text-center">Edit</th>
-                            <th class="equal-width-4 text-center">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var substance in Model.Interactions)
-                        {
-                            <tr class="align-middle">
-                                <td>@substance.OtherSubstanceName</td>
-                                <form asp-controller="ActiveSubstance" asp-action="ActSubstEdit" method="post">
-                                <td class="text-center">
-                                    <input type="text" name="Interaction" class="form-control" value="@substance.Interaction" />
-                                    <span asp-validation-for="Interactions.First().Interaction" class="text-danger"></span>
-                                </td>
-                                <td class="text-center">
-                                    <input type="hidden" name="ActId" value="@Model.Id" />
-                                    <input type="hidden" name="InteractId" value="@substance.ActSubId" />
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-save"></i> Save
-                                    </button>
-                                </td>
-                                </form>
-                                <td>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInteractionModal-@substance.ActSubId">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                    <!-- Modal for delete confirmation -->
-                                    <div class="modal fade" id="deleteInteractionModal-@substance.ActSubId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Interaction</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to delete the interaction with @substance.OtherSubstanceName?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form asp-controller="ActiveSubstance" asp-action="ActSubstDelete" method="post">
-                                                        <input type="hidden" name="ActId" value="@Model.Id" />
-                                                        <input type="hidden" name="InteractId" value="@substance.ActSubId" />
-                                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> No interactions with other active substances found.
-            </div>
-        }
-    </div>
+		<!-- Add new Medications (optional) -->
+		<div class="form-group">
+			<label>Add new Medications (optional):</label>
+			<select asp-for="MedicationId" class="form-control select2-multiple">
+				@foreach (var medication in Model.MedicationsDateReader)
+				{
+					<option value="@medication.Id">@medication.MedName</option>
+				}
+			</select>
+		</div>
 
-    <!-- Medications with Active Substance -->
-    <div class="mb-5">
-        <h4 class="mb-3">Medications Containing This Active Substance</h4>
-        @if (Model.Medications.Count() > 0)
-        {
-            <div class="table-responsive">
-                <table class="table table-hover table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="equal-width-1">@Html.DisplayNameFor(a => a.Medications.First().MedName)</th>
-                            <th class="equal-width-2">@Html.DisplayNameFor(a => a.Medications.First().Strength)</th>
-                            <th class="equal-width-3 text-center">Edit</th>
-                            <th class="equal-width-4 text-center">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var medication in Model.Medications)
-                        {
-                            <tr class="align-middle">
-                                <td>@medication.MedName</td>
-                                <form asp-controller="ActiveSubstance" asp-action="MedicationEdit" method="post">
-                                <td class="text-center">
-                                    <input type="text" name="Strength" class="form-control" value="@medication.Strength" />
-                                    <span asp-validation-for="Medications.First().Strength" class="text-danger"></span>
-                                </td>
-                                <td class="text-center">
-                                    <input type="hidden" name="ActId" value="@Model.Id" />
-                                    <input type="hidden" name="MedId" value="@medication.Id" />
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-save"></i> Save
-                                    </button>
-                                </td>
-                                </form>
-                                <td>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMedicationModal-@medication.Id">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                    <!-- Modal for delete confirmation -->
-                                    <div class="modal fade" id="deleteMedicationModal-@medication.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Medication</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to delete the medication @medication.MedName?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form asp-controller="ActiveSubstance" asp-action="MedicationDelete" method="post">
-                                                        <input type="hidden" name="ActId" value="@Model.Id" />
-                                                        <input type="hidden" name="MedId" value="@medication.Id" />
-                                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> No medications found containing this active substance.
-            </div>
-        }
-    </div>
+		<!-- Interactions with Other Substances -->
+		<div class="mb-5 mt-4">
+			<h4 class="mb-3">Interactions with Other Active Substances</h4>
+			<div class="form-group">
+				<div id="interactions-list" class="row gy-3">
+					@for (int i = 0; i < Model.Interactions.Count; i++)
+					{
+						<div class="interaction-item col-md-12 row align-items-end mb-3" id="Interaction_@Model.Interactions[i].ActSubId">
+							<!-- Substance Selector -->
+							<div class="col-md-6">
+								<label class="fw-bold">Substance</label>
+								<select name="Interactions[@i].ActSubId" class="form-control form-control-lg" required>
+									<option value="">Select Substance</option>
+									@foreach (var substance in ActiveSubstancesDataReader)
+									{
+										<option value="@substance.Id" >
+											@substance.ActiveSubstancesName
+										</option>
+									}
+								</select>
+							</div>
 
-    <div class="mt-4">
-        <!-- Button that submits the form -->
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('editForm').submit();">
-            <i class="fas fa-edit"></i> Edit
-        </button>
-        <a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
-            <i class="fas fa-arrow-left"></i> Back To List
-        </a>
-    </div>
+							<!-- Interaction Input -->
+							<div class="col-md-4">
+								<label class="fw-bold">Interaction</label>
+								<input type="text" name="Interactions[@i].Interaction" value="@Model.Interactions[i].Interaction" class="form-control form-control-lg" placeholder="Enter interaction" required />
+							</div>
 
+							<!-- Delete Button with Modal Confirmation -->
+							<div class="col-md-2 d-flex align-items-center">
+								<button type="button" class="btn btn-danger btn-lg delete-interaction" data-interaction-id="@Model.Interactions[i].ActSubId">
+									<i class="fas fa-trash-alt"></i> Delete
+								</button>
+							</div>
+						</div>
+					}
+				</div>
+
+				<!-- Add New Interaction Button -->
+				<button type="button" class="btn btn-success btn-lg mt-3" id="add-interaction">
+					<i class="fas fa-plus-circle"></i> Add Interaction
+				</button>
+			</div>
+		</div>
+
+		<!-- Submit Button -->
+		<div class="mt-4">
+			<button type="submit" class="btn btn-primary btn-lg">
+				<i class="fas fa-edit"></i> Save Changes
+			</button>
+			<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary btn-lg ms-2">
+				<i class="fas fa-arrow-left"></i> Back To List
+			</a>
+		</div>
+	</form>
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+	@await Html.PartialAsync("_ValidationScriptsPartial")
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="~/select2/js/select2.min.js"></script>
+	<link href="~/select2/css/select2.min.css" rel="stylesheet" />
 
-    <script src="~/select2/js/select2.min.js"></script>
-    <link href="~/select2/css/select2.min.css" rel="stylesheet" />
+	<script>
+		$(document).ready(function () {
+			// Initialize Select2 for Medication field
+			$('.select2-multiple').select2({
+				placeholder: "Select from the list",
+				allowClear: true,
+				width: '100%'
+			});
 
-    <script>
-        $(document).ready(function () {
-            // Initialize Select2 for both dropdowns
-            $('.select2-multiple').select2({
-                placeholder: "Select from the list",
-                allowClear: true,
-                width: '100%'
-            });
-        });
-    </script>
+			// Add new Interaction Row
+			$('#add-interaction').click(function () {
+				var index = $('.interaction-item').length;
+				var newInteraction = `
+					<div class="interaction-item col-md-12 row align-items-end mb-3">
+						<div class="col-md-6">
+							<label class="fw-bold">Substance</label>
+							<select name="Interactions[` + index + `].ActSubId" class="form-control form-control-lg" required>
+								<option value="">Select Substance</option>
+								@foreach (var substance in ActiveSubstancesDataReader)
+								{
+									<option value="@substance.Id">@substance.ActiveSubstancesName</option>
+								}
+							</select>
+						</div>
+						<div class="col-md-4">
+							<input type="text" name="Interactions[` + index + `].Interaction" class="form-control form-control-lg" placeholder="Enter interaction" required />
+						</div>
+						<div class="col-md-2 d-flex align-items-center">
+							<button type="button" class="btn btn-danger btn-lg remove-interaction">
+								<i class="fas fa-trash-alt"></i>
+							</button>
+						</div>
+					</div>
+				`;
+				$('#interactions-list').append(newInteraction).hide().fadeIn(300); // Smooth animation
+			});
+
+			// Remove Interaction Row
+			$(document).on('click', '.remove-interaction', function () {
+				$(this).closest('.interaction-item').fadeOut(300, function () {
+					$(this).remove(); // Smooth removal
+				});
+			});
+
+			// Delete existing active substance
+			$(document).on('click', '.delete-interaction', function (e) {
+				e.preventDefault(); // Prevent form submission
+
+				// Get Interaction ID from button's data attributes
+				var interactionId = $(this).data('interaction-id');
+
+				// Make an AJAX call to delete the interaction
+				$.ajax({
+					url: '@Url.Action("ActSubstDelete", "ActiveSubstance")',
+					type: 'POST',
+					data: { ActId: @Model.Id, InteractId: interactionId }, // Send ActId and InteractId
+					success: function (result) {
+						if (result.success) {
+							// Remove the interaction from the UI on success
+							$(`#Interaction_${interactionId}`).fadeOut(300, function () {
+								$(this).remove();
+							});
+						} else {
+							alert(result.message);
+						}
+					},
+					error: function (error) {
+						alert("Error removing interaction. Please try again.");
+					}
+				});
+			});
+		});
+	</script>
 }

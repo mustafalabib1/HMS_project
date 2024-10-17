@@ -30,7 +30,6 @@ namespace PLProject.Controllers
 		} 
 		#endregion
 
-
 		#region Get all Appointment for Doctor 
 		public async Task<IActionResult> IndexAsync(int? page )
 		{
@@ -91,7 +90,6 @@ namespace PLProject.Controllers
 
 			try
 			{
-
                 // get the appointment from Repository 
                 var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
 				apointment.ConvertAppointmentGenarelVMToApointment(ViewModel);
@@ -100,7 +98,10 @@ namespace PLProject.Controllers
 				unitOfWork.Repository<Apointment>().Update(apointment);
 				unitOfWork.Complete();
 
-				return RedirectToAction(nameof(Index));
+				apointment.ApointmentStatus= ApointmentStatusEnum.Completed;
+
+
+                return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)
 			{

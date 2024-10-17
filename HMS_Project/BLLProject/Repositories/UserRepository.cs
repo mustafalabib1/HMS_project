@@ -49,6 +49,7 @@ namespace BLLProject.Repositories
         public T GetEntityWithSpec(IUserSpecification<T> spec) => ApplySpec(spec).FirstOrDefault();
 
         public IEnumerable<T> GetALLWithSpec(IUserSpecification<T> spec) => ApplySpec(spec).AsNoTracking().ToList();
+        public IQueryable<T> FindLWithSpec(IUserSpecification<T> spec) => ApplySpec(spec).AsNoTracking();
         //helper
         private IQueryable<T> ApplySpec(IUserSpecification<T> spec) => UserSpecificationEvaluator<T>.GetQuery(context.Set<T>(), spec);
     }

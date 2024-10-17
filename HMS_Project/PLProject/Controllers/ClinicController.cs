@@ -8,162 +8,197 @@ using BLLProject.Specification;
 
 namespace PLProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
-    public class ClinicController : Controller
-    {
-        private readonly IUnitOfWork unitOfWork;
-        #region DPI
-        public ClinicController(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
-        #endregion
-        public IActionResult Index()
-        {
-            var clinics = unitOfWork.Repository<Clinic>().GetALL();
-            var clinicViewModels = clinics.Select(c => (ClinicViewModel)c).ToList();
-            return View(clinicViewModels);
-        }
+	[Authorize(Roles = Roles.Admin)]
+	public class ClinicController : Controller
+	{
+		#region DPI
+		private readonly IUnitOfWork unitOfWork;
+		public ClinicController(IUnitOfWork unitOfWork)
+		{
+			this.unitOfWork = unitOfWork;
+		}
+		#endregion
 
-        #region Specialization
-        public IActionResult AddSpecialization()
-        {
-            return View();
-        }
+		#region Index
+		public IActionResult Index()
+		{
+			var clinics = unitOfWork.Repository<Clinic>().GetALL();
+			var clinicViewModels = clinics.Select(c => (ClinicViewModel)c).ToList();
+			return View(clinicViewModels);
+		}
+		#endregion
 
-        [HttpPost]
-        public IActionResult AddSpecialization(DoctorSpecializationLookup doctorSpecialization)
-        {
-            if (ModelState.IsValid) // server side validation
-            {
-                unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecialization);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(doctorSpecialization);
-        }
-        #endregion
+		#region Specialization
+		public IActionResult AddSpecialization()
+		{
+			return View();
+		}
 
-        #region Create
-        public IActionResult Create()
-        {
-            var ViewModel = new ClinicViewModel() { SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL() };
+		[HttpPost]
+		public IActionResult AddSpecialization(DoctorSpecializationLookup doctorSpecialization)
+		{
+			if (ModelState.IsValid) // server side validation
+			{
+				unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecialization);
+				unitOfWork.Complete();
+				return RedirectToAction(nameof(Index));
+			}
+			return View(doctorSpecialization);
+		}
+		#endregion
 
-            return View(ViewModel);
-        }
+		#region Create
+		public IActionResult Create()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        public IActionResult Create(ClinicViewModel clinicViewModel)
-        {
-            if (ModelState.IsValid) // server side validation
-            {
-                unitOfWork.Repository<Clinic>().Add((Clinic)clinicViewModel);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
-            return View(clinicViewModel);
-        }
-        #endregion
+		[HttpPost]
+		public IActionResult Create(ClinicViewModel clinicViewModel)
+		{
+			if (ModelState.IsValid) // server side validation
+			{
+				var updatedClinic = (Clinic)clinicViewModel;
 
-        #region Details
-        public IActionResult Details(int? Id)
-        {
-            if (!Id.HasValue)
-                return BadRequest(); // 400
+				var AddedDoctor = unitOfWork.Repository<Doctor>().Find(d => clinicViewModel.DoctorsAddedId.Contains(d.Id));
+				var AddedNurse = unitOfWork.Repository<Nurse>().Find(d => clinicViewModel.NursesAddedId.Contains(d.Id));
 
-            var spec = new BaseSpecification<Clinic>(c => c.Id == Id);
-            spec.Includes.Add(c => c.ClinicSpecilization);
-            unitOfWork.Complete();
+				if (AddedDoctor is not null)
+				{
+					clinicViewModel.Doctors.AddRange(AddedDoctor);
+					updatedClinic.Doctors = clinicViewModel.Doctors;
+				}
 
-            var clinic = unitOfWork.Repository<Clinic>().GetEntityWithSpec(spec);
-            var clinicViewModel = (ClinicViewModel)clinic;
+				if (AddedNurse is not null)
+				{
+					clinicViewModel.Nurses.AddRange(AddedNurse);
+					updatedClinic.Nurses = clinicViewModel.Nurses;
+				}
+				unitOfWork.Repository<Clinic>().Add(updatedClinic);
+				unitOfWork.Complete();
+				return RedirectToAction(nameof(Index));
+			}
+			return View(clinicViewModel);
+		}
+		#endregion
 
-            if (clinic is null)
-                return NotFound(); // 404
+		#region Details
+		public IActionResult Details(int? Id)
+		{
+			if (!Id.HasValue)
+				return BadRequest(); // 400
 
-            return View(clinicViewModel);
-        }
+			var spec = new BaseSpecification<Clinic>(c => c.Id == Id);
+			spec.Includes.Add(c => c.ClinicSpecilization);
+			unitOfWork.Complete();
 
-        #endregion
+			var clinic = unitOfWork.Repository<Clinic>().GetEntityWithSpec(spec);
+			var clinicViewModel = (ClinicViewModel)clinic;
 
-        #region Edit
+			if (clinic is null)
+				return NotFound(); // 404
 
-        public IActionResult Edit(int? Id)
-        {
-            if (!Id.HasValue)
-                return BadRequest(); // 400
+			return View(clinicViewModel);
+		}
 
-            var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
+		#endregion
 
-            if (clinic is null)
-                return NotFound(); // 404
+		#region Edit
 
-            var clinicViewModel = (ClinicViewModel)clinic;
+		public IActionResult Edit(int? Id)
+		{
+			if (!Id.HasValue)
+				return BadRequest(); // 400
 
-            clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
-            return View(clinicViewModel);
-        }
+			var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+			if (clinic is null)
+				return NotFound(); // 404
 
-        public IActionResult Edit([FromRoute] int Id, ClinicViewModel clinicViewModel)
-        {
-            Clinic clinic = unitOfWork.Repository<Clinic>().Get(clinicViewModel.Id);
+			var clinicViewModel = (ClinicViewModel)clinic;
 
-            if (ModelState.IsValid) // server side validation
-            {
-                // Mapping the model
-                clinic.Name = clinicViewModel.Name;
-                clinic.Specialization = clinicViewModel.Specialization;
-                clinic.Phone = clinicViewModel.Phone;
-                clinic.Price = clinicViewModel.Price ?? default;
+			return View(clinicViewModel);
+		}
 
-                unitOfWork.Repository<Clinic>().Update(clinic);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            clinicViewModel.SpecializationsDateReader = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL();
-            return View(clinicViewModel);
-        }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 
-        #endregion
+		public IActionResult Edit([FromRoute] int Id, ClinicViewModel viewModel)
+		{
+			if (Id != viewModel.Id)
+				return BadRequest();
 
-        #region Delete
+			Clinic updatedClinic = unitOfWork.Repository<Clinic>().Get(viewModel.Id);
 
-        public IActionResult Delete(int? Id)
-        {
-            if (!Id.HasValue)
-                return BadRequest(); // 400
+			if (ModelState.IsValid) // server side validation
+			{
+				// Mapping the model
+				updatedClinic.Name = viewModel.Name;
+				updatedClinic.Specialization = viewModel.Specialization;
+				updatedClinic.Phone = viewModel.Phone;
+				updatedClinic.Price = viewModel.Price ?? default;
 
-            var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
-            var clinicViewModel = (ClinicViewModel)clinic;
+				viewModel.Doctors=updatedClinic.Doctors.ToList();
+				viewModel.Nurses= updatedClinic.Nurses.ToList();
 
-            if (clinic is null)
-                return NotFound(); // 404
+				var AddedDoctor = unitOfWork.Repository<Doctor>().Find(d => viewModel.DoctorsAddedId.Contains(d.Id));
+				var AddedNurse = unitOfWork.Repository<Nurse>().Find(d => viewModel.NursesAddedId.Contains(d.Id));
 
-            return View(clinicViewModel);
-        }
+				if (AddedDoctor is not null)
+				{
+					viewModel.Doctors.AddRange(AddedDoctor);
+					updatedClinic.Doctors = viewModel.Doctors;
+				}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete([FromRoute] int Id, ClinicViewModel clinicViewModel)
-        {
-            var clinic = unitOfWork.Repository<Clinic>().Get(clinicViewModel.Id);
-            try
-            {
-                unitOfWork.Repository<Clinic>().Delete(clinic);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View(clinic);
-            }
-        }
-        #endregion
+				if (AddedNurse is not null)
+				{
+					viewModel.Nurses.AddRange(AddedNurse);
+					updatedClinic.Nurses = viewModel.Nurses;
+				}
 
-    }
+				unitOfWork.Repository<Clinic>().Update(updatedClinic);
+				unitOfWork.Complete();
+				return RedirectToAction(nameof(Index));
+			}
+			return View(viewModel);
+		}
+
+		#endregion
+
+		#region Delete
+
+		public IActionResult Delete(int? Id)
+		{
+			if (!Id.HasValue)
+				return BadRequest(); // 400
+
+			var clinic = unitOfWork.Repository<Clinic>().Get(Id.Value);
+			var clinicViewModel = (ClinicViewModel)clinic;
+
+			if (clinic is null)
+				return NotFound(); // 404
+
+			return View(clinicViewModel);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Delete([FromRoute] int Id, ClinicViewModel clinicViewModel)
+		{
+			var clinic = unitOfWork.Repository<Clinic>().Get(clinicViewModel.Id);
+			try
+			{
+				unitOfWork.Repository<Clinic>().Delete(clinic);
+				unitOfWork.Complete();
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+				ModelState.AddModelError(string.Empty, ex.Message);
+				return View(clinic);
+			}
+		}
+		#endregion
+
+	}
 }

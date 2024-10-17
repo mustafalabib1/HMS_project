@@ -1,73 +1,98 @@
 ﻿@model ActiveSubstanceViewModel
-    <!-- Active Substance Name -->
-<div class="form-group mb-3">
-    <label asp-for="ActiveSubstancesName" class="form-label fw-bold"></label>
-    <input asp-for="ActiveSubstancesName" class="form-control form-control-plaintext ps-1" readonly />
-    <span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
+
+<div class="container mt-5">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Active Substance Details</h2>
+        <a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary btn-lg">
+            <i class="fas fa-arrow-left"></i> Back To List
+        </a>
+    </div>
+
+    <!-- Active Substance Info Card -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Active Substance Information</h4>
+            <div class="form-group mb-3">
+                <label asp-for="ActiveSubstancesName" class="form-label fw-bold">Active Substance Name:</label>
+                <input asp-for="ActiveSubstancesName" class="form-control-plaintext ps-1" readonly />
+                <span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactions Section -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Interactions with Other Active Substances</h4>
+            @if (Model.Interactions.Count() > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>@Html.DisplayNameFor(a => a.Interactions.First().OtherSubstanceName)</th>
+                                <th>@Html.DisplayNameFor(a => a.Interactions.First().Interaction)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Substance in Model.Interactions)
+                            {
+                                <tr>
+                                    <td>@Substance.OtherSubstanceName</td>
+                                    <td>@Substance.Interaction</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle"></i> No interactions found for this active substance.
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Medications Section -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Medications Containing This Active Substance</h4>
+            @if (Model.Medications.Count() > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>@Html.DisplayNameFor(a => a.Medications.First().MedName)</th>
+                                <th>@Html.DisplayNameFor(a => a.Medications.First().Strength)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Medication in Model.Medications)
+                            {
+                                <tr>
+                                    <td>@Medication.MedName</td>
+                                    <td>@Medication.Strength</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle"></i> No medications found containing this active substance.
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
-<!-- Interactions with Other Substances -->
-<div class="mb-4">
-    <h4 class="mb-3">Interactions with Other Active Substances</h4>
-    @if (Model.Interactions.Count() > 0)
-    {
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>@Html.DisplayNameFor(a => a.Interactions.First().OtherSubstanceName)</th>
-                        <th>@Html.DisplayNameFor(a => a.Interactions.First().Interaction)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var Substance in Model.Interactions)
-                    {
-                        <tr class="align-middle">
-                            <td>@Substance.OtherSubstanceName</td>
-                            <td>@Substance.Interaction</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-info mt-3">
-            <i class="fas fa-info-circle"></i> No interactions with other active substances found.
-        </div>
-    }
-</div>
-
-<!-- Medications with Active Substance -->
-<div class="mb-4">
-    <h4 class="mb-3">Medications Containing This Active Substance</h4>
-    @if (Model.Medications.Count() > 0)
-    {
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>@Html.DisplayNameFor(a => a.Medications.First().MedName)</th>
-                        <th>@Html.DisplayNameFor(a => a.Medications.First().Strength)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var Medication in Model.Medications)
-                    {
-                        <tr class="align-middle">
-                            <td>@Medication.MedName</td>
-                            <td>@Medication.Strength</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-info mt-3">
-            <i class="fas fa-info-circle"></i> No medications found containing this active substance.
-        </div>
-    }
-</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+}

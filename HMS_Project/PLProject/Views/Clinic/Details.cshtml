@@ -1,11 +1,21 @@
 ﻿@model ClinicViewModel
 @{
-    ViewData["Title"] = "View Clinic";
+	ViewData["Title"] = "View Clinic";
 }
-<h1>Clinic Details</h1>
-<br />
-<br />
+<div class="container mt-5">
+	<h1 class="mb-4">Clinic Details</h1>
 
-<partial name="PartialViews/DetailsDeleteClinicPartial" />
+	<partial name="PartialViews/DetailsDeleteClinicPartial" />
 
-<partial name="_ButtonsInDetailsPartial" model="Model.Id" />
+
+	<!-- Action Buttons -->
+	<div class="d-flex justify-content-end mt-4">
+		<partial name="_ButtonsInDetailsPartial" model="Model.Id" />
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -14,7 +14,6 @@ namespace PLProject.ViewModels
         public int ActSubId { get; set; }
         [Required]
         public string Interaction { get; set; } = null!;
-        [Required]
-        public string OtherSubstanceName { get; set; } = null!; 
+        public string? OtherSubstanceName { get; set; } = null!; 
     }
 }
