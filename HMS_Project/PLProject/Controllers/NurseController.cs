@@ -3,6 +3,7 @@ using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Numerics;
 
 namespace PLProject.Controllers
 {
@@ -62,11 +63,11 @@ namespace PLProject.Controllers
         [Route("Nurse/Edit/{userId}")]
         public IActionResult Edit(NurseViewModel NurseViewModel)
         {
-            var Nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.UserId);
+            var nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.UserId);
 
             if (ModelState.IsValid) // server side validation
             {
-                unitOfWork.Repository<Nurse>().Update((Nurse)NurseViewModel);
+                nurse.UpdateInfo(NurseViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }

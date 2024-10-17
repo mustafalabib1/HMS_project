@@ -71,7 +71,7 @@ namespace PLProject.Controllers
             var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.UserId);
             if (ModelState.IsValid) // server side validation
             {
-                unitOfWork.Repository<Receptionist>().Update((Receptionist)receptionistViewModel);
+                receptionist.UpdateInfo(receptionistViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }

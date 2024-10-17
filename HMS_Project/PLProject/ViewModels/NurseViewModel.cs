@@ -48,8 +48,7 @@ namespace PLProject.ViewModels
         public static explicit operator Nurse(NurseViewModel nurseViewModel)
         {
             var nurse = new Nurse();
-            nurse.UserId = nurseViewModel.UserId;
-            nurse.Id = nurseViewModel.Id;
+
             nurse.AppUser.SSN = nurseViewModel.SSN;
             nurse.AppUser.Email = nurseViewModel.Email;
             nurse.AppUser.Address = nurseViewModel.Address;

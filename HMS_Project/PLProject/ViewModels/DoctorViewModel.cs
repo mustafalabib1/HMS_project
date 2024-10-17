@@ -47,6 +47,7 @@ public class DoctorViewModel : UserViewModel
     public static explicit operator Doctor(DoctorViewModel doctorViewModel)
     {
         var doctor = new Doctor();
+
         doctor.AppUser.SSN = doctorViewModel.SSN;
         doctor.AppUser.Email = doctorViewModel.Email;
         doctor.AppUser.Address = doctorViewModel.Address;

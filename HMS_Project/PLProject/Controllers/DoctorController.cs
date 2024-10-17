@@ -98,7 +98,6 @@ namespace PLProject.Controllers
 		{
 			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.UserId);
 			
-			ModelState.Remove<DoctorViewModel>(d => d.schedule);
             if (ModelState.IsValid)
 			{
                 doctor.UpdatedDoctor(doctorViewModel);

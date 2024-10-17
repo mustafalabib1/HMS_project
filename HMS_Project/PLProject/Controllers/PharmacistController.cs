@@ -65,7 +65,7 @@ namespace PLProject.Controllers
             var pharmacist = unitOfWork.Repository<Pharmacist>().Get(pharmacistViewModel.UserId);
             if (ModelState.IsValid) // server side validation
             {
-                unitOfWork.Repository<Pharmacist>().Update((Pharmacist)pharmacistViewModel);
+                pharmacist.UpdateInfo(pharmacistViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
