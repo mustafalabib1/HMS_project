@@ -9,6 +9,7 @@ using PLProject.ViewModels.AppointmentViewModel;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using BLLProject.Specification;
+using Microsoft.AspNetCore.Identity;
 
 namespace PLProject.Controllers
 {
@@ -16,27 +17,29 @@ namespace PLProject.Controllers
 	public class AppointmentPatientController : Controller
 	{
 		private readonly IUnitOfWork unitOfWork;
+		private readonly UserManager<AppUser> _userManager;
 
-		public AppointmentPatientController(IUnitOfWork unitOfWork)
+		public AppointmentPatientController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
 		{
 			this.unitOfWork = unitOfWork;
-		}
+            _userManager = userManager;
+        }
 
 		#region Get all Appointment for patient 
-		public IActionResult Index(int? page, int PatientId = 1)
+		public IActionResult Index(int? page)
 		{
+			var _user = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
+			string _patientUserId = _user.Id;
 
-			//var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientId == PatientId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
-			//var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
-			//// Pagination logic
-			//int pageSize = 10;
-			//int pageNumber = page ?? 1;
+            var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientUserId == _patientUserId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
+			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
+			// Pagination logic
+			int pageSize = 10;
+			int pageNumber = page ?? 1;
 
-			//var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
+			var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
 
-			//return View(paginatedList);
-			return View();
-
+			return View(paginatedList);
 		}
 		#endregion
 
@@ -115,8 +118,10 @@ namespace PLProject.Controllers
 		[HttpPost]
 		public IActionResult ConfirmAppointment(ApointmentCreateVM model)
 		{
-			model.PatientUserId = "";
-			if (ModelState.IsValid)
+            var _user = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
+
+            model.PatientUserId = _user.Id;
+            if (ModelState.IsValid)
 			{
 				unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
 				unitOfWork.Complete();
@@ -137,6 +142,7 @@ namespace PLProject.Controllers
 			if (!Id.HasValue)
 				return BadRequest(); // 400
 			var spec = new BaseSpecification<Apointment>(a => a.Id == Id);
+
 			spec.Includes.Add(a => a.Patient);
 			spec.Includes.Add(a => a.Doctor);
 			spec.Includes.Add(a => a.Clinic);

@@ -13,7 +13,7 @@ namespace DALProject.model
 		public virtual AppUser AppUser { get; set; }
 
 		#region One2Many With DoctorSpecializationLookup
-		public int SpecializationId { get; set; }
+		public int? SpecializationId { get; set; }
         public virtual DoctorSpecializationLookup DoctorSpecialization { get; set; }=null!;
         #endregion
 

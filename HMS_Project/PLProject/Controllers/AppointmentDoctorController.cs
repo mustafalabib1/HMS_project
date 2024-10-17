@@ -13,8 +13,6 @@ using X.PagedList;
 namespace PLProject.Controllers
 {
 	[Authorize(Roles = Roles.Doctor)]
-	[Authorize(Roles = Roles.Admin)]
-
 	public class AppointmentDoctorController : Controller
 	{
 		#region Dpi
@@ -34,22 +32,21 @@ namespace PLProject.Controllers
 		#region Get all Appointment for Doctor 
 		public async Task<IActionResult> IndexAsync(int? page )
 		{
-			//         // Get the current doctor ID
-			//         var user = await userManager.GetUserAsync(User);
+			// Get the current doctor ID
+			var user = await userManager.GetUserAsync(User);
 
-			//         int DoctorId = 2;//user?.Id; 
-			//         var appointments = unitOfWork.Repository<Apointment>().Find(a => a.DoctorId == DoctorId/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/)
-			//	.Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
+			string _DoctorUserId = user.Id;//user?.Id; 
+			var appointments = unitOfWork.Repository<Apointment>().Find(a => a.DoctorUserId == _DoctorUserId)
+			.Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
 
-			//var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
-			//// Pagination logic
-			//int pageSize = 10;
-			//int pageNumber = page ?? 1;
+			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
+			// Pagination logic
+			int pageSize = 10;
+			int pageNumber = page ?? 1;
 
-			//var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
+			var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
 
-			//return View(paginatedList);
-			return View();
+			return View(paginatedList);
 		}
 
 		#endregion
@@ -57,22 +54,21 @@ namespace PLProject.Controllers
 		#region Details
 		public IActionResult Details(int? Id, string viewname = "Details")
 		{
-			//if (!Id.HasValue)
-			//	return BadRequest(); // 400
-			//var spec= new BaseSpecification<Apointment>(a=>a.Id==Id);
-			//spec.Includes.Add(a=>a.Patient);
-			//spec.Includes.Add(a=>a.Doctor);
-			//spec.Includes.Add(a=>a.Clinic);
-			//spec.Includes.Add(a => a.Prescription);
-			//var apointment = unitOfWork.Repository<Apointment>().GetEntityWithSpec(spec);
-			//var apointmentVM= apointment.ConvertApointmentToAppointmentGenarelVM();
+			if (!Id.HasValue)
+				return BadRequest(); // 400
 
-			//if (apointmentVM is null)
-			//	return NotFound(); // 404
+			var spec = new BaseSpecification<Apointment>(a => a.Id == Id);
+			spec.Includes.Add(a => a.Patient);
+			spec.Includes.Add(a => a.Doctor);
+			spec.Includes.Add(a => a.Clinic);
+			spec.Includes.Add(a => a.Prescription);
+			var apointment = unitOfWork.Repository<Apointment>().GetEntityWithSpec(spec);
+			var apointmentVM = apointment.ConvertApointmentToAppointmentGenarelVM();
 
-			//return View(viewname, apointmentVM);
-			return View();
+			if (apointmentVM is null)
+				return NotFound(); // 404
 
+			return View(viewname, apointmentVM);
 		}
 		#endregion
 
@@ -94,7 +90,6 @@ namespace PLProject.Controllers
 
 			try
 			{
-
                 // get the appointment from Repository 
                 var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
 				apointment.ConvertAppointmentGenarelVMToApointment(ViewModel);
