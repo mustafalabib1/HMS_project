@@ -63,7 +63,7 @@ namespace DALProject.Data.Configurations
             builder
                 .HasOne(a=>a.Invoice)
                 .WithOne(i=>i.Apointment)
-                .HasForeignKey<Invoice>(i=>i.Id)
+                .HasForeignKey<Invoice>(i=>i.ApointmentId)
 				.OnDelete(DeleteBehavior.Restrict);
             #endregion
         }
