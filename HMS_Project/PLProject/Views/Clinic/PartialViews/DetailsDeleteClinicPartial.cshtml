@@ -45,7 +45,7 @@
 				@foreach (var doctor in Model.Doctors)
 				{
 					<li class="list-group-item">
-						<strong>@doctor.FullName</strong> - @(doctor.Clinic?.Name ?? "No Clinic Assigned")
+						<strong>@doctor.AppUser.FullName</strong> - @(doctor.Clinic?.Name ?? "No Clinic Assigned")
 					</li>
 				}
 			</ul>
@@ -69,7 +69,7 @@
 				@foreach (var nurse in Model.Nurses)
 				{
 					<li class="list-group-item">
-						<strong>@nurse.FullName</strong> - @(nurse.Clinic?.Name ?? "No Clinic Assigned")
+						<strong>@nurse.AppUser.FullName</strong> - @(nurse.Clinic?.Name ?? "No Clinic Assigned")
 					</li>
 				}
 			</ul>

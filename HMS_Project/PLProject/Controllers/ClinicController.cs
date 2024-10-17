@@ -35,15 +35,15 @@ namespace PLProject.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult AddSpecialization(DoctorSpecializationLookup doctorSpecialization)
+		public IActionResult AddSpecialization(ClinicSpecializationLookup ClinicSpecialization)
 		{
 			if (ModelState.IsValid) // server side validation
 			{
-				unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecialization);
+				unitOfWork.Repository<ClinicSpecializationLookup>().Add(ClinicSpecialization);
 				unitOfWork.Complete();
 				return RedirectToAction(nameof(Index));
 			}
-			return View(doctorSpecialization);
+			return View(ClinicSpecialization);
 		}
 		#endregion
 
@@ -198,7 +198,68 @@ namespace PLProject.Controllers
 				return View(clinic);
 			}
 		}
-		#endregion
+        #endregion
 
-	}
+        [HttpPost]
+        public IActionResult RemoveDoctor(int doctorId, int clinicId)
+        {
+            try
+            {
+                // Find the schedule entry based on DoctorId and DayId
+                var doctor = unitOfWork.Repository<Doctor>().Find(d=>d.Id==doctorId).FirstOrDefault();
+				var clinic = unitOfWork.Repository<Clinic>().Get(clinicId);
+
+                if (doctor == null)
+                {
+                    return Json(new { success = false, message = "Doctor not found." });
+                }
+
+                // Delete the doctor from clinic 
+				clinic.Doctors.Remove(doctor);
+                unitOfWork.Repository<Clinic>().Update(clinic);
+                unitOfWork.Complete();
+
+                // Return success response
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Return error response
+                return Json(new { success = false, message = "Error occurred: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult RemoveNurse(int nurseId, int clinicId)
+        {
+            try
+            {
+                // Find the clinic and nurse 
+                var nurse = unitOfWork.Repository<Nurse>().Get(nurseId);
+                var clinic = unitOfWork.Repository<Clinic>().Get(clinicId);
+
+
+                if (nurse == null)
+                {
+                    return Json(new { success = false, message = "Nurse not found." });
+                }
+
+				// Delete the nurse from clinic 
+				clinic.Nurses.Remove(nurse);
+                unitOfWork.Repository<Clinic>().Update(clinic);
+                unitOfWork.Complete();
+
+
+                // Return success response
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Return error response
+                return Json(new { success = false, message = "Error occurred: " + ex.Message });
+            }
+        }
+
+
+    }
 }

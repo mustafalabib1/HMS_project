@@ -25,7 +25,7 @@ namespace DALProject.Data.Configurations
             builder
                 .HasOne(ds => ds.Doctor)
                 .WithMany(d => d.DoctorScheduleLookups)
-                .HasForeignKey(ds => ds.DoctorId);
+                .HasForeignKey(ds => ds.DoctorUserId);
             #endregion
         }
     }

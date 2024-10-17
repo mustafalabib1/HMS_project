@@ -2,6 +2,8 @@
 @inject IUnitOfWork unitOfWork
 @{
     var ActiveSubstancesDateReader = unitOfWork.Repository<ActiveSubstance>().GetALL().ToList();
+    var MedicationsDateReader = unitOfWork.Repository<Medication>().GetALL().ToList();
+
     ViewData["Title"] = "Create New Active Substance";
 }
 <div class="container mt-5">
@@ -20,7 +22,7 @@
         <div class="form-group mt-4">
             <label class="fw-bold">Active Substance Interactions (optional):</label>
             <div id="interactions-list" class="row gy-3">
-                @for (int i = 0; i < Model.Interactions.Count; i++)
+                @for (int i = 0; i < Model?.Interactions?.Count; i++)
                 {
                     <div class="interaction-item col-md-12 row align-items-end mb-3">
                         <div class="col-md-6">
@@ -54,7 +56,7 @@
         <div class="form-group mt-4">
             <label class="fw-bold">Add new Medications (optional):</label>
             <select asp-for="MedicationId" class="form-control select2-multiple form-control-lg" multiple="multiple" data-placeholder="Select medications">
-                @foreach (var medication in Model.MedicationsDateReader)
+                @foreach (var medication in MedicationsDateReader)
                 {
                     <option value="@medication.Id">@medication.MedName</option>
                 }

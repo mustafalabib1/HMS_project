@@ -5,9 +5,8 @@
         .Cast<DayOfWeek>()
         .Select(day => new SelectListItem { Value = day.ToString(), Text = day.ToString() })
         .ToList();
-}<div class="container mt-5">
-
-
+}
+<div class="container mt-5">
 <h1>Edit Doctor</h1>
 <br />
 <br />
@@ -17,11 +16,11 @@
 
     <div class="form-group mt-2">
         <label asp-for="specialization" class="mb-3"></label>
-        <select asp-for="specialization" class="form-control" required>
+        <select asp-for="specializationId" class="form-control" required>
             <option value="">Select Specialization</option>
             @foreach (var specialization in Model.SpecializationsDateReader)
             {
-                <option value="@specialization.Specialization">@specialization.Specialization</option>
+                <option value="@specialization.Id">@specialization.Specialization</option>
             }
         </select>
         <span asp-validation-for="specialization" class="text-danger"></span>
@@ -89,7 +88,6 @@
 
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
-</div>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -205,7 +203,6 @@
 
             updateDayOptions(); // Initial update to disable pre-selected days
         });
-
         $(document).ready(function () {
             // Handle delete button click event
             $(document).on('click', '.removeDayButton', function (e) {
@@ -238,3 +235,4 @@
 
     @Html.Partial("_ValidationScriptsPartial")
 }
+</div>

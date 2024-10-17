@@ -42,7 +42,7 @@ namespace DALProject.Data.Configurations
             builder
                    .HasOne(i => i.Receptionist)
                    .WithMany(i => i.invoices)
-                   .HasForeignKey(i => i.ReceptionistId); 
+                   .HasForeignKey(i => i.ReceptionistUserId); 
             #endregion
         }
     }

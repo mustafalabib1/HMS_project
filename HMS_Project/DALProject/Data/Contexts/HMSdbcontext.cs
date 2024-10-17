@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 namespace DALProject.Data.Contexts
 {
-    public partial class HMSdbcontext : IdentityDbContext<IdentityUser>
+    public partial class HMSdbcontext : IdentityDbContext<AppUser>
     {
         public HMSdbcontext(DbContextOptions<HMSdbcontext> options) : base(options)
         {
@@ -24,12 +24,6 @@ namespace DALProject.Data.Contexts
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Prescription>()
-                .HasOne(p => p.Pharmacist)
-                .WithMany(p => p.Prescriptions)
-                .OnDelete(DeleteBehavior.NoAction);
          }
 		partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 

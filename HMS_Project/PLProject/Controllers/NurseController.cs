@@ -3,6 +3,7 @@ using DALProject.model;
 using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Numerics;
 
 namespace PLProject.Controllers
 {
@@ -24,49 +25,32 @@ namespace PLProject.Controllers
             return View(NurseViewModels);
         }
 
-
-        #region Create
-        public IActionResult Create()
-        {
-            return View(new NurseViewModel());
-        }
-
-        [HttpPost]
-        public IActionResult Create(NurseViewModel NurseViewModel)
-        {
-            if (ModelState.IsValid) // server side validation
-            {
-                unitOfWork.Repository<Nurse>().Add((Nurse)NurseViewModel);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(NurseViewModel);
-        }
-        #endregion
-
         #region Details
-        public IActionResult Details(int? Id)
+        [Route("Nurse/Details/{userId}")]
+        public IActionResult Details(string userId)
         {
-            if (!Id.HasValue)
+            if (userId is null)
                 return BadRequest(); // 400
 
-            var Nurse = unitOfWork.Repository<Nurse>().Get(Id.Value);
-            var NurseViewModel = (NurseViewModel)Nurse;
+            var Nurse = unitOfWork.Repository<Nurse>().Get(userId);
 
             if (Nurse is null)
                 return NotFound(); // 404
+
+            var NurseViewModel = (NurseViewModel)Nurse;
 
             return View(NurseViewModel);
         }
         #endregion
 
         #region Edit
-        public IActionResult Edit(int? Id)
+        [Route("Nurse/Edit/{userId}")]
+        public IActionResult Edit(string userId)
         {
-            if (!Id.HasValue)
+            if (userId is null)
                 return BadRequest(); // 400
 
-            var Nurse = unitOfWork.Repository<Nurse>().Get(Id.Value);
+            var Nurse = unitOfWork.Repository<Nurse>().Get(userId);
 
             if (Nurse is null)
                 return NotFound(); // 404
@@ -76,50 +60,18 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
+        [Route("Nurse/Edit/{userId}")]
         public IActionResult Edit(NurseViewModel NurseViewModel)
         {
-            var Nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.Id);
-            NurseViewModel.UserPassword = Nurse.UserPassword;
+            var nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.UserId);
+
             if (ModelState.IsValid) // server side validation
             {
-                unitOfWork.Repository<Nurse>().Update((Nurse)NurseViewModel);
+                nurse.UpdateInfo(NurseViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
             return View(NurseViewModel);
-        }
-        #endregion
-
-        #region Delete
-        public IActionResult Delete(int? Id)
-        {
-            if (!Id.HasValue)
-                return BadRequest(); // 400
-
-            var Nurse = unitOfWork.Repository<Nurse>().Get(Id.Value);
-            var NurseViewModel = (NurseViewModel)Nurse;
-
-            if (Nurse is null)
-                return NotFound(); // 404
-
-            return View(NurseViewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Delete(NurseViewModel NurseViewModel)
-        {
-            var Nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.Id);
-            try
-            {
-                unitOfWork.Repository<Nurse>().Delete(Nurse);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View(NurseViewModel);
-            }
         }
         #endregion
     }

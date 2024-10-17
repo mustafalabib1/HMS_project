@@ -60,7 +60,7 @@
                         <option value="">Select Doctor</option>
                         @foreach (var doctor in HMSDoctors)
                         {
-                            <option value="@doctor.Id">@doctor.FullName @("Has clinic :"+doctor?.Clinic?.Name ?? "No Clinic")</option>
+                            <option value="@doctor.Id">@doctor.AppUser.FullName @("Has clinic :"+doctor?.Clinic?.Name ?? "No Clinic")</option>
                         }
                     </select>
                     <small class="text-muted">You can assign multiple doctors to the clinic.</small>
@@ -74,7 +74,7 @@
                         <option value="">Select Nurse</option>
                         @foreach (var Nure in HMSNures)
                         {
-							<option value="@Nure.Id">@Nure.FullName @("Has clinic :"+Nure?.Clinic?.Name ?? "No Clinic")</option>
+							<option value="@Nure.Id">@Nure.AppUser.FullName @("Has clinic :"+Nure?.Clinic?.Name ?? "No Clinic")</option>
                         }
                     </select>
                     <small class="text-muted">You can assign multiple nurses to the clinic.</small>

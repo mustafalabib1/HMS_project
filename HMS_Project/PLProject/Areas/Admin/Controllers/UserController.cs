@@ -8,6 +8,8 @@ using Microsoft.Identity.Client;
 using X.PagedList;
 using PLProject.Areas.Admin.ViewModels;
 using System.Data;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using DALProject.Data.Contexts;
 
 namespace PLProject.Areas.Admin.Controllers
 {
@@ -17,11 +19,22 @@ namespace PLProject.Areas.Admin.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly HMSdbcontext _dbContext;
 
-        public UserController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
+
+        public UserController(RoleManager<IdentityRole> roleManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            IUnitOfWork unitOfWork,
+            HMSdbcontext dbContext)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
+            _dbContext = dbContext;
         }
 
         #region Roles Views
@@ -125,11 +138,19 @@ namespace PLProject.Areas.Admin.Controllers
 
             await _userManager.AddToRolesAsync(user, model.Roles.Where(role => role.IsSelected).Select(role => role.RoleName));
 
-            return RedirectToAction(nameof(Index));
+            foreach (var role in model.Roles)
+            {
+                if (role.IsSelected)
+                {
+                    await AddToTable(role.RoleName, user.Id);
+                }
+            }
+
+                return RedirectToAction(nameof(Index));
         }
 
         #endregion
-            
+
         #region Edit User
 
         public async Task<IActionResult> Edit(string userId)
@@ -155,7 +176,7 @@ namespace PLProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProfileFormViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(model);
 
             var user = await _userManager.FindByIdAsync(model.Id);
@@ -226,18 +247,122 @@ namespace PLProject.Areas.Admin.Controllers
                 return NotFound();
 
             var userRoles = await _userManager.GetRolesAsync(user);
+            List<string> rolesRemoved = new List<string>();
+            List<string> rolesAdded = new List<string>();
 
+            // Iterate through the roles in model.Roles
             foreach (var role in model.Roles)
             {
-                if (userRoles.Any(r => r == role.RoleName) && !role.IsSelected)
-                    await _userManager.RemoveFromRoleAsync(user, role.RoleName);
-
-                if (!userRoles.Any(r => r == role.RoleName) && role.IsSelected)
+                // If the role is selected but not already in userRoles, add it
+                if (role.IsSelected && !userRoles.Contains(role.RoleName))
+                {
                     await _userManager.AddToRoleAsync(user, role.RoleName);
+                    rolesAdded.Add(role.RoleName);
+                }
+
+                // If the role is not selected but is in userRoles, remove it
+                else if (!role.IsSelected && userRoles.Contains(role.RoleName))
+                {
+                    await _userManager.RemoveFromRoleAsync(user, role.RoleName);
+                    rolesRemoved.Add(role.RoleName);
+                }
+            }
+
+            // Perform table updates only after all roles are processed
+            if (rolesRemoved.Any() || rolesAdded.Any())
+            {
+                foreach (var role in rolesRemoved)
+                {
+                    RemoveFromTable(role, user.Id);
+                }
+
+                foreach (var role in rolesAdded)
+                {
+                    await AddToTable(role, user.Id);
+                }
+
+                // If the current user is modifying their own roles, reset their session
+                var currentUser = await _userManager.GetUserAsync(User);
+                if (currentUser != null && currentUser == user)
+                {
+                    await _signInManager.SignOutAsync();
+                    await _signInManager.SignInAsync(currentUser, isPersistent: false);
+                }
             }
 
             return RedirectToAction(nameof(Index));
+
         }
         #endregion
+
+        private async Task AddToTable(string tableName, string UserId)
+        {
+            if (string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(tableName))
+            {
+                return;
+            }
+            var _user = await _userManager.FindByIdAsync(UserId);
+
+            switch (tableName)
+            {
+                case "Doctor":
+                    var DoctorSpecializationId = _unitOfWork.Repository<DoctorSpecializationLookup>().Find(d => d.Specialization == "General Practitioner").FirstOrDefault();
+
+                    _user.Doctor = new Doctor { UserId = UserId ,DoctorSpecialization= DoctorSpecializationId ?? new DoctorSpecializationLookup{ Specialization = "General Practitioner" } };
+                    break;
+                case "Receptionist":
+                    _user.Receptionist = new Receptionist { UserId = UserId };
+                    break;
+                case "Patient":
+                    _user.Patient = new Patient { UserId = UserId };
+                    break;
+                case "Nurse":
+                    _user.Nurse = new Nurse { UserId = UserId };
+                    break;
+                case "Pharmacist":
+                    _user.Pharmacist = new Pharmacist { UserId = UserId };
+                    break;
+            }
+
+            await _userManager.UpdateAsync(_user);
+        }
+
+        private void RemoveFromTable(string tableName, string UserId)
+        {
+            if (string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(tableName))
+            {
+                return;
+            }
+
+            switch (tableName)
+            {
+                case "Doctor":
+                    var doctor = _unitOfWork.Repository<Doctor>().Get(UserId);
+                    _unitOfWork.Repository<Doctor>().Delete(doctor);
+                    _unitOfWork.Complete();
+                    break;
+                case "Receptionist":
+                    var receptionist = _unitOfWork.Repository<Receptionist>().Get(UserId);
+                    _unitOfWork.Repository<Receptionist>().Delete(receptionist);
+                    _unitOfWork.Complete();
+                    break;
+                case "Patient":
+                    var patient = _unitOfWork.Repository<Patient>().Get(UserId);
+                    _unitOfWork.Repository<Patient>().Delete(patient);
+                    _unitOfWork.Complete();
+                    break;
+                case "Nurse":
+                    var nurse = _unitOfWork.Repository<Nurse>().Get(UserId);
+                    _unitOfWork.Repository<Nurse>().Delete(nurse);
+                    _unitOfWork.Complete();
+                    break;
+                case "Pharmacist":
+                    var pharmacist = _unitOfWork.Repository<Pharmacist>().Get(UserId);
+                    _unitOfWork.Repository<Pharmacist>().Delete(pharmacist);
+                    _unitOfWork.Complete();
+                    break;
+            }
+        }
     }
 }
+

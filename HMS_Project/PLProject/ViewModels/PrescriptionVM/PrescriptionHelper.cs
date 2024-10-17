@@ -17,7 +17,7 @@ namespace PLProject.ViewModels.PrescriptionVM
         {
             var PrescriptionVM = new PrescriptionViewModel();
             PrescriptionVM.PrescriptionItems = prescription.PrescriptionItems.Select(i => i.ConvertPrescriptionItemToPrescriptionItemDoctorVM()).ToList();
-            PrescriptionVM.DoctorId = prescription.DoctorId;
+            PrescriptionVM.DoctorUserId = prescription.DoctorUserId;
             PrescriptionVM.Patient = prescription.Apointment?.Patient;
             PrescriptionVM.prescriptionId = prescription.Id;
             return PrescriptionVM;

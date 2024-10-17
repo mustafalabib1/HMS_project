@@ -19,8 +19,9 @@ namespace PLProject.ViewModels
         }
         public PatientViewModel(Patient patient)
         {
-            SSN = patient.SSN;
-            string[] name = patient.FullName.Split();
+            UserId = patient.UserId;
+            SSN = patient.AppUser.SSN;
+            string[] name = patient.AppUser.FullName.Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];
@@ -32,12 +33,11 @@ namespace PLProject.ViewModels
                 FirstName = name[0];
                 LastName = name[1];
             }
-            DateOfBirth = patient.DateOfBirth;
-            Phone = patient.Phone;
-            Email = patient.Email;
-            UserPassword = patient.UserPassword;
-            Address = patient.Address;
-            Gender = patient.Gender;
+            DateOfBirth = patient.AppUser.DateOfBirth;
+            Phone = patient.AppUser.PhoneNumber;
+            Email = patient.AppUser.Email;
+            Address = patient.AppUser.Address;
+            Gender = patient.AppUser.Gender;
             Id= patient.Id;
         }
 
@@ -45,14 +45,13 @@ namespace PLProject.ViewModels
         {
             return new Patient()
             {
-                SSN = PatViewModel.SSN,
-                Email = PatViewModel.Email,
-                UserPassword = PatViewModel.UserPassword,
-                Address = PatViewModel.Address,
-                Gender = PatViewModel.Gender,
-                Phone = PatViewModel.Phone,
-                FullName = $"{PatViewModel.FirstName.Trim()} {PatViewModel.MiddleName.Trim()} {PatViewModel.LastName.Trim()}",
-                DateOfBirth = PatViewModel.DateOfBirth
+                //SSN = PatViewModel.SSN,
+                //Email = PatViewModel.Email,
+                //Address = PatViewModel.Address,
+                //Gender = PatViewModel.Gender,
+                //PhoneNumber = PatViewModel.Phone,
+                //FullName = $"{PatViewModel.FirstName.Trim()} {PatViewModel.MiddleName.Trim()} {PatViewModel.LastName.Trim()}",
+                //DateOfBirth = PatViewModel.DateOfBirth
             };
         }
         //we shoud make explicit casting patient to PatViewModle but this is not important in this case 

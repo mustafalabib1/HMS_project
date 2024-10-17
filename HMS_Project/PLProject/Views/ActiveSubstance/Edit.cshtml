@@ -1,4 +1,5 @@
-﻿@model ActiveSubstanceViewModel
+﻿@using BLLProject.Specification
+@model ActiveSubstanceViewModel
 @inject IUnitOfWork unitOfWork
 
 @{
@@ -7,6 +8,12 @@
 	// Fetch the Active Substances that can be used in the dropdown, excluding the ones already in interactions
 	var spec = new BaseSpecification<ActiveSubstance>(a => !Model.Interactions.Select(i => i.ActSubId).Contains(a.Id));
 	var ActiveSubstancesDataReader = unitOfWork.Repository<ActiveSubstance>().GetALLWithSpec(spec).ToList();
+	
+	var Medspec = new BaseSpecification<Medication>(a => !Model.Medications.Select(i => i.Id).Contains(a.Id));
+	var MedicationsDateReader = unitOfWork.Repository<Medication>().GetALLWithSpec(Medspec).ToList();
+
+
+
 }
 
 <div class="container mt-5">
@@ -25,7 +32,7 @@
 		<div class="form-group">
 			<label>Add new Medications (optional):</label>
 			<select asp-for="MedicationId" class="form-control select2-multiple">
-				@foreach (var medication in Model.MedicationsDateReader)
+				@foreach (var medication in MedicationsDateReader)
 				{
 					<option value="@medication.Id">@medication.MedName</option>
 				}

@@ -55,9 +55,11 @@ namespace DALProject.DbInitializer
                 _userManager.CreateAsync(new AppUser
                 {
                     UserName = "admin",
+                    FullName = "Admin",
                     Email = "admin@hmsproject.com",
-                    SSN = 123456789
-                }, "Admin#123").GetAwaiter().GetResult();
+                    SSN = 30301061601877,
+					DateOfBirth = new DateOnly(2000, 1, 1),
+				}, "Admin#123").GetAwaiter().GetResult();
 
                 AppUser user = _dbContext.AppUsers.FirstOrDefault(u => u.Email == "admin@hmsproject.com");
                 _userManager.AddToRoleAsync(user, Roles.Admin).GetAwaiter().GetResult();

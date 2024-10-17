@@ -27,7 +27,7 @@ namespace DALProject.Data.Configurations
             builder
                     .HasOne(a => a.Receptionist)
                     .WithMany(a => a.Apointments)
-                    .HasForeignKey(a => a.ReceptionistId)
+                    .HasForeignKey(a => a.ReceptionistUserId)
                     .OnDelete(DeleteBehavior.SetNull);
             #endregion
 
@@ -35,7 +35,7 @@ namespace DALProject.Data.Configurations
             builder
                     .HasOne(a => a.Patient)
                     .WithMany(a => a.Apointments)
-                    .HasForeignKey(a => a.PatientId);
+                    .HasForeignKey(a => a.PatientUserId);
             #endregion
 
             #region One2Many With Clinic 
@@ -49,7 +49,7 @@ namespace DALProject.Data.Configurations
             builder 
                 .HasOne(a=>a.Doctor)
                 .WithMany(d=>d.Apointments)
-                .HasForeignKey(a=>a.DoctorId);
+                .HasForeignKey(a=>a.DoctorUserId);
             #endregion
 
             #region One2One With Prescription

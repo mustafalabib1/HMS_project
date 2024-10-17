@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace DALProject.model
 {
-    public class Doctor : HmsUser
+    public class Doctor : ModelBase
     {
-        #region One2Many With DoctorSpecializationLookup
-        public int SpecializationId { get; set; }
+		// Relation With AppUser
+		public string? UserId { get; set; }
+		public virtual AppUser AppUser { get; set; }
+
+		#region One2Many With DoctorSpecializationLookup
+		public int? SpecializationId { get; set; }
         public virtual DoctorSpecializationLookup DoctorSpecialization { get; set; }=null!;
         #endregion
 

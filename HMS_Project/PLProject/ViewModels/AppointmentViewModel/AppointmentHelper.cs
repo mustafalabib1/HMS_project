@@ -8,9 +8,9 @@ namespace PLProject.ViewModels.AppointmentViewModel
         public static Apointment ConvertApointmentCreateVMToApointment(this Apointment appointment, ApointmentCreateVM appointmentCreateVM)
         {
             DateTime selectedAppointmentDate = DateTime.Parse(appointmentCreateVM.SelectedDate);
-            appointment.PatientId = appointmentCreateVM.PatientId;
+            appointment.PatientUserId = appointmentCreateVM.PatientUserId;
             appointment.ClinicId = appointmentCreateVM.ClinicId;
-            appointment.DoctorId = appointmentCreateVM.SelectedDoctorId;
+            appointment.DoctorUserId = appointmentCreateVM.SelectedDoctorUserId;
             appointment.ApointmentDate = DateOnly.FromDateTime(selectedAppointmentDate);
             appointment.ApointmentTime = TimeOnly.Parse(appointmentCreateVM.SelectedTime.Split('-')[0]);
 
@@ -43,8 +43,8 @@ namespace PLProject.ViewModels.AppointmentViewModel
             appointment.Prescription = new Prescription()
             {
                 PrescriptionItems = PrescriptionVM.PrescriptionItems.Select(pi => pi.PrescriptionItemDoctorVMToPrescriptionItem()).ToList(),
-                DoctorId = appointment.DoctorId
-            };
+                DoctorUserId = appointment.DoctorUserId
+			};
             return appointment;
         }
 

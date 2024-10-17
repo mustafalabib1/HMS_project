@@ -12,15 +12,16 @@ using System.Threading.Tasks;
 
 namespace PLProject.ViewModels
 {
-    public class NurseViewModel:UserViewModel
+    public class NurseViewModel : UserViewModel
     {
         public NurseViewModel()
         {
         }
         public NurseViewModel(Nurse nurse)
         {
+            UserId = nurse.UserId;
             Id = nurse.Id;
-            string[] name = nurse.FullName.Split();
+            string[] name = nurse.AppUser.FullName.Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];
@@ -32,12 +33,11 @@ namespace PLProject.ViewModels
                 FirstName = name[0];
                 LastName = name[1];
             }
-            DateOfBirth = nurse.DateOfBirth;
-            Phone = nurse.Phone;
-            Email = nurse.Email;
-            UserPassword = nurse.UserPassword;
-            Address = nurse.Address;
-            Gender = nurse.Gender;
+            DateOfBirth = nurse.AppUser.DateOfBirth;
+            Phone = nurse.AppUser.PhoneNumber;
+            Email = nurse.AppUser.Email;
+            Address = nurse.AppUser.Address;
+            Gender = nurse.AppUser.Gender;
             ClinicId = nurse.ClinicId;
             Id=nurse.Id;
         }
@@ -47,18 +47,18 @@ namespace PLProject.ViewModels
 
         public static explicit operator Nurse(NurseViewModel nurseViewModel)
         {
-            return new Nurse()
-            {
-                SSN = nurseViewModel.SSN,
-                Email = nurseViewModel.Email,
-                UserPassword = nurseViewModel.UserPassword,
-                Address = nurseViewModel.Address,
-                Gender = nurseViewModel.Gender,
-                Phone = nurseViewModel.Phone,
-                FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}",
-                DateOfBirth = nurseViewModel.DateOfBirth,
-                ClinicId = nurseViewModel.ClinicId,
-            };
+            var nurse = new Nurse();
+
+            nurse.AppUser.SSN = nurseViewModel.SSN;
+            nurse.AppUser.Email = nurseViewModel.Email;
+            nurse.AppUser.Address = nurseViewModel.Address;
+            nurse.AppUser.Gender = nurseViewModel.Gender;
+            nurse.AppUser.PhoneNumber = nurseViewModel.Phone;
+            nurse.AppUser.FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}";
+            nurse.AppUser.DateOfBirth = nurseViewModel.DateOfBirth;
+            nurse.ClinicId = nurseViewModel.ClinicId;
+
+            return nurse;
         }
 
         public static explicit operator NurseViewModel(Nurse nurse)

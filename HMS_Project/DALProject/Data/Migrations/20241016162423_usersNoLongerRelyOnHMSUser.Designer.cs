@@ -4,6 +4,7 @@ using DALProject.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Data.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    partial class HMSdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20241016162423_usersNoLongerRelyOnHMSUser")]
+    partial class usersNoLongerRelyOnHMSUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,7 +308,7 @@ namespace DALProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("SpecializationId")
+                    b.Property<int>("SpecializationId")
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
@@ -811,7 +814,9 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.model.DoctorSpecializationLookup", "DoctorSpecialization")
                         .WithMany("Doctors")
-                        .HasForeignKey("SpecializationId");
+                        .HasForeignKey("SpecializationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DALProject.model.AppUser", "AppUser")
                         .WithOne("Doctor")
@@ -1028,15 +1033,20 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.AppUser", b =>
                 {
-                    b.Navigation("Doctor");
+                    b.Navigation("Doctor")
+                        .IsRequired();
 
-                    b.Navigation("Nurse");
+                    b.Navigation("Nurse")
+                        .IsRequired();
 
-                    b.Navigation("Patient");
+                    b.Navigation("Patient")
+                        .IsRequired();
 
-                    b.Navigation("Pharmacist");
+                    b.Navigation("Pharmacist")
+                        .IsRequired();
 
-                    b.Navigation("Receptionist");
+                    b.Navigation("Receptionist")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DALProject.model.Clinic", b =>

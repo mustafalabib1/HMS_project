@@ -19,7 +19,7 @@ namespace PLProject.ViewModels
             ApointmentDate=Apointment.ApointmentDate;
             ApointmentStatus =Apointment.ApointmentStatus;
             ClinicId=Apointment.ClinicId;
-            DoctorId = Apointment.DoctorId;
+            DoctorUserId = Apointment.DoctorUserId;
         }
         [Required]
         public DateOnly ApointmentDate { get; set; }
@@ -31,7 +31,7 @@ namespace PLProject.ViewModels
         
         public IEnumerable<Doctor> DoctorsDateReader { get;set; }= new HashSet<Doctor>();
         [Required]
-        public int DoctorId { get; set; }
+        public string DoctorUserId{ get; set; }
 
         public static explicit operator Apointment(BookingApointmentViewModel ViewModel)
         {
@@ -40,7 +40,7 @@ namespace PLProject.ViewModels
                 ApointmentDate = ViewModel.ApointmentDate,
                 ApointmentStatus = ViewModel.ApointmentStatus,
                 ClinicId = ViewModel.ClinicId,
-                DoctorId = ViewModel.DoctorId,
+                DoctorUserId = ViewModel.DoctorUserId,
             };
         }
         public static explicit operator BookingApointmentViewModel(Apointment Apointment)

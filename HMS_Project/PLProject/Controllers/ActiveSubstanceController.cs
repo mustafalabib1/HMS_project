@@ -64,14 +64,7 @@ public class ActiveSubstanceController : Controller
 	#region Create
 	public IActionResult Create()
 	{
-
-		var viewModel = new ActiveSubstanceViewModel()
-		{
-			ActiveSubstancesDateReader = (unitOfWork.Repository<ActiveSubstance>().GetALL()),
-			MedicationsDateReader = unitOfWork.Repository<Medication>().GetALL(),
-		};
-		return View(viewModel);
-
+		return View();
 	}
 
 	// POST: Handle form submission
@@ -90,11 +83,6 @@ public class ActiveSubstanceController : Controller
 
 			return RedirectToAction("Success"); // Redirect after successful creation
 		}
-
-		// Reload the lists if the model state is invalid
-		model.ActiveSubstancesDateReader = (unitOfWork.Repository<ActiveSubstance>().GetALL());
-		model.MedicationsDateReader = unitOfWork.Repository<Medication>().GetALL();
-
 		return View(model);
 	}
 
@@ -115,14 +103,6 @@ public class ActiveSubstanceController : Controller
 
 		if (substancevm is null)
 			return NotFound(); // 404
-		if (viewname == "Edit")
-		{
-			//get Activesubstance that are not exist on this substance 
-			substancevm.ActiveSubstancesDateReader = unitOfWork.Repository<ActiveSubstance>().Find(x => !substancevm.Interactions.Select(i => i.ActSubId).Contains(x.Id));
-			//get Medication that are not exist on this substance 
-			substancevm.MedicationsDateReader = unitOfWork.Repository<Medication>().Find(x => !substancevm.Medications.Select(m => m.Id).Contains(x.Id));
-		}
-
 		return View(viewname, substancevm);
 	}
 	#endregion
@@ -183,14 +163,6 @@ public class ActiveSubstanceController : Controller
 		// If the model is invalid, repopulate lists and return the view
 		if (!ModelState.IsValid)
 		{
-			// Get active substances that are not already part of this substance's interactions
-			substance.ActiveSubstancesDateReader = unitOfWork.Repository<ActiveSubstance>().Find(
-				x => !substance.Interactions.Select(i => i.ActSubId).Contains(x.Id));
-
-			// Get medications that are not already part of this substance
-			substance.MedicationsDateReader = unitOfWork.Repository<Medication>().Find(
-				x => !substance.Medications.Select(m => m.Id).Contains(x.Id));
-
 			return View(substance);
 		}
 

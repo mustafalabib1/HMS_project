@@ -25,19 +25,20 @@ namespace PLProject.ViewModels
                 Day = entity.Day,
                 StartTime = entity.StartTime.ToTimeSpan(), // Convert TimeOnly to TimeSpan
                 EndTime = entity.EndTime.ToTimeSpan(),     // Convert TimeOnly to TimeSpan
-                DoctorId = entity.DoctorId,
                 Id= entity.Id,
             };
         }
         public static Doctor UpdatedDoctor(this Doctor doctor,DoctorViewModel doctorViewModel)
         {
-            doctor.Address = doctorViewModel.Address;
-            doctor.SSN = doctorViewModel.SSN;
-            doctor.FullName= $"{doctorViewModel.FirstName.Trim()} {doctorViewModel.MiddleName.Trim()} {doctorViewModel.LastName.Trim()}";
-            doctor.Gender = doctorViewModel.Gender;
-            doctor.Phone = doctorViewModel.Phone;
-            doctor.Email = doctorViewModel.Email;
-            doctor.UserPassword = doctorViewModel.UserPassword;
+
+            doctor.AppUser.Address= doctorViewModel.Address;
+            doctor.AppUser.SSN = doctorViewModel.SSN;
+            doctor.AppUser.FullName= $"{doctorViewModel.FirstName.Trim()} {doctorViewModel.MiddleName.Trim()} {doctorViewModel.LastName.Trim()}";
+            doctor.AppUser.Gender = doctorViewModel.Gender;
+            doctor.AppUser.PhoneNumber = doctorViewModel.Phone;
+            doctor.AppUser.Email = doctorViewModel.Email;
+            doctor.SpecializationId = doctorViewModel.specializationId ?? 0;
+
             foreach (var (day, dayVM) in doctor.DoctorScheduleLookups.Zip(doctorViewModel.schedule, (model, ViewModel) => (model, ViewModel)))
             {
                 day.Day = dayVM.Day;

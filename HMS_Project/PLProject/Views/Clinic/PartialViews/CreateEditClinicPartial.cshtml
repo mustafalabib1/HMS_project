@@ -37,7 +37,7 @@
         <option value="">Select Doctor</option>
         @foreach (var doctor in HMSDoctors)
         {
-            <option value="@doctor.Id">@doctor.FullName   @(doctor.Clinic.Name?? "don't has clinic")</option>
+            <option value="@doctor.Id">@doctor.AppUser.FullName   @(doctor.Clinic.Name ?? "don't has clinic")</option>
         }
     </select>
     <span asp-validation-for="Doctors" class="text-danger"></span>
@@ -49,7 +49,7 @@
         <option value="">Select Nurse</option>
         @foreach (var Nure in HMSNures)
         {
-            <option value="@Nure.Id">@Nure.FullName   @(Nure.Clinic.Name ?? "don't has clinic")</option>
+            <option value="@Nure.Id">@Nure.AppUser.FullName   @(Nure.Clinic.Name ?? "don't has clinic")</option>
         }
     </select>
     <span asp-validation-for="Nurses" class="text-danger"></span>

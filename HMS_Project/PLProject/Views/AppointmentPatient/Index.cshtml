@@ -1,6 +1,6 @@
 ﻿@model IPagedList<AppointmentGenarelVM>
 @{
-	ViewData["Title"] = $"All Appointment For {Model.FirstOrDefault()?.Patient.FullName ?? "Patient Name "}";
+	ViewData["Title"] = $"All Appointment For {Model.FirstOrDefault()?.Patient?.AppUser.FullName ?? "Patient Name "}";
 }
 
 
@@ -39,8 +39,8 @@
 									<td>@appointment.ApointmentTime</td>
 									<td>@appointment.ApointmentStatus</td>
 									<td>@appointment.Clinic.Name</td>
-									<td>@appointment.Doctor.FullName</td>
-									<td>@appointment.Patient.FullName</td>
+									<td>@appointment.Doctor.AppUser.FullName</td>
+									<td>@appointment.Patient.AppUser.FullName</td>
 									<td>
 										<a asp-action="Details" asp-route-Id="@appointment.Id" class="btn btn-warning">
 											<i class="fas fa-eye pe-1"></i>Details

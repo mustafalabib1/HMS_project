@@ -41,11 +41,10 @@ namespace PLProject.ViewModels
 
 		[Required(ErrorMessage = "Active Substance is Required"), Display(Name = "Active Substance Name")]
 		public string ActiveSubstancesName { get; set; } = null!;
-		public IEnumerable<ActiveSubstance>? ActiveSubstancesDateReader { get; set; }
-		public IEnumerable<Medication>? MedicationsDateReader { get; set; }
-		public List<int>? MedicationId { get; set; } = new List<int>();
-		public List<int>? ActivSubstanceId { get; set; } = new List<int>();
-		public List<Medication>? Medications { get; set; } =new List<Medication>();
+
+		public HashSet<int>? MedicationId { get; set; } = new HashSet<int>();
+
+		public List<Medication>? Medications { get; set; } = new List<Medication>();
 		public List<ActiveSubstanceInteractionViewModel>? Interactions { get; set; } = new List<ActiveSubstanceInteractionViewModel>();
 
 		public static explicit operator ActiveSubstance(ActiveSubstanceViewModel viewModel)

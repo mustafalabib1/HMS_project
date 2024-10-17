@@ -10,9 +10,15 @@
     
     <partial name="PartialViews/DetailsDeleteClinicPartial" />
 
-    <!-- Delete and Cancel Buttons -->
-        <div class="d-flex justify-content-end mt-4">
-            <partial name="_ButtonsInDeletePartial" />
+        <!-- Delete and Cancel Buttons -->
+        <div class="mt-5 mb-5">
+            <button type="submit" class="btn btn-danger mt-2">
+                <i class="fas fa-trash"></i> Delete
+            </button>
+
+            <a asp-action="Index" class="btn btn-primary mt-2">
+                <i class="fas fa-arrow-left"></i> Back To List
+            </a>
         </div>
 
 </form>

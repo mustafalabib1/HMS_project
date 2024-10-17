@@ -14,14 +14,12 @@ namespace PLProject.Controllers
 	[Authorize(Roles = Roles.Admin)]
 	public class DoctorController : Controller
 	{
-		#region DPI
 		private readonly IUnitOfWork unitOfWork;
 
 		public DoctorController(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
 		}
-		#endregion
 
 		#region Index (List Doctors)
 		public IActionResult Index()
@@ -43,98 +41,67 @@ namespace PLProject.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var spec = new BaseSpecification<DoctorSpecializationLookup>(ds => ds.Specialization == doctorSpecializationLookup.Specialization);
-				var Specialization = unitOfWork.Repository<DoctorSpecializationLookup>().GetEntityWithSpec(spec);
-
-				if (Specialization is null)
-				{
-					unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecializationLookup);
-					unitOfWork.Complete();
-
-					// Set a success message using TempData
-					TempData["SuccessMessage"] = "Specialization added successfully!";
-					return RedirectToAction(nameof(Index));
-				}
-				else
-				{
-					// Set an error message using TempData
-					TempData["ErrorMessage"] = "This specialization already exists.";
-					return View(doctorSpecializationLookup);
-				}
+				unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecializationLookup);
+				unitOfWork.Complete();
+				return RedirectToAction(nameof(Index));
 			}
-
 			return View(doctorSpecializationLookup);
 		}
 		#endregion
 
-		#region Create
-		public IActionResult Create()
+        #region Details
+        [Route("Doctor/Details/{userId}")]
+        public IActionResult Details(string userId)
 		{
-			var ViewModel = new DoctorViewModel() { SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL() };
-			return View(ViewModel);
-		}
-
-		[HttpPost]
-		public IActionResult Create(DoctorViewModel doctorViewModel)
-		{
-			if (ModelState.IsValid)
-			{
-				unitOfWork.Repository<Doctor>().Add((Doctor)doctorViewModel);
-				unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
-			}
-			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
-			return View(doctorViewModel);
-		}
-		#endregion
-
-		#region Details
-		public IActionResult Details(int? Id)
-		{
-			if (!Id.HasValue)
+			if (userId is null)
 				return BadRequest(); // 400
 
-			var spec = new BaseSpecification<Doctor>(e => e.Id == Id);
+			var spec = new BaseSpecification<Doctor>(e => e.UserId == userId);
 			spec.Includes.Add(e => e.DoctorSpecialization);
 
 			var doctor = unitOfWork.Repository<Doctor>().GetEntityWithSpec(spec);
-			var doctorViewModel = (DoctorViewModel)doctor;
 
 			if (doctor is null)
 				return NotFound(); // 404
+
+			var doctorViewModel = (DoctorViewModel)doctor;
 
 			return View(doctorViewModel);
 		}
-		#endregion
+        #endregion
 
-		#region Edit
-		public IActionResult Edit(int? Id)
+        #region Edit
+        [HttpGet]
+        [Route("Doctor/Edit/{userId}")]
+        public IActionResult Edit(string userId)
 		{
-			if (!Id.HasValue)
-				return BadRequest(); // 400
+			if (userId is null)
+                return BadRequest(); // 400
 
-			var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
+			var doctor = unitOfWork.Repository<Doctor>().Get(userId);
+			unitOfWork.Complete();
 
 			if (doctor is null)
 				return NotFound(); // 404
 
 			var doctorViewModel = (DoctorViewModel)doctor;
+
 			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
-			return View(doctorViewModel);
+            unitOfWork.Complete();
+
+            return View(doctorViewModel);
 		}
 
 		[HttpPost]
-		public IActionResult Edit(DoctorViewModel doctorViewModel)
+        [Route("Doctor/Edit/{userId}")]
+        public IActionResult Edit(DoctorViewModel doctorViewModel)
 		{
-			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
-
-			doctorViewModel.UserPassword = doctor.UserPassword;
-			ModelState.Remove<DoctorViewModel>(d => d.UserPassword);
-			if (ModelState.IsValid)
+			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.UserId);
+			
+            if (ModelState.IsValid)
 			{
-				doctor.UpdatedDoctor(doctorViewModel);
-				unitOfWork.Repository<Doctor>().Update(doctor);
-				unitOfWork.Complete();
+                doctor.UpdatedDoctor(doctorViewModel);
+                unitOfWork.Complete();
 				return RedirectToAction(nameof(Index));
 			}
 			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
@@ -142,75 +109,45 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
-		#region Delete
-		public IActionResult Delete(int? Id)
-		{
-			if (!Id.HasValue)
-				return BadRequest(); // 400
-
-			var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
-			var doctorViewModel = (DoctorViewModel)doctor;
-
-			if (doctor is null)
-				return NotFound(); // 404
-
-			return View(doctorViewModel);
-		}
-		[HttpPost]
-		public IActionResult Delete(DoctorViewModel doctorViewModel)
-		{
-			var doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
-			try
-			{
-				unitOfWork.Repository<Doctor>().Delete(doctor);
-				unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
-			}
-			catch (Exception ex)
-			{
-				ModelState.AddModelError(string.Empty, ex.Message);
-				return View(doctor);
-			}
-		}
-		#endregion
 		#region Create schedule
 		IActionResult CreateSchedule(int DocotorId)
 		{
 			return View();
 		}
 		[HttpPost]
-		IActionResult CreateSchedule(DoctorScheduleLookup Seschedule)
+		IActionResult CreateSchedule (DoctorScheduleLookup Seschedule )
 		{
 			return View();
 		}
-		#endregion
-		#region Delete Schedule day 
-		[HttpPost]
-		public IActionResult DeleteScheduleDay(int ScheduleId)
-		{
-			try
-			{
+        #endregion
+
+        #region Delete Schedule day 
+        [HttpPost]
+        public IActionResult DeleteScheduleDay(int ScheduleId)
+        {
+            try
+            {
 				// Find the schedule entry based on DoctorId and DayId
 				var scheduleDay = unitOfWork.Repository<DoctorScheduleLookup>().Get(ScheduleId);
 
-				if (scheduleDay == null)
-				{
-					return Json(new { success = false, message = "Schedule day not found." });
-				}
+                if (scheduleDay == null)
+                {
+                    return Json(new { success = false, message = "Schedule day not found." });
+                }
 
-				// Delete the schedule day
-				unitOfWork.Repository<DoctorScheduleLookup>().Delete(scheduleDay);
-				unitOfWork.Complete();
+                // Delete the schedule day
+                unitOfWork.Repository<DoctorScheduleLookup>().Delete(scheduleDay);
+                unitOfWork.Complete();
 
-				// Return success response
-				return Json(new { success = true });
-			}
-			catch (Exception ex)
-			{
-				// Return error response
-				return Json(new { success = false, message = "Error occurred: " + ex.Message });
-			}
-		}
-		#endregion
-	}
+                // Return success response
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                // Return error response
+                return Json(new { success = false, message = "Error occurred: " + ex.Message });
+            }
+        }
+        #endregion
+    }
 }

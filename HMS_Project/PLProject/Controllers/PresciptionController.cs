@@ -13,7 +13,7 @@ using X.PagedList;
 
 namespace PLProject.Controllers
 {
-	[Authorize(Roles = Roles.Doctor)]
+	[Authorize(Roles = Roles.Pharmacist)]
 	public class PrescriptionController : Controller
 	{
         #region DPI
@@ -38,7 +38,7 @@ namespace PLProject.Controllers
 			if (!string.IsNullOrEmpty(searchQuery))
 			{
 				prescriptions = unitOfWork.Repository<Prescription>().Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
-				&& p.Apointment.Patient.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
+				&& p.Apointment.Patient.AppUser.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
 			}
 			else
 			{
@@ -53,9 +53,11 @@ namespace PLProject.Controllers
 			ViewData["CurrentFilter"] = searchQuery;
 			var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
 			return View(paginatedList);
-		} 
-		#endregion
+			return View();
 
+		}
+		#endregion
+		[Authorize(Roles =Roles.Patient)]
 		#region Details
 		public IActionResult Details(int? Id, string viewname = "Details")
 		{
