@@ -16,17 +16,15 @@
                         </div>
 						<div class="options">
 							<form class="d-flex mt-2">
-								<select class="form-select spec" aria-label="Default select example">
-									<option selected>Specialization</option>
-									@* <option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option> *@
-								</select>
-								<select class="form-select clin" aria-label="Default select example">
+								<select class="form-select clin spec" aria-label="Default select example">
 									<option selected>Clinic</option>
-									@* <option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option> *@
+									<option>a</option>
+									<option>b</option>
+									<option>c</option>
+									<option>d</option>
+									<option>e</option>
+									<option>f</option>
+									<option>g</option>
 								</select>
 								<button type="submit"><i class="fa-solid fa-magnifying-glass me-1"></i>Search</button>
 							</form>
@@ -78,7 +76,7 @@
 							<div class="single-content">
 								<h4>Opening Hours</h4>
 								<ul class="time-sidual">
-									<li class="day">Monday - Fridayp <span>8.00-20.00</span></li>
+									<li class="day">Monday - Friday <span>8.00-20.00</span></li>
 									<li class="day">Saturday <span>9.00-18.30</span></li>
 									<li class="day">Monday - Thusday <span>9.00-15.00</span></li>
 								</ul>
@@ -192,20 +190,47 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.schedule-inner .row {
-		display: flex;
-	}
-
-	.single-schedule {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		height: 100%;
-	}
-
-	.single-schedule .inner {
-		flex: 1; 
-	}
-</style>
+<div class="fun-facts" style="background-image:url('img/fun-bg.jpg')">
+	<div class="overlay">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-12">
+					<div class="single-fun">
+						<i class="fa-solid fa-house-chimney-medical"></i>
+						<div class="content">
+							<span class="counter">20+</span>
+							<p>Clinic</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<div class="single-fun">
+						<i class="fa-solid fa-user-doctor"></i>
+						<div class="content">
+							<span class="counter">100+</span>
+							<p>Specialist Doctors</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<div class="single-fun">
+						<i class="fa-solid fa-face-smile"></i>
+						<div class="content">
+							<span class="counter">500+</span>
+							<p>Happy Patients</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<div class="single-fun">
+						<i class="fa-regular fa-calendar-check"></i>
+						<div class="content">
+							<span class="counter">10+</span>
+							<p>Years of Experience</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

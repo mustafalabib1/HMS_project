@@ -10,7 +10,6 @@
 
     <link rel="stylesheet" href="~/PLProject.styles.css" asp-append-version="true" />
 </head>
-
 <body>
     <header class="header">
         <div class="header-inner">
@@ -104,9 +103,50 @@
         </div>
     </header>
     @RenderBody()
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - PLProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-footer">
+                            <h2>About Us</h2>
+                            <p>We are a dedicated healthcare facility committed to providing high-quality medical care. Our team of professionals works tirelessly to ensure that every patient receives personalized and compassionate care. Your health and well-being are our top priorities.</p>
+                            <ul class="social">
+                                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-footer f-link">
+                            <h2>Quick Links</h2>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <ul>
+                                        <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
+                                        <li><a asp-controller="Doctor" asp-action="Index"><i class="fa fa-caret-right" aria-hidden="true"></i>Doctors</a></li>
+                                        <li><a asp-controller="Nurse" asp-action="Index"><i class="fa fa-caret-right" aria-hidden="true"></i>Nurses</a></li>
+                                        <li><a asp-controller="Pharmacist" asp-action="Index"><i class="fa fa-caret-right" aria-hidden="true"></i>Pharmacists</a></li>
+                                        <li><a asp-controller="Receptionist" asp-action="Index"><i class="fa fa-caret-right" aria-hidden="true"></i>Receptionists</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-footer">
+                            <h2>Open Hours</h2>
+                            <p>We’re available to assist you throughout the week.</p>
+                            <ul class="time-sidual">
+                                <li class="day">Monday - Friday <span>8.00-20.00</span></li>
+                                <li class="day">Saturday <span>9.00-18.30</span></li>
+                                <li class="day">Monday - Thusday <span>9.00-15.00</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

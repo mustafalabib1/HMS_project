@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Invoice>
+﻿@model IEnumerable<InvoiceViewModel>
 @{
     ViewData["Title"] = "Index";
 }
@@ -19,8 +19,8 @@
                 <th>@Html.DisplayNameFor(I => I.TotalAmount)</th>
                 <th>@Html.DisplayNameFor(I => I.PaymentStatus)</th>
                 <th>@Html.DisplayNameFor(I => I.PaymentType)</th>
-                <th>@Html.DisplayNameFor(I => I.ApointmentId)</th>
-                <th>@Html.DisplayNameFor(I => I.ReceptionistId)</th>
+                <th>@Html.DisplayNameFor(I => I.Apointment)</th>
+                <th>@Html.DisplayNameFor(I => I.Receptionist)</th>
                 <th>Details</th>
                 <th>Update</th>
                 <th>Delete</th>
