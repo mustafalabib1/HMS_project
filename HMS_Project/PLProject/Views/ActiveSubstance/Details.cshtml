@@ -2,11 +2,23 @@
 @{
 	ViewData["Title"] = "Details";
 }
-
+<div class="container mt-5">
 <h1 class="mb-4">Active Substance Details</h1>
 
 <div class="container">
 	<partial name="PartialViews/DetailsDeletePartial" model="@Model" />
 
-	<partial name="_ButtonsInDetailsPartial" model="Model.Id"/>
+		<div class="mt-5 mb-5">
+			<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+				<i class="fas fa-edit"></i> Edit
+			</a>
+			<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+				<i class="fas fa-trash"></i> Delete
+			</a>
+			</a>
+			<a asp-action="Index" class="btn btn-secondary ms-2">
+				<i class="fas fa-arrow-left"></i> Back To List
+			</a>
+		</div>
+	</div>
 </div>

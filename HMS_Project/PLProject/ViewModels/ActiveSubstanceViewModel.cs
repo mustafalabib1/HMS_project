@@ -20,7 +20,7 @@ namespace PLProject.ViewModels
 			Id = activeSubstance.Id;
 			ActiveSubstancesName = activeSubstance.ActiveSubstancesName;
 
-			Medications = activeSubstance.Medications.ToHashSet();
+			Medications = activeSubstance.Medications.ToList();
 
 			Interactions = activeSubstance.ActSub1.Select(interaction => new ActiveSubstanceInteractionViewModel
 			{
@@ -35,18 +35,17 @@ namespace PLProject.ViewModels
 				ActSubId = interaction.ActiveSubstanceId1 ?? 0
 
 			}))
-			.ToHashSet();
+			.ToList();
 		}
 		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Active Substance is Required"), Display(Name = "Active Substance Name")]
 		public string ActiveSubstancesName { get; set; } = null!;
-		public IEnumerable<ActiveSubstance>? ActiveSubstancesDateReader { get; set; }
-		public IEnumerable<Medication>? MedicationsDateReader { get; set; }
+
 		public HashSet<int>? MedicationId { get; set; } = new HashSet<int>();
-		public HashSet<int>? ActivSubstanceId { get; set; } = new HashSet<int>();
-		public ICollection<Medication>? Medications { get; set; } =new HashSet<Medication>();
-		public ICollection<ActiveSubstanceInteractionViewModel>? Interactions { get; set; } = new HashSet<ActiveSubstanceInteractionViewModel>();
+
+		public List<Medication>? Medications { get; set; } = new List<Medication>();
+		public List<ActiveSubstanceInteractionViewModel>? Interactions { get; set; } = new List<ActiveSubstanceInteractionViewModel>();
 
 		public static explicit operator ActiveSubstance(ActiveSubstanceViewModel viewModel)
 		{
@@ -55,12 +54,13 @@ namespace PLProject.ViewModels
 				ActiveSubstancesName = viewModel.ActiveSubstancesName,
 				Medications = viewModel.Medications
 			};
-			foreach (var InteractionSubsatance in viewModel.ActivSubstanceId)
+			foreach (var Interaction in viewModel.Interactions)
 			{
 				activeSubstance.ActSub1.Add(new ActiveSubstanceInteraction
 				{
-					ActiveSubstanceId2 = InteractionSubsatance
-                });
+					ActiveSubstanceId2 = Interaction.ActSubId,
+					Interaction = Interaction.Interaction
+				});
 			}
 			return activeSubstance;
 		}

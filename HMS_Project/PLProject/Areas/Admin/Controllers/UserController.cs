@@ -306,7 +306,9 @@ namespace PLProject.Areas.Admin.Controllers
             switch (tableName)
             {
                 case "Doctor":
-                    _user.Doctor = new Doctor { UserId = UserId };
+                    var DoctorSpecializationId = _unitOfWork.Repository<DoctorSpecializationLookup>().Find(d => d.Specialization == "General Practitioner").FirstOrDefault();
+
+                    _user.Doctor = new Doctor { UserId = UserId ,DoctorSpecialization= DoctorSpecializationId ?? new DoctorSpecializationLookup{ Specialization = "General Practitioner" } };
                     break;
                 case "Receptionist":
                     _user.Receptionist = new Receptionist { UserId = UserId };

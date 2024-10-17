@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create Doctor";
 }
-
+<div class="container mt-5">
 <h2>Create Doctor</h2>
 
 <form asp-action="Create" method="post">
@@ -33,3 +33,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 }
+</div>

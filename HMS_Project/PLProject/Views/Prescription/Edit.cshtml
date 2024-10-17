@@ -13,7 +13,7 @@
     <h1 class="text-center mb-4">Edit Prescription</h1>
 
     <script type="text/javascript">
-        var medicationsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.PrescriptionItems.Select(pi => pi.MedicationsDatareader.Select(m => new { m.Id, m.MedName }))));
+        var medicationsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.PrescriptionItems.Select(pi => pi.MedicationsDatareader?.Select(m => new { m.Id, m.MedName }))));
     </script>
 
     <!-- Prescription Form -->
@@ -47,7 +47,7 @@
                             <!-- Medications Section for Each Item -->
                             <div class="medications-container mb-4" data-prescription-index="@i">
                                 <h5 class="text-secondary mb-3">Medications</h5>
-                                @for (int j = 0; j < Model.PrescriptionItems[i].Medications.Count; j++)
+                                @for (int j = 0; j < Model.PrescriptionItems[i].Medications?.Count; j++)
                                 {
                                     <div class="row mb-3 medication-row" data-medication-index="@j">
                                         <div class="col-md-4">
