@@ -9,6 +9,8 @@ using PLProject.ViewModels.AppointmentViewModel;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using BLLProject.Specification;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace PLProject.Controllers
 {
@@ -16,27 +18,36 @@ namespace PLProject.Controllers
 	public class AppointmentPatientController : Controller
 	{
 		private readonly IUnitOfWork unitOfWork;
+		private readonly UserManager<AppUser> userManager;
+		private readonly IWebHostEnvironment env;
+		private string UserId;
 
-		public AppointmentPatientController(IUnitOfWork unitOfWork)
+
+		public AppointmentPatientController(IUnitOfWork unitOfWork, UserManager<AppUser> UserManager, IWebHostEnvironment _env)
 		{
 			this.unitOfWork = unitOfWork;
+			userManager = UserManager;
+			env = _env;
 		}
 
 		#region Get all Appointment for patient 
-		public IActionResult Index(int? page, int PatientId = 1)
+		public async Task<IActionResult> IndexAsync(int? page)
 		{
+			// Get the current doctor ID
+			var user = await userManager.GetUserAsync(User);
 
-			//var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientId == PatientId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
-			//var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
-			//// Pagination logic
-			//int pageSize = 10;
-			//int pageNumber = page ?? 1;
+			UserId = user?.Id ?? string.Empty;
 
-			//var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
+			var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientUserId == UserId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
+			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
+			
+			// Pagination logic
+			int pageSize = 10;
+			int pageNumber = page ?? 1;
 
-			//return View(paginatedList);
-			return View();
+			var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
 
+			return View(paginatedList);
 		}
 		#endregion
 
@@ -113,9 +124,15 @@ namespace PLProject.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult ConfirmAppointment(ApointmentCreateVM model)
+		public async Task<IActionResult> ConfirmAppointmentAsync(ApointmentCreateVM model)
 		{
-			model.PatientUserId = "";
+			// Get the current doctor ID
+			var user = await userManager.GetUserAsync(User);
+
+			UserId = user?.Id ?? string.Empty;
+
+			model.PatientUserId =UserId;
+
 			if (ModelState.IsValid)
 			{
 				unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
@@ -151,8 +168,38 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
-		#region Delete 
+		#region Delete
+		public IActionResult Delete(int? Id)
+		{
+			return Details(Id, "Delete");
+		}
 
+		[HttpPost]
+		public IActionResult Delete([FromRoute] int Id, AppointmentGenarelVM ViewModel)
+		{
+			if (Id != ViewModel.Id)
+				return BadRequest();
+			try
+			{
+				var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
+				apointment.ApointmentStatus = ApointmentStatusEnum.Cancelled;
+
+				unitOfWork.Repository<Apointment>().Update(apointment);
+				unitOfWork.Complete();
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+
+				if (env.IsDevelopment())
+					ModelState.AddModelError(string.Empty, ex.Message);
+				else
+					ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+
+				return View(ViewModel);
+			}
+		}
 		#endregion
 	}
 }

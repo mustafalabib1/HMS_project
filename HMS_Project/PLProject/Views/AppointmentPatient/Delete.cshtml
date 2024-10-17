@@ -1,11 +1,13 @@
-﻿@model AppointmentGenarelVM
+﻿.AppUser@model AppointmentGenarelVM
 @{
-    ViewData["Title"] = "Appointment Details";
+    ViewData["Title"] = "Delete";
 }
+
+
 
 <div class="container mt-5">
     <!-- Header Section -->
-    <h1 class="text-center mb-4">Appointment Details</h1>
+    <h1 class="text-center mb-4">Appointment Delete</h1>
 
     @if (Model != null)
     {
@@ -84,7 +86,10 @@
                 <strong>No Prescription Available</strong>
             </div>
         }
-
+        <form asp-action="Delete">
+            <input aps-for="@Model.Id" hidden />
+            <button type="submit" class="btn btn-danger"> <i class="fas fa-trash pe-1"></i>Delete</button>
+        </form>
         <!-- Back Button -->
         <div class="mt-4">
             <a asp-action="Index" class="btn btn-secondary">
