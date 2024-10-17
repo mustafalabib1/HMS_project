@@ -25,7 +25,6 @@ namespace PLProject.ViewModels
                 Day = entity.Day,
                 StartTime = entity.StartTime.ToTimeSpan(), // Convert TimeOnly to TimeSpan
                 EndTime = entity.EndTime.ToTimeSpan(),     // Convert TimeOnly to TimeSpan
-                DoctorUserId = entity.DoctorUserId,
                 Id= entity.Id,
             };
         }
@@ -38,6 +37,8 @@ namespace PLProject.ViewModels
             doctor.AppUser.Gender = doctorViewModel.Gender;
             doctor.AppUser.PhoneNumber = doctorViewModel.Phone;
             doctor.AppUser.Email = doctorViewModel.Email;
+            doctor.SpecializationId = doctorViewModel.specializationId ?? 0;
+
             foreach (var (day, dayVM) in doctor.DoctorScheduleLookups.Zip(doctorViewModel.schedule, (model, ViewModel) => (model, ViewModel)))
             {
                 day.Day = dayVM.Day;

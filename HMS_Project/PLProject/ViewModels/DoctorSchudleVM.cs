@@ -19,9 +19,6 @@ namespace Project.ViewModels
         [Display(Name = "End Time")]
         public TimeSpan EndTime { get; set; }
 
-        [Required]
-        public string DoctorUserId { get; set; }
-
         public Doctor? doctor { get; set; } 
         
     }

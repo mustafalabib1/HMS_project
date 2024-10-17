@@ -9,8 +9,12 @@ public class DoctorViewModel : UserViewModel
 
     public DoctorViewModel(Doctor doctor)
     {
+        UserId = doctor.AppUser.Id;
+
         Id = doctor.Id;
+
         SSN = doctor.AppUser.SSN;
+
         string[] name = doctor.AppUser.FullName.Split();
         if (name.Length == 3)
         {
@@ -23,12 +27,14 @@ public class DoctorViewModel : UserViewModel
             FirstName = name[0];
             LastName = name[1];
         }
+
         DateOfBirth = doctor.AppUser.DateOfBirth;
         Phone = doctor.AppUser.PhoneNumber;
         Email = doctor.AppUser.Email;
         Address = doctor.AppUser.Address;
         Gender = doctor.AppUser.Gender;
-        specialization = doctor.DoctorSpecialization.Specialization;
+        specialization = doctor.DoctorSpecialization?.Specialization ?? "general";
+        specializationId = doctor.SpecializationId ?? 0;
         schedule = doctor.DoctorScheduleLookups.Select(schedule => schedule.MapToViewModel()).ToList();
     }
 

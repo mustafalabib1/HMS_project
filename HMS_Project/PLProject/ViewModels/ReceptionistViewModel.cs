@@ -15,7 +15,8 @@ namespace PLProject.ViewModels
         }
         public ReceptionistViewModel(Receptionist receptionist)
         {
-             Id = receptionist.Id;
+            UserId = receptionist.UserId;
+            Id = receptionist.Id;
             SSN = receptionist.AppUser.SSN;
             string[] name = receptionist.AppUser.FullName.Split();
             if (name.Length == 3)

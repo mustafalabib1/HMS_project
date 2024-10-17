@@ -19,6 +19,7 @@ namespace PLProject.ViewModels
         }
         public PatientViewModel(Patient patient)
         {
+            UserId = patient.UserId;
             SSN = patient.AppUser.SSN;
             string[] name = patient.AppUser.FullName.Split();
             if (name.Length == 3)

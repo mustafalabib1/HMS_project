@@ -16,11 +16,11 @@
 
     <div class="form-group mt-2">
         <label asp-for="specialization" class="mb-3"></label>
-        <select asp-for="specialization" class="form-control" required>
+        <select asp-for="specializationId" class="form-control" required>
             <option value="">Select Specialization</option>
             @foreach (var specialization in Model.SpecializationsDateReader)
             {
-                <option value="@specialization.Specialization">@specialization.Specialization</option>
+                <option value="@specialization.Id">@specialization.Specialization</option>
             }
         </select>
         <span asp-validation-for="specialization" class="text-danger"></span>

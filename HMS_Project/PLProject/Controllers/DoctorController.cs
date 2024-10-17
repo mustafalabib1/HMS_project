@@ -49,72 +49,60 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
-		#region Create
-		public IActionResult Create()
+        #region Details
+        [Route("Doctor/Details/{userId}")]
+        public IActionResult Details(string userId)
 		{
-			var ViewModel = new DoctorViewModel() { SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL() };
-			return View(ViewModel);
-		}
-
-		[HttpPost]
-		public IActionResult Create(DoctorViewModel doctorViewModel)
-		{
-			if (ModelState.IsValid)
-			{
-				unitOfWork.Repository<Doctor>().Add((Doctor)doctorViewModel);
-				unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
-			}
-			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
-			return View(doctorViewModel);
-		}
-		#endregion
-
-		#region Details
-		public IActionResult Details(int? Id)
-		{
-			if (!Id.HasValue)
+			if (userId is null)
 				return BadRequest(); // 400
 
-			var spec = new BaseSpecification<Doctor>(e => e.Id == Id);
+			var spec = new BaseSpecification<Doctor>(e => e.UserId == userId);
 			spec.Includes.Add(e => e.DoctorSpecialization);
 
 			var doctor = unitOfWork.Repository<Doctor>().GetEntityWithSpec(spec);
-			var doctorViewModel = (DoctorViewModel)doctor;
 
 			if (doctor is null)
 				return NotFound(); // 404
+
+			var doctorViewModel = (DoctorViewModel)doctor;
 
 			return View(doctorViewModel);
 		}
-		#endregion
+        #endregion
 
-		#region Edit
-		public IActionResult Edit(int? Id)
+        #region Edit
+        [HttpGet]
+        [Route("Doctor/Edit/{userId}")]
+        public IActionResult Edit(string userId)
 		{
-			if (!Id.HasValue)
-				return BadRequest(); // 400
+			if (userId is null)
+                return BadRequest(); // 400
 
-			var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
+			var doctor = unitOfWork.Repository<Doctor>().Get(userId);
+			unitOfWork.Complete();
 
 			if (doctor is null)
 				return NotFound(); // 404
 
 			var doctorViewModel = (DoctorViewModel)doctor;
+
 			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
-			return View(doctorViewModel);
+            unitOfWork.Complete();
+
+            return View(doctorViewModel);
 		}
 
 		[HttpPost]
-		public IActionResult Edit(DoctorViewModel doctorViewModel)
+        [Route("Doctor/Edit/{userId}")]
+        public IActionResult Edit(DoctorViewModel doctorViewModel)
 		{
-			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
-
+			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.UserId);
+			
+			ModelState.Remove<DoctorViewModel>(d => d.schedule);
             if (ModelState.IsValid)
 			{
-				doctor.UpdatedDoctor(doctorViewModel);
-				unitOfWork.Repository<Doctor>().Update(doctor);
-				unitOfWork.Complete();
+                doctor.UpdatedDoctor(doctorViewModel);
+                unitOfWork.Complete();
 				return RedirectToAction(nameof(Index));
 			}
 			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
@@ -122,37 +110,6 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
-		#region Delete
-		public IActionResult Delete(int? Id)
-		{
-			if (!Id.HasValue)
-				return BadRequest(); // 400
-
-			var doctor = unitOfWork.Repository<Doctor>().Get(Id.Value);
-			var doctorViewModel = (DoctorViewModel)doctor;
-
-			if (doctor is null)
-				return NotFound(); // 404
-
-			return View(doctorViewModel);
-		}
-		[HttpPost]
-		public IActionResult Delete(DoctorViewModel doctorViewModel)
-		{
-			var doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.Id);
-			try
-			{
-				unitOfWork.Repository<Doctor>().Delete(doctor);
-				unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
-			}
-			catch (Exception ex)
-			{
-				ModelState.AddModelError(string.Empty, ex.Message);
-				return View(doctor);
-			}
-		}
-		#endregion
 		#region Create schedule
 		IActionResult CreateSchedule(int DocotorId)
 		{
@@ -164,6 +121,7 @@ namespace PLProject.Controllers
 			return View();
 		}
         #endregion
+
         #region Delete Schedule day 
         [HttpPost]
         public IActionResult DeleteScheduleDay(int ScheduleId)

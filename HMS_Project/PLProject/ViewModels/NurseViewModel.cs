@@ -19,6 +19,7 @@ namespace PLProject.ViewModels
         }
         public NurseViewModel(Nurse nurse)
         {
+            UserId = nurse.UserId;
             Id = nurse.Id;
             string[] name = nurse.AppUser.FullName.Split();
             if (name.Length == 3)
@@ -46,17 +47,19 @@ namespace PLProject.ViewModels
 
         public static explicit operator Nurse(NurseViewModel nurseViewModel)
         {
-            return new Nurse()
-            {
-                //SSN = nurseViewModel.SSN,
-                //Email = nurseViewModel.Email,
-                //Address = nurseViewModel.Address,
-                //Gender = nurseViewModel.Gender,
-                //PhoneNumber = nurseViewModel.Phone,
-                //FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}",
-                //DateOfBirth = nurseViewModel.DateOfBirth,
-                ClinicId = nurseViewModel.ClinicId,
-            };
+            var nurse = new Nurse();
+            nurse.UserId = nurseViewModel.UserId;
+            nurse.Id = nurseViewModel.Id;
+            nurse.AppUser.SSN = nurseViewModel.SSN;
+            nurse.AppUser.Email = nurseViewModel.Email;
+            nurse.AppUser.Address = nurseViewModel.Address;
+            nurse.AppUser.Gender = nurseViewModel.Gender;
+            nurse.AppUser.PhoneNumber = nurseViewModel.Phone;
+            nurse.AppUser.FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}";
+            nurse.AppUser.DateOfBirth = nurseViewModel.DateOfBirth;
+            nurse.ClinicId = nurseViewModel.ClinicId;
+
+            return nurse;
         }
 
         public static explicit operator NurseViewModel(Nurse nurse)

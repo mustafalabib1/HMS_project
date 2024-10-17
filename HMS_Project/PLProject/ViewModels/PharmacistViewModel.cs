@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace PLProject.ViewModels
 {
-    public class PharmacistViewModel:UserViewModel
+    public class PharmacistViewModel : UserViewModel
     {
         public PharmacistViewModel()
         {
         }
         public PharmacistViewModel(Pharmacist pharmacist)
         {
+            UserId = pharmacist.UserId;
             Id = pharmacist.Id;
             SSN = pharmacist.AppUser.SSN;
             string[] name = pharmacist.AppUser.FullName.Split();
@@ -42,6 +43,7 @@ namespace PLProject.ViewModels
         {
             return new Pharmacist()
             {
+                UserId = pharmacistViewModel.UserId,
                 Id = pharmacistViewModel.Id,
                 //SSN = pharmacistViewModel.SSN,
                 //Email = pharmacistViewModel.Email,

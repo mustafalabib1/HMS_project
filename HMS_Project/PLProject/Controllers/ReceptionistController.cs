@@ -28,36 +28,17 @@ namespace PLProject.Controllers
             var Receptionists = unitOfWork.Repository<Receptionist>().GetALL();
             var ReceptionistsViewModels = Receptionists.Select(R => (ReceptionistViewModel)R).ToList();
             return View(ReceptionistsViewModels);
-        } 
-        #endregion
-
-        #region create
-        public IActionResult Create()
-        {
-            return View();
         }
-
-        [HttpPost]
-        public IActionResult Create(ReceptionistViewModel receptionist)
-        {
-            if (ModelState.IsValid) // server side validation
-            {
-                unitOfWork.Repository<Receptionist>().Add((Receptionist)receptionist);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(receptionist);
-        }
-    
         #endregion
 
         #region Details
-        public IActionResult Details(int? Id, string viewname = "Details")
+        [Route("Receptionist/Details/{userId}")]
+        public IActionResult Details(string userId, string viewname = "Details")
         {
-            if (!Id.HasValue)
+            if (userId is null)
                 return BadRequest(); // 400
 
-            var receptionist = unitOfWork.Repository<Receptionist>().Get(Id.Value);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(userId);
             var ReceptionistView = (ReceptionistViewModel)receptionist;
 
             if (receptionist is null)
@@ -69,13 +50,13 @@ namespace PLProject.Controllers
         #endregion
 
         #region Edit
-
-        public IActionResult Edit(int? Id)
+        [Route("Receptionist/Edit/{userId}")]
+        public IActionResult Edit(string userId)
         {
-            if (!Id.HasValue)
+            if (userId is null)
                 return BadRequest(); // 400
 
-            var receptionist = unitOfWork.Repository<Receptionist>().Get(Id.Value);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(userId);
             if (receptionist is null)
                 return NotFound(); // 404
 
@@ -84,9 +65,10 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
+        [Route("Receptionist/Edit/{userId}")]
         public IActionResult Edit(ReceptionistViewModel receptionistViewModel)
         {
-            var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.Id);
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.UserId);
             if (ModelState.IsValid) // server side validation
             {
                 unitOfWork.Repository<Receptionist>().Update((Receptionist)receptionistViewModel);
@@ -97,36 +79,6 @@ namespace PLProject.Controllers
         }
 
 
-        #endregion
-
-        #region Delete
-        public IActionResult Delete(int? Id)
-        {
-
-            return Details(Id, "Delete");
-        }
-
-        [HttpPost]
-        public IActionResult Delete(ReceptionistViewModel receptionistViewModel)
-        {
-            var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.Id);
-            try
-            {
-                unitOfWork.Repository<Receptionist>().Delete(receptionist);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-
-                if (env.IsDevelopment())
-                    ModelState.AddModelError(string.Empty, ex.Message);
-                else
-                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
-
-                return View(receptionistViewModel);
-            }
-        }
         #endregion
     }
 }
