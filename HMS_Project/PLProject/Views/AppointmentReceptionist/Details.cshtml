@@ -1,0 +1,103 @@
+﻿@model AppointmentGenarelVM
+@inject IUnitOfWork unitOfWork
+
+@{
+    ViewData["Title"] = "Appointment Details";
+}
+
+<div class="container mt-5">
+    <!-- Header Section -->
+    <h1 class="text-center mb-4">Appointment Details</h1>
+
+    @if (Model != null)
+    {
+        <!-- Appointment Info Section -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-info text-white text-center">
+                <strong>Appointment Information</strong>
+            </div>
+            <div class="card-body">
+                <div class="row text-center mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Date:</strong> @Model.ApointmentDate.ToString("dd MMM yyyy")</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Time:</strong> @Model.ApointmentTime?.ToString("hh:mm tt")</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Doctor:</strong> @Model.Doctor.AppUser.FullName</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Clinic:</strong> @Model.Clinic.Name</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Patient Name:</strong> @Model.Patient.AppUser.FullName</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Status:</strong> @Model.ApointmentStatus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Examination Section -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white text-center">
+                <strong>Examination</strong>
+            </div>
+            <div class="card-body">
+                <p>@Model.Examination</p>
+            </div>
+        </div>
+
+        <!-- Prescription Section -->
+        @if (Model.PrescriptionViewModel != null)
+        {
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white text-center">
+                    <strong>Prescription Details</strong>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Active Substance</th>
+                                    <th>Dosage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PrescriptionViewModel.PrescriptionItems)
+                                {
+                                    <tr>
+                                        <td>@item.ActiveSubstance.ActiveSubstancesName</td>
+                                        <td>@item.FullDosage</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center mt-4">
+                <strong>No Prescription Available</strong>
+            </div>
+        }
+
+        <!-- Back Button -->
+        <div class="mt-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Appointments
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center mt-4">
+            <h3><i class="fas fa-exclamation-triangle"></i> No Data Found</h3>
+        </div>
+    }
+</div>

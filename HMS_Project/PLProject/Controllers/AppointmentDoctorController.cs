@@ -39,7 +39,7 @@ namespace PLProject.Controllers
 
 			UserId = user?.Id?? string.Empty;
 
-			var spec = new BaseSpecification<Apointment>(a => a.DoctorUserId == UserId/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/&& a.ApointmentStatus != ApointmentStatusEnum.Completed&&a.ApointmentStatus != ApointmentStatusEnum.Cancelled);
+			var spec = new BaseSpecification<Apointment>(a => a.DoctorUserId == UserId/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/&& a.ApointmentStatus == ApointmentStatusEnum.Confirmed);
 			spec.Includes.Add(a => a.Patient);
 			spec.Includes.Add(a => a.Doctor);
 			spec.Includes.Add(a => a.Clinic);

@@ -4,6 +4,8 @@ using PLProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using BLLProject.Specification;
+using Microsoft.AspNetCore.Identity;
+using PLProject.ViewModels.AppointmentViewModel;
 
 namespace PLProject.Controllers
 {
@@ -11,16 +13,35 @@ namespace PLProject.Controllers
     public class InvoiceController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly UserManager<AppUser> userManager;
 
-        public InvoiceController(IUnitOfWork unitOfWork)
+        public InvoiceController(IUnitOfWork unitOfWork, UserManager<AppUser> UserManager)
         {
             this.unitOfWork = unitOfWork;
+            userManager = UserManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync(int? page)
         {
-            var Invoices = unitOfWork.Repository<Invoice>().GetALL();
-            var InvoiceViewModel = Invoices.Select(c => (InvoiceViewModel)c).ToList();
-            return View(Invoices);
+            // Get the current doctor ID
+            var user = await userManager.GetUserAsync(User);
+
+            string UserId = user?.Id ?? string.Empty;
+
+            var spec = new BaseSpecification<Apointment>(/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/a=> a.ApointmentStatus != ApointmentStatusEnum.Completed && a.ApointmentStatus != ApointmentStatusEnum.Cancelled);
+            spec.Includes.Add(a => a.Patient);
+            spec.Includes.Add(a => a.Doctor);
+            spec.Includes.Add(a => a.Clinic);
+
+            var appointments = unitOfWork.Repository<Apointment>().GetALLWithSpec(spec).ToList();
+
+            var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
+            // Pagination logic
+            int pageSize = 10;
+            int pageNumber = page ?? 1;
+
+            var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
+
+            return View(paginatedList);
         }
         #region Create
         public IActionResult Create()

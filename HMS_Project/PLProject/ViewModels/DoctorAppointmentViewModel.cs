@@ -18,6 +18,7 @@ namespace PLProject.ViewModels
         {
             ApointmentId=apointment.Id;
             Patient = apointment.Patient;
+            
         }
         public int ApointmentId { get; set; }
         [Required]
