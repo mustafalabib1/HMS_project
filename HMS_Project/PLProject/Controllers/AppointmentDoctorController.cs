@@ -4,6 +4,7 @@ using DALProject.model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PLProject.ViewModels;
 using PLProject.ViewModels.AppointmentViewModel;
@@ -38,8 +39,12 @@ namespace PLProject.Controllers
 
 			UserId = user?.Id?? string.Empty;
 
-			var appointments = unitOfWork.Repository<Apointment>().Find(a => a.DoctorUserId == UserId/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/&&a.ApointmentStatus!= ApointmentStatusEnum.Completed)
-										 .Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
+			var spec = new BaseSpecification<Apointment>(a => a.DoctorUserId == UserId/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/&& a.ApointmentStatus != ApointmentStatusEnum.Completed&&a.ApointmentStatus != ApointmentStatusEnum.Cancelled);
+			spec.Includes.Add(a => a.Patient);
+			spec.Includes.Add(a => a.Doctor);
+			spec.Includes.Add(a => a.Clinic);
+
+			var appointments = unitOfWork.Repository<Apointment>().GetALLWithSpec(spec).ToList(); 
 
 			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
 			// Pagination logic
@@ -83,12 +88,13 @@ namespace PLProject.Controllers
 		[HttpPost]
 		public IActionResult Edit(AppointmentGenarelVM ViewModel)
 		{
-
 			// If the model is invalid, repopulate lists and return the view
-			if (!ModelState.IsValid)
+			ModelState.Remove<AppointmentGenarelVM>(a => a.PrescriptionViewModel.DoctorUserId);
+
+            if (!ModelState.IsValid)
 			{
-				return View(ViewModel);
-			}
+                return Details(ViewModel.Id, "Edit");
+            }
 
 			try
 			{
@@ -96,12 +102,10 @@ namespace PLProject.Controllers
                 var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
 				apointment.ConvertAppointmentGenarelVMToApointment(ViewModel);
 
+				apointment.ApointmentStatus= ApointmentStatusEnum.Completed;
 				// Update the appointment in the repository
 				unitOfWork.Repository<Apointment>().Update(apointment);
 				unitOfWork.Complete();
-
-				apointment.ApointmentStatus= ApointmentStatusEnum.Completed;
-
 
                 return RedirectToAction(nameof(Index));
 			}

@@ -8,9 +8,9 @@ namespace PLProject.ViewModels.AppointmentViewModel
         public static Apointment ConvertApointmentCreateVMToApointment(this Apointment appointment, ApointmentCreateVM appointmentCreateVM)
         {
             DateTime selectedAppointmentDate = DateTime.Parse(appointmentCreateVM.SelectedDate);
-            appointment.PatientUserId = appointmentCreateVM.PatientUserId;
+            appointment.PatientUserId = appointmentCreateVM.PatientId;
             appointment.ClinicId = appointmentCreateVM.ClinicId;
-            appointment.DoctorUserId = appointmentCreateVM.SelectedDoctorUserId;
+            appointment.DoctorUserId = appointmentCreateVM.SelectedDoctorId;
             appointment.ApointmentDate = DateOnly.FromDateTime(selectedAppointmentDate);
             appointment.ApointmentTime = TimeOnly.Parse(appointmentCreateVM.SelectedTime.Split('-')[0]);
 

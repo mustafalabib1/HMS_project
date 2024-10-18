@@ -49,107 +49,107 @@ namespace PLProject.Controllers
 
 			return View(paginatedList);
 		}
-		#endregion
+        #endregion
 
-		#region Patient Create Appointment
-		public IActionResult Create(ClinicAvailabilityViewModel model)
-		{
-			// Set the default year and month to the current if not provided
-			DateTime today = DateTime.Now;
-			if (model.SelectedYear == 0) model.SelectedYear = today.Year;
-			if (model.SelectedMonth == 0) model.SelectedMonth = today.Month;
+        #region Patient Create Appointment
+        public IActionResult Create(ClinicAvailabilityViewModel model)
+        {
+            // Set the default year and month to the current if not provided
+            DateTime today = DateTime.Now;
+            if (model.SelectedYear == 0) model.SelectedYear = today.Year;
+            if (model.SelectedMonth == 0) model.SelectedMonth = today.Month;
 
-			// If clinicId is provided, fetch available appointments
-			if (model.SelectedClinicId.HasValue)
-			{
-				var doctors = unitOfWork.Repository<Doctor>().Find(d => d.ClinicId == model.SelectedClinicId.Value).ToList();
+            // If clinicId is provided, fetch available appointments
+            if (model.SelectedClinicId.HasValue)
+            {
+                var spec = new BaseSpecification<Doctor>(d => d.ClinicId == model.SelectedClinicId.Value);
+                spec.Includes.Add(d => d.AppUser);
+                var doctors = unitOfWork.Repository<Doctor>().GetALLWithSpec(spec).ToList();
 
-				var availableDays = unitOfWork.Repository<DoctorScheduleLookup>().Find(ds => doctors.Select(d => d.Id).Contains(ds.Id)).GroupBy(ds => ds.Day);
+                var availableDays = unitOfWork.Repository<DoctorScheduleLookup>().Find(ds => doctors.Select(d => d.UserId).Contains(ds.DoctorUserId)).GroupBy(ds => ds.Day);
 
-				int daysInCurrentMonth = DateTime.DaysInMonth(model.SelectedYear, model.SelectedMonth);
+                int daysInCurrentMonth = DateTime.DaysInMonth(model.SelectedYear, model.SelectedMonth);
 
-				List<DayAvailability> availabilityList = new List<DayAvailability>();
+                List<DayAvailability> availabilityList = new List<DayAvailability>();
 
-				// Generate availability data for each day in the selected month
-				for (int i = 0; i < daysInCurrentMonth; i++)
-				{
-					DayAvailability day = new DayAvailability();
-					day.Date = new DateTime(model.SelectedYear, model.SelectedMonth, i + 1);
+                // Generate availability data for each day in the selected month
+                for (int i = 0; i < daysInCurrentMonth; i++)
+                {
+                    DayAvailability day = new DayAvailability();
+                    day.Date = new DateTime(model.SelectedYear, model.SelectedMonth, i + 1);
 
-					// Check if the date is available
-					if (day.Date <= today)
-					{
-						day.IsAvailable = false;
-						day.AvailableDoctors = null;
-					}
-					else
-					{
-						foreach (var avaday in availableDays)
-						{
-							if (avaday.Key == day.Date.DayOfWeek)
-								foreach (var item in avaday)
-								{
-									var count = unitOfWork.Repository<Apointment>()
-										.Find(a => a.ApointmentDate == DateOnly.FromDateTime(day.Date)
-											  && a.ApointmentTime < item.StartTime
-											  && a.ApointmentTime < item.EndTime).Count();
-									if (count < 50)
-									{
-										day.IsAvailable = true;
-										if (day.AvailableDoctors == null)
-										{
-											day.AvailableDoctors = new List<DoctorScheduleLookup>();
-										}
-										day.AvailableDoctors.Add(item);
-										unitOfWork.Complete();
+                    // Check if the date is available
+                    if (day.Date <= today)
+                    {
+                        day.IsAvailable = false;
+                        day.AvailableDoctors = null;
+                    }
+                    else
+                    {
+                        foreach (var avaday in availableDays)
+                        {
+                            if (avaday.Key == day.Date.DayOfWeek)
+                                foreach (var item in avaday)
+                                {
+                                    var count = unitOfWork.Repository<Apointment>()
+                                        .Find(a => a.ApointmentDate == DateOnly.FromDateTime(day.Date)
+                                              && a.ApointmentTime < item.StartTime
+                                              && a.ApointmentTime < item.EndTime).Count();
+                                    if (count < 50)
+                                    {
+                                        day.IsAvailable = true;
+                                        if (day.AvailableDoctors == null)
+                                        {
+                                            day.AvailableDoctors = new List<DoctorScheduleLookup>();
+                                        }
+                                        day.AvailableDoctors.Add(item);
+                                        unitOfWork.Complete();
 
-									}
-								}
-						}
-					}
+                                    }
+                                }
+                        }
+                    }
 
-					availabilityList.Add(day);
-					unitOfWork.Complete();
-				}
+                    availabilityList.Add(day);
+                    unitOfWork.Complete();
+                }
 
-				model.AvailableDays = availabilityList;
-			}
+                model.AvailableDays = availabilityList;
+            }
 
-			// Set the selected year and month in the model
-			model.SelectedYear = model.SelectedYear;
-			model.SelectedMonth = model.SelectedMonth;
-			model.SelectedClinicId = model.SelectedClinicId;
+            // Set the selected year and month in the model
+            model.SelectedYear = model.SelectedYear;
+            model.SelectedMonth = model.SelectedMonth;
+            model.SelectedClinicId = model.SelectedClinicId;
 
-			return View(model);
-		}
+            return View(model);
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> ConfirmAppointmentAsync(ApointmentCreateVM model)
-		{
-			// Get the current doctor ID
-			var user = await userManager.GetUserAsync(User);
+        [HttpPost]
+        public IActionResult ConfirmAppointment(ApointmentCreateVM model)
+        {
+            var user = userManager.GetUserAsync(User).Result;
+            model.PatientId = user?.Id??string.Empty;
+            if (ModelState.IsValid)
+            {
+                int doctorId = int.Parse(model.SelectedDoctorId);
+                model.SelectedDoctorId = unitOfWork.Repository<Doctor>().Find(d => d.Id == doctorId).FirstOrDefault().UserId;
 
-			UserId = user?.Id ?? string.Empty;
+                unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
+                unitOfWork.Complete();
 
-			model.PatientUserId =UserId;
+                TempData["SuccessMessage"] = "Appointment booked successfully!";
+                return RedirectToAction("Index");
+            }
+            // If no date was selected or there was an issue
+            TempData["ErrorMessage"] = "Please select a valid date and time for booking.";
+            return RedirectToAction("Create", new { clinicId = model.ClinicId });
+        }
+        #endregion
 
-			if (ModelState.IsValid)
-			{
-				unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
-				unitOfWork.Complete();
+        #region Details
 
-				TempData["SuccessMessage"] = "Appointment booked successfully!";
-				return RedirectToAction("Index");
-			}
-			// If no date was selected or there was an issue
-			TempData["ErrorMessage"] = "Please select a valid date and time for booking.";
-			return RedirectToAction("Create", new { clinicId = model.ClinicId });
-		}
-		#endregion
-
-		#region Details
-
-		public IActionResult Details(int? Id, string viewname = "Details")
+        public IActionResult Details(int? Id, string viewname = "Details")
 		{
 			if (!Id.HasValue)
 				return BadRequest(); // 400

@@ -6,6 +6,7 @@ using DALProject.model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PLProject.ViewModels;
 using PLProject.ViewModels.PrescriptionVM;
@@ -57,7 +58,7 @@ namespace PLProject.Controllers
 
 		}
 		#endregion
-		[Authorize(Roles =Roles.Patient)]
+
 		#region Details
 		public IActionResult Details(int? Id, string viewname = "Details")
 		{
@@ -83,9 +84,9 @@ namespace PLProject.Controllers
 		[HttpPost]
 		public async Task<IActionResult> EditAsync(PrescriptionViewModel viewModel)
 		{
-
-			// If the model is invalid, repopulate lists and return the view
-			if (!ModelState.IsValid)
+			ModelState.Remove<PrescriptionViewModel>(p => p.DoctorUserId);
+            // If the model is invalid, repopulate lists and return the view
+            if (!ModelState.IsValid)
 			{
 				return View(viewModel);
 			}
@@ -93,9 +94,8 @@ namespace PLProject.Controllers
 			try
 			{
 				var user = await _userManager.GetUserAsync(User);
-				//var PharmacistId = user.Id;
 				var updatedPrescription = unitOfWork.Repository<Prescription>().Get(viewModel.prescriptionId);
-				//updatedPrescription.PharmacistId = PharmacistId;
+				updatedPrescription.PharmacistUserId = user.Id;
 
 				//// Update the Prescription
 				

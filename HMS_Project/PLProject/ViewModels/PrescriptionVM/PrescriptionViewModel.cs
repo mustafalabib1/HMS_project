@@ -18,8 +18,7 @@ namespace PLProject.ViewModels.PrescriptionVM
         public bool HasItems => PrescriptionItems != null && PrescriptionItems.Any();
 
         public string? PharmacistUserId { get; set; }
-		[Required]
-		public string DoctorUserId { get; set; } = null!;
+		public string DoctorUserId { get; set; } =null!;
 		public Patient? Patient { get; set; }
 	}
 }

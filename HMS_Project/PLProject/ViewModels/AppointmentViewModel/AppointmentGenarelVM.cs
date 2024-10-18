@@ -14,7 +14,7 @@ namespace PLProject.ViewModels.AppointmentViewModel
         public virtual Clinic? Clinic { get; set; } = null!;
 
         public virtual Patient? Patient { get; set; }= null!;
-        public  int? DoctorId { get; set; }
+        public  string? DoctorId { get; set; }
         public virtual Doctor? Doctor { get; set; } = null!;
 
         public virtual Invoice? Invoice { get; set; } = null!;

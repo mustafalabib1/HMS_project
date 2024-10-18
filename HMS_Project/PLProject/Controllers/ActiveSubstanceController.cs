@@ -171,7 +171,7 @@ public class ActiveSubstanceController : Controller
 			// Update the active substance in the repository
 			unitOfWork.Repository<ActiveSubstance>().Update(activeSubstance);
 			unitOfWork.Complete();
-			return RedirectToAction(nameof(Edit), new { Id = substance.Id });
+			return RedirectToAction(nameof(Index));
 		}
 		catch (Exception ex)
 		{
