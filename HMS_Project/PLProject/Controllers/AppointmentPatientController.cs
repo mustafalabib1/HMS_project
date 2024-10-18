@@ -132,9 +132,6 @@ namespace PLProject.Controllers
             model.PatientId = user?.Id??string.Empty;
             if (ModelState.IsValid)
             {
-                int doctorId = int.Parse(model.SelectedDoctorId);
-                model.SelectedDoctorId = unitOfWork.Repository<Doctor>().Find(d => d.Id == doctorId).FirstOrDefault().UserId;
-
                 unitOfWork.Repository<Apointment>().Add(new Apointment().ConvertApointmentCreateVMToApointment(model));
                 unitOfWork.Complete();
 

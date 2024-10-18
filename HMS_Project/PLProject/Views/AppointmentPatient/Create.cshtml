@@ -108,8 +108,8 @@
                                                                 <div>
                                                                     <input type="radio" name="SelectedTime"
                                                                            value="@timeSlot.StartTime.ToString()- @timeSlot.EndTime.ToString()" required
-                                                                           onclick="selectTimeAndDoctor('@timeSlot.StartTime.ToString("HH:mm")', '@timeSlot.EndTime.ToString("HH:mm")',doctorId=@timeSlot.Doctor.Id)" />
-                                                                    <label>@timeSlot.StartTime.ToString("HH:mm") - @timeSlot.EndTime.ToString("HH:mm") with @timeSlot.Doctor.AppUser.FullName</label>
+                                                                           onclick="selectTimeAndDoctor('@timeSlot.StartTime.ToString("HH:mm")', '@timeSlot.EndTime.ToString("HH:mm")','@timeSlot.DoctorUserId')" />
+                                                                    <label>@timeSlot.StartTime.ToString("HH:mm") - @timeSlot.EndTime.ToString("HH:mm") with @timeSlot.Doctor.AppUser.FullName </label>
                                                                 </div>
                                                             }
 
