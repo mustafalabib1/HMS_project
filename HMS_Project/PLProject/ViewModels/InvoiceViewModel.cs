@@ -19,7 +19,7 @@ namespace PLProject.ViewModels
             PaymentStatus = invoice.PaymentStatus;
             PaymentType= Enum.TryParse(invoice.PaymentType, out PaymentType paymentType) ? paymentType : null;
             ReceptionistUserId = invoice.ReceptionistUserId;
-            ApointmentId = invoice.ApointmentId;
+            //ApointmentId = invoice.ApointmentId;
         }
 
         public int Id { get; set; }

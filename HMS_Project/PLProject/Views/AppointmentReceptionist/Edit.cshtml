@@ -59,7 +59,7 @@
                         <!-- Total Amount Field -->
                         <div class="col-md-6 mb-3">
                             <label asp-for="Invoice.TotalAmount" class="form-label"></label>
-                            <input asp-for="Invoice.TotalAmount" class="form-control" />
+                            <input asp-for="Invoice.TotalAmount" class="form-control" value="@Model.Clinic.Price"/>
                             <span asp-validation-for="Invoice.TotalAmount" class="text-danger"></span>
                         </div>
 

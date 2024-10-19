@@ -72,10 +72,10 @@ namespace PLProject.Controllers
         #region Edit
         public IActionResult Edit(int? Id)
         {
-            var _user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
-            UserId = _user.Id;
+            //var _user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
+            //UserId = _user.Id;
 
-            var _receptionist = unitOfWork.Repository<Receptionist>().Get(UserId);
+            //var _receptionist = unitOfWork.Repository<Receptionist>().Get(UserId);
 
             if (!Id.HasValue)
                 return BadRequest(); // 400
@@ -86,7 +86,7 @@ namespace PLProject.Controllers
             spec.Includes.Add(a => a.Clinic);
 
             var apointment = unitOfWork.Repository<Apointment>().GetEntityWithSpec(spec);
-            var apointmentVM = apointment.ConvertToReceptionAppointmentVM(_receptionist);
+            var apointmentVM = apointment.ConvertToReceptionAppointmentVM();
 
             return View(apointmentVM);
         }
@@ -95,9 +95,9 @@ namespace PLProject.Controllers
 
         public IActionResult Edit(ReceptionAppiontmentViewModel ViewModel)
         {
-            ModelState.Remove<AppointmentGenarelVM>(a => a.Invoice.PaymentType);
-            ModelState.Remove<AppointmentGenarelVM>(a => a.Invoice.Apointment);
-            ModelState.Remove<AppointmentGenarelVM>(a => a.Invoice.Receptionist);
+            ModelState.Remove<ReceptionAppiontmentViewModel>(a => a.Invoice.PaymentType);
+            ModelState.Remove<ReceptionAppiontmentViewModel>(a => a.Invoice.Apointment);
+            ModelState.Remove<ReceptionAppiontmentViewModel>(a => a.Invoice.Receptionist);
 
             if (!ModelState.IsValid)
             {
@@ -106,9 +106,14 @@ namespace PLProject.Controllers
 
             try
             {
+                var _user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
+
                 // get the appointment from Repository 
                 var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
+                apointment.ReceptionistUserId = _user.Id;
                 apointment.FromReceptionToAppointment(ViewModel);
+
+                apointment.Invoice.ReceptionistUserId = _user.Id;
 
                 apointment.ApointmentStatus = ApointmentStatusEnum.Confirmed;
                 // Update the appointment in the repository

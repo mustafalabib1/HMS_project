@@ -35,7 +35,9 @@ namespace DALProject.model
         #endregion
 
         #region One2One With Invoice
+        public int? InvoicId { get; set; }
         public virtual Invoice Invoice { get; set; } = null!;
+
 		#endregion
 
 		#region One2One With Prescription

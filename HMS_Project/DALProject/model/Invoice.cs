@@ -25,7 +25,6 @@ namespace DALProject.model
         #endregion
 
         #region One2One With Apointment
-        public int? ApointmentId { get; set; }
         public virtual Apointment Apointment { get; set; }=null!;
         #endregion
     }

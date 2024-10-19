@@ -56,11 +56,9 @@ namespace PLProject.ViewModels.AppointmentViewModel
         {
             appointment.Invoice = receptionAppiontmentViewModel.Invoice;
             appointment.Invoice.PaymentType = "Cash";
-            appointment.ReceptionistUserId = receptionAppiontmentViewModel.ReceptionistId;
-            appointment.Receptionist = receptionAppiontmentViewModel.Receptionist;
             return appointment;
         }
-        public static ReceptionAppiontmentViewModel ConvertToReceptionAppointmentVM(this Apointment appointment, Receptionist receptionist)
+        public static ReceptionAppiontmentViewModel ConvertToReceptionAppointmentVM(this Apointment appointment/*, Receptionist receptionist*/)
         {
             var AppointmentVM = new ReceptionAppiontmentViewModel();
             AppointmentVM.Id = appointment.Id;
@@ -71,8 +69,8 @@ namespace PLProject.ViewModels.AppointmentViewModel
             AppointmentVM.Patient = appointment.Patient;
             AppointmentVM.Doctor = appointment.Doctor;
             AppointmentVM.Invoice = appointment.Invoice;
-            AppointmentVM.Receptionist = receptionist;
-            AppointmentVM.ReceptionistId = receptionist.UserId;
+            //AppointmentVM.Receptionist = receptionist;
+            //AppointmentVM.ReceptionistId = receptionist.UserId;
 
             return AppointmentVM;
         }

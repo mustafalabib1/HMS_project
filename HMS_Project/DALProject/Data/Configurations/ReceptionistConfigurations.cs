@@ -17,6 +17,8 @@ namespace DALProject.Data.Configurations
 			builder.HasKey(a => a.UserId);
 			builder.Property(a => a.Id).UseIdentityColumn(1, 1);
 			#endregion
+
+
 		}
 	}
 }

@@ -295,6 +295,7 @@ namespace PLProject.Areas.Admin.Controllers
         }
         #endregion
 
+        #region Helpers
         private async Task AddToTable(string tableName, string UserId)
         {
             if (string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(tableName))
@@ -308,7 +309,7 @@ namespace PLProject.Areas.Admin.Controllers
                 case "Doctor":
                     var DoctorSpecializationId = _unitOfWork.Repository<DoctorSpecializationLookup>().Find(d => d.Specialization == "General Practitioner").FirstOrDefault();
 
-                    _user.Doctor = new Doctor { UserId = UserId ,DoctorSpecialization= DoctorSpecializationId ?? new DoctorSpecializationLookup{ Specialization = "General Practitioner" } };
+                    _user.Doctor = new Doctor { UserId = UserId, DoctorSpecialization = DoctorSpecializationId ?? new DoctorSpecializationLookup { Specialization = "General Practitioner" } };
                     break;
                 case "Receptionist":
                     _user.Receptionist = new Receptionist { UserId = UserId };
@@ -362,7 +363,8 @@ namespace PLProject.Areas.Admin.Controllers
                     _unitOfWork.Complete();
                     break;
             }
-        }
+        } 
+        #endregion
     }
 }
 

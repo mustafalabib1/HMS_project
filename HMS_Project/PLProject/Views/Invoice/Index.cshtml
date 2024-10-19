@@ -19,7 +19,7 @@
                 <th>@Html.DisplayNameFor(I => I.TotalAmount)</th>
                 <th>@Html.DisplayNameFor(I => I.PaymentStatus)</th>
                 <th>@Html.DisplayNameFor(I => I.PaymentType)</th>
-                <th>@Html.DisplayNameFor(I => I.ApointmentId)</th>
+@*                 <th>@Html.DisplayNameFor(I => I.ApointmentId)</th> *@
                 <th>@Html.DisplayNameFor(I => I.ReceptionistUserId)</th>
                 <th>Details</th>
                 <th>Update</th>
@@ -34,7 +34,7 @@
                     <td class="align-content-center">@Html.DisplayFor(I => invoice.TotalAmount)</td>
                     <td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentStatus)</td>
                     <td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentType)</td>
-                    <td class="align-content-center">@Html.DisplayFor(I => invoice.ApointmentId)</td>
+@*                     <td class="align-content-center">@Html.DisplayFor(I => invoice.ApointmentId)</td> *@
                     <td class="align-content-center">@Html.DisplayFor(I => invoice.ReceptionistUserId)</td>
                   
                     <partial name="_ButtonsPartial" model="@invoice.Id"></partial>

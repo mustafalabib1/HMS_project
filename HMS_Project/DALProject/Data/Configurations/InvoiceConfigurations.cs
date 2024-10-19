@@ -42,7 +42,8 @@ namespace DALProject.Data.Configurations
             builder
                    .HasOne(i => i.Receptionist)
                    .WithMany(i => i.invoices)
-                   .HasForeignKey(i => i.ReceptionistUserId); 
+                   .HasForeignKey(i => i.ReceptionistUserId)
+                   .OnDelete(DeleteBehavior.SetNull);
             #endregion
         }
     }

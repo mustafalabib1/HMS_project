@@ -28,7 +28,7 @@ namespace PLProject.Controllers
 
             string UserId = user?.Id ?? string.Empty;
 
-            var spec = new BaseSpecification<Apointment>(/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/a=> a.ApointmentStatus != ApointmentStatusEnum.Completed && a.ApointmentStatus != ApointmentStatusEnum.Cancelled);
+            var spec = new BaseSpecification<Apointment>(/*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/a => a.ApointmentStatus != ApointmentStatusEnum.Completed && a.ApointmentStatus != ApointmentStatusEnum.Cancelled);
             spec.Includes.Add(a => a.Patient);
             spec.Includes.Add(a => a.Doctor);
             spec.Includes.Add(a => a.Clinic);
@@ -52,21 +52,19 @@ namespace PLProject.Controllers
                 PaymentType = PaymentType.Cash,
                 ReceptionistsReader = unitOfWork.Repository<Receptionist>().GetALL(),
                 ApointmentsReader = unitOfWork.Repository<Apointment>().GetALL(),
-               
+
             };
 
             return View(invoiceviewmodel);
-           
-           
+
+
         }
 
         [HttpPost]
         public IActionResult Create(ApointmentViewModel model)
         {
             return View();
-            unitOfWork.Complete();
-
-        } 
+        }
         #endregion
 
         #region Details
@@ -96,7 +94,7 @@ namespace PLProject.Controllers
                 return BadRequest();
 
             var invoice = unitOfWork.Repository<Invoice>().Get(Id.Value);
-         
+
 
             if (invoice is null)
                 return NotFound();
@@ -110,10 +108,10 @@ namespace PLProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute]int Id,InvoiceViewModel invoiceViewModel)
+        public IActionResult Edit([FromRoute] int Id, InvoiceViewModel invoiceViewModel)
         {
             if (Id != invoiceViewModel.Id) return BadRequest();
-            
+
             Invoice invoice = unitOfWork.Repository<Invoice>().Get(invoiceViewModel.Id);
 
             if (ModelState.IsValid) // server side validation
@@ -122,7 +120,7 @@ namespace PLProject.Controllers
                 invoice.InvoiceDate = invoiceViewModel.InvoiceDate;
                 invoice.TotalAmount = invoiceViewModel.TotalAmount;
                 invoice.ReceptionistUserId = invoiceViewModel.ReceptionistUserId;
-                invoice.ApointmentId = invoiceViewModel.ApointmentId;
+                //invoice.ApointmentId = invoiceViewModel.ApointmentId;
                 invoice.PaymentStatus = invoiceViewModel.PaymentStatus;
                 invoice.PaymentType = invoiceViewModel.PaymentType.ToString();
 
@@ -139,7 +137,7 @@ namespace PLProject.Controllers
         public IActionResult Delete(int? Id)
         {
             if (!Id.HasValue)
-                return BadRequest(); 
+                return BadRequest();
 
             var invoice = unitOfWork.Repository<Invoice>().Get(Id.Value);
             var invoiceviewmodel = (InvoiceViewModel)invoice;
@@ -152,7 +150,7 @@ namespace PLProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([FromRoute]int Id,InvoiceViewModel invoiceViewModel)
+        public IActionResult Delete([FromRoute] int Id, InvoiceViewModel invoiceViewModel)
         {
             if (Id != invoiceViewModel.Id) return BadRequest();
 
@@ -167,7 +165,7 @@ namespace PLProject.Controllers
                 //        unitOfWork.Repository<Apointment>().Delete(emp);
                 //    }
                 //}
-             
+
                 unitOfWork.Repository<Invoice>().Delete(ivoice);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));

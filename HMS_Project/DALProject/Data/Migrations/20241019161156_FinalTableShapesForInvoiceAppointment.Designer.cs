@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Data.Migrations
 {
     [DbContext(typeof(HMSdbcontext))]
-    [Migration("20241017080228_add apointmentid as foreign key to table invoice")]
-    partial class addapointmentidasforeignkeytotableinvoice
+    [Migration("20241019161156_FinalTableShapesForInvoiceAppointment")]
+    partial class FinalTableShapesForInvoiceAppointment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,12 +48,12 @@ namespace DALProject.Data.Migrations
                     b.Property<int>("ActSbuAllergiesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientshaveAllergyId")
-                        .HasColumnType("int");
+                    b.Property<string>("PatientshaveAllergyUserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ActSbuAllergiesId", "PatientshaveAllergyId");
+                    b.HasKey("ActSbuAllergiesId", "PatientshaveAllergyUserId");
 
-                    b.HasIndex("PatientshaveAllergyId");
+                    b.HasIndex("PatientshaveAllergyUserId");
 
                     b.ToTable("ActiveSubstancePatient");
                 });
@@ -123,37 +123,127 @@ namespace DALProject.Data.Migrations
                     b.Property<int>("ClinicId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
+                    b.Property<string>("DoctorUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Examination")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("InvoicId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PatientUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("PrescriptionId")
                         .HasColumnType("int")
                         .HasColumnName("PrescriptionId");
 
-                    b.Property<int?>("ReceptionistId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReceptionistUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClinicId");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorUserId");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("InvoicId")
+                        .IsUnique()
+                        .HasFilter("[InvoicId] IS NOT NULL");
+
+                    b.HasIndex("PatientUserId");
 
                     b.HasIndex("PrescriptionId")
                         .IsUnique()
                         .HasFilter("[PrescriptionId] IS NOT NULL");
 
-                    b.HasIndex("ReceptionistId");
+                    b.HasIndex("ReceptionistUserId");
 
                     b.ToTable("Apointments");
+                });
+
+            modelBuilder.Entity("DALProject.model.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("SSN")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("DALProject.model.Clinic", b =>
@@ -213,57 +303,24 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Doctor", b =>
                 {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("ClinicId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int?>("ClinicId")
+                    b.Property<int?>("SpecializationId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<long>("SSN")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("SpecializationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("ClinicId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.HasIndex("SpecializationId");
 
@@ -283,8 +340,9 @@ namespace DALProject.Data.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
+                    b.Property<string>("DoctorUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
@@ -294,7 +352,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorUserId");
 
                     b.ToTable("DoctorScheduleLookups");
                 });
@@ -325,9 +383,6 @@ namespace DALProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ApointmentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("InvoiceDate")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
@@ -341,19 +396,15 @@ namespace DALProject.Data.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("char");
 
-                    b.Property<int?>("ReceptionistId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReceptionistUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(12,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApointmentId")
-                        .IsUnique()
-                        .HasFilter("[ApointmentId] IS NOT NULL");
-
-                    b.HasIndex("ReceptionistId");
+                    b.HasIndex("ReceptionistUserId");
 
                     b.ToTable("Invoices");
                 });
@@ -381,152 +432,53 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Nurse", b =>
                 {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("ClinicId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int?>("ClinicId")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<long>("SSN")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("ClinicId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("Nurses");
                 });
 
             modelBuilder.Entity("DALProject.model.Patient", b =>
                 {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<long>("SSN")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
+                    b.HasKey("UserId");
 
                     b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("DALProject.model.Pharmacist", b =>
                 {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<long>("SSN")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
+                    b.HasKey("UserId");
 
                     b.ToTable("Pharmacists");
                 });
@@ -539,17 +491,18 @@ namespace DALProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
+                    b.Property<string>("DoctorUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("PharmacistId")
-                        .HasColumnType("int");
+                    b.Property<string>("PharmacistUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorUserId");
 
-                    b.HasIndex("PharmacistId");
+                    b.HasIndex("PharmacistUserId");
 
                     b.ToTable("Prescriptions");
                 });
@@ -611,49 +564,16 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Receptionist", b =>
                 {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<long>("SSN")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
+                    b.HasKey("UserId");
 
                     b.ToTable("Receptionists");
                 });
@@ -708,80 +628,6 @@ namespace DALProject.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator().HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -865,31 +711,6 @@ namespace DALProject.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DALProject.model.AppUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SSN")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("AppUser");
-                });
-
             modelBuilder.Entity("ActiveSubstanceMedication", b =>
                 {
                     b.HasOne("DALProject.model.ActiveSubstance", null)
@@ -915,7 +736,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.model.Patient", null)
                         .WithMany()
-                        .HasForeignKey("PatientshaveAllergyId")
+                        .HasForeignKey("PatientshaveAllergyUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -947,13 +768,18 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.model.Doctor", "Doctor")
                         .WithMany("Apointments")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("DoctorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DALProject.model.Invoice", "Invoice")
+                        .WithOne("Apointment")
+                        .HasForeignKey("DALProject.model.Apointment", "InvoicId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("DALProject.model.Patient", "Patient")
                         .WithMany("Apointments")
-                        .HasForeignKey("PatientId")
+                        .HasForeignKey("PatientUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -964,12 +790,14 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.model.Receptionist", "Receptionist")
                         .WithMany("Apointments")
-                        .HasForeignKey("ReceptionistId")
+                        .HasForeignKey("ReceptionistUserId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Clinic");
 
                     b.Navigation("Doctor");
+
+                    b.Navigation("Invoice");
 
                     b.Navigation("Patient");
 
@@ -997,9 +825,15 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.model.DoctorSpecializationLookup", "DoctorSpecialization")
                         .WithMany("Doctors")
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("SpecializationId");
+
+                    b.HasOne("DALProject.model.AppUser", "AppUser")
+                        .WithOne("Doctor")
+                        .HasForeignKey("DALProject.model.Doctor", "UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Clinic");
 
@@ -1010,7 +844,7 @@ namespace DALProject.Data.Migrations
                 {
                     b.HasOne("DALProject.model.Doctor", "Doctor")
                         .WithMany("DoctorScheduleLookups")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("DoctorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1019,16 +853,10 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.model.Invoice", b =>
                 {
-                    b.HasOne("DALProject.model.Apointment", "Apointment")
-                        .WithOne("Invoice")
-                        .HasForeignKey("DALProject.model.Invoice", "ApointmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("DALProject.model.Receptionist", "Receptionist")
                         .WithMany("invoices")
-                        .HasForeignKey("ReceptionistId");
-
-                    b.Navigation("Apointment");
+                        .HasForeignKey("ReceptionistUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Receptionist");
                 });
@@ -1040,21 +868,51 @@ namespace DALProject.Data.Migrations
                         .HasForeignKey("ClinicId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("DALProject.model.AppUser", "AppUser")
+                        .WithOne("Nurse")
+                        .HasForeignKey("DALProject.model.Nurse", "UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
                     b.Navigation("Clinic");
+                });
+
+            modelBuilder.Entity("DALProject.model.Patient", b =>
+                {
+                    b.HasOne("DALProject.model.AppUser", "AppUser")
+                        .WithOne("Patient")
+                        .HasForeignKey("DALProject.model.Patient", "UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("DALProject.model.Pharmacist", b =>
+                {
+                    b.HasOne("DALProject.model.AppUser", "AppUser")
+                        .WithOne("Pharmacist")
+                        .HasForeignKey("DALProject.model.Pharmacist", "UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("DALProject.model.Prescription", b =>
                 {
                     b.HasOne("DALProject.model.Doctor", "Doctor")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("DoctorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DALProject.model.Pharmacist", "Pharmacist")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("PharmacistId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("PharmacistUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Doctor");
 
@@ -1098,6 +956,17 @@ namespace DALProject.Data.Migrations
                     b.Navigation("PrescriptionItem");
                 });
 
+            modelBuilder.Entity("DALProject.model.Receptionist", b =>
+                {
+                    b.HasOne("DALProject.model.AppUser", "AppUser")
+                        .WithOne("Receptionist")
+                        .HasForeignKey("DALProject.model.Receptionist", "UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1109,7 +978,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("DALProject.model.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1118,7 +987,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("DALProject.model.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1133,7 +1002,7 @@ namespace DALProject.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("DALProject.model.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1142,7 +1011,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("DALProject.model.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1158,10 +1027,17 @@ namespace DALProject.Data.Migrations
                     b.Navigation("PatrescriptionItem");
                 });
 
-            modelBuilder.Entity("DALProject.model.Apointment", b =>
+            modelBuilder.Entity("DALProject.model.AppUser", b =>
                 {
-                    b.Navigation("Invoice")
-                        .IsRequired();
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Nurse");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Pharmacist");
+
+                    b.Navigation("Receptionist");
                 });
 
             modelBuilder.Entity("DALProject.model.Clinic", b =>
@@ -1190,6 +1066,12 @@ namespace DALProject.Data.Migrations
             modelBuilder.Entity("DALProject.model.DoctorSpecializationLookup", b =>
                 {
                     b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("DALProject.model.Invoice", b =>
+                {
+                    b.Navigation("Apointment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DALProject.model.Medication", b =>
