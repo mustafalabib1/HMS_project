@@ -9,7 +9,7 @@ using X.PagedList;
 
 namespace PLProject.Controllers
 {
-    public class AppointReceptionistController : Controller
+    public class AppointmentReceptionistController : Controller
     {
         #region Dpi
         private readonly IUnitOfWork unitOfWork;
@@ -17,7 +17,7 @@ namespace PLProject.Controllers
         private readonly UserManager<AppUser> userManager;
         private string UserId;
 
-        public AppointReceptionistController(IUnitOfWork unitOfWork, IWebHostEnvironment Env, UserManager<AppUser> UserManager)
+        public AppointmentReceptionistController(IUnitOfWork unitOfWork, IWebHostEnvironment Env, UserManager<AppUser> UserManager)
         {
             this.unitOfWork = unitOfWork;
             env = Env;
@@ -28,17 +28,12 @@ namespace PLProject.Controllers
         #region Get all Appointment for Receptionist
         public async Task<IActionResult> IndexAsync(int? page)
         {
-            // Get the current doctor ID
-            var user = await userManager.GetUserAsync(User);
-
-            UserId = user?.Id ?? string.Empty;
 
             var spec = new BaseSpecification<Apointment>(a => /*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/ a.ApointmentStatus == ApointmentStatusEnum.Scheduled);
             spec.Includes.Add(a => a.Patient);
             spec.Includes.Add(a => a.Doctor);
             spec.Includes.Add(a => a.Clinic);
             
-
             var appointments = unitOfWork.Repository<Apointment>().GetALLWithSpec(spec).ToList();
 
             var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
@@ -77,25 +72,43 @@ namespace PLProject.Controllers
         #region Edit
         public IActionResult Edit(int? Id)
         {
-            return Details(Id, "Edit");
+            var _user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
+            UserId = _user.Id;
+
+            var _receptionist = unitOfWork.Repository<Receptionist>().Get(UserId);
+
+            if (!Id.HasValue)
+                return BadRequest(); // 400
+
+            var spec = new BaseSpecification<Apointment>(a => a.Id == Id);
+            spec.Includes.Add(a => a.Patient);
+            spec.Includes.Add(a => a.Doctor);
+            spec.Includes.Add(a => a.Clinic);
+
+            var apointment = unitOfWork.Repository<Apointment>().GetEntityWithSpec(spec);
+            var apointmentVM = apointment.ConvertToReceptionAppointmentVM(_receptionist);
+
+            return View(apointmentVM);
         }
 
         [HttpPost]
-        public IActionResult Edit(AppointmentGenarelVM ViewModel)
+
+        public IActionResult Edit(ReceptionAppiontmentViewModel ViewModel)
         {
-            // If the model is invalid, repopulate lists and return the view
-            ModelState.Remove<AppointmentGenarelVM>(a => a.PrescriptionViewModel.DoctorUserId);
+            ModelState.Remove<AppointmentGenarelVM>(a => a.Invoice.PaymentType);
+            ModelState.Remove<AppointmentGenarelVM>(a => a.Invoice.Apointment);
+            ModelState.Remove<AppointmentGenarelVM>(a => a.Invoice.Receptionist);
 
             if (!ModelState.IsValid)
             {
-                return Details(ViewModel.Id, "Edit");
+                return Edit(ViewModel.Id);
             }
 
             try
             {
                 // get the appointment from Repository 
                 var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);
-                apointment.ConvertAppointmentGenarelVMToApointment(ViewModel);
+                apointment.FromReceptionToAppointment(ViewModel);
 
                 apointment.ApointmentStatus = ApointmentStatusEnum.Confirmed;
                 // Update the appointment in the repository

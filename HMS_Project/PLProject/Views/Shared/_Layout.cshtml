@@ -26,7 +26,7 @@
 							<div class="main-menu">
 								<nav class="navigation">
 									<ul class="nav menu">
-										<li class="active">
+										<li class="">
 											<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 										</li>
 
@@ -72,9 +72,9 @@
 										@if (User.IsInRole(Roles.Receptionist) || User.IsInRole(Roles.Admin))
 										{
 											<li>
-												<a href="#">Billing</a>
+												<a href="#">Reception</a>
 												<ul class="dropdown">
-													<li><a asp-area="" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+													<li><a asp-area="" asp-controller="AppointmentReceptionist" asp-action="Index">Manage Appointments</a></li>
 												</ul>
 											</li>
 										}
@@ -152,6 +152,7 @@
 			</div>
 		</div>
 	</footer>
+
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>

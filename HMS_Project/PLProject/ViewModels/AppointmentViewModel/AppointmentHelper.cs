@@ -40,13 +40,41 @@ namespace PLProject.ViewModels.AppointmentViewModel
         {
             appointment.Examination = AppointmentGenarelVM.Examination;
             var PrescriptionVM = AppointmentGenarelVM.PrescriptionViewModel;
-            appointment.Prescription = new Prescription()
+            if(PrescriptionVM is not null)
             {
-                PrescriptionItems = PrescriptionVM.PrescriptionItems.Select(pi => pi.PrescriptionItemDoctorVMToPrescriptionItem()).ToList(),
-                DoctorUserId = appointment.DoctorUserId
-			};
+                appointment.Prescription = new Prescription()
+                {
+                    PrescriptionItems = PrescriptionVM.PrescriptionItems.Select(pi => pi.PrescriptionItemDoctorVMToPrescriptionItem()).ToList(),
+                    DoctorUserId = appointment.DoctorUserId
+                };
+            }
+            
             return appointment;
         }
 
+        public static Apointment FromReceptionToAppointment(this Apointment appointment, ReceptionAppiontmentViewModel receptionAppiontmentViewModel)
+        {
+            appointment.Invoice = receptionAppiontmentViewModel.Invoice;
+            appointment.Invoice.PaymentType = "Cash";
+            appointment.ReceptionistUserId = receptionAppiontmentViewModel.ReceptionistId;
+            appointment.Receptionist = receptionAppiontmentViewModel.Receptionist;
+            return appointment;
+        }
+        public static ReceptionAppiontmentViewModel ConvertToReceptionAppointmentVM(this Apointment appointment, Receptionist receptionist)
+        {
+            var AppointmentVM = new ReceptionAppiontmentViewModel();
+            AppointmentVM.Id = appointment.Id;
+            AppointmentVM.ApointmentDate = appointment.ApointmentDate;
+            AppointmentVM.ApointmentTime = appointment.ApointmentTime;
+            AppointmentVM.ApointmentStatus = appointment.ApointmentStatus;
+            AppointmentVM.Clinic = appointment.Clinic;
+            AppointmentVM.Patient = appointment.Patient;
+            AppointmentVM.Doctor = appointment.Doctor;
+            AppointmentVM.Invoice = appointment.Invoice;
+            AppointmentVM.Receptionist = receptionist;
+            AppointmentVM.ReceptionistId = receptionist.UserId;
+
+            return AppointmentVM;
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using BLLProject.Specification;
 using Microsoft.AspNetCore.Identity;
 using PLProject.ViewModels.AppointmentViewModel;
+using X.PagedList;
 
 namespace PLProject.Controllers
 {
