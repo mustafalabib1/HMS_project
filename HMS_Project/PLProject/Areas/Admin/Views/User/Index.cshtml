@@ -13,7 +13,7 @@
         <a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-primary">Add New User</a>
 
         <a href="@Url.Action("Index")" class="btn btn-secondary">Show All Users</a>
-        <a href="@Url.Action("Index", new { filterRole = "AdminAdmin" })" class="btn btn-secondary">Admins</a>
+        <a href="@Url.Action("Index", new { filterRole = "Admin" })" class="btn btn-secondary">Admins</a>
         <a href="@Url.Action("Index", new { filterRole = "Doctor" })" class="btn btn-secondary">Doctors</a>
         <a href="@Url.Action("Index", new { filterRole = "Patient" })" class="btn btn-secondary">Patients</a>
         <a href="@Url.Action("Index", new { filterRole = "Receptionist" })" class="btn btn-secondary">Receptionists</a>
