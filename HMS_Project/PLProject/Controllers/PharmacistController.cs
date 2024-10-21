@@ -9,20 +9,23 @@ namespace PLProject.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class PharmacistController : Controller
     {
+        #region DPI
         private readonly IUnitOfWork unitOfWork;
 
         public PharmacistController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
+        #endregion
 
-
+        #region Index 
         public IActionResult Index()
         {
             var pharmacists = unitOfWork.Repository<Pharmacist>().GetALL();
             var pharmacistViewModels = pharmacists.Select(p => (PharmacistViewModel)p).ToList();
             return View(pharmacistViewModels);
-        }
+        } 
+        #endregion
 
         #region Details
         [Route("Pharmacist/Details/{userId}")]
@@ -58,20 +61,22 @@ namespace PLProject.Controllers
             return View(pharmacistViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         [Route("Pharmacist/Edit/{userId}")]
-        public IActionResult Edit(PharmacistViewModel pharmacistViewModel)
+        public IActionResult Edit([FromRoute] int Id, PharmacistViewModel ViewModel)
         {
-            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(pharmacistViewModel.UserId);
+
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
+            var pharmacist = unitOfWork.Repository<Pharmacist>().Get(ViewModel.UserId);
             if (ModelState.IsValid) // server side validation
             {
-                pharmacist.UpdateInfo(pharmacistViewModel);
+                pharmacist.UpdateInfo(ViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            return View(pharmacistViewModel);
+            return View(ViewModel);
         }
         #endregion
-
     }
 }

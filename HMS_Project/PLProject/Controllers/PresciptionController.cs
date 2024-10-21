@@ -81,25 +81,28 @@ namespace PLProject.Controllers
 			return Details(Id, "Edit");
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> EditAsync(PrescriptionViewModel viewModel)
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit([FromRoute] int Id, PrescriptionViewModel ViewModel)
 		{
-			ModelState.Remove<PrescriptionViewModel>(p => p.DoctorUserId);
+
+            if (Id != ViewModel.prescriptionId)
+                return BadRequest();//400
+            ModelState.Remove<PrescriptionViewModel>(p => p.DoctorUserId);
             // If the model is invalid, repopulate lists and return the view
             if (!ModelState.IsValid)
 			{
-				return View(viewModel);
+				return View(ViewModel);
 			}
 
 			try
 			{
-				var user = await _userManager.GetUserAsync(User);
-				var updatedPrescription = unitOfWork.Repository<Prescription>().Get(viewModel.prescriptionId);
+				var user = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
+				var updatedPrescription = unitOfWork.Repository<Prescription>().Get(ViewModel.prescriptionId);
 				updatedPrescription.PharmacistUserId = user.Id;
 
 				//// Update the Prescription
 				
-				updatedPrescription.ConvertPrescriptionViewModelToPresciption(viewModel);
+				updatedPrescription.ConvertPrescriptionViewModelToPresciption(ViewModel);
 				
 				unitOfWork.Repository<Prescription>().Update(updatedPrescription);
 				unitOfWork.Complete();
@@ -111,7 +114,7 @@ namespace PLProject.Controllers
 				// Handle exceptions and add error messages to the model state
 				var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
 				ModelState.AddModelError(string.Empty, errorMessage);
-				return View(viewModel);
+				return View(ViewModel);
 			}
 		}
 		#endregion

@@ -13,6 +13,7 @@ namespace PLProject.Controllers
     [Authorize(Roles =$"{Roles.Admin}, {Roles.Receptionist}")]
     public class InvoiceController : Controller
     {
+        #region DPI
         private readonly IUnitOfWork unitOfWork;
         private readonly UserManager<AppUser> userManager;
 
@@ -21,10 +22,13 @@ namespace PLProject.Controllers
             this.unitOfWork = unitOfWork;
             userManager = UserManager;
         }
-        public async Task<IActionResult> IndexAsync(int? page)
+        #endregion
+
+        #region Index
+        public IActionResult Index(int? page)
         {
             // Get the current doctor ID
-            var user = await userManager.GetUserAsync(User);
+            var user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
 
             string UserId = user?.Id ?? string.Empty;
 
@@ -43,7 +47,9 @@ namespace PLProject.Controllers
             var paginatedList = patientappointments.ToPagedList(pageNumber, pageSize);
 
             return View(paginatedList);
-        }
+        } 
+        #endregion
+
         #region Create
         public IActionResult Create()
         {
@@ -134,6 +140,7 @@ namespace PLProject.Controllers
         }
         #endregion
 
+        #region Delete
         public IActionResult Delete(int? Id)
         {
             if (!Id.HasValue)
@@ -176,6 +183,7 @@ namespace PLProject.Controllers
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return View(ivoice);
             }
-        }
+        } 
+        #endregion
     }
 }

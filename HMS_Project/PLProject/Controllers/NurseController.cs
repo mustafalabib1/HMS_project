@@ -10,20 +10,22 @@ namespace PLProject.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class NurseController : Controller
     {
+        #region DPI
         private readonly IUnitOfWork unitOfWork;
-
         public NurseController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
+        #endregion
 
-
+        #region Index 
         public IActionResult Index()
         {
             var Nurses = unitOfWork.Repository<Nurse>().GetALL();
             var NurseViewModels = Nurses.Select(p => (NurseViewModel)p).ToList();
             return View(NurseViewModels);
-        }
+        } 
+        #endregion
 
         #region Details
         [Route("Nurse/Details/{userId}")]
@@ -59,19 +61,22 @@ namespace PLProject.Controllers
             return View(NurseViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         [Route("Nurse/Edit/{userId}")]
-        public IActionResult Edit(NurseViewModel NurseViewModel)
+        public IActionResult Edit([FromRoute] int Id, NurseViewModel ViewModel)
         {
-            var nurse = unitOfWork.Repository<Nurse>().Get(NurseViewModel.UserId);
+
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
+            var nurse = unitOfWork.Repository<Nurse>().Get(ViewModel.UserId);
 
             if (ModelState.IsValid) // server side validation
             {
-                nurse.UpdateInfo(NurseViewModel);
+                nurse.UpdateInfo(ViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            return View(NurseViewModel);
+            return View(ViewModel);
         }
         #endregion
     }

@@ -32,7 +32,7 @@ namespace PLProject.Controllers
 		#endregion
 
 		#region Get all Appointment for Doctor 
-		public async Task<IActionResult> IndexAsync(int? page )
+		public async Task<IActionResult> Index(int? page )
 		{
 			// Get the current doctor ID
 			var user = await userManager.GetUserAsync(User);
@@ -85,11 +85,14 @@ namespace PLProject.Controllers
 			return Details(Id, "Edit");
 		}
 
-		[HttpPost]
-		public IActionResult Edit(AppointmentGenarelVM ViewModel)
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit([FromRoute] int Id,AppointmentGenarelVM ViewModel)
 		{
+
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
 			// If the model is invalid, repopulate lists and return the view
-			ModelState.Remove<AppointmentGenarelVM>(a => a.PrescriptionViewModel.DoctorUserId);
+            ModelState.Remove<AppointmentGenarelVM>(a => a.PrescriptionViewModel.DoctorUserId);
 
             if (!ModelState.IsValid)
 			{
@@ -119,6 +122,5 @@ namespace PLProject.Controllers
 			}
 		}
 		#endregion
-
 	}
 }

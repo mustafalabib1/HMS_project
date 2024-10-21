@@ -14,12 +14,14 @@ namespace PLProject.Controllers
 	[Authorize(Roles = Roles.Admin)]
 	public class DoctorController : Controller
 	{
+		#region DPI
 		private readonly IUnitOfWork unitOfWork;
 
 		public DoctorController(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
-		}
+		} 
+		#endregion
 
 		#region Index (List Doctors)
 		public IActionResult Index()
@@ -71,7 +73,6 @@ namespace PLProject.Controllers
         #endregion
 
         #region Edit
-        [HttpGet]
         [Route("Doctor/Edit/{userId}")]
         public IActionResult Edit(string userId)
 		{
@@ -92,20 +93,22 @@ namespace PLProject.Controllers
             return View(doctorViewModel);
 		}
 
-		[HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         [Route("Doctor/Edit/{userId}")]
-        public IActionResult Edit(DoctorViewModel doctorViewModel)
+        public IActionResult Edit([FromRoute] int Id,DoctorViewModel ViewModel)
 		{
-			Doctor doctor = unitOfWork.Repository<Doctor>().Get(doctorViewModel.UserId);
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
+            Doctor doctor = unitOfWork.Repository<Doctor>().Get(ViewModel.UserId);
 			
             if (ModelState.IsValid)
 			{
-                doctor.UpdatedDoctor(doctorViewModel);
+                doctor.UpdatedDoctor(ViewModel);
                 unitOfWork.Complete();
 				return RedirectToAction(nameof(Index));
 			}
-			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
-			return View(doctorViewModel);
+			ViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
+			return View(ViewModel);
 		}
 		#endregion
 

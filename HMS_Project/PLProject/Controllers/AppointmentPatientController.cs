@@ -17,24 +17,26 @@ namespace PLProject.Controllers
 	[Authorize(Roles = Roles.Patient)]
 	public class AppointmentPatientController : Controller
 	{
-		private readonly IUnitOfWork unitOfWork;
-		private readonly UserManager<AppUser> userManager;
-		private readonly IWebHostEnvironment env;
-		private string UserId;
+        #region DPI
+        private readonly IUnitOfWork unitOfWork;
+        private readonly UserManager<AppUser> userManager;
+        private readonly IWebHostEnvironment env;
+        private string UserId;
 
 
-		public AppointmentPatientController(IUnitOfWork unitOfWork, UserManager<AppUser> UserManager, IWebHostEnvironment _env)
-		{
-			this.unitOfWork = unitOfWork;
-			userManager = UserManager;
-			env = _env;
-		}
+        public AppointmentPatientController(IUnitOfWork unitOfWork, UserManager<AppUser> UserManager, IWebHostEnvironment _env)
+        {
+            this.unitOfWork = unitOfWork;
+            userManager = UserManager;
+            env = _env;
+        } 
+        #endregion
 
-		#region Get all Appointment for patient 
-		public async Task<IActionResult> IndexAsync(int? page)
+        #region Get all Appointment for patient 
+        public IActionResult Index(int? page)
 		{
 			// Get the current doctor ID
-			var user = await userManager.GetUserAsync(User);
+			var user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
 
 			UserId = user?.Id ?? string.Empty;
 
@@ -51,7 +53,7 @@ namespace PLProject.Controllers
 		}
         #endregion
 
-        #region Patient Create Appointment
+        #region Create 
         public IActionResult Create(ClinicAvailabilityViewModel model)
         {
             // Set the default year and month to the current if not provided
@@ -126,7 +128,7 @@ namespace PLProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult ConfirmAppointment(ApointmentCreateVM model)
+        public IActionResult Create(ApointmentCreateVM model)
         {
             var user = userManager.GetUserAsync(User).Result;
             model.PatientId = user?.Id??string.Empty;
@@ -145,7 +147,6 @@ namespace PLProject.Controllers
         #endregion
 
         #region Details
-
         public IActionResult Details(int? Id, string viewname = "Details")
 		{
 			if (!Id.HasValue)
@@ -171,11 +172,11 @@ namespace PLProject.Controllers
 			return Details(Id, "Delete");
 		}
 
-		[HttpPost]
-		public IActionResult Delete([FromRoute] int Id, AppointmentGenarelVM ViewModel)
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete([FromRoute] int Id, AppointmentGenarelVM ViewModel)
 		{
 			if (Id != ViewModel.Id)
-				return BadRequest();
+				return BadRequest();//400
 			try
 			{
 				var apointment = unitOfWork.Repository<Apointment>().Get(ViewModel.Id);

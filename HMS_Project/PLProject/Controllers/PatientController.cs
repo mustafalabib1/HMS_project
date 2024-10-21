@@ -8,6 +8,7 @@ namespace PLProject.Controllers
 {
     public class PatientController : Controller
     {
+        #region DPi
         private readonly IUnitOfWork unitOfWork;
 
         public PatientController(IUnitOfWork unitOfWork)
@@ -15,13 +16,16 @@ namespace PLProject.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        #endregion
 
+        #region Idnex
         public IActionResult Index()
         {
             var Patients = unitOfWork.Repository<Patient>().GetALL();
             var PatientViewModels = Patients.Select(p => (PatientViewModel)p).ToList();
             return View(PatientViewModels);
-        }
+        } 
+        #endregion
 
         #region Details
         public IActionResult Details(string userId)
@@ -56,18 +60,20 @@ namespace PLProject.Controllers
             return View(PatientViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         [Route("Patient/Edit/{userId}")]
-        public IActionResult Edit(PatientViewModel patientViewModel)
+        public IActionResult Edit([FromRoute] int Id, PatientViewModel ViewModel)
         {
-            var patient = unitOfWork.Repository<Patient>().Get(patientViewModel.UserId);
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
+            var patient = unitOfWork.Repository<Patient>().Get(ViewModel.UserId);
             if (ModelState.IsValid) // server side validation
             {
-                patient.UpdateInfo(patientViewModel);
+                patient.UpdateInfo(ViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            return View(patientViewModel);
+            return View(ViewModel);
         }
         #endregion
     }

@@ -28,7 +28,7 @@
 
             @if (Model.AvailableDays != null && Model.AvailableDays.Any())
             {
-                <form method="post" action="@Url.Action("ConfirmAppointment")" id="appointment-form">
+                <form method="post" action="@Url.Action("Create")" id="appointment-form">
                     <!-- Hidden inputs to hold selected values -->
                     <input type="hidden" name="ClinicId" value="@Model.SelectedClinicId" />
                     <input type="hidden" name="SelectedDoctorId" id="SelectedDoctorId" />

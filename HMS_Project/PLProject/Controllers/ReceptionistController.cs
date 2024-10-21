@@ -64,21 +64,22 @@ namespace PLProject.Controllers
             return View(receptionistViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         [Route("Receptionist/Edit/{userId}")]
-        public IActionResult Edit(ReceptionistViewModel receptionistViewModel)
+        public IActionResult Edit([FromRoute] int Id, ReceptionistViewModel ViewModel)
         {
-            var receptionist = unitOfWork.Repository<Receptionist>().Get(receptionistViewModel.UserId);
+
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
+            var receptionist = unitOfWork.Repository<Receptionist>().Get(ViewModel.UserId);
             if (ModelState.IsValid) // server side validation
             {
-                receptionist.UpdateInfo(receptionistViewModel);
+                receptionist.UpdateInfo(ViewModel);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
-            return View(receptionistViewModel);
+            return View(ViewModel);
         }
-
-
         #endregion
     }
 }

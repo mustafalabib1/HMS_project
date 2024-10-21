@@ -13,6 +13,7 @@ namespace PLProject.Controllers
     [Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
     public class MedicationController : Controller
     {
+        #region DPI
         private readonly IUnitOfWork unitOfWork;
         private readonly IWebHostEnvironment env;
 
@@ -22,6 +23,9 @@ namespace PLProject.Controllers
             this.env = env;
         }
 
+        #endregion
+
+        #region Index 
         // Index Action
         public IActionResult Index(string searchQuery, int page = 1)
         {
@@ -44,7 +48,9 @@ namespace PLProject.Controllers
 
             return View(pagedList);
         }
+        #endregion
 
+        #region Greate
         // Create Action (GET)
         public IActionResult Create()
         {
@@ -101,7 +107,9 @@ namespace PLProject.Controllers
 
             return View(medicationViewModel); // Return the view with the model to show validation errors
         }
+        #endregion
 
+        #region Edit
         // Edit Action (GET)
         public IActionResult Edit(int id)
         {
@@ -125,22 +133,25 @@ namespace PLProject.Controllers
         }
 
         // Edit Action (POST)
-        [HttpPost]
-        public IActionResult Edit(MedicationViewModel medicationViewModel)
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit([FromRoute] int Id, MedicationViewModel ViewModel)
         {
+
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
             if (ModelState.IsValid)
             {
                 // Retrieve the existing medication from the database
-                var medication = unitOfWork.Repository<Medication>().Get(medicationViewModel.Id);
+                var medication = unitOfWork.Repository<Medication>().Get(ViewModel.Id);
 
                 if (medication == null) return NotFound();
 
                 // Update medication properties
-                medication.MedName = medicationViewModel.Name;
-                medication.Strength = medicationViewModel.Strength;
+                medication.MedName = ViewModel.Name;
+                medication.Strength = ViewModel.Strength;
 
                 // Update the active substances
-                medication.ActiveSubstances = medicationViewModel.ActiveSubstanceIds
+                medication.ActiveSubstances = ViewModel.ActiveSubstanceIds
                     .Select(id => new ActiveSubstance { Id = id })
                     .ToList();
 
@@ -153,16 +164,17 @@ namespace PLProject.Controllers
             }
 
             // If the model state is invalid, repopulate the active substances
-            medicationViewModel.ActiveSubstances = unitOfWork.Repository<ActiveSubstance>().GetALL().Select(a => new ActiveSubstanceViewModel
+            ViewModel.ActiveSubstances = unitOfWork.Repository<ActiveSubstance>().GetALL().Select(a => new ActiveSubstanceViewModel
             {
                 Id = a.Id,
                 ActiveSubstancesName = a.ActiveSubstancesName
             }).ToList();
 
-            return View(medicationViewModel); // Return the view with the model to show validation errors
+            return View(ViewModel); // Return the view with the model to show validation errors
         }
+        #endregion
 
-
+        #region Details
         // Details Action
         public IActionResult Details(int id)
         {
@@ -182,9 +194,8 @@ namespace PLProject.Controllers
             };
 
             return View(medicationViewModel);
-        }
-
-
+        } 
+        #endregion
 
         public IActionResult Delete(int id)
         {
@@ -207,16 +218,31 @@ namespace PLProject.Controllers
         }
 
         // Delete Action (POST)
-        [HttpPost, ActionName("DeleteConfirmed")]
-        public IActionResult DeleteConfirmed(int id)
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete([FromRoute] int Id, MedicationViewModel ViewModel)
         {
-            var medication = unitOfWork.Repository<Medication>().Get(id);
-            if (medication != null)
+
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
+            try
             {
+                var medication = unitOfWork.Repository<Medication>().Get(ViewModel.Id);
                 unitOfWork.Repository<Medication>().Delete(medication);
-                unitOfWork.Complete(); // Save changes to the database
+                unitOfWork.Complete();
+
+
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            catch (Exception ex)
+            {
+
+                if (env.IsDevelopment())
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                else
+                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+
+                return View(ViewModel);
+            }
         }
     }
 }

@@ -14,11 +14,11 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 [Authorize(Roles = $"{Roles.Admin}, {Roles.Pharmacist}")]
 public class ActiveSubstanceController : Controller
 {
+	#region DPI
+
 	private readonly IWebHostEnvironment env;
 	private readonly HMSdbcontextProcedures procedures;
 	private readonly IUnitOfWork unitOfWork;
-	#region DPI
-
 
 	public ActiveSubstanceController(IWebHostEnvironment _env, HMSdbcontextProcedures procedures, IUnitOfWork unitOfWork)
 	{
@@ -113,13 +113,15 @@ public class ActiveSubstanceController : Controller
 		return Details(Id, "Delete");
 	}
 
-	[HttpPost]
-	public async Task<ActionResult> Delete(ActiveSubstanceViewModel substance)
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<ActionResult> Delete([FromRoute]int Id,ActiveSubstanceViewModel viewModel)
 	{
+		if (Id != viewModel.Id)
+				return BadRequest();//400
 		try
 		{
 
-			await procedures.sp_DeleteActiveSubstanceAsync(substance.Id);
+			await procedures.sp_DeleteActiveSubstanceAsync(viewModel.Id);
 
 			return RedirectToAction(nameof(Index));
 		}
@@ -131,7 +133,7 @@ public class ActiveSubstanceController : Controller
 			else
 				ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
 
-			return View(substance);
+			return View(viewModel);
 		}
 	}
 	#endregion
@@ -142,28 +144,31 @@ public class ActiveSubstanceController : Controller
 		return Details(Id, "Edit");
 	}
 
-	[HttpPost]
-	public IActionResult Edit(ActiveSubstanceViewModel substance)
+    [HttpPost, ValidateAntiForgeryToken]   
+    public IActionResult Edit([FromRoute] int Id, ActiveSubstanceViewModel viewModel)
 	{
-		// Add medications associated with the substance
-		substance.Medications.AddRange(unitOfWork.Repository<Medication>().Find(x => substance.MedicationId.Contains(x.Id)));
+
+        if (Id != viewModel.Id)
+            return BadRequest();//400
+                                // Add medications associated with the substance
+        viewModel.Medications.AddRange(unitOfWork.Repository<Medication>().Find(x => viewModel.MedicationId.Contains(x.Id)));
 		unitOfWork.Complete();
 
 		// Get the active substance from the repository
-		var activeSubstance = unitOfWork.Repository<ActiveSubstance>().Get(substance.Id);
+		var activeSubstance = unitOfWork.Repository<ActiveSubstance>().Get(viewModel.Id);
 
 		// Add New medication to the active substance
-		activeSubstance.Medications.AddRange(substance.Medications);
+		activeSubstance.Medications.AddRange(viewModel.Medications);
 		unitOfWork.Complete();
 		// Add New interactions to the active substance
-		activeSubstance.ActSub1.AddRange(((ActiveSubstance)substance).ActSub1);
+		activeSubstance.ActSub1.AddRange(((ActiveSubstance)viewModel).ActSub1);
 		unitOfWork.Complete();
-		activeSubstance.ActiveSubstancesName = substance.ActiveSubstancesName;
+		activeSubstance.ActiveSubstancesName = viewModel.ActiveSubstancesName;
 
 		// If the model is invalid, repopulate lists and return the view
 		if (!ModelState.IsValid)
 		{
-			return View(substance);
+			return View(viewModel);
 		}
 
 		try
@@ -179,7 +184,7 @@ public class ActiveSubstanceController : Controller
 			var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
 			ModelState.AddModelError(string.Empty, errorMessage);
 
-			return View(substance);
+			return View(viewModel);
 		}
 	}
 
@@ -323,6 +328,4 @@ public class ActiveSubstanceController : Controller
 	}
 	#endregion
 	#endregion
-
-
 }

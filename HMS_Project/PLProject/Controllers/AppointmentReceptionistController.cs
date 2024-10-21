@@ -26,7 +26,7 @@ namespace PLProject.Controllers
         #endregion
 
         #region Get all Appointment for Receptionist
-        public async Task<IActionResult> IndexAsync(int? page)
+        public IActionResult Index(int? page)
         {
 
             var spec = new BaseSpecification<Apointment>(a => /*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/ a.ApointmentStatus == ApointmentStatusEnum.Scheduled);
@@ -45,7 +45,6 @@ namespace PLProject.Controllers
 
             return View(paginatedList);
         }
-
         #endregion
 
         #region Details
@@ -65,7 +64,6 @@ namespace PLProject.Controllers
                 return NotFound(); // 404
 
             return View(viewname, apointmentVM);
-
         }
         #endregion
 
@@ -91,10 +89,11 @@ namespace PLProject.Controllers
             return View(apointmentVM);
         }
 
-        [HttpPost]
-
-        public IActionResult Edit(ReceptionAppiontmentViewModel ViewModel)
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit([FromRoute] int Id, ReceptionAppiontmentViewModel ViewModel)
         {
+            if (Id != ViewModel.Id)
+                return BadRequest();//400
             ModelState.Remove<ReceptionAppiontmentViewModel>(a => a.Invoice.PaymentType);
             ModelState.Remove<ReceptionAppiontmentViewModel>(a => a.Invoice.Apointment);
             ModelState.Remove<ReceptionAppiontmentViewModel>(a => a.Invoice.Receptionist);
