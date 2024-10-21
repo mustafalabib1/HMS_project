@@ -1,14 +1,16 @@
 ﻿@model ReceptionistViewModel
 @{
-    ViewData["Title"] = "Delete Receptionist";
+	ViewData["Title"] = "Delete Receptionist";
 }
-<h1>Are you sure you want to delete this receptionist?</h1>
-<br />
-<br />
+<div class="container mt-5">
+	<h1>Are you sure you want to delete this receptionist?</h1>
+	<br />
+	<br />
 
-<form asp-controller="Receptionist" asp-action="Delete" method="post">
-    <partial name="userpartialviews\_UserDetailsDeletePartial" model="@Model" />
+	<form asp-controller="Receptionist" asp-action="Delete" method="post">
+		<partial name="userpartialviews\_UserDetailsDeletePartial" model="@Model" />
 
-    <!-- Delete and Cancel Buttons -->
-    <partial name="_ButtonsInDeletePartial" />
-</form>
+		<!-- Delete and Cancel Buttons -->
+		<partial name="_ButtonsInDeletePartial" />
+	</form>
+</div>

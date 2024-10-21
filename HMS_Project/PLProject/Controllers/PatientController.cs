@@ -62,9 +62,9 @@ namespace PLProject.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         [Route("Patient/Edit/{userId}")]
-        public IActionResult Edit([FromRoute] int Id, PatientViewModel ViewModel)
+        public IActionResult Edit([FromRoute] string userId, PatientViewModel ViewModel)
         {
-            if (Id != ViewModel.Id)
+            if (userId != ViewModel.UserId)
                 return BadRequest();//400
             var patient = unitOfWork.Repository<Patient>().Get(ViewModel.UserId);
             if (ModelState.IsValid) // server side validation

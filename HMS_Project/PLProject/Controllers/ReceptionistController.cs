@@ -66,10 +66,10 @@ namespace PLProject.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         [Route("Receptionist/Edit/{userId}")]
-        public IActionResult Edit([FromRoute] int Id, ReceptionistViewModel ViewModel)
+        public IActionResult Edit([FromRoute] string userId, ReceptionistViewModel ViewModel)
         {
 
-            if (Id != ViewModel.Id)
+            if (userId != ViewModel.UserId)
                 return BadRequest();//400
             var receptionist = unitOfWork.Repository<Receptionist>().Get(ViewModel.UserId);
             if (ModelState.IsValid) // server side validation

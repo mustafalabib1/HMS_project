@@ -1,25 +1,19 @@
 ﻿@model MedicationViewModel
 
 @{
-    ViewData["Title"] = "Medication Details";
+	ViewData["Title"] = "Medication Details";
 }
+<div class="container mt-5">
+	<h2>Medication Details</h2>
 
-<h2>Medication Details</h2>
+	<partial name="PartialViews/DetailsDeleteMedicationPartial" />
 
-
-
-
-
-
-<partial name="PartialViews/DetailsDeleteMedicationPartial" />
-
-
-    <div class="mt-3">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-    </div>
-
+	<div class="mt-3">
+		<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+		<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+		<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+	</div>
+</div>
 
 
 

@@ -1,31 +1,31 @@
 ﻿@model MedicationViewModel
 
 @{
-    ViewData["Title"] = "Delete Medication";
+	ViewData["Title"] = "Delete Medication";
 }
+<div class="container mt-5">
+	<h1 class="mb-4 text-danger">Are You Sure You Want to Delete This Medication?</h1>
 
-<h1 class="mb-4 text-danger">Are You Sure You Want to Delete This Medication?</h1>
+	<div class="alert alert-warning">
+		<i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this medication, all related data will be removed permanently.
+	</div>
 
-<div class="alert alert-warning">
-    <i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this medication, all related data will be removed permanently.
+	<form asp-action="Delete" method="post">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+		<partial name="PartialViews/DetailsDeleteMedicationPartial" />
+
+		<input type="hidden" asp-for="Id" />
+
+		<!-- Delete and Cancel Buttons -->
+		<div class="mt-3">
+			<button type="submit" class="btn btn-danger">Delete</button>
+			<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+		</div>
+	</form>
 </div>
 
-<form asp-action="Delete" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-    
-        <partial name="PartialViews/DetailsDeleteMedicationPartial" />
-
-    <input type="hidden" asp-for="Id" />
-
-    <!-- Delete and Cancel Buttons -->
-    <div class="mt-3">
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
-
-  
-    
 

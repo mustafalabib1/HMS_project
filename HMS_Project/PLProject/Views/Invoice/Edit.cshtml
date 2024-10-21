@@ -2,11 +2,10 @@
 @{
     ViewData["Title"] = "Invoice Edit";
 }
-
+<div class="container mt-5">
 <h1>Edit Invoice</h1>
 <br />
-<br />
-<br />
+
 <form asp-asp-controller="Invoice" asp-action="Edit" method="post">
 
     <partial name="PartialViews/CreateEditInvoicePartial" model="@Model"></partial>
@@ -14,4 +13,4 @@
     <!-- Action Buttons -->
     <partial name="_ButtonsInEditPartial" />
 </form>
-
+</div>

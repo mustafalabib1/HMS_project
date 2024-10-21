@@ -1,22 +1,21 @@
 ﻿@model PatientViewModel
 @{
-    ViewData["Title"] = "Edit Patient";
+	ViewData["Title"] = "Edit Patient";
 }
+<div class="container mt-5">
+	<h1>Edit Patient</h1>
+	<br />
 
-<h1>Edit Patient</h1>
-<br />
-<br />
+	<form asp-controller="Patient" asp-action="Edit" method="post">
 
-<form asp-controller="Patient" asp-action="Edit" method="post">
-
-    <partial name="userpartialviews\_UserEditPartial" model="@Model" />
-    <!-- Action Buttons -->
-    <partial name="_ButtonsInEditPartial" />
-</form>
-
+		<partial name="userpartialviews\_UserEditPartial" model="@Model" />
+		<!-- Action Buttons -->
+		<partial name="_ButtonsInEditPartial" />
+	</form>
+</div>
 <!-- Scripts for Validation -->
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }

@@ -1,17 +1,15 @@
 ﻿@model InvoiceViewModel
 @{
-    ViewData["Title"] = "Delete";
+	ViewData["Title"] = "Delete";
 }
+<div class="container mt-5">
+	<h1>Are U Sure?</h1>
+	<br />
+	<form asp-asp-controller="Invoice" asp-action="Delete" method="post">
 
-<h1>Are U Sure?</h1>
-<br />
-<br />
-<br />
-<form asp-asp-controller="Invoice" asp-action="Delete" method="post">
- 
-    
-    <partial name="PartialViews/DetailsDeleteInvoicePartial" model="@Model"></partial>
-    <!-- Delete and Cancel Buttons -->
-    <partial name="_ButtonsInDeletePartial" />
-</form>
 
+		<partial name="PartialViews/DetailsDeleteInvoicePartial" model="@Model"></partial>
+		<!-- Delete and Cancel Buttons -->
+		<partial name="_ButtonsInDeletePartial" />
+	</form>
+</div>

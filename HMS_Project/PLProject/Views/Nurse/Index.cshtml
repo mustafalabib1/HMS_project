@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<NurseViewModel>
 @{
-    ViewData["Title"] = "Nurses";
-    ViewData["User"] = "Nurse";
+	ViewData["Title"] = "Nurses";
+	ViewData["User"] = "Nurse";
 
 }
-
-<partial name="userpartialviews\_UserIndexPartial" model="@Model" />
-
+<div class="container mt-5">
+	<partial name="userpartialviews\_UserIndexPartial" model="@Model" />
+</div>

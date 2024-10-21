@@ -1,23 +1,22 @@
 ﻿@model ReceptionistViewModel
 
 @{
-    ViewData["Title"] = "Create Receptionist";
+	ViewData["Title"] = "Create Receptionist";
 }
+<div class="container mt-5">
+	<h2>Create Receptionist</h2>
 
-<h2>Create Receptionist</h2>
+	<form asp-action="Create" method="post">
 
-
-<form asp-action="Create" method="post">
-    
-    <partial name="userpartialviews\_UserCreatePartial" />
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>
-
+		<partial name="userpartialviews\_UserCreatePartial" />
+		<!-- Submit Button -->
+		<button type="submit" class="btn btn-primary mt-2">Submit</button>
+	</form>
+</div>
 <!-- Scripts for Validation -->
 @section Scripts {
-@{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
 

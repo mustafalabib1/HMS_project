@@ -1,23 +1,23 @@
 ﻿@model NurseViewModel
 
 @{
-    ViewData["Title"] = "Create Nurse";
+	ViewData["Title"] = "Create Nurse";
 }
+<div class="container mt-5">
+	<h2>Create Nurse</h2>
 
-<h2>Create Nurse</h2>
-
-<form asp-action="Create" method="post">
-    <partial name="userpartialviews\_UserCreatePartial" />
+	<form asp-action="Create" method="post">
+		<partial name="userpartialviews\_UserCreatePartial" />
 
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-    <a asp-controller="Nurse" asp-action="Index" class="btn btn-light">Back To List</a>
-</form>
-
+		<!-- Submit Button -->
+		<button type="submit" class="btn btn-primary mt-2">Submit</button>
+		<a asp-controller="Nurse" asp-action="Index" class="btn btn-light">Back To List</a>
+	</form>
+</div>
 <!-- Scripts for Validation -->
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }

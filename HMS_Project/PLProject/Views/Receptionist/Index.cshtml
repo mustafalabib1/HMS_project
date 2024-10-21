@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<ReceptionistViewModel>
 @{
-    ViewData["Title"] = "Receptionists";
-    ViewData["User"]= "Receptionist";
+	ViewData["Title"] = "Receptionists";
+	ViewData["User"] = "Receptionist";
 }
-
-<partial name="userpartialviews\_UserIndexPartial" model="@Model" />
-
+<div class="container mt-5">
+	<partial name="userpartialviews\_UserIndexPartial" model="@Model" />
+</div>

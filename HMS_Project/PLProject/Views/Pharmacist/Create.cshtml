@@ -1,16 +1,16 @@
 ﻿@model PharmacistViewModel
 
 @{
-    ViewData["Title"] = "Create Pharmacist";
+	ViewData["Title"] = "Create Pharmacist";
 }
+<div class="container mt-5">
+	<h2>Create Pharmacist</h2>
 
-<h2>Create Pharmacist</h2>
+	<form asp-action="Create" method="post">
 
-<form asp-action="Create" method="post">
+		<partial name="userpartialviews\_UserCreatePartial" />
 
-    <partial name="userpartialviews\_UserCreatePartial" />
-
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>
-
+		<!-- Submit Button -->
+		<button type="submit" class="btn btn-primary mt-2">Submit</button>
+	</form>
+</div>

@@ -1,14 +1,15 @@
 ﻿@model ReceptionistViewModel
 @{
-    ViewData["Title"] = "Edit Receptionist";
+	ViewData["Title"] = "Edit Receptionist";
 }
+<div class="container mt-5">
+	<h1>Edit Receptionist</h1>
 
-<h1>Edit Receptionist</h1>
+	<form asp-controller="Receptionist" asp-action="Edit" method="post">
 
-<form asp-controller="Receptionist" asp-action="Edit" method="post">
+		<partial name="userpartialviews\_UserEditPartial" model="@Model" />
 
-    <partial name="userpartialviews\_UserEditPartial" model="@Model" />
-
-    <!-- Action Buttons -->
-    <partial name="_ButtonsInEditPartial" />
-</form>
+		<!-- Action Buttons -->
+		<partial name="_ButtonsInEditPartial" />
+	</form>
+</div>

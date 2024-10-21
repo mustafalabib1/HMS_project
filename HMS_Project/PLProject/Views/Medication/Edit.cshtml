@@ -1,47 +1,37 @@
 ﻿@model PLProject.ViewModels.MedicationViewModel
 
 @{
-    ViewData["Title"] = "Edit Medication";
+	ViewData["Title"] = "Edit Medication";
 }
+<div class="container mt-5">
+	<h2>Edit Medication</h2>
 
-<h2>Edit Medication</h2>
+	<form asp-action="Edit" method="post">
 
+		<partial name="PartialViews/CreateEditMedicationPartial" />
 
-
-<form asp-action="Edit" method="post">
-
-
-    <partial name="PartialViews/CreateEditMedicationPartial" />
-
-
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Save </button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </div>
-   
-</form>
-
-
-
-
-
-
+		<div class="mt-3">
+			<button type="submit" class="btn btn-primary">Save </button>
+			<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+		</div>
+	</form>
+</div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script src="~/select2/js/select2.min.js"></script>
-    <link href="~/select2/css/select2.min.css" rel="stylesheet" />
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script src="~/select2/js/select2.min.js"></script>
+	<link href="~/select2/css/select2.min.css" rel="stylesheet" />
 
-    <script>
-        $(document).ready(function () {
-            // Initialize Select2 for the active substances dropdown
-            $('.select2-multiple').select2({
-                placeholder: "Select from the list",
-                allowClear: true,
-                width: '100%'
-            });
-        });
-    </script>
+	<script>
+		$(document).ready(function () {
+			// Initialize Select2 for the active substances dropdown
+			$('.select2-multiple').select2({
+				placeholder: "Select from the list",
+				allowClear: true,
+				width: '100%'
+			});
+		});
+	</script>
 }

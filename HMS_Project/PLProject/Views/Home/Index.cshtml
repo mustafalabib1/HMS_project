@@ -1,8 +1,9 @@
-﻿
+﻿@inject IUnitOfWork unitOfWork;
 @{
+	// Fetch all clinics
+	var Clinics = unitOfWork.Repository<Clinic>().GetALL().ToList();
 	ViewData["Title"] = "Home Page";
 }
-
 <div class="cover" style="background-image:url('img/slider2.jpg')">
 	<div class="container">
 		<div class="row">
@@ -13,18 +14,16 @@
 					<div class="book-box">
 						<div class="title">
 							<p><i class="fa-regular fa-calendar-check me-2"></i>Book a doctor</p>
-                        </div>
+						</div>
 						<div class="options">
 							<form class="d-flex mt-2">
 								<select class="form-select clin spec" aria-label="Default select example">
+
 									<option selected>Clinic</option>
-									<option>a</option>
-									<option>b</option>
-									<option>c</option>
-									<option>d</option>
-									<option>e</option>
-									<option>f</option>
-									<option>g</option>
+									@foreach (var Clinic in Clinics)
+									{
+										<option selected>Clinic</option>
+									}
 								</select>
 								<button type="submit"><i class="fa-solid fa-magnifying-glass me-1"></i>Search</button>
 							</form>
@@ -96,8 +95,10 @@
 				<div class="section-title">
 					<h2>We Are Always Ready to Help You & Your Family</h2>
 					<img class="mt-2" src="img/section-img.png" alt="#">
-					<p class="mt-2">Your health and well-being are our top priority. At our clinic, we provide comprehensive healthcare services designed
-					<br /> to meet the needs of both individuals and families. From emergency care to preventive treatments, we’ve got you covered.</p>
+					<p class="mt-2">
+						Your health and well-being are our top priority. At our clinic, we provide comprehensive healthcare services designed
+						<br /> to meet the needs of both individuals and families. From emergency care to preventive treatments, we’ve got you covered.
+					</p>
 				</div>
 			</div>
 		</div>
@@ -139,8 +140,10 @@
 				<div class="section-title">
 					<h2>We Offer Different Services To Improve Your Health</h2>
 					<img class="mt-2" src="img/section-img-white.png" alt="#">
-					<p class="mt-2">At our clinic, we provide a wide range of medical services designed to address all your health concerns. 
-					<br /> From preventive care to advanced surgical treatments, our expert team is here to ensure you receive the highest standard of care.</p>
+					<p class="mt-2">
+						At our clinic, we provide a wide range of medical services designed to address all your health concerns.
+						<br /> From preventive care to advanced surgical treatments, our expert team is here to ensure you receive the highest standard of care.
+					</p>
 				</div>
 			</div>
 		</div>

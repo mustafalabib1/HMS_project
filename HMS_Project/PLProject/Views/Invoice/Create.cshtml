@@ -1,23 +1,24 @@
 ﻿@model InvoiceViewModel
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
+<div class="container mt-5">
+	<h1>Create New Invoice</h1>
+	<br />
+	<br />
 
-<h1>Create New Invoice</h1>
-<br />
-<br />
-
-<form asp-asp-controller="Invoice" asp-action="Create" method="post">
-  
-
-    <partial name="PartialViews/CreateEditInvoicePartial"></partial>
+	<form asp-asp-controller="Invoice" asp-action="Create" method="post">
 
 
+		<partial name="PartialViews/CreateEditInvoicePartial"></partial>
 
-    <input type="submit" value="Create" class="btn btn-primary mt-2" />
-    <a asp-controller="Invoice" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
-</form>
+
+
+		<input type="submit" value="Create" class="btn btn-primary mt-2" />
+		<a asp-controller="Invoice" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
+	</form>
+</div>
 @section ClientSideValidation {
-    <partial name="_ValidationScriptsPartial"></partial>
+	<partial name="_ValidationScriptsPartial"></partial>
 }
 

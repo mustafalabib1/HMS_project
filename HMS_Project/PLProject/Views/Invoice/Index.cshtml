@@ -1,111 +1,112 @@
 ﻿@model IEnumerable<Invoice>
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
-<div class="title"><h1>Invoices</h1></div>
+<div class="container mt-5">
+	<div class="title"><h1>Invoices</h1></div>
 
-<br />
-<br />
-<div class="create-invoice">
-    <a asp-controller="Invoice" asp-action="Create" class="btn btn-primary" id="createbtn"><i class="fa-solid fa-plus"></i>Create New Invoice</a>
+	<br />
+	<br />
+	<div class="create-invoice">
+		<a asp-controller="Invoice" asp-action="Create" class="btn btn-primary" id="createbtn"><i class="fa-solid fa-plus"></i>Create New Invoice</a>
+	</div>
+	<br />
+	@if (Model.Count() > 0)
+	{
+		<table class="mt-4 table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>@Html.DisplayNameFor(I => I.InvoiceDate)</th>
+					<th>@Html.DisplayNameFor(I => I.TotalAmount)</th>
+					<th>@Html.DisplayNameFor(I => I.PaymentStatus)</th>
+					<th>@Html.DisplayNameFor(I => I.PaymentType)</th>
+					@*                 <th>@Html.DisplayNameFor(I => I.ApointmentId)</th> *@
+					<th>@Html.DisplayNameFor(I => I.ReceptionistUserId)</th>
+					<th>Details</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var invoice in Model)
+				{
+					<tr>
+						<td class="align-content-center">@Html.DisplayFor(I => invoice.InvoiceDate)</td>
+						<td class="align-content-center">@Html.DisplayFor(I => invoice.TotalAmount)</td>
+						<td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentStatus)</td>
+						<td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentType)</td>
+						@*                     <td class="align-content-center">@Html.DisplayFor(I => invoice.ApointmentId)</td> *@
+						<td class="align-content-center">@Html.DisplayFor(I => invoice.ReceptionistUserId)</td>
+
+						<partial name="_ButtonsPartial" model="@invoice.Id"></partial>
+					</tr>
+				}
+			</tbody>
+			@*  <tbody>
+		@foreach (var invoice in Model)
+		{
+		<tr>
+		<td class="align-content-center">@invoice.InvoiceDate</td>
+		<td class="align-content-center">@invoice.TotalAmount</td>
+		<td class="align-content-center">@invoice.PaymentStatus</td>
+		<td class="align-content-center">@invoice.PaymentType</td>
+		<td class="align-content-center">@invoice.Apointment.ApointmentDate</td>
+		<td class="align-content-center">@invoice.Receptionist.FullName</td>
+		<td>
+		<a asp-controller="Invoice" asp-action="Details" asp-route-Id="@invoice.InvoiceID" class="btn btn-warning">
+		<i class="fas fa-eye"></i> Details
+		</a>
+		</td>
+		<td>
+		<a asp-controller="Invoice" asp-action="Edit" asp-route-Id="@invoice.InvoiceID" class="btn btn-success">
+		<i class="fas fa-edit"></i> Update
+		</a>
+		</td>
+		<td>
+		<a asp-controller="Invoice" asp-action="Delete" asp-route-Id="@invoice.InvoiceID" class="btn btn-danger">
+		<i class="fas fa-trash"></i> Delete
+		</a>
+		</td>
+		</tr>
+		}
+		</tbody> *@
+		</table>
+	}
+	else
+	{
+		<div class="mt-4 alert alert-warning">
+			<h3>There is no Invoices !</h3>
+		</div>
+	}
 </div>
-<br />
-@if (Model.Count() > 0)
-{
-    <table class="mt-4 table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(I => I.InvoiceDate)</th>
-                <th>@Html.DisplayNameFor(I => I.TotalAmount)</th>
-                <th>@Html.DisplayNameFor(I => I.PaymentStatus)</th>
-                <th>@Html.DisplayNameFor(I => I.PaymentType)</th>
-@*                 <th>@Html.DisplayNameFor(I => I.ApointmentId)</th> *@
-                <th>@Html.DisplayNameFor(I => I.ReceptionistUserId)</th>
-                <th>Details</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var invoice in Model)
-            {
-                <tr>
-                    <td class="align-content-center">@Html.DisplayFor(I=> invoice.InvoiceDate)</td>
-                    <td class="align-content-center">@Html.DisplayFor(I => invoice.TotalAmount)</td>
-                    <td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentStatus)</td>
-                    <td class="align-content-center">@Html.DisplayFor(I => invoice.PaymentType)</td>
-@*                     <td class="align-content-center">@Html.DisplayFor(I => invoice.ApointmentId)</td> *@
-                    <td class="align-content-center">@Html.DisplayFor(I => invoice.ReceptionistUserId)</td>
-                  
-                    <partial name="_ButtonsPartial" model="@invoice.Id"></partial>
-                </tr>
-            }
-        </tbody>
-       @*  <tbody>
-            @foreach (var invoice in Model)
-            {
-                <tr>
-                    <td class="align-content-center">@invoice.InvoiceDate</td>
-                    <td class="align-content-center">@invoice.TotalAmount</td>
-                    <td class="align-content-center">@invoice.PaymentStatus</td>
-                    <td class="align-content-center">@invoice.PaymentType</td>
-                    <td class="align-content-center">@invoice.Apointment.ApointmentDate</td>
-                    <td class="align-content-center">@invoice.Receptionist.FullName</td>
-                    <td>
-                        <a asp-controller="Invoice" asp-action="Details" asp-route-Id="@invoice.InvoiceID" class="btn btn-warning">
-                            <i class="fas fa-eye"></i> Details
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Invoice" asp-action="Edit" asp-route-Id="@invoice.InvoiceID" class="btn btn-success">
-                            <i class="fas fa-edit"></i> Update
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Invoice" asp-action="Delete" asp-route-Id="@invoice.InvoiceID" class="btn btn-danger">
-                            <i class="fas fa-trash"></i> Delete
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody> *@
-    </table>
-}
-else
-{
-    <div class="mt-4 alert alert-warning">
-        <h3>There is no Invoices !</h3>
-    </div>
-}
 <style>
-    .title {
-        font-family: 'Palatino', 'Times New Roman', serif; /* Fallback in case Palatino is not available */
-        font-weight: 700; /* Heavy (bold) font */
-        text-align: center; /* Center horizontally */
-        margin-top: 3vh; /* Optionally center vertically, adjust as needed */
-    }
+	.title {
+		font-family: 'Palatino', 'Times New Roman', serif; /* Fallback in case Palatino is not available */
+		font-weight: 700; /* Heavy (bold) font */
+		text-align: center; /* Center horizontally */
+		margin-top: 3vh; /* Optionally center vertically, adjust as needed */
+	}
 
-    .createbtn {
-        font-family: 'Palatino', serif;
-        font-weight: bold; /* Heavy font */
-        display: block; /* Ensures centering */
-        text-align: center; /* Centers text inside button */
-        margin: 0 auto; /* Centers the button */
-        width: fit-content; /* Adjusts the width to the content */
-    }
+	.createbtn {
+		font-family: 'Palatino', serif;
+		font-weight: bold; /* Heavy font */
+		display: block; /* Ensures centering */
+		text-align: center; /* Centers text inside button */
+		margin: 0 auto; /* Centers the button */
+		width: fit-content; /* Adjusts the width to the content */
+	}
 
-    .create-invoice {
-        text-align: center;
-    }
+	.create-invoice {
+		text-align: center;
+	}
 
-     .custom-alert {
-        width: 50%; /* Adjusts width as needed */
-        margin: 0 auto; /* Centers the div horizontally */
-        border-radius: 15px; /* Adds rounded corners */
-        animation: fadeIn 1.5s ease-in-out; /* Animation */
-        text-align: center; /* Centers the h3 inside */
-    }
-
+	.custom-alert {
+		width: 50%; /* Adjusts width as needed */
+		margin: 0 auto; /* Centers the div horizontally */
+		border-radius: 15px; /* Adds rounded corners */
+		animation: fadeIn 1.5s ease-in-out; /* Animation */
+		text-align: center; /* Centers the h3 inside */
+	}
 
 </style>
 

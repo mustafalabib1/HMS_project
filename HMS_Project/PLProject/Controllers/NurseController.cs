@@ -63,10 +63,10 @@ namespace PLProject.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         [Route("Nurse/Edit/{userId}")]
-        public IActionResult Edit([FromRoute] int Id, NurseViewModel ViewModel)
+        public IActionResult Edit([FromRoute] string userId, NurseViewModel ViewModel)
         {
 
-            if (Id != ViewModel.Id)
+            if (userId != ViewModel.UserId)
                 return BadRequest();//400
             var nurse = unitOfWork.Repository<Nurse>().Get(ViewModel.UserId);
 
