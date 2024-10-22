@@ -87,7 +87,7 @@ namespace PLProject.Controllers
 					// Collect selected active substances based on ActiveSubstanceIds
 					foreach (var id in medicationViewModel.ActiveSubstanceIds)
 					{
-						var activeSubstance = unitOfWork.Repository<ActiveSubstance>().GetALL().FirstOrDefault(a => a.Id == id);
+						var activeSubstance = unitOfWork.Repository<ActiveSubstance>().Get(id);
 						if (activeSubstance != null)
 						{
 							medication.ActiveSubstances.Add(activeSubstance);

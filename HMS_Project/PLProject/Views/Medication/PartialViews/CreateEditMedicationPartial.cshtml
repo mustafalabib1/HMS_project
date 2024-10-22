@@ -16,7 +16,7 @@
 
 <div class="form-group">
     <label>Add Active Substances (optional):</label>
-    <select asp-for="ActiveSubstances" class="form-control select2-multiple" multiple="multiple">
+    <select asp-for="ActiveSubstanceIds" class="form-control select2-multiple" multiple="multiple">
         @foreach (var substance in Model.ActiveSubstances)
         {
             <option value="@substance.Id">@substance.ActiveSubstancesName</option>
