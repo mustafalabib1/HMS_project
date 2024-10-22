@@ -5,6 +5,9 @@
 }
 
 <div class="container mt-5">
+	<!-- Success Message -->
+	<partial name="SuccessMessage" />
+
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="mb-4">@ViewData["Title"]</h1>
@@ -35,7 +38,7 @@
 								@foreach (var Prescription in Model)
 								{
 									<tr>
-										<td>@(Prescription.Patient?.AppUser.FullName??"patient name")</td>
+										<td>@(Prescription.Patient?.AppUser.FullName ?? "patient name")</td>
 										<td>
 											<a asp-action="Details" asp-route-Id="@Prescription.prescriptionId" class="btn btn-warning">
 												<i class="fas fa-eye pe-1"></i>Details
@@ -115,11 +118,20 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	// Optional: JavaScript to handle search input interaction
-	document.getElementById('search-btn').addEventListener('click', function () {
-		const query = document.getElementById('search-input').value;
-		alert('Search for: ' + query); // Implement search functionality here
-	});
-</script>
+@section Scripts {
+	<script>
+		// Automatically hide the success message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#SuccessMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+		});
+	</script>
+	<script>
+		// Optional: JavaScript to handle search input interaction
+		document.getElementById('search-btn').addEventListener('click', function () {
+			const query = document.getElementById('search-input').value;
+			alert('Search for: ' + query); // Implement search functionality here
+		});
+	</script>
+}

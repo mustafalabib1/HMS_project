@@ -16,6 +16,8 @@
 }
 
 <div class="container mt-5">
+    <!-- Error Message -->
+    <partial name="ErrorMessage" />
     <h1 class="text-center text-primary">Create New Clinic</h1>
     <p class="text-center text-muted">Fill out the details below to register a new clinic.</p>
 
@@ -114,8 +116,17 @@
 </div>
 
 <!-- Scripts for Select2 and Validation -->
+
 @section Scripts {
-    @{
+    <script>
+        // Automatically hide the error message after 5 seconds (5000 milliseconds)
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#errorMessage').fadeOut('slow');
+            }, 5000); // 5000 ms = 5 seconds
+        });
+    </script>
+	    @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script src="~/select2/js/select2.min.js"></script>

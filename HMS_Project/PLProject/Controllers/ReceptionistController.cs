@@ -72,14 +72,32 @@ namespace PLProject.Controllers
             if (userId != ViewModel.UserId)
                 return BadRequest();//400
             var receptionist = unitOfWork.Repository<Receptionist>().Get(ViewModel.UserId);
-            if (ModelState.IsValid) // server side validation
-            {
-                receptionist.UpdateInfo(ViewModel);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(ViewModel);
-        }
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					receptionist.UpdateInfo(ViewModel);
+					//unitOfWork.Repository<Doctor>().Update(doctor);
+					unitOfWork.Complete();
+
+					// Set a success message using TempData
+					TempData["SuccessMessage"] = "receptionist update successfully!";
+
+					return RedirectToAction(nameof(Index));
+				}
+				catch (Exception ex)
+				{
+					if (env.IsDevelopment())
+						ModelState.AddModelError(string.Empty, ex.Message);
+					else
+						// Set an error message using TempData
+						TempData["ErrorMessage"] = "An Error Has Occurred during update receptionist";
+					return View(ViewModel);
+				}
+			}
+
+			return View(ViewModel);
+		}
         #endregion
     }
 }

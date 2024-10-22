@@ -119,15 +119,24 @@ namespace PLProject.Controllers
                 unitOfWork.Repository<Apointment>().Update(apointment);
                 unitOfWork.Complete();
 
-                return RedirectToAction(nameof(Index));
+
+				// Set a success message using TempData
+				TempData["SuccessMessage"] = "apointment update successfully!";
+
+
+				return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                // Handle exceptions and add error messages to the model state
-                var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
-                ModelState.AddModelError(string.Empty, errorMessage);
+				// Handle exceptions and add error messages to the model state
 
-                return View(ViewModel);
+				if (env.IsDevelopment())
+					ModelState.AddModelError(string.Empty, ex.Message);
+				else
+					// Set an error message using TempData
+					TempData["ErrorMessage"] = "An Error Has Occurred during the update.";
+
+				return View(ViewModel);
             }
         }
         #endregion

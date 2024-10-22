@@ -1,9 +1,12 @@
 ﻿@model DoctorViewModel
-
+@inject IUnitOfWork unitOfWork;
 @{
+	var SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL().ToList();
 	ViewData["Title"] = "Create Doctor";
 }
 <div class="container mt-5">
+	<!-- Error Message -->
+	<partial name="ErrorMessage" />
 	<h2>Create Doctor</h2>
 
 	<form asp-action="Create" method="post">
@@ -15,7 +18,7 @@
 			<label asp-for="specializationId"></label>
 			<select asp-for="specializationId" class="form-control" required>
 				<option value="">Select Specialization</option>
-				@foreach (var specialization in Model.SpecializationsDateReader)
+				@foreach (var specialization in SpecializationsDateReader)
 				{
 					<option value="@specialization.Id">@specialization.Specialization</option>
 				}
@@ -29,6 +32,14 @@
 </div>
 <!-- Scripts for Validation -->
 @section Scripts {
+	<script>
+		// Automatically hide the error message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#errorMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+		});
+	</script>
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}

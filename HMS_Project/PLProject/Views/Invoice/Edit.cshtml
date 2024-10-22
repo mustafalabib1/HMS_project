@@ -1,16 +1,30 @@
 ﻿@model InvoiceViewModel
 @{
-    ViewData["Title"] = "Invoice Edit";
+	ViewData["Title"] = "Invoice Edit";
 }
 <div class="container mt-5">
-<h1>Edit Invoice</h1>
-<br />
+	<!-- Error Message -->
+	<partial name="ErrorMessage" />
 
-<form asp-asp-controller="Invoice" asp-action="Edit" method="post">
+	<h1>Edit Invoice</h1>
+	<br />
 
-    <partial name="PartialViews/CreateEditInvoicePartial" model="@Model"></partial>
+	<form asp-asp-controller="Invoice" asp-action="Edit" method="post">
 
-    <!-- Action Buttons -->
-    <partial name="_ButtonsInEditPartial" />
-</form>
+		<partial name="PartialViews/CreateEditInvoicePartial" model="@Model"></partial>
+
+		<!-- Action Buttons -->
+		<partial name="_ButtonsInEditPartial" />
+	</form>
 </div>
+
+@section Scripts {
+	<script>
+		// Automatically hide the error message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#errorMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+		});
+	</script>
+}

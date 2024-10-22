@@ -69,21 +69,34 @@ public class ActiveSubstanceController : Controller
 
 	// POST: Handle form submission
 	[HttpPost]
-	public IActionResult Create(ActiveSubstanceViewModel model)
+	public IActionResult Create(ActiveSubstanceViewModel ViewModel)
 	{
-		foreach (var MedId in model.MedicationId)
+		foreach (var MedId in ViewModel.MedicationId)
 		{
-			model.Medications.Add(unitOfWork.Repository<Medication>().Get(MedId));
+			ViewModel.Medications.Add(unitOfWork.Repository<Medication>().Get(MedId));
 		}
 		if (ModelState.IsValid)
 		{
+			try
+			{
+				unitOfWork.Repository<ActiveSubstance>().Add((ActiveSubstance)ViewModel);
+				unitOfWork.Complete();
+				// Set a success message using TempData
+				TempData["SuccessMessage"] = "Active substance Created  successfully!";
 
-			unitOfWork.Repository<ActiveSubstance>().Add((ActiveSubstance)model);
-			unitOfWork.Complete();
-
-			return RedirectToAction("Success"); // Redirect after successful creation
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+				if (env.IsDevelopment())
+					ModelState.AddModelError(string.Empty, ex.Message);
+				else
+					// Set an error message using TempData
+					TempData["ErrorMessage"] = "An Error Has Occurred during Createing Active substance.";
+				return View(ViewModel);
+			}
 		}
-		return View(model);
+		return View(ViewModel);
 	}
 
 	// Success action
@@ -113,15 +126,18 @@ public class ActiveSubstanceController : Controller
 		return Details(Id, "Delete");
 	}
 
-    [HttpPost, ValidateAntiForgeryToken]
-    public async Task<ActionResult> Delete([FromRoute]int Id,ActiveSubstanceViewModel viewModel)
+	[HttpPost, ValidateAntiForgeryToken]
+	public async Task<ActionResult> Delete([FromRoute] int Id, ActiveSubstanceViewModel viewModel)
 	{
 		if (Id != viewModel.Id)
-				return BadRequest();//400
+			return BadRequest();//400
 		try
 		{
 
 			await procedures.sp_DeleteActiveSubstanceAsync(viewModel.Id);
+
+			// Set a success message using TempData
+			TempData["SuccessMessage"] = "Active Substance delete successfully!";
 
 			return RedirectToAction(nameof(Index));
 		}
@@ -131,7 +147,7 @@ public class ActiveSubstanceController : Controller
 			if (env.IsDevelopment())
 				ModelState.AddModelError(string.Empty, ex.Message);
 			else
-				ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Department");
+				ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Active Substance");
 
 			return View(viewModel);
 		}
@@ -144,14 +160,14 @@ public class ActiveSubstanceController : Controller
 		return Details(Id, "Edit");
 	}
 
-    [HttpPost, ValidateAntiForgeryToken]   
-    public IActionResult Edit([FromRoute] int Id, ActiveSubstanceViewModel viewModel)
+	[HttpPost, ValidateAntiForgeryToken]
+	public IActionResult Edit([FromRoute] int Id, ActiveSubstanceViewModel viewModel)
 	{
 
-        if (Id != viewModel.Id)
-            return BadRequest();//400
-                                // Add medications associated with the substance
-        viewModel.Medications.AddRange(unitOfWork.Repository<Medication>().Find(x => viewModel.MedicationId.Contains(x.Id)));
+		if (Id != viewModel.Id)
+			return BadRequest();//400
+								// Add medications associated with the substance
+		viewModel.Medications.AddRange(unitOfWork.Repository<Medication>().Find(x => viewModel.MedicationId.Contains(x.Id)));
 		unitOfWork.Complete();
 
 		// Get the active substance from the repository
@@ -176,156 +192,24 @@ public class ActiveSubstanceController : Controller
 			// Update the active substance in the repository
 			unitOfWork.Repository<ActiveSubstance>().Update(activeSubstance);
 			unitOfWork.Complete();
+
+			// Set a success message using TempData
+			TempData["SuccessMessage"] = "Active Substance update successfully!";
+
 			return RedirectToAction(nameof(Index));
 		}
 		catch (Exception ex)
 		{
 			// Handle exceptions and add error messages to the model state
-			var errorMessage = env.IsDevelopment() ? ex.Message : "An error occurred during the update.";
-			ModelState.AddModelError(string.Empty, errorMessage);
+
+			if (env.IsDevelopment())
+				ModelState.AddModelError(string.Empty, ex.Message);
+			else
+				// Set an error message using TempData
+				TempData["ErrorMessage"] = "An Error Has Occurred during the update.";
 
 			return View(viewModel);
 		}
 	}
-
-	#region Edit Active Substance Interation 
-	public IActionResult ActSubstEdit(int? ActId, int? InteractId, string Interaction)
-	{
-		if (!ActId.HasValue || !InteractId.HasValue)
-			return BadRequest(); // 400
-
-		var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
-
-		if (substance is null)
-			return NotFound(); // 404
-
-		var interaction = substance.ActSub1.Where(ai => ai.ActiveSubstanceId2 == InteractId).FirstOrDefault() ??
-			substance.ActSub2.Where(ai => ai.ActiveSubstanceId1 == InteractId).FirstOrDefault();
-
-		if (interaction is null)
-			return NotFound(); // 404
-
-		try
-		{
-			interaction.Interaction = Interaction;
-			unitOfWork.Repository<ActiveSubstanceInteraction>().Update(interaction);
-			// Redirect to Edit action and pass ActId as route parameter
-			return RedirectToAction(nameof(Edit), new { Id = ActId });
-		}
-		catch (Exception ex)
-		{
-
-			if (env.IsDevelopment())
-				ModelState.AddModelError(string.Empty, ex.Message);
-			else
-				ModelState.AddModelError(string.Empty, "An Error Has Occurred during editing the Department");
-
-			return RedirectToAction(nameof(Edit), new { Id = ActId });
-		}
-	}
-	#endregion
-	#region delete Active Substance Interation 
-	[HttpPost]
-	public IActionResult ActSubstDelete(int? ActId, int? InteractId)
-	{
-		if (!ActId.HasValue || !InteractId.HasValue)
-			return BadRequest(); // 400
-
-
-		try
-		{
-			var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
-
-			if (substance is null)
-				return NotFound(); // 404
-
-			var interaction = substance.ActSub1.Where(ai => ai.ActiveSubstanceId2 == InteractId).FirstOrDefault() ??
-				substance.ActSub2.Where(ai => ai.ActiveSubstanceId1 == InteractId).FirstOrDefault();
-
-			if (interaction is null)
-				return NotFound(); // 404
-
-			unitOfWork.Repository<ActiveSubstanceInteraction>().Delete(interaction);
-			unitOfWork.Complete();
-			// Return success response
-			return Json(new { success = true });
-		}
-		catch (Exception ex)
-		{
-			// Return error response
-			return Json(new { success = false, message = "Error occurred: " + ex.Message });
-		}
-	}
-	#endregion
-	#region Edit Medication in Active Substance  
-	public IActionResult MedicationEdit(int? ActId, int? MedId, int Strength)
-	{
-		if (!ActId.HasValue || !MedId.HasValue)
-			return BadRequest(); // 400
-
-		var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
-
-		if (substance is null)
-			return NotFound(); // 404
-
-		var med = substance.Medications.Where(m => m.Id == MedId).FirstOrDefault();
-
-		if (med is null)
-			return NotFound(); // 404
-
-		try
-		{
-			med.Strength = Strength;
-			unitOfWork.Repository<Medication>().Update(med);
-			unitOfWork.Complete();
-			// Redirect to Edit action and pass ActId as route parameter
-			return RedirectToAction(nameof(Edit), new { Id = ActId });
-		}
-		catch (Exception ex)
-		{
-			if (env.IsDevelopment())
-				ModelState.AddModelError(string.Empty, ex.Message);
-			else
-				ModelState.AddModelError(string.Empty, "An Error Has Occurred during editing the Department");
-
-			return RedirectToAction(nameof(Edit), new { Id = ActId });
-		}
-	}
-	#endregion
-	#region delete Medication from Active Substance  
-	[HttpPost]
-	public IActionResult MedicationDelete(int? ActId, int? MedId)
-	{
-		if (!ActId.HasValue || !MedId.HasValue)
-			return BadRequest(); // 400
-
-		var substance = unitOfWork.Repository<ActiveSubstance>().Get(ActId.Value);
-
-		if (substance is null)
-			return NotFound(); // 404
-
-		var med = substance.Medications.Where(m => m.Id == MedId).FirstOrDefault();
-
-		if (med is null)
-			return NotFound(); // 404
-
-		try
-		{
-			unitOfWork.Repository<Medication>().Delete(med);
-			unitOfWork.Complete();
-			// Redirect to Edit action and pass ActId as route parameter
-			return RedirectToAction(nameof(Edit), new { Id = ActId });
-		}
-		catch (Exception ex)
-		{
-			if (env.IsDevelopment())
-				ModelState.AddModelError(string.Empty, ex.Message);
-			else
-				ModelState.AddModelError(string.Empty, "An Error Has Occurred during deleting the Department");
-
-			return RedirectToAction(nameof(Edit), new { Id = ActId });
-		}
-	}
-	#endregion
 	#endregion
 }

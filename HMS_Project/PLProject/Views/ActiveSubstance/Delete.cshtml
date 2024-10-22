@@ -1,29 +1,42 @@
 ﻿@model ActiveSubstanceViewModel
 @{
-    ViewData["Title"] = "Delete Active Substance";
+	ViewData["Title"] = "Delete Active Substance";
 }
 <div class="container mt-5">
-<h1 class="mb-4 text-danger">Are You Sure You Want to Delete This Active Substance?</h1>
+	<!-- Error Message -->
+	<partial name="ErrorMessage" />
+	<h1 class="mb-4 text-danger">Are You Sure You Want to Delete This Active Substance?</h1>
 
-<div class="alert alert-warning">
-    <i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this active substance, all related data will be removed permanently.
+	<div class="alert alert-warning">
+		<i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this active substance, all related data will be removed permanently.
+	</div>
+
+	<form asp-controller="ActiveSubstance" asp-action="Delete" method="post">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		<partial name="PartialViews/DetailsDeletePartial" model="@Model" />
+
+		<!-- Delete and Cancel Buttons -->
+		<div class="mt-5 mb-5">
+			<button type="submit" class="btn btn-danger mt-2">
+				<i class="fas fa-trash"></i> Delete
+			</button>
+
+			<a asp-action="Index" class="btn btn-primary mt-2">
+				<i class="fas fa-arrow-left"></i> Back To List
+			</a>
+		</div>
+
+	</form>
 </div>
 
-<form asp-controller="ActiveSubstance" asp-action="Delete" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-    <partial name="PartialViews/DetailsDeletePartial" model="@Model" />
-
-        <!-- Delete and Cancel Buttons -->
-        <div class="mt-5 mb-5">
-            <button type="submit" class="btn btn-danger mt-2">
-                <i class="fas fa-trash"></i> Delete
-            </button>
-
-            <a asp-action="Index" class="btn btn-primary mt-2">
-                <i class="fas fa-arrow-left"></i> Back To List
-            </a>
-        </div>
-
-</form>
-</div>
+@section Scripts {
+	<script>
+		// Automatically hide the error message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#errorMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+		});
+	</script>
+}

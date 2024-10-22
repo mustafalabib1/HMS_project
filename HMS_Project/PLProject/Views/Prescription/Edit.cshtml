@@ -9,6 +9,10 @@
     }
 }
 <div class="container mt-5">
+
+    <!-- Error Message -->
+    <partial name="ErrorMessage" />
+
     <!-- Page Header -->
     <h1 class="text-center mb-4">Edit Prescription</h1>
 
@@ -99,6 +103,14 @@
 
 <!-- Custom Scripts Section -->
 @section Scripts {
+    <script>
+        // Automatically hide the error message after 5 seconds (5000 milliseconds)
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#errorMessage').fadeOut('slow');
+            }, 5000); // 5000 ms = 5 seconds
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

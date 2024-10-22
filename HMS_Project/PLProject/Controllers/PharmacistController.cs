@@ -11,11 +11,13 @@ namespace PLProject.Controllers
     {
         #region DPI
         private readonly IUnitOfWork unitOfWork;
+		private readonly IWebHostEnvironment env;
 
-        public PharmacistController(IUnitOfWork unitOfWork)
+		public PharmacistController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
         {
             this.unitOfWork = unitOfWork;
-        }
+			env = _env;
+		}
         #endregion
 
         #region Index 
@@ -69,14 +71,32 @@ namespace PLProject.Controllers
             if (userId != ViewModel.UserId)
                 return BadRequest();//400
             var pharmacist = unitOfWork.Repository<Pharmacist>().Get(ViewModel.UserId);
-            if (ModelState.IsValid) // server side validation
-            {
-                pharmacist.UpdateInfo(ViewModel);
-                unitOfWork.Complete();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(ViewModel);
-        }
-        #endregion
-    }
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					pharmacist.UpdateInfo(ViewModel);
+					//unitOfWork.Repository<Doctor>().Update(doctor);
+					unitOfWork.Complete();
+
+					// Set a success message using TempData
+					TempData["SuccessMessage"] = "pharmacist update successfully!";
+
+					return RedirectToAction(nameof(Index));
+				}
+				catch (Exception ex)
+				{
+					if (env.IsDevelopment())
+						ModelState.AddModelError(string.Empty, ex.Message);
+					else
+						// Set an error message using TempData
+						TempData["ErrorMessage"] = "An Error Has Occurred during update pharmacist";
+					return View(ViewModel);
+				}
+			}
+
+			return View(ViewModel);
+		}
+		#endregion
+	}
 }

@@ -5,6 +5,11 @@
 }
 
 <div class="container mt-5">
+	<!-- Success Message -->
+	<partial name="SuccessMessage" />
+
+	<h1 class="display-4 text-center mb-4"> All @ViewData["Title"] </h1>
+
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="mb-4">@ViewData["Title"]</h1>
@@ -135,10 +140,20 @@
 	</div>
 </div>
 
-<script>
-	// Optional: JavaScript to handle search input interaction
-	document.getElementById('search-btn').addEventListener('click', function () {
-		const query = document.getElementById('search-input').value;
-		alert('Search for: ' + query); // Implement search functionality here
-	});
+@section Scripts {
+	<script>
+		// Automatically hide the success message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#SuccessMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+			});
+	</script>
+	<script>
+	 // Optional: JavaScript to handle search input interaction
+	 document.getElementById('search-btn').addEventListener('click', function () {
+		 const query = document.getElementById('search-input').value;
+		 alert('Search for: ' + query); // Implement search functionality here
+	 });
 </script>
+}

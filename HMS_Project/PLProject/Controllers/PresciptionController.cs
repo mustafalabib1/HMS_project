@@ -107,6 +107,10 @@ namespace PLProject.Controllers
 				unitOfWork.Repository<Prescription>().Update(updatedPrescription);
 				unitOfWork.Complete();
 
+
+				// Set a success message using TempData
+				TempData["SuccessMessage"] = "Prescription update successfully!";
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)

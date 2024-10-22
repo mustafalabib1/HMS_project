@@ -1,156 +1,170 @@
 ﻿@model ClinicAvailabilityViewModel
 @inject IUnitOfWork unitOfWork;
 @{
-    // Fetch all clinics
-    var Clinics = unitOfWork.Repository<Clinic>().GetALL().ToList();
+	// Fetch all clinics
+	var Clinics = unitOfWork.Repository<Clinic>().GetALL().ToList();
 }
 <div class="container mt-5">
-    <div class="row">
-        <!-- Clinic Selection Section -->
-        <div class="col-md-4">
-            <h3>Select a Clinic</h3>
-            <ul class="clinic-list">
-                @foreach (var clinic in Clinics)
-                {
-                    <li class="clinic-item">
-                        <a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = clinic.Id })"
-                           class="clinic-link @(clinic.Id == Model.SelectedClinicId ? "active" : "")">
-                            @clinic.Name
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
+	<!-- Error Message -->
+	<partial name="ErrorMessage" />
+	<div class="row">
+		<!-- Clinic Selection Section -->
+		<div class="col-md-4">
+			<h3>Select a Clinic</h3>
+			<ul class="clinic-list">
+				@foreach (var clinic in Clinics)
+				{
+					<li class="clinic-item">
+						<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = clinic.Id })"
+						   class="clinic-link @(clinic.Id == Model.SelectedClinicId ? "active" : "")">
+							@clinic.Name
+						</a>
+					</li>
+				}
+			</ul>
+		</div>
 
-        <!-- Available Dates Section -->
-        <div class="col-md-8">
-            <h3>Available Dates</h3>
+		<!-- Available Dates Section -->
+		<div class="col-md-8">
+			<h3>Available Dates</h3>
 
-            @if (Model.AvailableDays != null && Model.AvailableDays.Any())
-            {
-                <form method="post" action="@Url.Action("Create")" id="appointment-form">
-                    <!-- Hidden inputs to hold selected values -->
-                    <input type="hidden" name="ClinicId" value="@Model.SelectedClinicId" />
-                    <input type="hidden" name="SelectedDoctorId" id="SelectedDoctorId" />
-                    <input type="hidden" name="SelectedDate" id="SelectedDate" />
-                    <input type="hidden" name="SelectedTime" id="SelectedTime" />
+			@if (Model.AvailableDays != null && Model.AvailableDays.Any())
+			{
+				<form method="post" action="@Url.Action("Create")" id="appointment-form">
+					<!-- Hidden inputs to hold selected values -->
+					<input type="hidden" name="ClinicId" value="@Model.SelectedClinicId" />
+					<input type="hidden" name="SelectedDoctorId" id="SelectedDoctorId" />
+					<input type="hidden" name="SelectedDate" id="SelectedDate" />
+					<input type="hidden" name="SelectedTime" id="SelectedTime" />
 
-                    <!-- Month Navigation Buttons -->
-                    <div class="month-navigation">
-                        <div class="btn-container">
-                            @if (Model.SelectedYear < DateTime.Now.Year || (Model.SelectedYear == DateTime.Now.Year && Model.SelectedMonth < DateTime.Now.Month))
-                            {
-                                <a class="btn btn-secondary invisible" id="previous-month">
-                                    Previous Month
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth - 1 })"
-                                   class="btn btn-secondary" id="previous-month">
-                                    Previous Month
-                                </a>
-                            }
+					<!-- Month Navigation Buttons -->
+					<div class="month-navigation">
+						<div class="btn-container">
+							@if (Model.SelectedYear < DateTime.Now.Year || (Model.SelectedYear == DateTime.Now.Year && Model.SelectedMonth < DateTime.Now.Month))
+							{
+								<a class="btn btn-secondary invisible" id="previous-month">
+									Previous Month
+								</a>
+							}
+							else
+							{
+								<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth - 1 })"
+								   class="btn btn-secondary" id="previous-month">
+									Previous Month
+								</a>
+							}
 
-                            <a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth + 1 })"
-                               class="btn btn-secondary" id="next-month">
-                                Next Month
-                            </a>
-                        </div>
-                    </div>
+							<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth + 1 })"
+							   class="btn btn-secondary" id="next-month">
+								Next Month
+							</a>
+						</div>
+					</div>
 
-                    <h4>@DateTimeFormatInfo.CurrentInfo.GetMonthName(Model.SelectedMonth) @Model.SelectedYear</h4>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int week = 0; week < 6; week++)
-                            {
-                                <tr>
-                                    @for (int day = 0; day < 7; day++)
-                                    {
-                                        int dateIndex = week * 7 + day - (int)new DateTime(Model.SelectedYear, Model.SelectedMonth, 1).DayOfWeek;
-                                        DateTime currentDate = new DateTime(Model.SelectedYear, Model.SelectedMonth, 1).AddDays(dateIndex);
+					<h4>@DateTimeFormatInfo.CurrentInfo.GetMonthName(Model.SelectedMonth) @Model.SelectedYear</h4>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Sun</th>
+								<th>Mon</th>
+								<th>Tue</th>
+								<th>Wed</th>
+								<th>Thu</th>
+								<th>Fri</th>
+								<th>Sat</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (int week = 0; week < 6; week++)
+							{
+								<tr>
+									@for (int day = 0; day < 7; day++)
+									{
+										int dateIndex = week * 7 + day - (int)new DateTime(Model.SelectedYear, Model.SelectedMonth, 1).DayOfWeek;
+										DateTime currentDate = new DateTime(Model.SelectedYear, Model.SelectedMonth, 1).AddDays(dateIndex);
 
-                                        if (currentDate.Month != Model.SelectedMonth)
-                                        {
-                                            <td></td>
-                                            // Empty cell for days not in the current month
-                                        }
-                                        else
-                                        {
-                                            var availableDay = Model.AvailableDays.FirstOrDefault(d => d.Date.Date == currentDate.Date);
-                                            if (availableDay.IsAvailable)
-                                            {
-                                                <td class="text-center available">
-                                                    <input type="radio" name="SelectedDate" value="@availableDay.Date.ToString("yyyy-MM-dd")"
-                                                           id="day-@availableDay.Date.ToString("yyyyMMdd")" required
-                                                           onclick="selectDate('@availableDay.Date.ToString("yyyy-MM-dd")')" />
-                                                    <label for="day-@availableDay.Date.ToString("yyyyMMdd")">
-                                                        @currentDate.Day
-                                                    </label>
+										if (currentDate.Month != Model.SelectedMonth)
+										{
+											<td></td>
+											// Empty cell for days not in the current month
+										}
+										else
+										{
+											var availableDay = Model.AvailableDays.FirstOrDefault(d => d.Date.Date == currentDate.Date);
+											if (availableDay.IsAvailable)
+											{
+												<td class="text-center available">
+													<input type="radio" name="SelectedDate" value="@availableDay.Date.ToString("yyyy-MM-dd")"
+														   id="day-@availableDay.Date.ToString("yyyyMMdd")" required
+														   onclick="selectDate('@availableDay.Date.ToString("yyyy-MM-dd")')" />
+													<label for="day-@availableDay.Date.ToString("yyyyMMdd")">
+														@currentDate.Day
+													</label>
 
-                                                    @if (availableDay.AvailableDoctors != null)
-                                                    {
-                                                        <!-- Time Slot Selection -->
-                                                        <div class="time-slots">
-                                                            @foreach (var timeSlot in availableDay.AvailableDoctors)
-                                                            {
-                                                                <div>
-                                                                    <input type="radio" name="SelectedTime"
-                                                                           value="@timeSlot.StartTime.ToString()- @timeSlot.EndTime.ToString()" required
-                                                                           onclick="selectTimeAndDoctor('@timeSlot.StartTime.ToString("HH:mm")', '@timeSlot.EndTime.ToString("HH:mm")','@timeSlot.DoctorUserId')" />
-                                                                    <label>@timeSlot.StartTime.ToString("HH:mm") - @timeSlot.EndTime.ToString("HH:mm") with @timeSlot.Doctor.AppUser.FullName </label>
-                                                                </div>
-                                                            }
+													@if (availableDay.AvailableDoctors != null)
+													{
+														<!-- Time Slot Selection -->
+														<div class="time-slots">
+															@foreach (var timeSlot in availableDay.AvailableDoctors)
+															{
+																<div>
+																	<input type="radio" name="SelectedTime"
+																		   value="@timeSlot.StartTime.ToString()- @timeSlot.EndTime.ToString()" required
+																		   onclick="selectTimeAndDoctor('@timeSlot.StartTime.ToString("HH:mm")', '@timeSlot.EndTime.ToString("HH:mm")','@timeSlot.DoctorUserId')" />
+																	<label>@timeSlot.StartTime.ToString("HH:mm") - @timeSlot.EndTime.ToString("HH:mm") with @timeSlot.Doctor.AppUser.FullName </label>
+																</div>
+															}
 
-                                                        </div>
-                                                    }
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td class="text-center unavailable">@currentDate.Day</td>
-                                                // Not available
-                                            }
-                                        }
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+														</div>
+													}
+												</td>
+											}
+											else
+											{
+												<td class="text-center unavailable">@currentDate.Day</td>
+												// Not available
+											}
+										}
+									}
+								</tr>
+							}
+						</tbody>
+					</table>
 
-                    <!-- Submit Button -->
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" id="submit-button">Book Appointment</button>
-                    </div>
-                </form>
-            }
-            else
-            {
-                <p>Select a clinic to view available dates.</p>
-            }
-        </div>
-    </div>
+					<!-- Submit Button -->
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary" id="submit-button">Book Appointment</button>
+					</div>
+				</form>
+			}
+			else
+			{
+				<p>Select a clinic to view available dates.</p>
+			}
+		</div>
+	</div>
 </div>
-<script>
-    function selectDate(date) {
-        document.getElementById('SelectedDate').value = date;
-    }
 
-    function selectTimeAndDoctor(startTime, endTime, doctorId) {
-        console.log("Selected DoctorId: " + doctorId);
-        // Update the hidden fields with the selected values
-        document.getElementById('SelectedTime').value = startTime + '-' + endTime;
-        document.getElementById('SelectedDoctorId').value = doctorId;
-    }
-</script>
+@section Scripts {
+	<script>
+		// Automatically hide the error message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#errorMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+		});
+	</script>
+
+	<script>
+		function selectDate(date) {
+			document.getElementById('SelectedDate').value = date;
+		}
+
+		function selectTimeAndDoctor(startTime, endTime, doctorId) {
+			console.log("Selected DoctorId: " + doctorId);
+			// Update the hidden fields with the selected values
+			document.getElementById('SelectedTime').value = startTime + '-' + endTime;
+			document.getElementById('SelectedDoctorId').value = doctorId;
+		}
+	</script>
+}

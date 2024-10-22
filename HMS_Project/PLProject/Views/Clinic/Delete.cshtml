@@ -1,26 +1,39 @@
 ﻿@model ClinicViewModel
 @{
-    ViewData["Title"] = "Delete Clinic";
+	ViewData["Title"] = "Delete Clinic";
 }
 <div class="container mt-5">
-<h1>Are you sure ?</h1>
-<br />
-<br />
+	<!-- Error Message -->
+	<partial name="ErrorMessage" />
+	<h1>Are you sure ?</h1>
+	<br />
+	<br />
 
-<form asp-asp-controller="Clinic" asp-action="Delete" method="post">
-    
-    <partial name="PartialViews/DetailsDeleteClinicPartial" />
+	<form asp-asp-controller="Clinic" asp-action="Delete" method="post">
 
-        <!-- Delete and Cancel Buttons -->
-        <div class="mt-5 mb-5">
-            <button type="submit" class="btn btn-danger mt-2">
-                <i class="fas fa-trash"></i> Delete
-            </button>
+		<partial name="PartialViews/DetailsDeleteClinicPartial" />
 
-            <a asp-action="Index" class="btn btn-primary mt-2">
-                <i class="fas fa-arrow-left"></i> Back To List
-            </a>
-        </div>
+		<!-- Delete and Cancel Buttons -->
+		<div class="mt-5 mb-5">
+			<button type="submit" class="btn btn-danger mt-2">
+				<i class="fas fa-trash"></i> Delete
+			</button>
 
-</form>
+			<a asp-action="Index" class="btn btn-primary mt-2">
+				<i class="fas fa-arrow-left"></i> Back To List
+			</a>
+		</div>
+
+	</form>
 </div>
+
+@section Scripts {
+	<script>
+		// Automatically hide the error message after 5 seconds (5000 milliseconds)
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('#errorMessage').fadeOut('slow');
+			}, 5000); // 5000 ms = 5 seconds
+		});
+	</script>
+}

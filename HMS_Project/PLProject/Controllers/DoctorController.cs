@@ -16,11 +16,13 @@ namespace PLProject.Controllers
 	{
 		#region DPI
 		private readonly IUnitOfWork unitOfWork;
+		private readonly IWebHostEnvironment env;
 
-		public DoctorController(IUnitOfWork unitOfWork)
+		public DoctorController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
 		{
 			this.unitOfWork = unitOfWork;
-		} 
+			env = _env;
+		}
 		#endregion
 
 		#region Index (List Doctors)
@@ -43,17 +45,33 @@ namespace PLProject.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecializationLookup);
-				unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
+				var spec = new BaseSpecification<DoctorSpecializationLookup>(ds => ds.Specialization == doctorSpecializationLookup.Specialization);
+				var Specialization = unitOfWork.Repository<DoctorSpecializationLookup>().GetEntityWithSpec(spec);
+
+				if (Specialization is null)
+				{
+					unitOfWork.Repository<DoctorSpecializationLookup>().Add(doctorSpecializationLookup);
+					unitOfWork.Complete();
+
+					// Set a success message using TempData
+					TempData["SuccessMessage"] = "Specialization added successfully!";
+					return RedirectToAction(nameof(Index));
+				}
+				else
+				{
+					// Set an error message using TempData
+					TempData["ErrorMessage"] = "This specialization already exists.";
+					return View(doctorSpecializationLookup);
+				}
 			}
+
 			return View(doctorSpecializationLookup);
 		}
 		#endregion
 
-        #region Details
-        [Route("Doctor/Details/{userId}")]
-        public IActionResult Details(string userId)
+		#region Details
+		[Route("Doctor/Details/{userId}")]
+		public IActionResult Details(string userId)
 		{
 			if (userId is null)
 				return BadRequest(); // 400
@@ -70,14 +88,14 @@ namespace PLProject.Controllers
 
 			return View(doctorViewModel);
 		}
-        #endregion
+		#endregion
 
-        #region Edit
-        [Route("Doctor/Edit/{userId}")]
-        public IActionResult Edit(string userId)
+		#region Edit
+		[Route("Doctor/Edit/{userId}")]
+		public IActionResult Edit(string userId)
 		{
 			if (userId is null)
-                return BadRequest(); // 400
+				return BadRequest(); // 400
 
 			var doctor = unitOfWork.Repository<Doctor>().Get(userId);
 			unitOfWork.Complete();
@@ -87,70 +105,75 @@ namespace PLProject.Controllers
 
 			var doctorViewModel = (DoctorViewModel)doctor;
 
-			doctorViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
-            unitOfWork.Complete();
+			unitOfWork.Complete();
 
-            return View(doctorViewModel);
+			return View(doctorViewModel);
 		}
 
-        [HttpPost, ValidateAntiForgeryToken]
-        [Route("Doctor/Edit/{userId}")]
-        public IActionResult Edit([FromRoute] string userId, DoctorViewModel ViewModel)
+		[HttpPost, ValidateAntiForgeryToken]
+		[Route("Doctor/Edit/{userId}")]
+		public IActionResult Edit([FromRoute] string userId, DoctorViewModel ViewModel)
 		{
-            if (userId != ViewModel.UserId)
-                return BadRequest();//400
-            Doctor doctor = unitOfWork.Repository<Doctor>().Get(ViewModel.UserId);
-			
-            if (ModelState.IsValid)
+			if (userId != ViewModel.UserId)
+				return BadRequest();//400
+			Doctor doctor = unitOfWork.Repository<Doctor>().Get(ViewModel.UserId);
+
+			if (ModelState.IsValid)
 			{
-                doctor.UpdatedDoctor(ViewModel);
-                unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
+				try
+				{
+					doctor.UpdatedDoctor(ViewModel);
+					//unitOfWork.Repository<Doctor>().Update(doctor);
+					unitOfWork.Complete();
+
+					// Set a success message using TempData
+					TempData["SuccessMessage"] = "Doctor update successfully!";
+
+					return RedirectToAction(nameof(Index));
+				}
+				catch (Exception ex)
+				{
+					if (env.IsDevelopment())
+						ModelState.AddModelError(string.Empty, ex.Message);
+					else
+						// Set an error message using TempData
+						TempData["ErrorMessage"] = "An Error Has Occurred during update doctor";
+					return View(ViewModel);
+				}
 			}
-			ViewModel.SpecializationsDateReader = unitOfWork.Repository<DoctorSpecializationLookup>().GetALL();
+
 			return View(ViewModel);
+
 		}
 		#endregion
 
-		#region Create schedule
-		IActionResult CreateSchedule(int DocotorId)
-		{
-			return View();
-		}
+		#region Delete Schedule day 
 		[HttpPost]
-		IActionResult CreateSchedule (DoctorScheduleLookup Seschedule )
+		public IActionResult DeleteScheduleDay(int ScheduleId)
 		{
-			return View();
-		}
-        #endregion
-
-        #region Delete Schedule day 
-        [HttpPost]
-        public IActionResult DeleteScheduleDay(int ScheduleId)
-        {
-            try
-            {
+			try
+			{
 				// Find the schedule entry based on DoctorId and DayId
 				var scheduleDay = unitOfWork.Repository<DoctorScheduleLookup>().Get(ScheduleId);
 
-                if (scheduleDay == null)
-                {
-                    return Json(new { success = false, message = "Schedule day not found." });
-                }
+				if (scheduleDay == null)
+				{
+					return Json(new { success = false, message = "Schedule day not found." });
+				}
 
-                // Delete the schedule day
-                unitOfWork.Repository<DoctorScheduleLookup>().Delete(scheduleDay);
-                unitOfWork.Complete();
+				// Delete the schedule day
+				unitOfWork.Repository<DoctorScheduleLookup>().Delete(scheduleDay);
+				unitOfWork.Complete();
 
-                // Return success response
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                // Return error response
-                return Json(new { success = false, message = "Error occurred: " + ex.Message });
-            }
-        }
-        #endregion
-    }
+				// Return success response
+				return Json(new { success = true });
+			}
+			catch (Exception ex)
+			{
+				// Return error response
+				return Json(new { success = false, message = "Error occurred: " + ex.Message });
+			}
+		}
+		#endregion
+	}
 }
