@@ -6,11 +6,11 @@
     var SubstanceList = unitOfWork.Repository<ActiveSubstance>().GetALL();
 }
 
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
     <!-- Error Message -->
     <partial name="ErrorMessage" />
     <!-- Header Section -->
-    <h1 class="text-center mb-4">Edit Appointment</h1>
+    <h1 class="page-title">Edit Appointment</h1>
 
     @if (Model is not null)
     {

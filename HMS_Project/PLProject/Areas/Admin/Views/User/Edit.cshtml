@@ -2,43 +2,46 @@
 @{
     ViewData["Title"] = "Edit User Details";
 }
+<div class="container mt-5" style="min-height: 100vh">
+    <h1 class="page-title">Edit Details</h1>
 
-<h1>Edit Details</h1>
-
-<section class="container">
-    <form asp-action="Edit" method="post" class="form">
-        <div>
-            <input asp-for="Id" type="hidden" />
-        </div>
-        <div class="input-box">
-            <label asp-for="FullName">Full Name</label>
-            <input asp-for="FullName" class="form-control" max-length="100" aria-required="true" />
-            <span asp-validation-for="FullName" class="text-danger"></span>
-        </div>
-        <div class="input-box">
-            <label asp-for="UserName">User Name</label>
-            <input asp-for="UserName" class="form-control" max-length="100" aria-required="true" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
-        <div class="input-box">
-            <label asp-for="Email">Email Address</label>
-            <input asp-for="Email" class="form-control" aria-required="true" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="input-box">
-            <label asp-for="PhoneNumber">Phone Number</label>
-            <input asp-for="PhoneNumber" class="form-control" aria-required="true" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
-        <div class="input-box address">
-            <label asp-for="Address">Address</label>
-            <input asp-for="Address" class="form-control" aria-required="true" />
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
-        <input type="submit" value="Save Changes" class="btn btn-primary mt-2" />
-        <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
-    </form>
-</section>
+    <section class="container">
+        <form asp-action="Edit" method="post" class="form">
+            <div>
+                <input asp-for="Id" type="hidden" />
+            </div>
+            <div class="input-box mb-3">
+                <label asp-for="FullName" class="form-label">Full Name</label>
+                <input asp-for="FullName" class="form-control" max-length="100" aria-required="true" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="input-box mb-3">
+                <label asp-for="UserName" class="form-label">User Name</label>
+                <input asp-for="UserName" class="form-control" max-length="100" aria-required="true" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="input-box mb-3">
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <input asp-for="Email" class="form-control" aria-required="true" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="input-box mb-3">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" aria-required="true" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="input-box address mb-3">
+                <label asp-for="Address" class="form-label">Address</label>
+                <input asp-for="Address" class="form-control" aria-required="true" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="mt-3 d-flex justify-content-between">
+                <input type="submit" value="Save Changes" class="btn btn-primary mt-2" />
+                <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
+            </div>
+        </form>
+    </section>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

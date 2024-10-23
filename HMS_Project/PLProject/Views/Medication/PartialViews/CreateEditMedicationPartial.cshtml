@@ -15,7 +15,7 @@
 </div>
 
 <div class="mt-4">
-    <label>Add Active Substances (optional):</label>
+    <label asp-for="ActiveSubstances" class="form-label">Add Active Substances (optional):</label>
     <select asp-for="ActiveSubstances" class="form-control select2-multiple" multiple="multiple">
         @foreach (var substance in Model.ActiveSubstances)
         {

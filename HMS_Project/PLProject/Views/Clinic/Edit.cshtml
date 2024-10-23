@@ -15,10 +15,10 @@
     ViewData["Title"] = "Edit Clinic";
 }
 
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 200vh">
     <!-- Error Message -->
     <partial name="ErrorMessage" />
-    <h1 class="mb-4">Edit Clinic Information</h1>
+    <h1 class="page-title">Edit Clinic Information</h1>
 
     <form asp-controller="Clinic" asp-action="Edit" method="post">
         <!-- Clinic Information Section -->
@@ -109,8 +109,9 @@
                     </select>
                     <small class="text-muted">You can assign multiple nurses to the clinic.</small>
                     <span asp-validation-for="Nurses" class="text-danger"></span>
+                </div>
 
-                    <!-- Assigned Nurses Card -->
+                <!-- Assigned Nurses Card -->
                     <div class="card mb-4">
                         <div class="card-header bg-info text-white d-flex justify-content-between">
                             <span>Assigned Nurses</span>
@@ -138,7 +139,6 @@
                             }
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -166,10 +166,10 @@
 
         <!-- Submit Button -->
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-success btn-lg">
+            <button type="submit" class="btn btn-success">
                 <i class="fas fa-save"></i> Save Changes
             </button>
-            <a asp-action="Index" class="btn btn-secondary btn-lg"><i class="fas fa-arrow-left"></i> Back to List</a>
+            <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
         </div>
     </form>
 </div>

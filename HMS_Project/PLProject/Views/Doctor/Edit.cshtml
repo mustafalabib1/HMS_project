@@ -8,19 +8,17 @@
 		.Select(day => new SelectListItem { Value = day.ToString(), Text = day.ToString() })
 		.ToList();
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 200vh">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
 
-	<h1>Edit Doctor</h1>
-	<br />
-	<br />
+	<h1 class="page-title">Edit Doctor</h1>
 
 	<form asp-controller="Doctor" asp-action="Edit" method="post">
 		<partial name="userpartialviews\_UserEditPartial" model="@Model" />
 
-		<div class="form-group mt-2">
-			<label asp-for="specialization" class="mb-3"></label>
+		<div class="mt-3">
+			<label asp-for="specialization" class="form-label">Specialization</label>
 			<select asp-for="specializationId" class="form-control" required>
 				<option value="">Select Specialization</option>
 				@foreach (var specialization in SpecializationsDateReader)
@@ -39,7 +37,7 @@
 		</div>
 
 		<!-- Schedule Form Container -->
-		<div id="scheduleContainer" class="mt-4 @(Model.schedule != null && Model.schedule.Count > 0 ? "" : "d-none")">
+		<div id="scheduleContainer" class="mt-2 @(Model.schedule != null && Model.schedule.Count > 0 ? "" : "d-none")">
 			<h4>Schedule</h4>
 			<hr>
 
@@ -52,7 +50,7 @@
 						<div class="mb-3" data-index="@i">
 							<div class="row" data-index="@i" id="day_@item.Id">
 								<div class="col-md-4">
-									<label asp-for="schedule[@i].Day"></label>
+									<label asp-for="schedule[@i].Day" class="form-label"></label>
 									<select asp-for="schedule[@i].Day" class="form-select schedule-day-select" required>
 										<option value="">Select day</option>
 										@foreach (var day in days)
@@ -64,13 +62,13 @@
 								</div>
 
 								<div class="col-md-3">
-									<label asp-for="schedule[@i].StartTime">Start Time</label>
+									<label asp-for="schedule[@i].StartTime" class="form-label">Start Time</label>
 									<input type="time" asp-for="schedule[@i].StartTime" class="form-control" required />
 									<span asp-validation-for="schedule[@i].StartTime" class="text-danger"></span>
 								</div>
 
 								<div class="col-md-3">
-									<label asp-for="schedule[@i].EndTime">End Time</label>
+									<label asp-for="schedule[@i].EndTime" class="form-label">End Time</label>
 									<input type="time" asp-for="schedule[@i].EndTime" class="form-control" required />
 									<span asp-validation-for="schedule[@i].EndTime" class="text-danger"></span>
 								</div>
@@ -86,7 +84,7 @@
 				}
 			</div>
 
-			<button type="button" id="addDayButton" class="btn btn-success mt-4">
+			<button type="button" id="addDayButton" class="btn btn-success mt-2">
 				<i class="fas fa-plus-circle"></i> Add Day
 			</button>
 		</div>
@@ -139,7 +137,7 @@
 											<div id="day_${dayIndex}" class="mb-3" data-index="${dayIndex}">
 												<div class="row">
 													<div class="col-md-4">
-														<label for="schedule_${dayIndex}__Day">Day</label>
+														<label for="schedule_${dayIndex}__Day" class="form-label">Day</label>
 														<select name="schedule[${dayIndex}].Day" class="form-select schedule-day-select" required>
 															<option value="">Select day</option>
 			@foreach (var day in days)
@@ -150,11 +148,11 @@
 														<span class="text-danger"></span>
 													</div>
 													<div class="col-md-3">
-														<label for="schedule_${dayIndex}__StartTime">Start Time</label>
+														<label for="schedule_${dayIndex}__StartTime" class="form-label">Start Time</label>
 														<input type="time" name="schedule[${dayIndex}].StartTime" class="form-control" required />
 													</div>
 													<div class="col-md-3">
-														<label for="schedule_${dayIndex}__EndTime">End Time</label>
+															<label for="schedule_${dayIndex}__EndTime" class="form-label">End Time</label>
 														<input type="time" name="schedule[${dayIndex}].EndTime" class="form-control" required />
 													</div>
 													<div class="col-md-2 d-flex align-items-end">

@@ -16,23 +16,23 @@
 
 }
 
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
-	<h2 class="mb-4">Edit Active Substance</h2>
+	<h1 class="page-title">Edit Active Substance</h1>
 
 	<!-- Main form for editing the active substance and its interactions -->
 	<form id="editForm" asp-action="Edit" method="post">
 		<!-- Active Substance Name -->
-		<div class="form-group">
-			<label asp-for="ActiveSubstancesName"></label>
+		<div>
+			<label asp-for="ActiveSubstancesName" class="form-label"></label>
 			<input asp-for="ActiveSubstancesName" class="form-control" />
 			<span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
 		</div>
 
 		<!-- Add new Medications (optional) -->
-		<div class="form-group">
-			<label>Add new Medications (optional):</label>
+		<div class="mt-3">
+			<label asp-for="MedicationId" class="form-label">Add new Medications (optional):</label>
 			<select asp-for="MedicationId" class="form-control select2-multiple">
 				@foreach (var medication in MedicationsDateReader)
 				{
@@ -42,17 +42,17 @@
 		</div>
 
 		<!-- Interactions with Other Substances -->
-		<div class="mb-5 mt-4">
-			<h4 class="mb-3">Interactions with Other Active Substances</h4>
-			<div class="form-group">
+		<div class="mt-3">
+			<h6 class="mb-3">Interactions with Other Active Substances</h6>
+			<div>
 				<div id="interactions-list" class="row gy-3">
 					@for (int i = 0; i < Model.Interactions.Count; i++)
 					{
-						<div class="interaction-item col-md-12 row align-items-end mb-3" id="Interaction_@Model.Interactions[i].ActSubId">
+						<div class="interaction-item col-md-12 row align-items-end mb-3 mt-3" id="Interaction_@Model.Interactions[i].ActSubId">
 							<!-- Substance Selector -->
 							<div class="col-md-6">
-								<label class="fw-bold">Substance</label>
-								<select name="Interactions[@i].ActSubId" class="form-control form-control-lg" required>
+								<label class="form-label">Substance</label>
+								<select name="Interactions[@i].ActSubId" class="form-control" required>
 									<option value="">Select Substance</option>
 									@foreach (var substance in ActiveSubstancesDataReader)
 									{
@@ -66,12 +66,12 @@
 							<!-- Interaction Input -->
 							<div class="col-md-4">
 								<label class="fw-bold">Interaction</label>
-								<input type="text" name="Interactions[@i].Interaction" value="@Model.Interactions[i].Interaction" class="form-control form-control-lg" placeholder="Enter interaction" required />
+								<input type="text" name="Interactions[@i].Interaction" value="@Model.Interactions[i].Interaction" class="form-control" placeholder="Enter interaction" required />
 							</div>
 
 							<!-- Delete Button with Modal Confirmation -->
 							<div class="col-md-2 d-flex align-items-center">
-								<button type="button" class="btn btn-danger btn-lg delete-interaction" data-interaction-id="@Model.Interactions[i].ActSubId">
+								<button type="button" class="btn btn-danger delete-interaction" data-interaction-id="@Model.Interactions[i].ActSubId">
 									<i class="fas fa-trash-alt"></i> Delete
 								</button>
 							</div>
@@ -80,18 +80,18 @@
 				</div>
 
 				<!-- Add New Interaction Button -->
-				<button type="button" class="btn btn-success btn-lg mt-3" id="add-interaction">
+				<button type="button" class="btn btn-success mt-3" id="add-interaction">
 					<i class="fas fa-plus-circle"></i> Add Interaction
 				</button>
 			</div>
 		</div>
 
 		<!-- Submit Button -->
-		<div class="mt-4">
-			<button type="submit" class="btn btn-primary btn-lg">
+		<div class="mt-3 d-flex justify-content-between">
+			<button type="submit" class="btn btn-primary">
 				<i class="fas fa-edit"></i> Save Changes
 			</button>
-			<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary btn-lg ms-2">
+			<a asp-controller="ActiveSubstance" asp-action="Index" class="btn btn-secondary ms-2">
 				<i class="fas fa-arrow-left"></i> Back To List
 			</a>
 		</div>
@@ -126,10 +126,10 @@
 			$('#add-interaction').click(function () {
 				var index = $('.interaction-item').length;
 				var newInteraction = `
-					<div class="interaction-item col-md-12 row align-items-end mb-3">
+					<div class="interaction-item col-md-12 row align-items-end mb-3 mt-3">
 						<div class="col-md-6">
-							<label class="fw-bold">Substance</label>
-							<select name="Interactions[` + index + `].ActSubId" class="form-control form-control-lg" required>
+							<label class="form-label">Substance</label>
+							<select name="Interactions[` + index + `].ActSubId" class="form-control" required>
 								<option value="">Select Substance</option>
 								@foreach (var substance in ActiveSubstancesDataReader)
 								{
@@ -138,10 +138,10 @@
 							</select>
 						</div>
 						<div class="col-md-4">
-							<input type="text" name="Interactions[` + index + `].Interaction" class="form-control form-control-lg" placeholder="Enter interaction" required />
+							<input type="text" name="Interactions[` + index + `].Interaction" class="form-control" placeholder="Enter interaction" required />
 						</div>
 						<div class="col-md-2 d-flex align-items-center">
-							<button type="button" class="btn btn-danger btn-lg remove-interaction">
+							<button type="button" class="btn btn-danger remove-interaction">
 								<i class="fas fa-trash-alt"></i>
 							</button>
 						</div>
