@@ -2,24 +2,22 @@
 @{
 	ViewData["Title"] = "View Clinic";
 }
-<div class="container mt-5">
-	<h1 class="mb-4">Clinic Details</h1>
+<div class="container mt-5" style="min-height: 100vh">
+	<h1 class="page-title">Clinic Details</h1>
 
 	<partial name="PartialViews/DetailsDeleteClinicPartial" />
 
 
 	<!-- Action Buttons -->
-	<div class="d-flex justify-content-end mt-4">
+	<div class="d-flex justify-content-between mt-3">
 		<!-- Delete and Cancel Buttons -->
-		<div class="mt-5 mb-5">
-			<button type="submit" class="btn btn-danger mt-2">
-				<i class="fas fa-trash"></i> Delete
-			</button>
+		<a asp-action="Delete" class="btn btn-danger mt-2">
+			<i class="fas fa-trash"></i> Delete
+		</a>
 
-			<a asp-action="Index" class="btn btn-primary mt-2">
-				<i class="fas fa-arrow-left"></i> Back To List
-			</a>
-		</div>
+		<a asp-action="Index" class="btn btn-primary mt-2">
+			<i class="fas fa-arrow-left"></i> Back To List
+		</a>
 	</div>
 </div>
 
