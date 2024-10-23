@@ -33,7 +33,7 @@ namespace PLProject.Controllers
 		#endregion
 
 		#region Get all Appointment for patient 
-		public IActionResult Index(int? page)
+		public IActionResult Index(int? page, string filter)
 		{
 			// Get the current doctor ID
 			var user = userManager.GetUserAsync(User).GetAwaiter().GetResult();
@@ -41,6 +41,16 @@ namespace PLProject.Controllers
 			UserId = user?.Id ?? string.Empty;
 
 			var appointments = unitOfWork.Repository<Apointment>().Find(a => a.PatientUserId == UserId).Include(a => a.Patient).Include(a => a.Doctor).Include(a => a.Clinic).ToList();
+
+			if(filter == "Past")
+			{
+				appointments = appointments.Where(a => a.ApointmentDate < DateOnly.FromDateTime(DateTime.Now) || a.ApointmentStatus == ApointmentStatusEnum.Completed).ToList();
+			}
+			else if (string.IsNullOrEmpty(filter))
+			{
+				appointments = appointments.Where(a => a.ApointmentDate >= DateOnly.FromDateTime(DateTime.Now) && a.ApointmentStatus != ApointmentStatusEnum.Completed).ToList();
+			}
+
 			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
 
 			// Pagination logic

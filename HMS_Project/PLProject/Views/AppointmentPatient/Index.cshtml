@@ -13,6 +13,9 @@
 			<div class="row">
 				<div class="col-sm">
 					<a asp-controller="AppointmentPatient" asp-action="Create" class="btn btn-primary">Create New Appointment</a>
+					<a href="@Url.Action("Index")" class="btn btn-success">View Upcoming Appointments</a>
+					<a href="@Url.Action("Index", new { filter = "Past" })" class="btn btn-warning">View Past Appointments</a>
+
 				</div>
 			</div>
 
@@ -114,7 +117,7 @@
 			else
 			{
 				<div class="mt-4 alert alert-warning text-center">
-					<h3><i class="fas fa-exclamation-triangle"></i> No Apointment Found</h3>
+					<h3><i class="fas fa-exclamation-triangle"></i> No Appointments Found</h3>
 				</div>
 			}
 
