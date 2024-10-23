@@ -4,7 +4,11 @@
 }
 <div class="container mt-5" style="min-height: 100vh">
 	<h1 class="page-title">Add a New Clinic Specialization</h1>
+	<!-- Success Message -->
+	<partial name="SuccessMessage" />
 
+    <!-- Error Message -->
+    <partial name="ErrorMessage" />
 
 	<form asp-action="AddSpecialization" method="post">
 		<div class="mt-2">

@@ -42,9 +42,21 @@ namespace PLProject.Controllers
 		{
 			if (ModelState.IsValid) // server side validation
 			{
+				bool alreadyExist = unitOfWork.Repository<ClinicSpecializationLookup>().GetALL().Any(c => c.Specialization == ClinicSpecialization.Specialization);
+
+				if (alreadyExist)
+				{
+					TempData["ErrorMessage"] = "Specialization already exists!";
+					return View(ClinicSpecialization);
+				}
+
 				unitOfWork.Repository<ClinicSpecializationLookup>().Add(ClinicSpecialization);
 				unitOfWork.Complete();
-				return RedirectToAction(nameof(Index));
+
+				// Set a success message using TempData
+				TempData["SuccessMessage"] = "Specialization added successfully!";
+
+				return View();
 			}
 			return View(ClinicSpecialization);
 		}
