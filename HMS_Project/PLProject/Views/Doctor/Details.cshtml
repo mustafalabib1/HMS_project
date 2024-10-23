@@ -2,76 +2,77 @@
 @{
     ViewData["Title"] = "Doctor Details";
 }
-<div class="container mt-5">
-<h1>Doctor Details</h1>
-<br />
-<br />
+<div class="container mt-5" style="min-height: 120vh">
+    <h1 class="page-title">Doctor Details</h1>
 
-<div>
-    <div class="mb-3">
-        <label asp-for="FirstName" class="form-label"></label>
-        <input asp-for="FirstName" class="form-control" readonly />
-    </div>
-    <div class="mb-3">
-        <label asp-for="MiddleName" class="form-label"></label>
-        <input asp-for="MiddleName" class="form-control" readonly />
-        <span asp-validation-for="MiddleName" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="LastName" class="form-label"></label>
-        <input asp-for="LastName" class="form-control" readonly />
-    </div>
+    <div>
+        <div class="mb-3">
+            <label asp-for="FirstName" class="form-label"></label>
+            <input asp-for="FirstName" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label asp-for="MiddleName" class="form-label"></label>
+            <input asp-for="MiddleName" class="form-control" readonly />
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="LastName" class="form-label"></label>
+            <input asp-for="LastName" class="form-control" readonly />
+        </div>
 
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" readonly />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Phone" class="form-label"></label>
-        <input asp-for="Phone" class="form-control" readonly />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Gender" class="form-label"></label>
-        <input asp-for="Gender" class="form-control" readonly />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label"></label>
+            <input asp-for="Phone" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Gender" class="form-label"></label>
+            <input asp-for="Gender" class="form-control" readonly />
+        </div>
 
-    <div class="mb-3">
-        <label asp-for="DateOfBirth" class="form-label"></label>
-        <input asp-for="DateOfBirth" class="form-control" readonly />
+        <div class="mb-3">
+            <label asp-for="DateOfBirth" class="form-label"></label>
+            <input asp-for="DateOfBirth" class="form-control" readonly />
+        </div>
+
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title mb-3">Doctor's Schedule</h4>
+                <div class="mb-3">
+                    @if (Model.schedule != null && Model.schedule.Count > 0)
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.schedule)
+                                {
+                                    <tr>
+                                        <td>@item.Day</td>
+                                        <td>@item.StartTime.ToString("hh\\:mm")</td> <!-- Display as HH:MM -->
+                                        <td>@item.EndTime.ToString("hh\\:mm")</td>   <!-- Display as HH:MM -->
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No schedule available for this doctor.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Include your partial buttons (Edit/Delete, etc.) -->
+        <partial name="_ButtonsInDetailsPartial" model="Model.UserId" />
     </div>
-
-    <!-- Schedule Section -->
-    <h3 class="mt-4">Doctor's Schedule</h3>
-    <hr />
-
-    @if (Model.schedule != null && Model.schedule.Count > 0)
-    {
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.schedule)
-                {
-                    <tr>
-                        <td>@item.Day</td>
-                        <td>@item.StartTime.ToString("hh\\:mm")</td> <!-- Display as HH:MM -->
-                        <td>@item.EndTime.ToString("hh\\:mm")</td>   <!-- Display as HH:MM -->
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No schedule available for this doctor.</p>
-    }
-
-    <!-- Include your partial buttons (Edit/Delete, etc.) -->
-    <partial name="_ButtonsInDetailsPartial" model="Model.UserId" />
-</div>
 </div>
