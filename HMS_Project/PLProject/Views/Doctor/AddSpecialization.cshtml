@@ -2,32 +2,32 @@
 @{
     ViewData["Title"] = "Add Specialization";
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
     <!-- Error Message -->
     <partial name="ErrorMessage" />
 
-    <h1 class="mb-4">Add a New Doctor Specialization</h1>
+    <h1 class="page-title">Add a New Doctor Specialization</h1>
 
     <form asp-action="AddSpecialization" method="post" id="specializationForm">
         <div class="row mb-4 align-items-center">
             <!-- Label -->
             <div class="col-md-3">
-                <label asp-for="Specialization" class="form-label fs-5">Specialization</label>
+                <label asp-for="Specialization" class="form-label">Specialization</label>
             </div>
             <!-- Input -->
             <div class="col-md-12">
-                <input asp-for="Specialization" class="form-control form-control-lg" placeholder="e.g. Cardiology, Neurology" />
+                <input asp-for="Specialization" class="form-control" placeholder="e.g. Cardiology, Neurology" />
                 <span asp-validation-for="Specialization" class="text-danger"></span>
             </div>
         </div>
 
         <!-- Submit Button with loading spinner -->
         <div class="d-flex justify-content-between align-items-center">
-            <button type="submit" class="btn btn-primary btn-lg" id="submitButton">
+            <button type="submit" class="btn btn-primary" id="submitButton">
                 <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                 Add Specialization
             </button>
-            <a asp-action="Index" class="btn btn-secondary btn-lg">Back To List</a>
+            <a asp-action="Index" class="btn btn-secondary">Back To List</a>
         </div>
     </form>
 </div>
