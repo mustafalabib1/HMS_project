@@ -6,32 +6,30 @@
 
     ViewData["Title"] = "Create New Active Substance";
 }
-
-<div class="container mt-5" style="min-height: 100vh">
+<div class="container mt-5">
     <!-- Error Message -->
     <partial name="ErrorMessage" />
-
-    <h1 class="page-title">Create New Active Substance</h1>
+    <h2 class="mb-4">Create New Active Substance</h2>
 
     <form asp-action="Create" method="post">
 
         <!-- Active Substance Name -->
-        <div>
-            <label asp-for="ActiveSubstancesName" class="form-label">Active Substance Name</label>
-            <input asp-for="ActiveSubstancesName" class="form-control" placeholder="Enter active substance name" />
+        <div class="form-group">
+            <label asp-for="ActiveSubstancesName" class="fw-bold">Active Substance Name</label>
+            <input asp-for="ActiveSubstancesName" class="form-control form-control-lg" placeholder="Enter active substance name" />
             <span asp-validation-for="ActiveSubstancesName" class="text-danger"></span>
         </div>
 
         <!-- Dynamic Interactions Section -->
-        <div class="mt-4">
-            <label class="form-label">Active Substance Interactions (optional):</label>
-            <div id="interactions-list" class="row gy-3 mt-2">
+        <div class="form-group mt-4">
+            <label class="fw-bold">Active Substance Interactions (optional):</label>
+            <div id="interactions-list" class="row gy-3">
                 @for (int i = 0; i < Model?.Interactions?.Count; i++)
                 {
                     <div class="interaction-item col-md-12 row align-items-end mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Select Substance</label>
-                            <select asp-for="@Model.Interactions[i].ActSubId" class="form-control">
+                            <label class="d-block">Select Substance</label>
+                            <select asp-for="@Model.Interactions[i].ActSubId" class="form-control form-control-lg">
                                 <option value="">Select Substance</option>
                                 @foreach (var substance in ActiveSubstancesDateReader)
                                 {
@@ -40,26 +38,26 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="@Model.Interactions[i].Interaction" class="form-label">Interaction</label>
-                            <input asp-for="@Model.Interactions[i].Interaction" class="form-control" placeholder="Enter interaction" />
+                            <label asp-for="@Model.Interactions[i].Interaction" class="d-block">Interaction</label>
+                            <input asp-for="@Model.Interactions[i].Interaction" class="form-control form-control-lg" placeholder="Enter interaction" />
                         </div>
                         <div class="col-md-2 d-flex align-items-center">
-                            <button type="button" class="btn btn-danger remove-interaction" title="Remove Interaction">
+                            <button type="button" class="btn btn-danger btn-lg remove-interaction" title="Remove Interaction">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
                     </div>
                 }
             </div>
-            <button type="button" class="btn btn-success" id="add-interaction">
+            <button type="button" class="btn btn-success btn-lg mt-3" id="add-interaction">
                 <i class="fas fa-plus-circle"></i> Add Interaction
             </button>
         </div>
 
         <!-- Medications Section -->
-        <div class="mt-4">
-            <label class="form-label">Add new Medications (optional):</label>
-            <select asp-for="MedicationId" class="form-control select2-multiple" multiple="multiple" data-placeholder="Select medications">
+        <div class="form-group mt-4">
+            <label class="fw-bold">Add new Medications (optional):</label>
+            <select asp-for="MedicationId" class="form-control select2-multiple form-control-lg" multiple="multiple" data-placeholder="Select medications">
                 @foreach (var medication in MedicationsDateReader)
                 {
                     <option value="@medication.Id">@medication.MedName</option>
@@ -69,10 +67,10 @@
 
         <!-- Submit Button -->
         <div class="mt-4 d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary btn-lg">
                 <i class="fas fa-save"></i> Submit
             </button>
-            <a asp-action="Index" class="btn btn-secondary">
+            <a asp-action="Index" class="btn btn-secondary btn-lg">
                 <i class="fas fa-arrow-left"></i> Back to List
             </a>
         </div>
@@ -108,8 +106,8 @@
                         var newInteraction = `
                             <div class="interaction-item col-md-12 row align-items-end mb-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Select Substance</label>
-                                    <select name="Interactions[` + index + `].ActSubId" class="form-control">
+                                    <label class="d-block">Select Substance</label>
+                                    <select name="Interactions[` + index + `].ActSubId" class="form-control form-control-lg">
                                         <option value="">Select Substance</option>
         @foreach (var substance in ActiveSubstancesDateReader)
         {
@@ -119,11 +117,11 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Interaction</label>
-                                    <input type="text" name="Interactions[` + index + `].Interaction" class="form-control " placeholder="Enter interaction" />
+                                    <label class="d-block">Interaction</label>
+                                    <input type="text" name="Interactions[` + index + `].Interaction" class="form-control form-control-lg" placeholder="Enter interaction" />
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center">
-                                    <button type="button" class="btn btn-danger remove-interaction">
+                                    <button type="button" class="btn btn-danger btn-lg remove-interaction">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>

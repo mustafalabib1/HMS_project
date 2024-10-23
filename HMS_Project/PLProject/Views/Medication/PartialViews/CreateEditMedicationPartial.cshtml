@@ -2,19 +2,19 @@
 
 
 
-<div>
-    <label asp-for="Name" class="form-label"></label>
+<div class="form-group">
+    <label asp-for="Name" class="form-label fw-bold"></label>
     <input asp-for="Name" class="form-control" />
     <span asp-validation-for="Name" class="text-danger"></span>
 </div>
 
-<div class="mt-4">
-    <label asp-for="Strength" class="form-label"></label>
+<div class="form-group">
+    <label asp-for="Strength" class="form-label fw-bold"></label>
     <input asp-for="Strength" class="form-control" />
     <span asp-validation-for="Strength" class="text-danger"></span>
 </div>
 
-<div class="mt-4">
+<div class="form-group">
     <label>Add Active Substances (optional):</label>
     <select asp-for="ActiveSubstanceIds" class="form-control select2-multiple" multiple="multiple">
         @foreach (var substance in Model.ActiveSubstances)

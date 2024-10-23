@@ -3,18 +3,18 @@
 @{
 	ViewData["Title"] = "Create New Medication";
 }
-<div class="container mt-5" style="min-height: 100vh">
+<div class="container mt-5">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
 
-	<h1 class="page-title">Create New Medication</h1>
+	<h2>Create New Medication</h2>
 
 	<form asp-action="Create" method="post">
 
 		<partial name="PartialViews/CreateEditMedicationPartial" />
 
 
-		<div class="mt-3 d-flex justify-content-between">
+		<div class="mt-3">
 			<button type="submit" class="btn btn-primary">Create</button>
 			<a asp-action="Index" class="btn btn-secondary">Cancel</a>
 		</div>

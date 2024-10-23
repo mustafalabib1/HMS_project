@@ -3,16 +3,16 @@
 	ViewData["Title"] = "doctors";
 	ViewData["User"] = "doctor";
 }
-<div class="container mt-5" style="min-height: 100vh">
+<div class="container mt-5">
 
 	<!-- Success Message -->
 	<partial name="SuccessMessage" />
 
-	<h1 class="page-title"> All @ViewData["Title"] </h1>
+	<h1 class="display-4 text-center mb-4"> All @ViewData["Title"] </h1>
 
 	<!-- Action Buttons -->
 	<div class="d-flex justify-content-between mb-3">
-		<a asp-action="AddSpecialization" class="btn btn-primary"> Add Doctor Specialization</a>
+		<a asp-action="AddSpecialization" class="btn btn-primary btn-lg px-4"> <i class="fas fa-user-md"></i> Add Doctor Specialization</a>
 	</div>
 
 	@if (Model.Any())
@@ -53,17 +53,10 @@
 	}
 	else
 	{
-		<div class="mt-4 alert alert-warning text-center">
-			<h3><i class="fas fa-exclamation-triangle"></i> No Doctors Found</h3>
-			@* <p>You can add new doctor by clicking the button below.</p>
-			<a asp-controller="ActiveSubstance" asp-action="Create" class="btn btn-primary">
-				<i class="fas fa-plus-circle"></i> Add New Active Substance
-			</a> *@
-		</div>
-		@* <div class="alert alert-warning mt-4">
+		<div class="alert alert-warning mt-4">
 			<h3 class="text-center"> No doctors found!</h3>
 			<p class="text-center">You can add a new doctor by clicking the "Create New Doctor" button above.</p>
-		</div> *@
+		</div>
 	}
 </div>
 

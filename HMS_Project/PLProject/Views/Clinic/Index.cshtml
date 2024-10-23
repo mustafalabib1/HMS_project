@@ -2,11 +2,12 @@
 @{
 	ViewData["Title"] = "View Clinics";
 }
-<div class="container mt-5" style="min-height: 100vh">
+<div class="container mt-5">
 	<!-- Success Message -->
 	<partial name="SuccessMessage" />
-
-	<h1 class="page-title">All Clinics</h1>
+	<h1>All Clinics</h1>
+	<br />
+	<br />
 
 	<a asp-controller="Clinic" asp-action="Create" class="btn btn-primary">Create New Clinic</a>
 	<a asp-controller="Clinic" asp-action="AddSpecialization" class="btn btn-primary">Add New Clinic Specialization</a>
@@ -58,12 +59,8 @@
 	}
 	else
 	{
-		<div class="mt-4 alert alert-warning text-center">
-			<h3><i class="fas fa-exclamation-triangle"></i> No Clinics Found</h3>
-			<p>You can add new clinic by clicking the button below.</p>
-			<a asp-controller="Clinic" asp-action="Create" class="btn btn-primary">
-				<i class="fas fa-plus-circle"></i> Add New Clinic
-			</a>
+		<div class="mt-4 alert alert-warning">
+			<h3>There is no Clinics !</h3>
 		</div>
 	}
 </div>
