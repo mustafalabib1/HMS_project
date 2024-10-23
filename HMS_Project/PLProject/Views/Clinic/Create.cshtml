@@ -15,10 +15,10 @@
     ViewData["Title"] = "Create Clinic";
 }
 
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 150vh">
     <!-- Error Message -->
     <partial name="ErrorMessage" />
-    <h1 class="text-center text-primary">Create New Clinic</h1>
+    <h1 class="page-title">Create New Clinic</h1>
     <p class="text-center text-muted">Fill out the details below to register a new clinic.</p>
 
     <form asp-asp-controller="Clinic" asp-action="Create" method="post" class="needs-validation" novalidate>

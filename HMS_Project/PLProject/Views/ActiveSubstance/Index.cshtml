@@ -4,16 +4,14 @@
 	ViewData["Title"] = "Active Substances";
 }
 
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
 	<!-- Success Message -->
 	<partial name="SuccessMessage" />
 
-	<h1 class="display-4 text-center mb-4"> All @ViewData["Title"] </h1>
+	<h1 class="page-title"> All @ViewData["Title"] </h1>
 
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="mb-4">@ViewData["Title"]</h1>
-
 			<div class="row">
 				<div class="col-sm">
 					<a asp-controller="ActiveSubstance" asp-action="Create" class="btn btn-primary">Create New Active Substance</a>

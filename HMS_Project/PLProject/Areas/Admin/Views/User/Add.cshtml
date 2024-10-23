@@ -4,49 +4,49 @@
     ViewData["Title"] = "Add New User";
 }
 
-<section class="container">
-    <h1>Add New User</h1>
+<section class="container mt-5" style="min-height: 175vh">
+    <h1 class="page-title">Add New User</h1>
 
     <form asp-action="Add" method="post" class="form">
         <div asp-validation-summary="All" class="text-danger" role="alert"></div>
         <div class="input-box">
-            <label asp-for="FullName">Full Name</label>
+            <label asp-for="FullName" class="form-label">Full Name</label>
             <input asp-for="FullName" class="form-control" max-length="100" aria-required="true"/>
             <span asp-validation-for="FullName" class="text-danger"></span>
         </div>
-        <div class="input-box">
-            <label asp-for="UserName">User Name</label>
+        <div class="input-box mt-4">
+            <label asp-for="UserName" class="form-label">User Name</label>
             <input asp-for="UserName" class="form-control" max-length="100" aria-required="true" />
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
-        <div class="input-box">
-            <label asp-for="Email">Email Address</label>
+        <div class="input-box mt-4">
+            <label asp-for="Email" class="form-label">Email Address</label>
             <input asp-for="Email" class="form-control" aria-required="true"/>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-        <div class="input-box">
-            <label asp-for="Password">Password</label>
+        <div class="input-box mt-4">
+            <label asp-for="Password" class="form-label">Password</label>
             <input asp-for="Password" class="form-control" aria-required="true"/>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-        <div class="input-box">
-            <label asp-for="ConfirmPassword">Confirm Password</label>
+        <div class="input-box mt-4">
+            <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
             <input asp-for="ConfirmPassword" class="form-control" aria-required="true"/>
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
-        <div class="column">
-            <div class="input-box">
-                <label asp-for="PhoneNumber">Phone Number</label>
+        <div class="column mt-4">
+            <div class="input-box mt-4">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
                 <input asp-for="PhoneNumber" class="form-control" aria-required="true"/>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="input-box">
-                <label asp-for="BirthDate">Birth Date</label>
+            <div class="input-box mt-4">
+                <label asp-for="BirthDate" class="form-label">Birth Date</label>
                 <input asp-for="BirthDate" class="form-control" aria-required="true" value="" />
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
         </div>
-        <div class="gender-box mt-2">
+        <div class="gender-box mt-4">
             <h5>Gender</h5>
             <div class="gender-option d-flex">
                 <div class="gender me-3">
@@ -60,16 +60,16 @@
                 </div>
             </div>
         </div>
-        <div class="input-box address">
-            <label asp-for="Address">Address</label>
+        <div class="input-box address mt-4">
+            <label asp-for="Address" class="form-label">Address</label>
             <input asp-for="Address" class="form-control" aria-required="true"/>
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
         <hr />
-        <h6>Assign Roles</h6>
+        <h5>Assign Roles</h5>
         @for (int i = 0; i < Model.Roles.Count; i++)
         {
-            <div class="form-check m-1">
+            <div class="form-check m-2">
                 <input type="hidden" asp-for="@Model.Roles[i].RoleId" />
                 <input type="hidden" asp-for="@Model.Roles[i].RoleName" />
                 <input asp-for="@Model.Roles[i].IsSelected" class="form-check-input" />
@@ -80,8 +80,10 @@
         }
         <span asp-validation-for="Roles" class="text-danger"></span>
 
-        <input type="submit" value="Save" class="btn btn-primary mt-2" />
-        <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
+        <div class="mt-3 d-flex justify-content-between">
+            <input type="submit" value="Save" class="btn btn-primary mt-2" />
+            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary mt-2">Back To List</a>
+        </div>
     </form>
 </section>
 
