@@ -15,20 +15,34 @@
 
 
 <div class="mb-4">
-    <h4 class="mb-3">Active Substances</h4>
-    @if (Model.ActiveSubstances.Any())
+    
+    @if (Model.ActiveSubstances.Count() > 0)
     {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(a => a.ActiveSubstances.First().ActiveSubstancesName)</th>
 
-        <tr>
-            @foreach (var substance in Model.ActiveSubstances)
-            {
-                <td>@substance.ActiveSubstancesName</td>
-            }
-        </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ac in Model.ActiveSubstances)
+                    {
+                        <tr class="align-middle">
+                            <td>@ac.ActiveSubstancesName</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
     else
     {
-        <div class="alert alert-info">No active substances found for this medication.</div>
+        <div class="alert alert-info mt-3">
+            <i class="fas fa-info-circle"></i> No active substance found containing this Medication.
+        </div>
     }
 </div>
 
