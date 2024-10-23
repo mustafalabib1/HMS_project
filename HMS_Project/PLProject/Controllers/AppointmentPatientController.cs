@@ -134,7 +134,6 @@ namespace PLProject.Controllers
 			model.PatientId = user?.Id ?? string.Empty;
 			if (ModelState.IsValid)
 			{
-				return RedirectToAction("Index");
 				try
 				{
 					// Set a success message using TempData
@@ -142,6 +141,7 @@ namespace PLProject.Controllers
 					unitOfWork.Complete();
 
 					TempData["SuccessMessage"] = "Appointment booked successfully!";
+					return RedirectToAction("Index");
 
 				}
 				catch (Exception ex)
