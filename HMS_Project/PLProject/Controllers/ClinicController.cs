@@ -61,7 +61,6 @@ namespace PLProject.Controllers
 		{
 			if (ModelState.IsValid) // server side validation
 			{
-				return RedirectToAction(nameof(Index));
 				try
 				{
 					var updatedClinic = (Clinic)clinicViewModel;
@@ -85,7 +84,6 @@ namespace PLProject.Controllers
 
 					// Set a success message using TempData
 					TempData["SuccessMessage"] = "Clinic Create successfully!";
-
 
 					return RedirectToAction(nameof(Index));
 				}
