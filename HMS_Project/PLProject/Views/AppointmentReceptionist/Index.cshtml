@@ -2,12 +2,12 @@
 @{
 	ViewData["Title"] = $"Scheduled Appointments";
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
 	<!-- Success Message -->
 	<partial name="SuccessMessage" />
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="mb-4 ">@ViewData["Title"]</h1>
+			<h1 class="page-title">@ViewData["Title"]</h1>
 
 			<partial name="_ApointmentIndexPartial" model="@Model" />
 
