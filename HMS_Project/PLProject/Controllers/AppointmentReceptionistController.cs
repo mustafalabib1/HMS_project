@@ -121,7 +121,7 @@ namespace PLProject.Controllers
 
 
 				// Set a success message using TempData
-				TempData["SuccessMessage"] = "apointment update successfully!";
+				TempData["SuccessMessage"] = "Appointment Updated Successfully!";
 
 
 				return RedirectToAction(nameof(Index));

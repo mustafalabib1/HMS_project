@@ -227,7 +227,7 @@ namespace PLProject.Controllers
 		public IActionResult Delete([FromRoute] int Id, ClinicViewModel clinicViewModel)
 		{
 
-			if (Id != clinicViewModel.Id)
+			if (Id == clinicViewModel.Id)
 			{
 				try
 				{
@@ -236,7 +236,7 @@ namespace PLProject.Controllers
 					unitOfWork.Complete();
 
 					// Set a success message using TempData
-					TempData["SuccessMessage"] = "clinic delete successfully!";
+					TempData["SuccessMessage"] = "clinic deleted successfully!";
 
 					return RedirectToAction(nameof(Index));
 				}
