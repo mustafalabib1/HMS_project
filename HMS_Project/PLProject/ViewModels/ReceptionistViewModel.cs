@@ -18,7 +18,7 @@ namespace PLProject.ViewModels
             UserId = receptionist.UserId;
             Id = receptionist.Id;
             SSN = receptionist.AppUser.SSN;
-            string[] name = receptionist.AppUser.FullName.Split();
+            string[] name = receptionist.AppUser.FullName.TrimEnd().TrimStart().Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];

@@ -7,71 +7,76 @@ using System.Numerics;
 
 namespace PLProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
-    public class NurseController : Controller
-    {
-        #region DPI
-        private readonly IUnitOfWork unitOfWork;
+	public class NurseController : Controller
+	{
+		#region DPI
+		private readonly IUnitOfWork unitOfWork;
 		private readonly IWebHostEnvironment env;
 
 		public NurseController(IUnitOfWork unitOfWork, IWebHostEnvironment _env)
-        {
-            this.unitOfWork = unitOfWork;
+		{
+			this.unitOfWork = unitOfWork;
 			env = _env;
 		}
-        #endregion
+		#endregion
 
-        #region Index 
-        public IActionResult Index()
-        {
-            var Nurses = unitOfWork.Repository<Nurse>().GetALL();
-            var NurseViewModels = Nurses.Select(p => (NurseViewModel)p).ToList();
-            return View(NurseViewModels);
-        } 
-        #endregion
+		#region Index 
+		[Authorize(Roles = Roles.Admin)]
+		public IActionResult Index()
+		{
+			var Nurses = unitOfWork.Repository<Nurse>().GetALL();
+			var NurseViewModels = Nurses.Select(p => (NurseViewModel)p).ToList();
+			return View(NurseViewModels);
+		}
+		#endregion
 
-        #region Details
-        [Route("Nurse/Details/{userId}")]
-        public IActionResult Details(string userId)
-        {
-            if (userId is null)
-                return BadRequest(); // 400
+		#region Details
+		[Authorize(Roles = Roles.Admin + "," + Roles.Nurse)]  // Admins can edit all, doctors can edit their own profile
+		[Route("Nurse/Details/{userId}")]
+		public IActionResult Details(string userId)
+		{
+			if (userId is null)
+				return BadRequest(); // 400
 
-            var Nurse = unitOfWork.Repository<Nurse>().Get(userId);
+			var Nurse = unitOfWork.Repository<Nurse>().Get(userId);
 
-            if (Nurse is null)
-                return NotFound(); // 404
+			if (Nurse is null)
+				return NotFound(); // 404
 
-            var NurseViewModel = (NurseViewModel)Nurse;
+			var NurseViewModel = (NurseViewModel)Nurse;
+			if (User.IsInRole(Roles.Nurse))
+				return RedirectToAction(nameof(Index), controllerName: "Home");
+			else
+				return View(NurseViewModel);
+		}
+		#endregion
 
-            return View(NurseViewModel);
-        }
-        #endregion
+		#region Edit
+		[Authorize(Roles = Roles.Admin + "," + Roles.Nurse)]  // Admins can edit all, doctors can edit their own profile
 
-        #region Edit
-        [Route("Nurse/Edit/{userId}")]
-        public IActionResult Edit(string userId)
-        {
-            if (userId is null)
-                return BadRequest(); // 400
+		[Route("Nurse/Edit/{userId}")]
+		public IActionResult Edit(string userId)
+		{
+			if (userId is null)
+				return BadRequest(); // 400
 
-            var Nurse = unitOfWork.Repository<Nurse>().Get(userId);
+			var Nurse = unitOfWork.Repository<Nurse>().Get(userId);
 
-            if (Nurse is null)
-                return NotFound(); // 404
+			if (Nurse is null)
+				return NotFound(); // 404
 
-            var NurseViewModel = (NurseViewModel)Nurse;
-            return View(NurseViewModel);
-        }
+			var NurseViewModel = (NurseViewModel)Nurse;
+			return View(NurseViewModel);
+		}
 
-        [HttpPost, ValidateAntiForgeryToken]
-        [Route("Nurse/Edit/{userId}")]
-        public IActionResult Edit([FromRoute] string userId, NurseViewModel ViewModel)
-        {
+		[HttpPost, ValidateAntiForgeryToken]
+		[Route("Nurse/Edit/{userId}")]
+		public IActionResult Edit([FromRoute] string userId, NurseViewModel ViewModel)
+		{
 
-            if (userId != ViewModel.UserId)
-                return BadRequest();//400
-            var nurse = unitOfWork.Repository<Nurse>().Get(ViewModel.UserId);
+			if (userId != ViewModel.UserId)
+				return BadRequest();//400
+			var nurse = unitOfWork.Repository<Nurse>().Get(ViewModel.UserId);
 			if (ModelState.IsValid)
 			{
 				try
@@ -98,6 +103,6 @@ namespace PLProject.Controllers
 
 			return View(ViewModel);
 		}
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -1,9 +1,18 @@
 ﻿@model string
 <div class="mt-3 d-flex justify-content-between">
-	<a  asp-action="Edit" asp-route-id="@Model" class="btn btn-primary">
+	<a asp-action="Edit" asp-route-id="@Model" class="btn btn-primary">
 		<i class="fas fa-edit"></i> Edit
 	</a>
-	<a asp-action="Index" class="btn btn-secondary ms-2">
+	@if (User.IsInRole(Roles.Admin))
+	{
+		<a asp-action="Index" class="btn btn-secondary ms-2">
 		<i class="fas fa-arrow-left"></i> Back To List
-	</a>
+		</a>
+	}
+	else
+	{
+		<a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">
+			<i class="fas fa-arrow-left"></i> Back
+		</a>
+	}
 </div>

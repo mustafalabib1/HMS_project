@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -56,17 +57,59 @@
 											<li>
 												<a asp-area="" asp-controller="AppointmentPatient" asp-action="Index">Book Appointment</a>
 											</li>
+
+											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+											<li>
+												<a asp-area="" asp-controller="Patient" asp-action="Details" asp-route-id="@userId">My details</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Patient" asp-action="Edit" asp-route-id="@userId">update my details</a>
+											</li>
 										}
 										@if (User.IsInRole(Roles.Doctor))
 										{
+											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
 											<li>
 												<a asp-area="" asp-controller="AppointmentDoctor" asp-action="Index">My Appointment</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Doctor" asp-action="Details" asp-route-id="@userId">My details</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Doctor" asp-action="Edit" asp-route-id="@userId">update my details</a>
 											</li>
 										}
 										@if (User.IsInRole(Roles.Pharmacist))
 										{
 											<li>
 												<a asp-area="" asp-controller="Prescription" asp-action="Index">Prescription</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="ActiveSubstance" asp-action="Index">Active Substance</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Medication" asp-action="Index">Medication</a>
+											</li>
+											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+											<li>
+												<a asp-area="" asp-controller="Pharmacist" asp-action="Details" asp-route-id="@userId">My details</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Pharmacist" asp-action="Edit" asp-route-id="@userId">update my details</a>
+											</li>
+										}
+										@if (User.IsInRole(Roles.Nurse))
+										{
+											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+											<li>
+												<a asp-area="" asp-controller="Nurse" asp-action="Details" asp-route-id="@userId">My details</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Nurse" asp-action="Edit" asp-route-id="@userId">update my details</a>
 											</li>
 										}
 										@if (User.IsInRole(Roles.Receptionist) || User.IsInRole(Roles.Admin))
@@ -76,6 +119,15 @@
 												<ul class="dropdown">
 													<li><a asp-area="" asp-controller="AppointmentReceptionist" asp-action="Index">Manage Appointments</a></li>
 												</ul>
+											</li>
+
+											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+											<li>
+												<a asp-area="" asp-controller="Receptionist" asp-action="Details" asp-route-id="@userId">My details</a>
+											</li>
+											<li>
+												<a asp-area="" asp-controller="Receptionist" asp-action="Edit" asp-route-id="@userId">update my details</a>
 											</li>
 										}
 										@if (User.IsInRole(Roles.Admin))

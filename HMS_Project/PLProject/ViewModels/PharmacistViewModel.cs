@@ -19,7 +19,7 @@ namespace PLProject.ViewModels
             UserId = pharmacist.UserId;
             Id = pharmacist.Id;
             SSN = pharmacist.AppUser.SSN;
-            string[] name = pharmacist.AppUser.FullName.Split();
+            string[] name = pharmacist.AppUser.FullName.TrimEnd().TrimStart().Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];

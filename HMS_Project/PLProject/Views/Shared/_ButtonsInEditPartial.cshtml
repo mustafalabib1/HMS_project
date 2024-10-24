@@ -4,7 +4,17 @@
             <i class="fas fa-save"></i> Save Changes
         </button>
     </div>
-    <div class="cancel">
-        <a asp-action="Index" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Cancel</a>
-    </div>
+   
+	@if (User.IsInRole(Roles.Admin))
+	{
+		<div class="cancel">
+			<a asp-action="Index" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Cancel</a>
+		</div>
+	}
+	else
+	{
+		<div class="cancel">
+			<a asp-controller ="Home" asp-action="Index" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Cancel</a>
+		</div>
+	}
 </div>

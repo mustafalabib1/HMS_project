@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PLProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
     public class PharmacistController : Controller
     {
         #region DPI
@@ -20,6 +19,7 @@ namespace PLProject.Controllers
 		}
         #endregion
 
+    [Authorize(Roles = Roles.Admin)]
         #region Index 
         public IActionResult Index()
         {
@@ -30,7 +30,10 @@ namespace PLProject.Controllers
         #endregion
 
         #region Details
+
         [Route("Pharmacist/Details/{userId}")]
+        		[Authorize(Roles = Roles.Admin + "," + Roles.Pharmacist)] 
+
         public IActionResult Details(string userId)
         {
             if (userId is null)
@@ -45,10 +48,13 @@ namespace PLProject.Controllers
 
             return View(pharmacistViewModel);
         }
-        #endregion
+		#endregion
 
-        #region Edit
-        [Route("Pharmacist/Edit/{userId}")]
+
+		#region Edit
+		[Authorize(Roles = Roles.Admin + "," + Roles.Pharmacist)]
+
+		[Route("Pharmacist/Edit/{userId}")]
         public IActionResult Edit(string userId)
         {
             if (userId is null)
@@ -81,8 +87,10 @@ namespace PLProject.Controllers
 
 					// Set a success message using TempData
 					TempData["SuccessMessage"] = "pharmacist update successfully!";
-
-					return RedirectToAction(nameof(Index));
+					if (User.IsInRole(Roles.Doctor))
+						return RedirectToAction(nameof(Index), controllerName: "Home");
+					else
+						return RedirectToAction(nameof(Index));
 				}
 				catch (Exception ex)
 				{

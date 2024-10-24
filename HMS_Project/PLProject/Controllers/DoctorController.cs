@@ -11,7 +11,6 @@ using Project.ViewModels;
 
 namespace PLProject.Controllers
 {
-	[Authorize(Roles = Roles.Admin)]
 	public class DoctorController : Controller
 	{
 		#region DPI
@@ -26,6 +25,8 @@ namespace PLProject.Controllers
 		#endregion
 
 		#region Index (List Doctors)
+		[Authorize(Roles = Roles.Admin)]
+
 		public IActionResult Index()
 		{
 			var doctors = unitOfWork.Repository<Doctor>().GetALL();
@@ -35,6 +36,8 @@ namespace PLProject.Controllers
 		#endregion
 
 		#region Specialization
+		[Authorize(Roles = Roles.Admin)]
+
 		public IActionResult AddSpecialization()
 		{
 			return View();
@@ -69,7 +72,10 @@ namespace PLProject.Controllers
 		}
 		#endregion
 
+
 		#region Details
+		[Authorize(Roles = Roles.Admin + "," + Roles.Doctor)]  // Admins can edit all, doctors can edit their own profile
+
 		[Route("Doctor/Details/{userId}")]
 		public IActionResult Details(string userId)
 		{
@@ -91,6 +97,7 @@ namespace PLProject.Controllers
 		#endregion
 
 		#region Edit
+		[Authorize(Roles = Roles.Admin + "," + Roles.Doctor)]  // Admins can edit all, doctors can edit their own profile
 		[Route("Doctor/Edit/{userId}")]
 		public IActionResult Edit(string userId)
 		{
@@ -110,6 +117,7 @@ namespace PLProject.Controllers
 			return View(doctorViewModel);
 		}
 
+		[Authorize(Roles = Roles.Admin + "," + Roles.Doctor)]  // Admins can edit all, doctors can edit their own profile
 		[HttpPost, ValidateAntiForgeryToken]
 		[Route("Doctor/Edit/{userId}")]
 		public IActionResult Edit([FromRoute] string userId, DoctorViewModel ViewModel)
@@ -128,8 +136,10 @@ namespace PLProject.Controllers
 
 					// Set a success message using TempData
 					TempData["SuccessMessage"] = "Doctor update successfully!";
-
-					return RedirectToAction(nameof(Index));
+					if (User.IsInRole(Roles.Doctor))
+						return RedirectToAction(nameof(Index),controllerName:"Home");
+					else 						
+						return RedirectToAction(nameof(Index));
 				}
 				catch (Exception ex)
 				{
@@ -148,6 +158,7 @@ namespace PLProject.Controllers
 		#endregion
 
 		#region Delete Schedule day 
+		[Authorize(Roles = Roles.Admin)]
 		[HttpPost]
 		public IActionResult DeleteScheduleDay(int ScheduleId)
 		{

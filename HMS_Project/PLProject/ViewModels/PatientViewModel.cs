@@ -21,8 +21,8 @@ namespace PLProject.ViewModels
         {
             UserId = patient.UserId;
             SSN = patient.AppUser.SSN;
-            string[] name = patient.AppUser.FullName.Split();
-            if (name.Length == 3)
+            string[] name = patient.AppUser.FullName.TrimEnd().TrimStart().Split();
+            if (name.Length <=3)
             {
                 FirstName = name[0];
                 MiddleName = name[1];

@@ -1,5 +1,6 @@
 ﻿using BLLProject.Interfaces;
 using BLLProject.Repositories;
+using BLLProject.Specification;
 using DALProject.Data.Contexts;
 using DALProject.Data.Migrations;
 using DALProject.model;
@@ -35,16 +36,29 @@ namespace PLProject.Controllers
 		{
 
 			IEnumerable<Prescription> prescriptions;
-			// Filter by ActiveSubstanceName (if provided)
+			
 			if (!string.IsNullOrEmpty(searchQuery))
 			{
-				prescriptions = unitOfWork.Repository<Prescription>().Find(p => p.Apointment.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
-				&& p.Apointment.Patient.AppUser.FullName.ToUpper().Contains(searchQuery.ToUpper())).AsNoTracking().ToList();
+				var spec = new BaseSpecification<Apointment>(a =>a.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
+				&& a.ApointmentStatus == ApointmentStatusEnum.Completed 
+				&& a.Patient.AppUser.FullName.ToUpper().Contains(searchQuery.ToUpper()));
+				spec.Includes.Add(a => a.Patient);
+				spec.Includes.Add(a => a.Doctor);
+				spec.Includes.Add(a => a.Clinic);
+
+				prescriptions = unitOfWork.Repository<Apointment>().GetALLWithSpec(spec).Select(a=>a.Prescription);
 			}
 			else
 			{
-				// Fetch all prescriptions entries for this day 
-				prescriptions = unitOfWork.Repository<Prescription>()./*Find(p=>p.Apointment.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)).AsNoTracking()*/GetALL().ToList();
+				var curruntDate = DateOnly.FromDateTime(DateTime.Now);
+				var spec = new BaseSpecification<Apointment>(a => a.ApointmentDate.Equals(curruntDate)
+				&& a.ApointmentStatus == ApointmentStatusEnum.Completed);
+				spec.Includes.Add(a => a.Patient);
+				spec.Includes.Add(a => a.Doctor);
+				spec.Includes.Add(a => a.Clinic);
+				spec.Includes.Add(a => a.Prescription);
+
+				prescriptions = unitOfWork.Repository<Apointment>().GetALLWithSpec(spec).Select(a => a.Prescription);
 			}
 			var prescriptionsVM = prescriptions.Select(p => p.ConvertPresciptionToPrescriptionViewModel());
 			// Pagination logic
@@ -54,8 +68,6 @@ namespace PLProject.Controllers
 			ViewData["CurrentFilter"] = searchQuery;
 			var paginatedList = prescriptionsVM.ToPagedList(pageNumber, pageSize);
 			return View(paginatedList);
-			return View();
-
 		}
 		#endregion
 

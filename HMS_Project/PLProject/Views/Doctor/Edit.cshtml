@@ -14,7 +14,7 @@
 
 	<h1 class="page-title">Edit Doctor</h1>
 
-	<form asp-controller="Doctor" asp-action="Edit" method="post">
+	<form asp-area="" asp-controller="Doctor" asp-action="Edit" method="post">
 		<partial name="userpartialviews\_UserEditPartial" model="@Model" />
 
 		<div class="mt-3">
@@ -88,8 +88,22 @@
 				<i class="fas fa-plus-circle"></i> Add Day
 			</button>
 		</div>
-
+		<div class="justify-content-center">
 		<button type="submit" class="btn btn-primary mt-3">Submit</button>
+		@if (User.IsInRole(Roles.Admin))
+		{
+			<div class="cancel">
+				<a asp-action="Index" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Cancel</a>
+			</div>
+		}
+		else
+		{
+			<div class="cancel">
+				<a asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Cancel</a>
+			</div>
+		}
+		</div>
+
 	</form>
 
 

@@ -15,7 +15,7 @@ public class DoctorViewModel : UserViewModel
 
         SSN = doctor.AppUser.SSN;
 
-        string[] name = doctor.AppUser.FullName.Split();
+        string[] name = doctor.AppUser.FullName.TrimEnd().TrimStart().Split();
         if (name.Length == 3)
         {
             FirstName = name[0];
@@ -27,7 +27,7 @@ public class DoctorViewModel : UserViewModel
             FirstName = name[0];
             LastName = name[1];
         }
-
+        Clinic = doctor.Clinic;
         DateOfBirth = doctor.AppUser.DateOfBirth;
         Phone = doctor.AppUser.PhoneNumber;
         Email = doctor.AppUser.Email;
@@ -40,6 +40,7 @@ public class DoctorViewModel : UserViewModel
 
     public string? specialization { get; set; }
     public int? specializationId { get; set; }
+    public Clinic? Clinic { get; set; }
     public decimal? Price { get; set; } // إضافة خاصية Price إذا كانت مطلوبة
     public List<DoctorScheduleVM>? schedule { get; set; } = new List<DoctorScheduleVM>();
 
@@ -55,6 +56,7 @@ public class DoctorViewModel : UserViewModel
         doctor.AppUser.FullName = $"{doctorViewModel.FirstName.Trim()} {doctorViewModel.MiddleName.Trim()} {doctorViewModel.LastName.Trim()}";
         doctor.AppUser.DateOfBirth = doctorViewModel.DateOfBirth;
         doctor.SpecializationId = doctorViewModel.specializationId ?? 0;
+        doctor.Clinic = doctorViewModel.Clinic;
         return doctor;
     }
 

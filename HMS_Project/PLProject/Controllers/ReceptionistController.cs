@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PLProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
     public class ReceptionistController : Controller
     {
         #region DPI
@@ -23,16 +22,19 @@ namespace PLProject.Controllers
         #endregion
 
         #region Index
+    [Authorize(Roles = Roles.Admin)]
         public IActionResult Index()
         {
             var Receptionists = unitOfWork.Repository<Receptionist>().GetALL();
             var ReceptionistsViewModels = Receptionists.Select(R => (ReceptionistViewModel)R).ToList();
             return View(ReceptionistsViewModels);
         }
-        #endregion
+		#endregion
 
-        #region Details
-        [Route("Receptionist/Details/{userId}")]
+		#region Details
+		[Authorize(Roles = Roles.Admin + "," + Roles.Receptionist)] 
+
+		[Route("Receptionist/Details/{userId}")]
         public IActionResult Details(string userId, string viewname = "Details")
         {
             if (userId is null)
@@ -43,14 +45,18 @@ namespace PLProject.Controllers
 
             if (receptionist is null)
                 return NotFound(); // 404
-
-            return View(viewname,ReceptionistView);
+			if (User.IsInRole(Roles.Doctor))
+				return RedirectToAction(nameof(Index), controllerName: "Home");
+			else
+				return View(viewname,ReceptionistView);
         }
 
-        #endregion
+		#endregion
 
-        #region Edit
-        [Route("Receptionist/Edit/{userId}")]
+		#region Edit
+		[Authorize(Roles = Roles.Admin + "," + Roles.Receptionist)]
+
+		[Route("Receptionist/Edit/{userId}")]
         public IActionResult Edit(string userId)
         {
             if (userId is null)

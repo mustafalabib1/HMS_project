@@ -7,7 +7,10 @@
 
 	<div>
 		<partial name="userpartialviews\_UserDetailsDeletePartial" model="@Model" />
-
+		<div class="mb-3">
+			<label class="form-label">Clinic Name</label>
+			<input asp-for="clinic.Name" class="form-control" readonly />
+		</div>
 		<partial name="_ButtonsInDetailsPartial" model="Model.UserId" />
 	</div>
 </div>

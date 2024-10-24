@@ -21,7 +21,7 @@ namespace PLProject.ViewModels
         {
             UserId = nurse.UserId;
             Id = nurse.Id;
-            string[] name = nurse.AppUser.FullName.Split();
+            string[] name = nurse.AppUser.FullName.TrimEnd().TrimStart().Split();
             if (name.Length == 3)
             {
                 FirstName = name[0];
@@ -33,6 +33,7 @@ namespace PLProject.ViewModels
                 FirstName = name[0];
                 LastName = name[1];
             }
+            clinic = nurse.Clinic;
             DateOfBirth = nurse.AppUser.DateOfBirth;
             Phone = nurse.AppUser.PhoneNumber;
             Email = nurse.AppUser.Email;
@@ -44,6 +45,7 @@ namespace PLProject.ViewModels
 
         public ICollection<Clinic> ClinicDateReader { get; set; } = new HashSet<Clinic>();
         public int? ClinicId { get; set; }
+        public Clinic? clinic { get; set; }
 
         public static explicit operator Nurse(NurseViewModel nurseViewModel)
         {
@@ -57,6 +59,7 @@ namespace PLProject.ViewModels
             nurse.AppUser.FullName = $"{nurseViewModel.FirstName.Trim()} {nurseViewModel.MiddleName.Trim()} {nurseViewModel.LastName.Trim()}";
             nurse.AppUser.DateOfBirth = nurseViewModel.DateOfBirth;
             nurse.ClinicId = nurseViewModel.ClinicId;
+            nurse.Clinic = nurseViewModel.clinic;
 
             return nurse;
         }

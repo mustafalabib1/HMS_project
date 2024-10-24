@@ -29,7 +29,7 @@ namespace PLProject.Controllers
         public IActionResult Index(int? page)
         {
 
-            var spec = new BaseSpecification<Apointment>(a => /*&&a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)*/ a.ApointmentStatus == ApointmentStatusEnum.Scheduled);
+            var spec = new BaseSpecification<Apointment>(a =>a.ApointmentDate==DateOnly.FromDateTime(DateTime.Now)&& a.ApointmentStatus == ApointmentStatusEnum.Scheduled);
             spec.Includes.Add(a => a.Patient);
             spec.Includes.Add(a => a.Doctor);
             spec.Includes.Add(a => a.Clinic);
