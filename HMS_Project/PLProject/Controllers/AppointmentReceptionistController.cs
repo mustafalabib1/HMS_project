@@ -139,6 +139,44 @@ namespace PLProject.Controllers
 				return View(ViewModel);
             }
         }
-        #endregion
-    }
+		#endregion
+
+		#region update appointment 
+		public IActionResult UpdatePreviousAppointment()
+		{
+			try
+			{
+				var spec = new BaseSpecification<Apointment>(a => a.ApointmentDate < DateOnly.FromDateTime(DateTime.Now) && a.ApointmentStatus == ApointmentStatusEnum.Scheduled);
+
+				var appointments = unitOfWork.Repository<Apointment>().GetALLWithSpec(spec).ToList();
+
+				for (int i = 0; i < appointments.Count; i++)
+				{
+                    appointments[i].ApointmentStatus = ApointmentStatusEnum.NoShow;
+					unitOfWork.Repository<Apointment>().Update(appointments[i]);
+				}
+				unitOfWork.Complete();
+
+
+				// Set a success message using TempData
+				TempData["SuccessMessage"] = "Appointment Updated Successfully!";
+
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+				// Handle exceptions and add error messages to the model state
+
+				if (env.IsDevelopment())
+					ModelState.AddModelError(string.Empty, ex.Message);
+				else
+					// Set an error message using TempData
+					TempData["ErrorMessage"] = "An Error Has Occurred during the update.";
+
+				return RedirectToAction(nameof(Index));
+			}
+		}
+		#endregion
+	}
 }

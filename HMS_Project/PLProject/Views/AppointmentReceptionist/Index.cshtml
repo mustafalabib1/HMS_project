@@ -5,9 +5,16 @@
 <div class="container mt-5" style="min-height: 100vh">
 	<!-- Success Message -->
 	<partial name="SuccessMessage" />
+
+
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="page-title">@ViewData["Title"]</h1>
+
+			<!-- Action Buttons -->
+			<div class="d-flex justify-content-between mb-3">
+				<a asp-action="UpdatePreviousAppointment" class="btn btn-primary"> updare previous appointments</a>
+			</div>
 
 			<partial name="_ApointmentIndexPartial" model="@Model" />
 
