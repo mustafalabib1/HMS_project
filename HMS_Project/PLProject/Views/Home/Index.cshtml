@@ -16,16 +16,16 @@
 							<p><i class="fa-regular fa-calendar-check me-2"></i>Book a doctor</p>
 						</div>
 						<div class="options">
-							<form class="d-flex mt-2">
-								<select class="form-select clin spec" aria-label="Default select example">
+							<form class="d-flex mt-2" action="/AppointmentPatient/Create">
+								<select class="form-select clin spec" name="SelectedClinicId" aria-label="Default select example">
 
-									<option selected>Clinic</option>
+									<option selected disabled>Choose your clinic!</option>
 									@foreach (var Clinic in Clinics)
 									{
-										<option>@Clinic.Name</option>
+										<option value="@Clinic.Id">@Clinic.Name</option>
 									}
 								</select>
-								<button type="submit"><i class="fa-solid fa-magnifying-glass me-1"></i>Search</button>
+								<button type="submit"><i class="fa-solid fa-magnifying-glass me-1"></i>Book</button>
 							</form>
 						</div>
 					</div>
