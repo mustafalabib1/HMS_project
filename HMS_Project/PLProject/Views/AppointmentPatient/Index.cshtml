@@ -3,12 +3,12 @@
 	ViewData["Title"] = $"All Appointment For {Model.FirstOrDefault()?.Patient?.AppUser.FullName ?? "Patient Name "}";
 }
 
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
 	<!-- Success Message -->
 	<partial name="SuccessMessage" />
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="mb-4">@ViewData["Title"]</h1>
+			<h1 class="page-title">@ViewData["Title"]</h1>
 
 			<div class="row">
 				<div class="col-sm">
@@ -32,7 +32,7 @@
 								<th>Doctor Name</th>
 								<th>Patient Name</th>
 								<th>Details</th>
-								<th>delete</th>
+								<th>Delete</th>
 							</tr>
 						</thead>
 						<tbody>

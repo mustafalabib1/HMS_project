@@ -4,13 +4,13 @@
 	// Fetch all clinics
 	var Clinics = unitOfWork.Repository<Clinic>().GetALL().ToList();
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 100vh">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
 	<div class="row">
 		<!-- Clinic Selection Section -->
 		<div class="col-md-4">
-			<h3>Select a Clinic</h3>
+			<h3 class="page-title">Select a Clinic</h3>
 			<ul class="clinic-list">
 				@foreach (var clinic in Clinics)
 				{
@@ -26,7 +26,7 @@
 
 		<!-- Available Dates Section -->
 		<div class="col-md-8">
-			<h3>Available Dates</h3>
+			<h3 class="page-title">Available Dates</h3>
 
 			@if (Model.AvailableDays != null && Model.AvailableDays.Any())
 			{
@@ -39,25 +39,31 @@
 
 					<!-- Month Navigation Buttons -->
 					<div class="month-navigation">
-						<div class="btn-container">
+						<div class="btn-container w-100 d-flex justify-content-between">
 							@if (Model.SelectedYear < DateTime.Now.Year || (Model.SelectedYear == DateTime.Now.Year && Model.SelectedMonth < DateTime.Now.Month))
 							{
-								<a class="btn btn-secondary invisible" id="previous-month">
-									Previous Month
-								</a>
+								<div>
+									<a class="btn btn-secondary invisible" id="previous-month">
+										Previous Month
+									</a>
+								</div>
 							}
 							else
 							{
-								<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth - 1 })"
-								   class="btn btn-secondary" id="previous-month">
-									Previous Month
-								</a>
+								<div>
+									<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth - 1 })"
+									   class="btn btn-secondary" id="previous-month">
+										Previous Month
+									</a>
+								</div>
 							}
 
-							<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth + 1 })"
-							   class="btn btn-secondary" id="next-month">
-								Next Month
-							</a>
+							<div>
+								<a href="@Url.Action("Create", new ClinicAvailabilityViewModel () { SelectedClinicId = Model.SelectedClinicId, SelectedYear = Model.SelectedYear, SelectedMonth = Model.SelectedMonth + 1 })"
+								   class="btn btn-secondary" id="next-month">
+									Next Month
+								</a>
+							</div>
 						</div>
 					</div>
 

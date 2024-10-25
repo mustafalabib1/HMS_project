@@ -2,12 +2,11 @@
 @{
 	ViewData["Title"] = "Edit Patient";
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 150vh">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
 
-	<h1>Edit Patient</h1>
-	<br />
+	<h1 class="page-title">Edit Patient</h1>
 
 	<form asp-controller="Patient" asp-action="Edit" method="post">
 
