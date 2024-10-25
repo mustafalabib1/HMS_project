@@ -2,24 +2,26 @@
 @{
 	ViewData["Title"] = "Delete Clinic";
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 120vh">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
-	<h1>Are you sure ?</h1>
-	<br />
-	<br />
+	<h1 class="page-title" style="background-color: rgb(220 53 69)">Are You Sure You Want to Delete This Clinic?</h1>
+
+	<div class="alert alert-warning">
+		<i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this clinic, all related data will be removed permanently.
+	</div>
 
 	<form asp-asp-controller="Clinic" asp-action="Delete" method="post">
 
 		<partial name="PartialViews/DetailsDeleteClinicPartial" />
 
 		<!-- Delete and Cancel Buttons -->
-		<div class="mt-5 mb-5">
-			<button type="submit" class="btn btn-danger mt-2">
+		<div class="mt-3 d-flex justify-content-between">
+			<button type="submit" class="btn btn-danger">
 				<i class="fas fa-trash"></i> Delete
 			</button>
 
-			<a asp-action="Index" class="btn btn-primary mt-2">
+			<a asp-action="Index" class="btn btn-primary">
 				<i class="fas fa-arrow-left"></i> Back To List
 			</a>
 		</div>

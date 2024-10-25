@@ -2,10 +2,10 @@
 @{
 	ViewData["Title"] = "Delete Active Substance";
 }
-<div class="container mt-5">
+<div class="container mt-5" style="min-height: 120vh">
 	<!-- Error Message -->
 	<partial name="ErrorMessage" />
-	<h1 class="mb-4 text-danger">Are You Sure You Want to Delete This Active Substance?</h1>
+	<h1 class="page-title" style="background-color: rgb(220 53 69)">Are You Sure You Want to Delete This Active Substance?</h1>
 
 	<div class="alert alert-warning">
 		<i class="fas fa-exclamation-triangle"></i> This action is irreversible. Once you delete this active substance, all related data will be removed permanently.
@@ -17,12 +17,12 @@
 		<partial name="PartialViews/DetailsDeletePartial" model="@Model" />
 
 		<!-- Delete and Cancel Buttons -->
-		<div class="mt-5 mb-5">
-			<button type="submit" class="btn btn-danger mt-2">
+		<div class="mt-3 d-flex justify-content-between">
+			<button type="submit" class="btn btn-danger">
 				<i class="fas fa-trash"></i> Delete
 			</button>
 
-			<a asp-action="Index" class="btn btn-primary mt-2">
+			<a asp-action="Index" class="btn btn-primary">
 				<i class="fas fa-arrow-left"></i> Back To List
 			</a>
 		</div>
