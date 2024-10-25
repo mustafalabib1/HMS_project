@@ -74,7 +74,7 @@
 								</div>
 
 								<div class="col-md-2 d-flex align-items-end">
-									<button type="button" class="btn btn-danger removeDayButton" data-schedule-id="@Model.schedule[i].Id" data-index="@i">
+									<button type="button" class="btn btn-danger DeleteDayButton" data-schedule-id="@Model.schedule[i].Id" data-index="@i">
 										<i class="fas fa-times-circle"></i> Remove Day
 									</button>
 								</div>
@@ -105,8 +105,6 @@
 		</div>
 
 	</form>
-
-
 	@section Scripts {
 		<script>
 			// Automatically hide the error message after 5 seconds (5000 milliseconds)
@@ -149,7 +147,7 @@
 				function addNewDayRow() {
 					var newDayRow = `
 											<div id="day_${dayIndex}" class="mb-3" data-index="${dayIndex}">
-												<div class="row">
+												<div class="row schesdule-day">
 													<div class="col-md-4">
 														<label for="schedule_${dayIndex}__Day" class="form-label">Day</label>
 														<select name="schedule[${dayIndex}].Day" class="form-select schedule-day-select" required>
@@ -186,7 +184,12 @@
 				$('#addDayButton').click(function () {
 					addNewDayRow();
 				});
-
+				// Remove removeDay Row
+				$(document).on('click', '.removeDayButton', function () {
+					$(this).closest('.schesdule-day').fadeOut(300, function () {
+						$(this).remove(); // Smooth removal
+					});
+				});
 				// Remove day from the schedule
 				$(document).on('click', '.removeDayButton', function () {
 					var index = $(this).data('index');
@@ -229,9 +232,10 @@
 
 				updateDayOptions(); // Initial update to disable pre-selected days
 			});
+
 			$(document).ready(function () {
 				// Handle delete button click event
-				$(document).on('click', '.removeDayButton', function (e) {
+				$(document).on('click', '.DeleteDayButton', function (e) {
 					e.preventDefault(); // Prevent form submission
 
 					// Get schedule ID from button's data attributes
@@ -257,8 +261,6 @@
 				});
 			});
 		</script>
-
-
 		@Html.Partial("_ValidationScriptsPartial")
 	}
 </div>
