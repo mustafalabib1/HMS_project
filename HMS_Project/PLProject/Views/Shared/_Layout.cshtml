@@ -53,13 +53,18 @@
 											</li>
 										}
 
-										@if (!User.Identity.IsAuthenticated || User.IsInRole(Roles.Patient))
+										@if (!(User.Identity.IsAuthenticated) || User.IsInRole(Roles.Patient))
 
 										{
 											<li>
 												<a asp-area="" asp-controller="AppointmentPatient" asp-action="Index">Book Appointment</a>
 											</li>
 
+											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+										}
+										@if (User.IsInRole(Roles.Patient))
+
+										{
 											var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
 											<li>
@@ -69,6 +74,7 @@
 												<a asp-area="" asp-controller="Patient" asp-action="Edit" asp-route-id="@userId">update my details</a>
 											</li>
 										}
+
 										@if (User.IsInRole(Roles.Doctor))
 
 										{
