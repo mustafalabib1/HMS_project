@@ -39,9 +39,9 @@ namespace PLProject.Controllers
 			
 			if (!string.IsNullOrEmpty(searchQuery))
 			{
-				var spec = new BaseSpecification<Apointment>(a =>a.ApointmentDate == DateOnly.FromDateTime(DateTime.Now)
-				&& a.ApointmentStatus == ApointmentStatusEnum.Completed 
-				&& a.Patient.AppUser.FullName.ToUpper().Contains(searchQuery.ToUpper()));
+				var spec = new BaseSpecification<Apointment>(a => a.ApointmentStatus == ApointmentStatusEnum.Completed
+
+                && a.Patient.AppUser.FullName.ToUpper().Contains(searchQuery.ToUpper()));
 				spec.Includes.Add(a => a.Patient);
 				spec.Includes.Add(a => a.Doctor);
 				spec.Includes.Add(a => a.Clinic);
@@ -50,9 +50,9 @@ namespace PLProject.Controllers
 			}
 			else
 			{
-				var curruntDate = DateOnly.FromDateTime(DateTime.Now);
-				var spec = new BaseSpecification<Apointment>(a => a.ApointmentDate.Equals(curruntDate)
-				&& a.ApointmentStatus == ApointmentStatusEnum.Completed);
+				
+				var spec = new BaseSpecification<Apointment>(a => 
+				a.ApointmentStatus == ApointmentStatusEnum.Completed);
 				spec.Includes.Add(a => a.Patient);
 				spec.Includes.Add(a => a.Doctor);
 				spec.Includes.Add(a => a.Clinic);

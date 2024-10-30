@@ -44,11 +44,11 @@ namespace PLProject.Controllers
 
 			if(filter == "Past")
 			{
-				appointments = appointments.Where(a => a.ApointmentDate < DateOnly.FromDateTime(DateTime.Now) || a.ApointmentStatus == ApointmentStatusEnum.Completed).ToList();
+				appointments = appointments.Where(a => /*a.ApointmentDate < DateOnly.FromDateTime(DateTime.Now) ||*/ a.ApointmentStatus == ApointmentStatusEnum.Completed).ToList();
 			}
 			else if (string.IsNullOrEmpty(filter))
 			{
-				appointments = appointments.Where(a => a.ApointmentDate >= DateOnly.FromDateTime(DateTime.Now) && a.ApointmentStatus != ApointmentStatusEnum.Completed).ToList();
+				appointments = appointments.Where(a => /*a.ApointmentDate >= DateOnly.FromDateTime(DateTime.Now) &&*/ a.ApointmentStatus != ApointmentStatusEnum.Completed).ToList();
 			}
 
 			var patientappointments = appointments.Select(app => app.ConvertApointmentToAppointmentGenarelVM());
