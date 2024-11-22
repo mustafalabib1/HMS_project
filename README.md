@@ -63,11 +63,11 @@ The Hospital Management System (HMS) is a software solution designed to streamli
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/hospital-management-system.git
+   git clone https://github.com/HMS_project/hospital-management-system.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd hospital-management-system
+   cd HMS_project
    ```
 3. Restore packages:
    ```bash
@@ -105,10 +105,14 @@ The Hospital Management System (HMS) is a software solution designed to streamli
 ---
 
 ## Contributors
-- **Mostafa Labib Mohamed Labib**: Project Lead.
+- **Mostafa Labib**: Project Lead.
+- **Fares Mahmoud**
+- **Ammar Barakat**
+- **Mohamed Saad**
+- **Mohammadi Alaa**
+- **Ahmed Ali**
+- **Ahmed ElShafay**
+- **Ahmed ElShafay**
 
----
 
-## License
-This project is licensed under the [MIT License](LICENSE).
 
