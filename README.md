@@ -94,6 +94,7 @@ The Hospital Management System (HMS) is a software solution designed to streamli
 ## UML Diagrams
 - **Use Case Diagrams**: Highlight system interactions for different roles.
 - **Entity Relationship Diagram (ERD)**: Show relationships between database entities like Patients, Doctors, Appointments, and Prescriptions.
+- ![ER Diagram](./ERD/ERD.png)
 
 ---
 
