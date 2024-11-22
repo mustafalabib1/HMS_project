@@ -95,7 +95,7 @@ The Hospital Management System (HMS) is a software solution designed to streamli
 - **Use Case Diagrams**: Highlight system interactions for different roles.
 - ![admin](./UML/admin.png)
   ---
-- ![Recepationis](./UML/Recepationis.png)
+- ![Recepationis](./UML/Recepationist.png)
   ---
 - ![Pharmcaists](./UML/Pharmcaists.png)
   ---
